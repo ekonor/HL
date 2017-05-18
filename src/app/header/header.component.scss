@@ -1,0 +1,93 @@
+.header a, a:hover {
+
+  color: orange;
+  text-decoration: none;
+  font-size: 200%;
+}
+
+.nav-pills>li>a {
+  color: #fff;
+  font-size: 120%;
+}
+
+.nav-pills>li>a:hover {
+  background-color: #6091ac;
+
+}
+
+@media (max-width: 767px) {
+  .nav-pills>li {
+    float: none;
+  }
+  .nav-pills{
+    text-align: center;
+  }
+
+}
+
+.clear {
+  clear: both;
+  height: 63px;
+
+}
+
+.wrapper {
+  min-height: 100%;
+}
+
+html, body {
+  height: 100%;
+
+}
+
+.alignment-reg {
+  float: right;
+}
+
+.alignment-search{
+  float: right;
+  margin-right: 10px;
+
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(15%);
+  -ms-transform: translateY(15%);
+  transform: translateY(15%);
+}
+
+.btn:hover, .btn:focus, .btn.focus {
+  color: white;
+  text-decoration: none;
+  background-color: #6091ac;
+}
+
+footer {
+  color: white;
+  background-color: #000;
+  padding: 0px 0 18px 0;
+  border-top: 1px solid #000;
+}
+
+#footer-ahef, #footer-ahef li {
+
+  margin: 0;
+  padding: 0;
+}
+#footer-ahef {
+  background: none;
+  margin-top: 6px;
+}
+#footer-ahef li {
+  display: inline-block;
+  width: 20%; /* 5 пункта меню, то есть 100%/5 */
+  text-align: center;
+}
+#footer-ahef a {
+  display: block;
+  padding: 3px 0;
+  color: #fff;
+  text-decoration: none;
+}
+#footer-ahef a:hover {
+  background: #6091AC;
+}
