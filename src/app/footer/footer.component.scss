@@ -1,0 +1,30 @@
+footer {
+  color: white;
+  background-color: #000;
+  padding: 0px 0 18px 0;
+  border-top: 1px solid #000;
+}
+
+#footer-ahef, #footer-ahef li {
+
+  margin: 0;
+  padding: 0;
+}
+#footer-ahef {
+  background: none;
+  margin-top: 6px;
+}
+#footer-ahef li {
+  display: inline-block;
+  width: 20%; /* 5 пункта меню, то есть 100%/5 */
+  text-align: center;
+}
+#footer-ahef a {
+  display: block;
+  padding: 3px 0;
+  color: #fff;
+  text-decoration: none;
+}
+#footer-ahef a:hover {
+  background: #6091AC;
+}
