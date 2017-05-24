@@ -22,7 +22,16 @@
   .nav-pills{
     text-align: center;
   }
-
+  .alignment-reg {
+    position: relative;
+    height: 13%;
+    width: 100%;
+  }
+  .alignment-reg>li {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
 }
 
 .alignment-reg {
