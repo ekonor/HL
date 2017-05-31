@@ -1,9 +1,40 @@
-.thumbnail {
-  position: relative;;
+/* Весь блок клуба */
+.club_blok {
+  margin-bottom: 5px;
+  border: solid 1px #dad7d5;
+  border-radius: 5px;
+  height: 110px;
 }
+
+.club_blok_img {
+  height: 110px;
+}
+
+.club_blok_text {
+  height: 110px;
+}
+/* Стили картинки в блоке клуба*/
+.club_blok img {
+  margin: 5px;
+  height: 100px;
+   text-align: center;
+   display: block;
+   max-width: 100%;
+   max-height: 100%;
+
+ }
+ /* Стили текста в блоке клуба*/
+.club_blok span {
+  margin-left: 20px;
+}
+.club_blok h3 {
+  margin-left: 20px;
+}
+
+
+
 .btn {
   margin-right: 10px;
-
   position: absolute;
   bottom: 15px; /* Положение от нижнего края */
   right: 15px; /* Положение от правого края */

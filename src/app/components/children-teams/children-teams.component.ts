@@ -17,7 +17,7 @@ export class ChildrenTeam {
   styleUrls: ['./children-teams.component.scss']
 })
 export class ChildrenTeamsComponent implements OnInit {
-  title = 'Детские команды';
+  title = 'Детские клубы и команды';
   childrenteam: ChildrenTeam = {
     id: 1,
     name: 'Олимпийские надежды',
