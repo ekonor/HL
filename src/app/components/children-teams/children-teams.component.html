@@ -1,1 +1,28 @@
-<h1 style="text-align: center"> {{title}}</h1>
+
+<h1 style="text-align: center"> {{title}} </h1>
+<div class="wraper">
+<ul class="childrenteams">
+  <li *ngFor="let childrenteam of childrenteams">
+<div class="container-fluid thumbnail caption">
+  <div class="row">
+    <div class="col-xs-6 col-md-2"><img src="{{childrenteam.image}}"  width="150" height="100"  class="img-responsive" alt="эмблема команды {{childrenteam.name}}"></div>
+    <div class="col-xs-12 col-sm-6 col-md-10"><h3>{{childrenteam.name}} {{childrenteam.year}}</h3>
+      <span class="">{{childrenteam.city}}</span> <span class="">{{childrenteam.nation}}</span>
+      <p><a href="#" class="btn btn-default" role="button">Подробнее...</a></p></div>
+  </div>
+</div>
+  </li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

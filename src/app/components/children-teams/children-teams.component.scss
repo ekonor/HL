@@ -1,0 +1,27 @@
+.thumbnail {
+  position: relative;;
+}
+.btn {
+  margin-right: 10px;
+
+  position: absolute;
+  bottom: 15px; /* Положение от нижнего края */
+  right: 15px; /* Положение от правого края */
+  line-height: 1px;
+
+}
+.btn:hover, .btn:focus, .btn.focus {
+  color: white;
+  text-decoration: none;
+  background-color: #6091ac;
+}
+/* Убираем маркеры списка */
+.childrenteams li {
+  list-style-type: none;
+}
+
+.img-responsive{
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
