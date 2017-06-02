@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+
+
+
 @Component({
   selector: 'app-arenas',
   templateUrl: './arenas.component.html',
@@ -13,3 +16,4 @@ export class ArenasComponent implements OnInit {
   }
 
 }
+
