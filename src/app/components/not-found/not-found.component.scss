@@ -1,0 +1,275 @@
+.kode-content {
+  background-attachment:fixed !important;}
+
+.kode-content .kode-pagesection .kode-parallax {
+  float: left;
+  width: 100%;
+  padding: 40px 0px 0px 0px;
+}
+.kode-404-page {
+  float: left;
+  width: 100%;
+  text-align: center;
+  padding: 25px 0px 80px 0px;
+}
+.kode-404-page h2 {
+  font-size: 40px;
+  text-transform: uppercase;
+}
+.kode-404-page img { margin-bottom: 40px; }
+.kode-404-page span {
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.kode-testimonial ul li .thcolor {
+  color: #fff;
+}
+
+.kode-innersearch {
+  float: left;
+  margin: 20px 0 0;
+  width: 100%;
+}
+.kode-innersearch form {
+  display: inline-block;
+  width: 350px;
+  position: relative;
+}
+.kode-innersearch form input[type="text"] {
+  border: 1px solid #d4d4d4;
+  color: #000;
+  font-size: 16px;
+  height: 47px;
+  padding: 6px 20px 6px 20px;
+  float: left;
+  width: 100%;
+  box-shadow: 0px 2px 0px 0px #d4d4d4;
+}
+.kode-innersearch form label {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  height: 100%;
+  margin: 0px;
+}
+.kode-innersearch form label:before {
+  content: "\f002";
+  font-family: FontAwesome;
+  position: absolute;
+  right: 15px;
+  top: 16px;
+  color: #999999;
+  cursor: pointer;
+}
+.kode-innersearch form input[type="submit"] {
+  float: right;
+  width: 45px;
+  height: 48px;
+  background: none;
+  border: none;
+}
+
+/* NewsLetter  Starts */
+.kode-newslatter {
+  float: left;
+  width: 100%;
+  padding: 30px 0px;
+  position: relative;
+}
+.kode-newslatter h3 {
+  color: #ffffff;
+  font-size: 36px;
+  float: left;
+  margin: 0px;
+  font-weight: 300;
+  padding-right: 20px;
+}
+.kode-newslatter form {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+  position: relative;
+  padding-left: 20px;
+}
+.kode-newslatter form input[type="text"] {
+  border: 1px solid #fff;
+  height: 50px;
+  width: 100%;
+  padding: 5px 15px 5px 15px;
+  background: none;
+  font-size: 16px;
+  font-style: italic;
+  color: #ffffff;
+}
+.kode-newslatter form label {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  margin: 0px;
+}
+.kode-newslatter form label:before {
+  content: "\f1d8";
+  font-family: FontAwesome;
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  color: #ffffff;
+  font-size: 25px;
+  cursor: pointer;
+}
+.kode-newslatter form input[type="submit"] {
+  width: 50px;
+  height: 50px;
+  background: none;
+  border: none;
+}
+.kode-halfbg {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 50%;
+  height: 100%;
+}
+
+.thbg-color,.thbg-colorhover:hover {
+  background-color: #ffd341;
+}
+
+.kode-bg-color {
+  background-color: #373737;
+}
+
+.about-widget p{
+  margin:17px 0 0;
+}
+
+
+.kode-forminfo h3,.kode-forminfo p,.kode-form-list li strong {
+  color: #000;
+}
+.kode-form-list li {
+  color: #000;
+  list-style: none;
+  margin-bottom: 5px;
+}
+.kode-form-list li i {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #000;
+  margin-right: 20px;
+  text-align: center;
+  font-size: 18px;
+  padding: 5px 0px 0px 0px;
+  box-shadow:0px 3px 5px 0px rgba(0,0,0,0.3);
+  -moz-box-shadow:0px 3px 5px 0px rgba(0,0,0,0.3);
+  -webkit-box-shadow:0px 3px 5px 0px rgba(0,0,0,0.3);
+}
+.kode-form-list li p {
+  display: inline-block;
+  width: auto;
+}
+.kode-forminfo .kode-team-network {
+  float: left;
+}
+.kode-form-list {
+  float:left;
+  width:100%;
+}
+
+
+/*** это интересно css starts***/
+
+.widget-flickr ul{
+  float: left;
+  width: 100%;
+  margin: 0;
+}
+.widget-flickr ul li{
+  list-style-type: none;
+  float: left;
+  margin: 0 3px 10px;
+  box-shadow:0px 3px 5px 0px rgba(0,0,0,0.3);
+  -moz-box-shadow:0px 3px 5px 0px rgba(0,0,0,0.3);
+  -webkit-box-shadow:0px 3px 5px 0px rgba(0,0,0,0.3);
+}
+.widget-flickr ul li img{
+  border-radius: 3px;
+}
+
+.kode-table tr:hover{
+  transition:all 0.3s ease-in-out;
+  -moz-transition:all 0.3s ease-in-out;
+  -webkit-transition:all 0.3s ease-in-out;
+}
+
+/***это интересно css ends***/
+
+.widget {
+  float: left;
+  width: 100%;
+}
+
+/***contact-us-widget starts***/
+
+.contact-us-widget{
+  float: left;
+  width: 100%;
+}
+.contact-us-widget p{
+  margin:0 0 17px;
+}
+
+/***contact-us-widget ends***/
+
+/***social-links1 starts***/
+
+.social-links1 li{
+  display:inline-block;
+  margin:0 10px 0 0;
+}
+.social-links1 li:last-child{
+  margin:0;
+}
+.social-links1 li a{
+  width:35px;
+  height:35px;
+  text-align:center;
+  padding:3px 0;
+  display:block;
+  font-size:16px;
+  color:#fff;
+  overflow: hidden;
+  position: relative;
+  z-index: 11;
+  box-shadow:0px 3px 5px 0px rgba(0,0,0,0.3);
+  -moz-box-shadow:0px 3px 5px 0px rgba(0,0,0,0.3);
+  -webkit-box-shadow:0px 3px 5px 0px rgba(0,0,0,0.3);
+}
+.social-links1 li a:before{
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.2);
+}
+.social-links1 li a:hover:before{
+  top: 0;
+}
+.fb-bg1{
+  background-color:#3b5997;
+}
+.tw-bg1{
+  background-color:#00aceb;
+}
+.youtube-bg1{
+  background-color:#ba0204;
+}
+.linkedin-bg1{
+  background-color:#5182aa;
+}
+
+/***social-links1 ends***/
