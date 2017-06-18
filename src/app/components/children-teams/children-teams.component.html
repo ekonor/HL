@@ -4,21 +4,20 @@
 <div class="container-fluid">
 
   <div class="row">
+
     <div class="col-md-6" *ngFor="let childrenteam of childrenteams">
 
-<div class="club_blok">
-    <div class="club_blok_img  col-xs-6 col-md-3"><img src="{{childrenteam.image}}" alt="Эмблема команды {{childrenteam.name}}"></div>
-    <div class="club_blok_text col-xs-6 col-sm-6 col-md-9"><h3>{{childrenteam.name}}</h3>
-      <span class="">{{childrenteam.city}}</span> <span class="">{{childrenteam.nation}}</span>
+      <div class="club_blok">
 
-      <p><a href="sdsdf" class="btn btn-default" role="button">Подробнее...</a></p></div>
-</div>
+        <div class="club_blok_img  col-xs-6 col-md-3"><img src="{{childrenteam.image}}" alt="Эмблема команды {{childrenteam.name}}"></div>
 
+        <div class="club_blok_text col-xs-6 col-sm-6 col-md-9"><h3>{{childrenteam.name}}</h3>
+          <span class="">{{childrenteam.city}}</span> <span class="">{{childrenteam.nation}}</span>
+        </div>
+      </div>
     </div>
-
   </div>
 </div>
-
 
 
 

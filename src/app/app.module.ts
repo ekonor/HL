@@ -13,6 +13,7 @@ import { TournamentsComponent } from './components/tournaments/tournaments.compo
 import { ArenasComponent } from './components/arenas/arenas.component';
 import { HockeyNewsComponent } from './components/hockey-news/hockey-news.component';
 import { routing, appRoutingProviders } from './app.routes';
+import { SlidesComponent } from './components/home/slides/slides.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { routing, appRoutingProviders } from './app.routes';
     TournamentsComponent,
     ArenasComponent,
     HockeyNewsComponent,
+    SlidesComponent,
 
   ],
   imports: [
