@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { Post } from './news';
+import { NewsListResponse, NewsListItem } from './news';
 import { NewsService } from './news.service';
+import { ListInfo } from "app/common/list/list-info";
+import { ListBaseComponent } from "app/common/list/list-base.component";
+
 @Component({
   selector: 'app-hockey-news',
   templateUrl: './hockey-news.component.html',
   styleUrls: ['./hockey-news.component.scss'],
   providers: [NewsService]
 })
-export class HockeyNewsComponent implements OnInit {
-  title = 'Новости хоккейного мира';
-  constructor(private _newsService: NewsService) {}
+export class HockeyNewsComponent extends ListBaseComponent<NewsListItem> {
+  constructor(private readonly newsService: NewsService) {
+    super();
 
-
-  getNews() {
-      this._newsService.getNews().then(news => this.news = news);
+    this.title='Новости хоккейного мира';
   }
 
-  ngOnInit() {
-    this.getNews();
+    protected getListData(): Promise<NewsListResponse> {
+      return this.newsService.getNewsList(this.listInfo)
   }
-  news: Post [];
 }
