@@ -1,4 +1,4 @@
-import { Post } from './news';
+import { Post } from "app/components/hockey-news/news";
 
 export let NEWS: Post[] = [
 

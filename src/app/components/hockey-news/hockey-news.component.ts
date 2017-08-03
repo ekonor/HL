@@ -3,6 +3,7 @@ import { NewsListResponse, NewsListItem } from './news';
 import { NewsService } from './news.service';
 import { ListInfo } from "app/common/list/list-info";
 import { ListBaseComponent } from "app/common/list/list-base.component";
+import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: 'app-hockey-news',
@@ -17,7 +18,7 @@ export class HockeyNewsComponent extends ListBaseComponent<NewsListItem> {
     this.title='Новости хоккейного мира';
   }
 
-    protected getListData(): Promise<NewsListResponse> {
+    protected getListData(): Observable<NewsListResponse> {
       return this.newsService.getNewsList(this.listInfo)
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ListInfo } from "app/common/list/list-info";
 import { ListResponse } from "app/common/list/list-response";
+import { Observable } from "rxjs/Observable";
 
 export abstract class ListBaseComponent<TListItem> implements OnInit {
   public title: string;
@@ -17,12 +18,12 @@ export abstract class ListBaseComponent<TListItem> implements OnInit {
 
   public loadData(){
       this.getListData()
-          .then((result) => {
+          .subscribe((result) => {
         this.listData = result.ListItems;
 
         // todo set pagerfrom result.Count
     });
   }
 
-    protected abstract getListData() : Promise<ListResponse<TListItem>>;
+    protected abstract getListData() : Observable<ListResponse<TListItem>>;
 }

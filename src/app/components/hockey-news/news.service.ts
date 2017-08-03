@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions }       from '@angular/http';
+import { Http, RequestOptions, RequestOptionsArgs }       from '@angular/http';
 
 import { Observable }     from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -10,21 +10,24 @@ import { ListInfo } from 'app/common/list/list-info';
 @Injectable()
 export class NewsService {
   private newsUrl : string = `http://87.117.9.216/Hockeyapp.WebApi/api/v1/news`;
-  private options = new RequestOptions({headers: new Headers({'Content-Type': 'application/json'})});
-  
-  constructor(private http: Http) {}
 
-  getNewsList(listInfo: ListInfo): Promise<NewsListResponse> {   
-    let params: URLSearchParams = new URLSearchParams();
-    for(let key in listInfo){
-      params.set(key.toString(), listInfo[key]);
-    }
+  constructor(private http: Http) {}
+ 
+  getNewsList(listInfo: ListInfo): Observable<NewsListResponse> {   
+       let headers = new Headers();
+       headers.set('Content-Type', 'application/json');  
+       headers.set("Access-Control-Allow-Origin", "*");
+
+      let params = new URLSearchParams();
+      for(let key in listInfo){
+        params.append(key.toString(), listInfo[key]);
+      }
     
-    this.options.search = params;
+      let requestOptions =  new RequestOptions({ headers: headers, params: params } as any);
     
-    return this.http
-    .get(`${this.newsUrl}/list`, this.options)
-    .map(response => response.json().data as NewsListResponse);  
+    return this.http.get(`${this.newsUrl}/list`, requestOptions)
+          .map(response => response.json().data as NewsListResponse);  
+ 
   }
 
   getNewsItem(id: number): Promise<NewsItem> {
