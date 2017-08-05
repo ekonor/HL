@@ -23,6 +23,8 @@ import { AuthenticationService } from "app/auth/authentication.service";
 import { UserService } from "app/auth/user.service";
 import { AlertComponent } from "app/components/alert/alert.component";
 
+import { AgmCoreModule } from '@agm/core';
+
 
 @NgModule({
 
@@ -46,7 +48,10 @@ import { AlertComponent } from "app/components/alert/alert.component";
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing
+    routing,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBpuC7_aFMwlRMvHJJgDFsQ0M5_6RlzNYA'
+    })
   ],
   providers: [
     appRoutingProviders,
