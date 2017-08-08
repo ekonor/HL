@@ -1,31 +1,46 @@
 import { Injectable } from '@angular/core';
-import {Http} from "@angular/http";
-import {Observable} from "rxjs/Observable";
-import 'rxjs/add/operator/map'
-import {Post} from "./news";
-import {Response} from '@angular/http';
+import { Http, RequestOptions, RequestOptionsArgs }       from '@angular/http';
 
+import { Observable }     from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
+import { NewsListResponse, NewsItem } from './news';
+import { ListInfo } from 'app/common/list/list-info';
 
 @Injectable()
 export class NewsService {
-
-  private patch: string = '/news';
-
+  private newsUrl : string = `http://87.117.9.216/Hockeyapp.WebApi/api/v1/news`;
 
   constructor(private http: Http) {}
 
-    getNewsList() : Observable<Post[]> {
-    return this.http.get(this.patch + '/list')
-      .map((resp:Response) => {
-        let posts :Post[] = [];
-        let postList = resp.json().ListItems;
-        for(let index in postList){
-          console.log(postList[index]);
-          let post = (postList[index]);
-          posts.push({Title: post.Title, PostUserName: post.PostUserName});
-        }
-        return posts;
-      });
+  getNewsList(listInfo: ListInfo): Observable<NewsListResponse> {
+    let headers = new Headers();
+    headers.set('Content-Type', 'application/json');
+    headers.set("Access-Control-Allow-Origin", "*");
 
+    let params = new URLSearchParams();
+    for(let key in listInfo){
+      params.append(key.toString(), listInfo[key]);
+    }
+
+    let requestOptions =  new RequestOptions({ headers: headers, params: params } as any);
+
+    return this.http.get(`${this.newsUrl}/list`, requestOptions)
+      .map(response => response.json().data as NewsListResponse);
+
+  }
+
+  getNewsItem(id: number): Promise<NewsItem> {
+    const url = `${this.newsUrl}/${id}`;
+    return this.http.get(url)
+      .toPromise()
+      .then(response => response.json().data as NewsItem)
+      .catch(this.handleError);
+  }
+
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
   }
 }

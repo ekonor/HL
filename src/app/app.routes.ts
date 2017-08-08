@@ -6,6 +6,8 @@ import { HomeComponent } from './components/home/home.component';
 import { TournamentsComponent } from './components/tournaments/tournaments.component';
 import { ArenasComponent } from './components/arenas/arenas.component';
 import { HockeyNewsComponent } from './components/hockey-news/hockey-news.component';
+import { LoginComponent } from "app/components/login/login.component";
+import { RegisterComponent } from "app/components/register/register.component";
 
 
 export const routes: Routes =[
@@ -15,6 +17,8 @@ export const routes: Routes =[
   { path: 'children-teams', component: ChildrenTeamsComponent},
   { path: 'arenas', component: ArenasComponent},
   { path: 'about', component: AboutComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

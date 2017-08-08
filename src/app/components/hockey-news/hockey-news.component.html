@@ -1,59 +1,60 @@
 <h1 style="text-align: center"> {{title}} </h1>
 <hr>
-  <!--// Page Content //-->
+<!--// Page Content //-->
 
-    <div class="container-fluid">
-      <div class="row">
+<div class="container-fluid">
+  <div class="row">
 
-        <div class="col-md-12">
+    <div class="col-md-12">
 
-          <div class="kode-blog-list kode-fullwidth-blog">
-            <ul class="row">
-              <li class="col-md-12" *ngFor="let post of list">
-                <div class="kode-time-zoon">
-                  <time datetime="2008-02-14 20:00">07 <span>may</span></time>
-                  <h3><a href="#">{{post.Title}}</a></h3>
-                </div>
-                <figure><a href="#"><img src="{{post.image}}" class="img-responsive" alt="Хоккейные новости"></a></figure>
-                <div class="kode-blog-info">
-                  <ul class="kode-blog-options">
-                    <li><a href="#"><i class="fa fa-user"></i> {{post.autor}}</a></li>
-                    <li><a href="#"><i class="fa fa-comment"></i> Коментарии: 3</a></li>
-                    <li><a href="#"><i class="fa fa-share-alt"></i> Рекомендованно: 6</a></li>
-                    <li><a href="{{post.sitelink}}"><i class="fa fa-file-text"></i> Источник: {{post.sitename}}</a></li>
-                  </ul>
-                  <ul class="kode-team-network">
-                    <li><a class="fa fa-facebook" href="#"></a></li>
-                    <li><a class="fa fa-twitter" href="#"></a></li>
-                    <li><a class="fa fa-linkedin" href="#"></a></li>
-                  </ul>
-                  <p>{{post.description}}</p>
-                  <a href="#" class="kode-modrenbtn thbg-colorhover">Читать далее ...</a>
+      <div class="kode-blog-list kode-fullwidth-blog">
+        <ul class="row">
 
-                </div>
-              </li>
-
-            </ul>
-
-            <!--// Pagination //-->
-            <div class="pagination">
-              <a href="#"><i class="fa fa-angle-double-left"></i></a>
-              <a href="#">1</a>
-              <a href="#">2</a>
-              <span>3</span>
-              <a href="#">4</a>
-              <a href="#"><i class="fa fa-angle-double-right"></i></a>
+          <li class="col-md-12" *ngFor="let post of ListItems">
+            <div class="kode-time-zoon">
+              <time datetime="2008-02-14 20:00">07 <span>may</span></time>
+              <h3><a href="#">{{post.title}}</a></h3>
             </div>
-            <!--// Pagination //-->
+            <figure><a href="#"><img src="{{post.image}}" class="img-responsive" alt="Хоккейные новости"></a></figure>
+            <div class="kode-blog-info">
+              <ul class="kode-blog-options">
+                <li><a href="#"><i class="fa fa-user"></i> {{post.autor}}</a></li>
+                <li><a href="#"><i class="fa fa-comment"></i> Коментарии: 3</a></li>
+                <li><a href="#"><i class="fa fa-share-alt"></i> Рекомендованно: 6</a></li>
+                <li><a href="{{post.sitelink}}"><i class="fa fa-file-text"></i> Источник: {{post.sitename}}</a></li>
+              </ul>
+              <ul class="kode-team-network">
+                <li><a class="fa fa-facebook" href="#"></a></li>
+                <li><a class="fa fa-twitter" href="#"></a></li>
+                <li><a class="fa fa-linkedin" href="#"></a></li>
+              </ul>
+              <p>{{post.description}}</p>
+              <a href="#" class="kode-modrenbtn thbg-colorhover">Читать далее ...</a>
 
-          </div>
+            </div>
+          </li>
 
+        </ul>
+
+        <!--// Pagination //-->
+        <div class="pagination">
+          <a href="#"><i class="fa fa-angle-double-left"></i></a>
+          <a href="#">1</a>
+          <a href="#">2</a>
+          <span>3</span>
+          <a href="#">4</a>
+          <a href="#"><i class="fa fa-angle-double-right"></i></a>
         </div>
+        <!--// Pagination //-->
 
       </div>
+
     </div>
 
-  <!--// Page Content //-->
+  </div>
+</div>
+
+<!--// Page Content //-->
 
 
 

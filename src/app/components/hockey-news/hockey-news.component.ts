@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Post } from './news';
+import { NewsListResponse, NewsListItem } from './news';
 import { NewsService } from './news.service';
-
+import { ListInfo } from "app/common/list/list-info";
+import { ListBaseComponent } from "app/common/list/list-base.component";
+import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: 'app-hockey-news',
@@ -9,20 +11,14 @@ import { NewsService } from './news.service';
   styleUrls: ['./hockey-news.component.scss'],
   providers: [NewsService]
 })
-export class HockeyNewsComponent implements OnInit {
-  title = 'Новости хоккейного мира';
+export class HockeyNewsComponent extends ListBaseComponent<NewsListItem> {
+  constructor(private readonly newsService: NewsService) {
+    super();
 
-  posts: Post[]=[];
+    this.title='Новости хоккейного мира';
+  }
 
-
-  constructor(private _newsService: NewsService) {}
-
-    ngOnInit(){
-    this._newsService.getNewsList().subscribe((ListItems)=>this.posts=ListItems)
-
-
-
-
-
+  protected getListData(): Observable<NewsListResponse> {
+    return this.newsService.getNewsList(this.listInfo)
   }
 }
