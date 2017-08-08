@@ -9,11 +9,10 @@
 
           <div class="kode-blog-list kode-fullwidth-blog">
             <ul class="row">
-
-              <li class="col-md-12" *ngFor="let post of news">
+              <li class="col-md-12" *ngFor="let post of list">
                 <div class="kode-time-zoon">
                   <time datetime="2008-02-14 20:00">07 <span>may</span></time>
-                  <h3><a href="#">{{post.title}}</a></h3>
+                  <h3><a href="#">{{post.Title}}</a></h3>
                 </div>
                 <figure><a href="#"><img src="{{post.image}}" class="img-responsive" alt="Хоккейные новости"></a></figure>
                 <div class="kode-blog-info">

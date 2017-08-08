@@ -1,13 +1,19 @@
+
 export class Post {
-  id: number;
-  title: string;
-  date: string;
-  time: string;
-  autor: string;
-  description: string;
-  text: string;
-  video: string;
-  image: string;
-  sitename: string;
-  sitelink: string;
+  Id?: number;
+  CategoryId?: number;
+  CategotyName?: string;
+  Title?: string;
+  Summary?: string;
+  Added?: string;
+  PostUserId?: number;
+  PostUserName?: string;
+  ReplyCount?: number;
+  VoteUpCount?: number;
+  VoteDownCount?: number;
+  SourceUrl?: number;
+  SourceName?: string;
+  Logo?: string;
+  LogoSource?: string;
+
 }

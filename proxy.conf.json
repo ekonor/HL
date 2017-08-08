@@ -1,0 +1,7 @@
+{
+  "/news": {
+    "target" : "http://87.117.9.216/Hockeyapp.WebApi/api/v1/",
+    "changeOrigin": true
+
+  }
+}
