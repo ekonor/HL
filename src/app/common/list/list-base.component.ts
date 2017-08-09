@@ -19,6 +19,7 @@ export abstract class ListBaseComponent<TListItem> implements OnInit {
   public loadData(){
       this.getListData()
           .subscribe((result) => {
+
         this.listData = result.ListItems;
 
         // todo set pagerfrom result.Count

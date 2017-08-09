@@ -9,11 +9,11 @@ import { ListInfo } from 'app/common/list/list-info';
 
 @Injectable()
 export class NewsService {
-  private newsUrl : string = `http://87.117.9.216/Hockeyapp.WebApi/api/v1/news`;
+  private newsUrl : string = `/api/v1/news`;
 
   constructor(private http: Http) {}
 
-  getNewsList(listInfo: ListInfo): Observable<NewsListResponse> {
+  public getNewsList(listInfo: ListInfo): Observable<NewsListResponse> {
     let headers = new Headers();
     headers.set('Content-Type', 'application/json');
     headers.set("Access-Control-Allow-Origin", "*");
@@ -26,7 +26,7 @@ export class NewsService {
     let requestOptions =  new RequestOptions({ headers: headers, params: params } as any);
 
     return this.http.get(`${this.newsUrl}/list`, requestOptions)
-      .map(response => response.json().data as NewsListResponse);
+      .map(response => response.json() as NewsListResponse);
 
   }
 
@@ -34,7 +34,7 @@ export class NewsService {
     const url = `${this.newsUrl}/${id}`;
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json().data as NewsItem)
+      .then(response => response.json() as NewsItem)
       .catch(this.handleError);
   }
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable} from "rxjs/Observable";
+import {ArenasService} from "./arenas.service";
 
 
 
@@ -10,7 +12,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArenasComponent implements OnInit {
 
-  constructor() { }
+   latestArenasList$: Observable<any>;
+
+
+  constructor(private arenasService: ArenasService) {
+
+    this.latestArenasList$ = this.arenasService.getArenasList();
+  }
 
   ngOnInit() {
   }

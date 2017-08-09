@@ -25,6 +25,7 @@ import { UserService } from "app/auth/user.service";
 import { AlertComponent } from "app/components/alert/alert.component";
 
 import { AgmCoreModule } from '@agm/core';
+import {ArenasService} from "./components/arenas/arenas.service";
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { AgmCoreModule } from '@agm/core';
     AuthGuard,
     AlertService,
     AuthenticationService,
-    UserService
+    UserService,
+    ArenasService
   ],
   bootstrap: [AppComponent]
 })

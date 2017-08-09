@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsListResponse, NewsListItem } from './news';
 import { NewsService } from './news.service';
-import { ListInfo } from "app/common/list/list-info";
 import { ListBaseComponent } from "app/common/list/list-base.component";
 import { Observable } from "rxjs/Observable";
 

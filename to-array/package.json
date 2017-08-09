@@ -30,7 +30,7 @@
     "url": "https://github.com/Raynos/to-array/issues",
     "email": "raynos2@gmail.com"
   },
-  "bundleDependencies": false,
+  "bundleDependencies": true,
   "component": {
     "scripts": {
       "to-array/index.js": "index.js"
