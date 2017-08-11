@@ -1,0 +1,269 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab|PT+Sans+Caption&subset=latin,cyrillic);
+
+.row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.heading h1 {
+  color: #000;
+  font-family: "Open Sans",sans-serif;
+  font-size: 33px;
+  position: relative;
+}
+
+.heading-12 h1 {
+  display: inline-block;
+  font-weight: bold;
+  margin: 0 0 15px;
+  padding: 0 0 20px;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.heading-12 p {
+  color: #949494;
+  font-family: "Open Sans",sans-serif;
+  font-size: 14px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.heading {
+  text-align: center;
+}
+
+a:hover, a:focus, a:active {
+  outline: none;
+  text-decoration: none;
+}
+
+.kode-blog-btn {
+  text-decoration: none;
+  display: block;
+  position: relative;
+  bottom: 5px;
+  left: 50%;
+  margin-left: -100px;
+  width: 200px;
+  text-transform: uppercase;
+  border: 1px solid;
+  color: #333333;
+  box-sizing: border-box;
+}
+.kode-blog-btn:before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 10px;
+  border-top: 1px solid;
+  border-left: 1px solid
+}
+.kode-blog-btn:after{
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 10px;
+  height: 20px;
+  border-bottom: 1px solid;
+  border-right: 1px solid
+}
+.kode-blog-btn:hover:before {
+  width: 10px;
+  height: 20px;
+}
+.kode-blog-btn:hover:after {
+  width: 20px;
+  height: 10px;
+}
+
+body {
+  color: #505050;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.kode-large-blog > ul > li {
+
+  margin-bottom: 45px;
+}
+
+.kode-blog-list ul li:hover img {
+  opacity: 0.6;
+}
+
+.kode-blog-list figure, .kode-blog-list figure img {
+  float: left;
+  margin: 0;
+  width: 100%;
+}
+
+.kode-blog-list ul li {
+  list-style: outside none none;
+}
+
+li {
+  line-height: 25px;
+  list-style: disc outside none;
+}
+
+.kode-blog-list ul li:hover .kode-city-zoon p{
+  background-color: #6091ac;
+}
+
+.kode-city-zoon p {
+  background-color: lightgrey;
+  color: #ffffff;
+  float: left;
+  font-size: 12px;
+  margin: -10px -10px -10px -10px;
+  padding: 0px 0 0px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 105%;
+}
+
+.kode-city-zoon p {
+
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+  }
+
+.kode-city-zoon p span {
+  display: block;
+  font-size: 18px;
+  margin-top: 6px;
+}
+
+.kode-blog-list ul li:hover .kode-city-zoon h5 a {
+  color: #6091ac !important;
+}
+
+.kode-city-zoon {
+  background-color: #f4f4f4;
+  float: left;
+  padding: 18px;
+  position: relative;
+  width: 100%;
+}
+
+h5 {
+  font-size: 25px;
+  text-align: center;
+  color: #333333;
+  font-family: 'Roboto Slab', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2;
+  margin-top: 30px;
+
+}
+
+.kode-blog-info {
+  background-color: #f4f4f4;
+  float: left;
+  padding: 20px 20px 0;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.kode-blog-info::before {
+  background-color: #f4f4f4;
+  bottom: -14px;
+  content: "";
+  height: 14px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  width: 42%;
+}
+
+.kode-blog-info p {
+  margin: 0 0 10%;
+}
+
+
+a {
+  font-family: 'PT Sans Caption', sans-serif;
+  font-size: .8em;
+  color: #333333;
+  text-decoration: none;
+  }
+
+
+.kode-large-blog ul li:hover .kode-blog-btn {
+  color: #6091ac !important;
+}
+
+.kode-blog-info  {
+  display: inline-block;
+  float: none;
+}
+
+.kode-team-network {
+
+  margin: 0 40px 0 0;
+}
+
+
+.kode-team-network li a:hover {
+
+  background-color: #6091ac;
+}
+
+.kode-team-network li a:hover {
+  color: #ffffff;
+}
+
+.kode-team-network li a {
+  border: 1px solid #e6e6e6;
+  color: #999999;
+  height: 26px;
+  padding: 5px 0 0;
+  text-align: center;
+  width: 26px;
+}
+
+.kode-team-network li{
+
+  display: inline-block;
+}
+
+.fa {
+
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* Pagination starts */
+.pagination {
+  float: left;
+  width: 100%;
+  text-align: center;
+}
+.pagination a,.pagination span {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #d7d7d7;
+  color: #a5a5a5;
+  padding: 5px 0px 0px 0px;
+  margin-right: 6px;
+}
+.pagination a:hover,.pagination span { color: #ffffff; background-color: #a5a5a5;
+}
+
+/* Pagination ends */

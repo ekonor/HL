@@ -1,3 +1,32 @@
+/* Заголовок */
+heading h1 {
+  color: #000;
+  font-family: "Open Sans",sans-serif;
+  font-size: 33px;
+  position: relative;
+}
+
+.heading-12 h1 {
+  display: inline-block;
+  font-weight: bold;
+  margin: 0 0 15px;
+  padding: 0 0 20px;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.heading-12 p {
+  color: #949494;
+  font-family: "Open Sans",sans-serif;
+  font-size: 14px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.heading {
+  text-align: center;
+}
+
 /* Весь блок клуба */
 .club_blok {
   margin-bottom: 5px;

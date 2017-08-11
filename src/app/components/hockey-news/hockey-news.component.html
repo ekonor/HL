@@ -1,11 +1,16 @@
-<h1 style="text-align: center"> {{title}} </h1>
-<hr>
+
 <!--// Page Content //-->
 
 <div class="container-fluid">
   <div class="row">
 
     <div class="col-md-12">
+      <div class="heading heading-12 margin-top-bottom-30">
+        <p> Все самые интересные и свежие новости о хоккее в одном месте</p>
+        <h1><span class="left"></span>Новости о хоккее и  околохоккейном мире<span class="right"></span></h1>
+        <hr>
+      </div>
+
 
       <div class="kode-blog-list kode-fullwidth-blog">
         <ul class="row">
@@ -13,7 +18,7 @@
           <li class="col-md-12" *ngFor="let post of listData">
             <div class="kode-time-zoon">
               <time datetime="2008-02-14 20:00">07 <span>may</span></time>
-              <h3><a href="#">{{post.Title}}</a></h3>
+              <h3 [innerHtml]="post.Title" ><a href="#"></a></h3>
             </div>
             <figure><a href="#"><img src="{{post.Logo}}" class="img-responsive" alt="Хоккейные новости"></a></figure>
             <div class="kode-blog-info">

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {ArenasService} from "./arenas.service";
+import {ListBaseComponent} from "../../common/list/list-base.component";
+import {ArenasListItem, ArenasListResponse} from "./arenas";
 
 
 
@@ -8,20 +10,19 @@ import {ArenasService} from "./arenas.service";
 @Component({
   selector: 'app-arenas',
   templateUrl: './arenas.component.html',
-  styleUrls: ['./arenas.component.scss']
+  styleUrls: ['./arenas.component.scss'],
+  providers: [ArenasService]
 })
-export class ArenasComponent implements OnInit {
+export class ArenasComponent extends ListBaseComponent<ArenasListItem> {
+  constructor(private readonly arenasService: ArenasService) {
+    super();
 
-   latestArenasList$: Observable<any>;
-
-
-  constructor(private arenasService: ArenasService) {
-
-    this.latestArenasList$ = this.arenasService.getArenasList();
+    this.title='Все хоккейные арены и площадки';
   }
 
-  ngOnInit() {
+  protected getListData(): Observable<ArenasListResponse> {
+    return this.arenasService.getArenasList(this.listInfo)
   }
-
 }
+
 
