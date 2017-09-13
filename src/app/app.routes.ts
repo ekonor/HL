@@ -8,11 +8,13 @@ import { ArenasComponent } from './components/arenas/arenas.component';
 import { HockeyNewsComponent } from './components/hockey-news/hockey-news.component';
 import { LoginComponent } from "app/components/login/login.component";
 import { RegisterComponent } from "app/components/register/register.component";
+import {ArenaIdComponent} from "./components/arenas/arena-id/arena-id.component";
 
 
 export const routes: Routes =[
   { path: '', component: HomeComponent},
   { path: 'hockey-news', component: HockeyNewsComponent},
+  { path: 'arenas/{id}', component: ArenaIdComponent},
   { path: 'tournaments', component: TournamentsComponent},
   { path: 'children-teams', component: ChildrenTeamsComponent},
   { path: 'arenas', component: ArenasComponent},

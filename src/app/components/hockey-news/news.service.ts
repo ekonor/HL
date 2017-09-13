@@ -9,7 +9,7 @@ import { ListInfo } from 'app/common/list/list-info';
 
 @Injectable()
 export class NewsService {
-  private newsUrl : string = `/api/v1/news`;
+  private newsUrl : string = `http://hockey.smargit.com/Hockeyapp.WebApi/api/v1/news`;
 
   constructor(private http: Http) {}
 
@@ -30,7 +30,7 @@ export class NewsService {
 
   }
 
-  getNewsItem(id: number): Promise<NewsItem> {
+  public getNewsItem(id: number): Promise<NewsItem> {
     const url = `${this.newsUrl}/${id}`;
     return this.http.get(url)
       .toPromise()

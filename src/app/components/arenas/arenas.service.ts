@@ -9,7 +9,7 @@ import { ListInfo } from 'app/common/list/list-info'
 @Injectable()
 export class ArenasService {
 
-  private arenasUrl : string = `/api/v1/arenas`;
+  private arenasUrl : string = ` http://hockey.smargit.com/Hockeyapp.WebApi/api/v1/arenas`;
 
   constructor(private http: Http) { }
 

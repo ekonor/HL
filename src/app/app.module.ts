@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule} from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -26,6 +26,7 @@ import { AlertComponent } from "app/components/alert/alert.component";
 
 import { AgmCoreModule } from '@agm/core';
 import {ArenasService} from "./components/arenas/arenas.service";
+import { ArenaIdComponent } from './components/arenas/arena-id/arena-id.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import {ArenasService} from "./components/arenas/arenas.service";
     SlidesComponent,
     AlertComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ArenaIdComponent
   ],
   imports: [
     BrowserModule,
