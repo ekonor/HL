@@ -1,4 +1,4 @@
-import {Routes, RouterModule} from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { ChildrenTeamsComponent } from './components/children-teams/children-teams.component';
 import { AboutComponent } from './components/about/about.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -6,9 +6,14 @@ import { HomeComponent } from './components/home/home.component';
 import { TournamentsComponent } from './components/tournaments/tournaments.component';
 import { ArenasComponent } from './components/arenas/arenas.component';
 import { HockeyNewsComponent } from './components/hockey-news/hockey-news.component';
-import { LoginComponent } from "app/components/login/login.component";
-import { RegisterComponent } from "app/components/register/register.component";
-import {ArenaIdComponent} from "./components/arenas/arena-id/arena-id.component";
+import { LoginComponent } from "app/components/account/login/login.component";
+import { RegisterComponent } from "app/components/account/register/register.component";
+import { ArenaIdComponent } from "./components/arenas/arena-id/arena-id.component";
+import { ForgotPasswordComponent } from 'app/components/account/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from 'app/components/account/reset-password/reset-password.component';
+import { ForgotPasswordConfirmationComponent } from 'app/components/account/forgot-password-confirmation/forgot-password-confirmation.component';
+import { ResetPasswordConfirmationComponent } from 'app/components/account/reset-password-confirmation/reset-password-confirmation.component';
+import { ConfirmEmailComponent } from 'app/components/account/confirm-email/confirm-email.component';
 
 
 export const routes: Routes =[
@@ -21,6 +26,11 @@ export const routes: Routes =[
   { path: 'about', component: AboutComponent},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'confirm-email', component: ConfirmEmailComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'forgot-password-confirmation', component: ForgotPasswordConfirmationComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'reset-password-confirmation', component: ResetPasswordConfirmationComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
