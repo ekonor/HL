@@ -23,7 +23,10 @@ export abstract class ListBaseComponent<TListItem> implements OnInit {
         this.listData = result.ListItems;
 
         // todo set pagerfrom result.Count
-    });
+    }
+   );
+    console.log("hhh");
+
   }
 
     protected abstract getListData() : Observable<ListResponse<TListItem>>;

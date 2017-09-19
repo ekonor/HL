@@ -1,25 +1,21 @@
-import { ListResponse } from "app/common/list/list-response";
+export class Arena {
+  linkName: string = '';
+  id: number;
+  name: string = '-';
+  address: string = '-';
+  email: string = '-';
+  webSite: string = '';
+  capacity: number = 0;
+  logo: string = '';
+  cityName: string = '-';
+  contacts: string;
+  longitude: number = 0;
+  latitude: number = 0;
+  about: string = '-';
+  arenaTypeName: string = '-';
 
-class ArenasItemBase {
-  Id: number;
-  CategoryId: number;
-  Name: string;
-  Address: string;
-  Email: string;
-  WebSite: string;
-  Capacity: number;
-  Logo: string;
-  CityName: string
-}
-
-/* класс элемента списка новостей */
-export class ArenasListItem extends ArenasItemBase {
-}
-
-/* класс списка новостей - то что вернет метод get */
-export class ArenasListResponse extends ListResponse<ArenasListItem> {
-}
-
-export class ArenasItem extends ArenasItemBase {
-  Content: string;
+  constructor( values: Object = {} )
+  {
+    Object.assign( this, values );
+  }
 }

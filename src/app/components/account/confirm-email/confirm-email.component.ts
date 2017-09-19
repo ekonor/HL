@@ -12,4 +12,7 @@ export class ConfirmEmailComponent implements OnInit {
   ngOnInit() {
   }
 
+  confirm() {
+
+  }
 }

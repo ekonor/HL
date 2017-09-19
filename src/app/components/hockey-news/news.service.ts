@@ -9,7 +9,7 @@ import { ListInfo } from 'app/common/list/list-info';
 
 @Injectable()
 export class NewsService {
-  private newsUrl : string = `http://hockey.smargit.com/Hockeyapp.WebApi/api/v1/news`;
+  private newsUrl : string = `http://87.117.9.216/Hockeyapp.WebApi/api/v1/news`;
 
   constructor(private http: Http) {}
 

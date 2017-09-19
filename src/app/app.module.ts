@@ -16,9 +16,13 @@ import { ArenasComponent } from './components/arenas/arenas.component';
 import { HockeyNewsComponent } from './components/hockey-news/hockey-news.component';
 import { routing, appRoutingProviders } from './app.routes';
 import { SlidesComponent } from './components/home/slides/slides.component';
+
 import { LoginComponent } from "app/components/account/login/login.component";
 import { ForgotPasswordComponent } from "app/components/account/forgot-password/forgot-password.component";
 import { RegisterComponent } from "app/components/account/register/register.component";
+import { ForgotPasswordConfirmationComponent } from 'app/components/account/forgot-password-confirmation/forgot-password-confirmation.component';
+import { ResetPasswordComponent } from 'app/components/account/reset-password/reset-password.component';
+
 import { AuthGuard } from "app/auth/auth.guard";
 import { AlertService } from "app/components/alert/alert.service";
 import { AuthenticationService } from "app/auth/authentication.service";
@@ -26,12 +30,12 @@ import { UserService } from "app/auth/user.service";
 import { AlertComponent } from "app/components/alert/alert.component";
 
 import { AgmCoreModule } from '@agm/core';
-import {ArenasService} from "./components/arenas/arenas.service";
-import { ArenaIdComponent } from './components/arenas/arena-id/arena-id.component';
-import { ForgotPasswordConfirmationComponent } from './components/account/forgot-password-confirmation/forgot-password-confirmation.component';
-import { ResetPasswordComponent } from './components/account/reset-password/reset-password.component';
-import { ResetPasswordConfirmationComponent } from './components/account/reset-password-confirmation/reset-password-confirmation.component';
-import { ConfirmEmailComponent } from './components/account/confirm-email/confirm-email.component';
+import { ArenasService } from "./components/arenas/arenas.service";
+import { ArenasIdComponent } from './components/arenas/arenas-id.component';
+import { ResetPasswordConfirmationComponent } from 'app/components/account/reset-password-confirmation/reset-password-confirmation.component';
+import { ConfirmEmailComponent } from 'app/components/account/confirm-email/confirm-email.component';
+import { ConfirmEmailResultComponent } from 'app/components/account/confirm-email-result/confirm-email-result.component';
+//import { ArenasListComponent } from './components/arenas/arenas.component';
 
 
 @NgModule({
@@ -50,13 +54,15 @@ import { ConfirmEmailComponent } from './components/account/confirm-email/confir
     SlidesComponent,
     AlertComponent,
     LoginComponent,
-    RegisterComponent,
-    ArenaIdComponent,
     ForgotPasswordComponent,
     ForgotPasswordConfirmationComponent,
+    RegisterComponent,
+    ConfirmEmailComponent,
+    ConfirmEmailResultComponent,
     ResetPasswordComponent,
     ResetPasswordConfirmationComponent,
-    ConfirmEmailComponent
+    ArenasIdComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

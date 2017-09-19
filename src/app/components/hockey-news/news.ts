@@ -3,19 +3,21 @@ import { ListResponse } from "app/common/list/list-response";
 class NewsItemBase {
   Id: number;
   CategoryId: number;
-  CategotyName: string;
+  CategoryName: string;
+  LinkName: string;
   Title: string;
   Summary: string;
-  Added: Date;
-  PostUserId: number;
-  PostUserName: string;
   ReplyCount: number;
   VoteUpCount: number;
   VoteDownCount: number;
-  SourceUrl: string;
-  SourceName: string;
   Logo: string;
-  LogoSource: string;
+  CreationDate: Date;
+  /*Creator: {
+    UserId: number;
+    UserName: string;
+    UserLogo: string;
+  }*/
+  State: number;
 }
 
 /* класс элемента списка новостей */
@@ -32,14 +34,20 @@ export class NewsItem extends NewsItemBase {
 
 export class Post {
   id: number;
+  categoryId: number;
+  categoryName: string;
+  linkName: string;
   title: string;
-  date: string;
-  time: string;
-  autor: string;
-  description: string;
-  text: string;
-  video: string;
-  image: string;
-  sitename: string;
-  sitelink: string;
+  summary: string;
+  replyCount: number;
+  voteUpCount: number;
+  voteDownCount: number;
+  logo: string;
+  creationDate: Date;
+  /*creator: {
+    userId: number;
+    userName: string;
+    userLogo: string;
+  }*/
+  state: number;
 }
