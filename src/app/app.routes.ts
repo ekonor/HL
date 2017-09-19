@@ -14,6 +14,7 @@ import { ResetPasswordComponent } from 'app/components/account/reset-password/re
 import { ForgotPasswordConfirmationComponent } from 'app/components/account/forgot-password-confirmation/forgot-password-confirmation.component';
 import { ResetPasswordConfirmationComponent } from 'app/components/account/reset-password-confirmation/reset-password-confirmation.component';
 import { ConfirmEmailComponent } from 'app/components/account/confirm-email/confirm-email.component';
+import { ConfirmEmailResultComponent } from 'app/components/account/confirm-email-result/confirm-email-result.component';
 
 
 export const routes: Routes =[
@@ -27,6 +28,7 @@ export const routes: Routes =[
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'confirm-email', component: ConfirmEmailComponent },
+  { path: 'confirm-email-result?userId={userId}&code={code}', component: ConfirmEmailResultComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'forgot-password-confirmation', component: ForgotPasswordConfirmationComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
