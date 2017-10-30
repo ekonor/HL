@@ -1,4 +1,3 @@
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -28,15 +27,12 @@ import { AlertService } from "app/components/alert/alert.service";
 import { AuthenticationService } from "app/auth/authentication.service";
 import { UserService } from "app/auth/user.service";
 import { AlertComponent } from "app/components/alert/alert.component";
-
 import { AgmCoreModule } from '@agm/core';
 import { ArenasService } from "./components/arenas/arenas.service";
 import { ArenasIdComponent } from './components/arenas/arenas-id.component';
 import { ResetPasswordConfirmationComponent } from 'app/components/account/reset-password-confirmation/reset-password-confirmation.component';
 import { ConfirmEmailComponent } from 'app/components/account/confirm-email/confirm-email.component';
 import { ConfirmEmailResultComponent } from 'app/components/account/confirm-email-result/confirm-email-result.component';
-//import { ArenasListComponent } from './components/arenas/arenas.component';
-
 
 @NgModule({
 
