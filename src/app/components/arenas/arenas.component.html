@@ -1,76 +1,87 @@
 <div class="container">
-
-  <!--div-- class="row"-->
-
-    <!--div class="col-md-12"-->
+  <div class="row">
+    <div class="col-md-12">
       <div class="heading heading-12 margin-top-bottom-30">
         <p> Вся информация о ледовых аренах, стадионах и площадках в одном месте</p>
         <h1><span class="left"></span>Хоккейные арены и площадки<span class="right"></span></h1>
         <hr>
       </div>
-
-      <div class="row kode-blog-list kode-large-blog">
-
-        <div class="col-lg-4 col-sm-6 portfolio-item" *ngFor="let arena of arenas">
-          <div class="card h-100">
-            <a href="#">
-              <!--object data="assets/img/arenas/stadion_proba.jpeg" type="image/png"-->
-                <img class="card-img-top" src="http://hockey.smargit.com/HockeyApp.WebApi{{arena.logo}}" alt="">
-              <!--/object-->
-            </a>
-            <div class="card-body">
-              <h4 class="card-title">
-                 <strong>{{arena.name}}</strong><br>
-              </h4>
-              <p class="card-text">
-                  {{arena.address}}<br>
-                  <a href="mailto:#">{{arena.email}}</a><br>
-                  <a style="color: #00aceb" target="_blank" href="{{arena.webSite}}">Перейти на сайт</a><br>
-              </p>
-            </div>
-          </div>
+    </div>
+    <!-- Pagination -->
+    <!--div class="col-md-12">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+    </div-->
+    <div class="col-lg-4 col-sm-6 blog-item" *ngFor="let arena of arenas">
+      <div class="item h-100">
+        <div class="item-img">
+          <a href="/arenas/{{arena.id}}"><img class="item-img-top" src="http://hockey.smargit.com/HockeyApp.WebApi{{arena.logo}}" alt="" onerror = "this.style.display = 'none'"></a>
         </div>
-        <!--ul class="row row-flex row-flex-wrap">
-
-          <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 arena-blog-preview" *ngFor="let arena of arenas">
-            <div class="kode-city-zoon">
-              <p>{{arena.cityName}}&nbsp;</p>
-              <h5><a href="#">{{arena.name}}</a></h5>
-            </div>
-            <figure><a href="#"><img src="assets/img/arenas/stadion_proba.jpeg" alt=""></a></figure>
-            <div class="kode-blog-info">
-              <address>
-                <strong>{{arena.name}}</strong><br>
-                {{arena.address}}<br>
-                <a href="mailto:#">{{arena.email}}</a><br>
-                <a style="color: #00aceb" target="_blank" href="{{arena.webSite}}">Перейти на сайт</a><br>
-              </address>
-              <a href="/arenas/{{arena.id}}" class="kode-blog-btn">Подробнее...</a-->
-
-              <!--ul class="kode-team-network">
-                <li><a class="fa fa-facebook" href="#"></a></li>
-                <li><a class="fa fa-twitter" href="#"></a></li>
-                <li><a class="fa fa-linkedin" href="#"></a></li>
-              </ul-->
-            <!--/div>
-          </li>
-
-
-        </ul-->
-
-        <!--// Pagination //-->
-        <!--div class="pagination">
-          <a href="#"><i class="fa fa-angle-double-left"></i></a>
-          <a href="#">1</a>
-          <a href="#">2</a>
-          <span>3</span>
-          <a href="#">4</a>
-          <a href="#"><i class="fa fa-angle-double-right"></i></a>
-        </div-->
-        <!--// Pagination //-->
-
+        <div class="item-body">
+          <div class="item-title-main">
+            <p>{{arena.cityName}}</p>
+          </div>
+          <h5 class="item-title">
+            <a href="/arenas/{{arena.id}}" alt="Подробнее...">{{arena.name}}</a>
+          </h5>
+          <span class="item-text">
+            <p>Вместимость: {{arena.capacity}} чел.</p>
+            <p>Контакты: {{arena.contacts}}</p>
+            <p>Электронная почта: <a href="mailto:#">{{arena.email}}</a></p>
+            <p>Адрес: {{arena.address}}</p>
+            <p>Сайт: <a style="color: #00aceb" target="_blank" href="{{arena.webSite}}">{{arena.webSite}}</a></p>
+          </span>
+        </div>
       </div>
-    <!--/div-->
-  <!--/div-->
-</div>
+    </div>
+    <!-- Pagination -->
+    <!--div class="col-md-12">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+    </div-->
 
+  </div>
+</div>
+  <!-- /.container -->
