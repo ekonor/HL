@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule} from '@angular/http';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -12,7 +12,12 @@ import { AboutComponent } from './components/about/about.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
 import { TournamentsComponent } from './components/tournaments/tournaments.component';
+
 import { ArenasComponent } from './components/arenas/arenas.component';
+import { ArenasService } from "./components/arenas/arenas.service";
+import { ArenasIdComponent } from './components/arenas/arenas-id.component';
+import { ArenasFilterPipe } from './components/arenas/arenas-filter.pipe';
+
 import { HockeyNewsComponent } from './components/hockey-news/hockey-news.component';
 import { routing, appRoutingProviders } from './app.routes';
 import { SlidesComponent } from './components/home/slides/slides.component';
@@ -29,8 +34,6 @@ import { AuthenticationService } from "app/auth/authentication.service";
 import { UserService } from "app/auth/user.service";
 import { AlertComponent } from "app/components/alert/alert.component";
 import { AgmCoreModule } from '@agm/core';
-import { ArenasService } from "./components/arenas/arenas.service";
-import { ArenasIdComponent } from './components/arenas/arenas-id.component';
 import { ResetPasswordConfirmationComponent } from 'app/components/account/reset-password-confirmation/reset-password-confirmation.component';
 import { ConfirmEmailComponent } from 'app/components/account/confirm-email/confirm-email.component';
 import { ConfirmEmailResultComponent } from 'app/components/account/confirm-email-result/confirm-email-result.component';
@@ -48,6 +51,8 @@ import { ConfirmEmailResultComponent } from 'app/components/account/confirm-emai
     HomeComponent,
     TournamentsComponent,
     ArenasComponent,
+    ArenasFilterPipe,
+    ArenasIdComponent,
     HockeyNewsComponent,
     SlidesComponent,
     AlertComponent,
@@ -59,7 +64,6 @@ import { ConfirmEmailResultComponent } from 'app/components/account/confirm-emai
     ConfirmEmailResultComponent,
     ResetPasswordComponent,
     ResetPasswordConfirmationComponent,
-    ArenasIdComponent,
     ForgotPasswordComponent
   ],
   imports: [

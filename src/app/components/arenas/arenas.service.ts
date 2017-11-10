@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from "@angular/http";
 import { Arena } from './arenas';
+import { ArenaType } from "./arenas-types";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ArenasService
@@ -27,8 +30,16 @@ export class ArenasService
       .toPromise()
       .then(this.extractArena)
       .catch(this.handleError);
-console.log(this.url + "/" + id);
+       //console.log(this.url + "/" + id);
     return arena;
+  }
+
+  public getArenasTypes(): Promise<ArenaType[]> {
+    let arenastypes = this.http.get(this.url + "/" + "types")
+      .toPromise()
+      .then(this.extractArenasTypes)
+      .catch(this.handleError);
+    return arenastypes;
   }
 
  /* public addArena( arena: Arena ) {
@@ -68,6 +79,19 @@ console.log(this.url + "/" + id);
     let arena = new Arena(res);
 
     return arena;
+  }
+
+  private extractArenasTypes( response: Response ) {
+    let arenasTypes = response.json() as ArenaType[];
+    /*let products = response.json()['productList'] as Product[];
+    console.log(res);
+    let arenas: Arena[] = [];
+
+    for ( let i = 0; i < res.length; i++ ) {
+      arenas.push(new Arena({id: res[ i ].id, name: res[ i ].name}));
+    }*/
+    console.log(arenasTypes);
+    return arenasTypes;
   }
 
   private handleError( error: any ): any {

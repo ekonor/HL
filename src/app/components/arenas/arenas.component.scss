@@ -1,4 +1,4 @@
-//@import url(https://fonts.googleapis.com/css?family=Roboto+Slab|PT+Sans+Caption&subset=latin,cyrillic);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab|PT+Sans+Caption&subset=latin,cyrillic);
 
 /*.row {
   margin-right: -15px;
@@ -375,7 +375,13 @@ a {
 }*/
 
 .blog-item {
-  padding-bottom: 30px;
+  //padding-bottom: 30px;
+}
+
+.item[_ngcontent-c4],
+.item[_ngcontent-c3]
+{
+
 }
 
 .item-img-top {
@@ -577,4 +583,21 @@ a.page-link
   color: #007bff;
   background-color: #fff;
   border: 1px solid #ddd;
+}
+
+/* filter form */
+
+form.filter
+{
+
+}
+
+table.filter
+{
+  margin: 0 auto;
+}
+
+form.filter th
+{
+  padding: 0 10px;
 }
