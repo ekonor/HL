@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule} from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -82,7 +83,8 @@ import { ConfirmEmailResultComponent } from 'app/components/account/confirm-emai
     AlertService,
     AuthenticationService,
     UserService,
-    ArenasService
+    ArenasService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

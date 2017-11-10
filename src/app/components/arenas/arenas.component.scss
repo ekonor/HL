@@ -587,17 +587,21 @@ a.page-link
 
 /* filter form */
 
-form.filter
-{
+form.filter {
 
 }
 
-table.filter
-{
+table.filter {
   margin: 0 auto;
 }
 
-form.filter th
-{
+form.filter th {
   padding: 0 10px;
+}
+
+span.toggle {
+  width: 10px;
+  height: 10px;
+  vertical-align: middle;
+  cursor: pointer;
 }

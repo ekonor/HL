@@ -6,6 +6,7 @@ import { ArenaType } from "./arenas-types";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/min';
 //import { ChangeDetectionStrategy } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   moduleId: module.id,
@@ -21,6 +22,7 @@ export class ArenasComponent implements OnInit {
   arenas: Arena[];
   arenasTypes: ArenaType[];
   errorMessage: string;
+  cookieValue = 'UNKNOWN';
 
   //arenasType: ArenaType;
 
@@ -47,12 +49,16 @@ export class ArenasComponent implements OnInit {
   pages: number;
 
   constructor( private service: ArenasService,
-               private router: Router ) {
+               private router: Router,
+               private cookieService: CookieService ) {
   }
 
   ngOnInit() {
     this.getArenas();
     this.getArenasTypes();
+    this.cookieService.set( 'Test', 'Hello World' );
+    this.cookieValue = this.cookieService.get('Test');
+    console.log(this.cookieValue);
   }
 
   public refresh() {
