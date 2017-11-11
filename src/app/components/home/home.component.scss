@@ -36,7 +36,7 @@ section .m-t-4 {
   -webkit-transition: border .2s ease-in-out;
   -o-transition: border .2s ease-in-out;
   transition: border .2s ease-in-out;
-  height: 655px;
+  height: 100px;
 }
 
 .icons {
@@ -69,5 +69,8 @@ section {
   padding-bottom: 40px;
 }
 
-
+img
+{
+  height: 200px;
+}
 

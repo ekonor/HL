@@ -56,8 +56,9 @@ export class ArenasComponent implements OnInit {
   ngOnInit() {
     this.getArenas();
     this.getArenasTypes();
-    this.cookieService.set( 'Test', 'Hello World' );
-    this.cookieValue = this.cookieService.get('Test');
+    //this.cookieService.set( 'Test', 'Hello World' );
+    //this.cookieValue = this.cookieService.get('Test');
+    this.cookieValue = this.cookieService.get('arenas-filter-state');
     console.log(this.cookieValue);
   }
 

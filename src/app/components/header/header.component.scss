@@ -1,60 +1,680 @@
-.header a, a:hover {
-
-  color: #ffd341;
-  text-decoration: none;
-  font-size: 200%;
+.kode-header-absolute {
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 999;
 }
 
-.nav-pills>li>a {
-  color: #fff;
-  font-size: 120%;
+header {
+  float: left;
+  width: 100%;
 }
 
-.nav-pills>li>a:hover {
-  background-color: #6091ac;
-
-}
-
-@media (max-width: 767px) {
-  .nav-pills>li {
-    float: none;
-  }
-  .nav-pills{
-    text-align: center;
-  }
-  .alignment-reg {
-    position: relative;
-    height: 13%;
-    width: 100%;
-  }
-  .alignment-reg>li {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-  }
-}
-
-.alignment-reg {
-  float: right;
-}
-
-.alignment-search{
-  float: right;
-  margin-right: 10px;
-
+.kode-topbar {
+  background-color: #195d10;
+  float: left;
+  font-size: 13px;
   position: relative;
-  top: 50%;
-  -webkit-transform: translateY(15%);
-  -ms-transform: translateY(15%);
-  transform: translateY(15%);
+  width: 100%;
 }
 
-.btn:hover, .btn:focus, .btn.focus {
-  color: white;
+.kode_bg_white .bx-wrapper .bx-viewport {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+}
+
+.kode-topbar a, .kode-topbar p, .kode-topbar i, .kode-topbar span {
+  color: #ffffff;
+}
+
+.kode-barinfo {
+  float: left;
+  height: 30px;
+  overflow: hidden;
+  padding: 5px 16px;
+  float: left;
+  padding: 25px 0;
+  text-align: center;
+  transition: all 0.3s ease-in-out 0s;
+  width: 100%;
+}
+
+
+.kode-navigation {
+  float: right;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-left {
+  float: left !important;
+}
+
+.kode-navigation ul {
+  float: left;
+  list-style: outside none none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.kode-navigation ul li {
+  float: left;
+  list-style: outside none none;
+  position: relative;
+}
+
+li {
+  line-height: 28px;
+  list-style: disc outside none;
+}
+
+.header-8 .kode-navigation ul li a {
+  text-align: left;
+}
+
+.kode-navigation ul li a {
+  color: #fff;
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 15px 16px;
   text-decoration: none;
-  background-color: #6091ac;
+  text-transform: uppercase;
+}
+
+
+.kode-navigation ul ul {
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+  float: left;
+  left: 0;
+  margin: 20px 0 0;
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  transition: all 0.3s ease-in-out 0s;
+  visibility: hidden;
+  width: 210px;
+  z-index: 10;
+}
+
+.kode-navigation ul ul li {
+  width: 100%;
+}
+
+.kode-navigation ul li {
+  float: left;
+  list-style: outside none none;
+  position: relative;
+}
+
+.header-8 .kode-navigation ul li a {
+  text-align: left;
+}
+
+.kode-navigation ul ul li a {
+  font-weight: normal;
+  padding: 8px 20px;
+  text-transform: capitalize;
+}
+
+.kode-navigation ul li a {
+  color: #fff;
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 15px 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.kode-userinfo li {
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+  display: inline-block;
+  list-style: outside none none;
+  padding: 6px 11px 5px 15px;
+  position: relative;
+}
+
+li {
+  line-height: 28px;
+  list-style: disc outside none;
 }
 
 .row {
-  margin-bottom: -21px;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+/*.kode-topbar::after {
+  border-bottom: 39px solid #009c00;
+  border-left: 30px solid transparent;
+  content: "";
+  position: absolute;
+  right: 50%;
+  top: 0;
+}*/
+
+.kode-userinfo {
+  float: right;
+}
+
+ul {
+  margin-bottom: 0px;
+}
+
+
+header{
+  float: left;
+  width: 100%;
+}
+.kode-topbar {
+  background-color: #FFc355;
+  float: left;
+  font-size: 13px;
+  position: relative;
+  width: 100%;
+}
+/*.kode-topbar::before {
+  background-color: #009c00;
+  content: "";
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+}*/
+
+.kode-topbar a, .kode-topbar p, .kode-topbar i, .kode-topbar span {
+  color: #ffffff;
+}
+.kode-barinfo{
+  float: left;
+  height: 30px;
+  overflow: hidden;
+  padding: 5px 16px;
+}
+.kode_bg_white .bx-wrapper .bx-viewport {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+}
+.kode_bg_white strong {
+  color: #fff;
+}
+.kode-userinfo {
+  float: right;
+}
+.kode-userinfo li {
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+  display: inline-block;
+  list-style: outside none none;
+  padding: 6px 11px 5px 15px;
+  position: relative;
+}
+.kode-userinfo li i {
+  margin-right: 4px;
+}
+.kode-header-absolute {
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
+.kd-headbar {
+  background-color: #333333;
+  border-bottom: 3px solid;
+  float: left;
+  width: 100%;
+}
+.logo {
+  float: left;
+  margin: 25px 0 25px 25px;
+  width: 100%;
+}
+.kd-headbar .logo {
+  transition: all 0.3s ease-in-out 0s;
+}
+.kf_sticky .kd-headbar .logo {
+  margin: 10px 0 10px 10px;
+}
+.kf_sticky .navbar-nav > li > a {
+  padding: 27px 14px;
+}
+.kf_sticky .kode-search {
+  margin: 21px -14px 0 0;
+}
+.kode-rightsection {
+  float: right;
+}
+.navbar-default {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+  display: none;
+  float: left;
+  margin: 0;
+}
+.navbar-default .navbar-nav li {
+  list-style: outside none none;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  color: #eb1a1a;
+}
+.navbar-nav > li:first-child > a {
+  padding-left: 0;
+}
+.navbar-nav > li > a {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  overflow: hidden;
+  padding: 42px 14px;
+  position: relative;
+  text-transform: uppercase;
+}
+.navbar-nav > li > a::before {
+  border-radius: 40px 40px 0 0;
+  bottom: 0;
+  color: #ffffff;
+  content: "";
+  font-family: FontAwesome;
+  font-size: 9px;
+  height: 9px;
+  left: 50%;
+  line-height: 9px;
+  margin: 0 0 -8px -12px;
+  padding: 0 0 0 5px;
+  position: absolute;
+  width: 18px;
+  z-index: 4;
+}
+.navbar-nav > li > a::after {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  border-color: #eb1a1a #eb1a1a -moz-use-text-color;
+  border-image: none;
+  border-radius: 40px 40px 0 0;
+  border-style: solid solid none;
+  border-width: 1px 1px medium;
+  bottom: 1px;
+  content: "";
+  height: 12px;
+  left: 50%;
+  margin: 0 0 -8px -15px;
+  position: absolute;
+  width: 24px;
+  z-index: 0;
+}
+.navbar-nav > li > a::before, .navbar-nav > li > a::after {
+  opacity: 0;
+}
+.navbar-nav > li:hover > a::before, .navbar-nav > li:hover > a::after {
+  margin-bottom: 0;
+  opacity: 1;
+}
+.navbar-nav .children {
+  background-color: #333333;
+  border-top: 1px solid;
+  left: 0;
+  margin: 0 0 0 -50px;
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  transform: translateX(30px);
+  transition: all 0.4s ease-in-out 0s;
+  visibility: hidden;
+  z-index: 999;
+}
+.navbar-nav > li:hover > .children, .navbar-nav .children > li:hover > .children {
+  opacity: 1;
+  transform: translateX(0px);
+  visibility: visible;
+}
+.navbar-nav .children li {
+  float: left;
+  position: relative;
+  width: 100%;
+}
+.navbar-nav .children li a {
+  border-bottom: 1px solid #3e3e3e;
+  color: #ffffff;
+  float: left;
+  font-size: 12px;
+  padding: 7px 15px;
+  text-transform: uppercase;
+  width: 195px;
+}
+.navbar-nav .children li a::before {
+  content: "";
+  display: inline-block;
+  font-family: FontAwesome;
+  padding: 0 14px 0 0;
+}
+.navbar-nav .children .children {
+  left: 100%;
+  margin: 0;
+  top: 0;
+}
+.navbar-nav .children > li:hover > a, .children > li:hover > a::before {
+  color: #ffffff;
+}
+.kode-header-two .kode-search::before, .kode-header-two .kode-search::after {
+  display: none;
+}
+.kode-header-three .kd-headbar {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+}
+.kode-header-three .navbar-nav > li > a::after {
+  display: none;
+}
+.kode-header-three .navbar-nav > li > a::before {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border-bottom: 2px solid #000;
+  bottom: 30px;
+  content: "";
+  left: 0;
+  margin: 0;
+  width: 100%;
+}
+.kode-cart {
+  float: right;
+  padding: 29px 0 0;
+}
+.kode-cart a {
+  color: #ffffff;
+  text-transform: uppercase;
+}
+.kode-cart a i {
+  border-radius: 100%;
+  color: #000;
+  height: 42px;
+  margin-right: 12px;
+  padding: 13px 0 0;
+  text-align: center;
+  width: 42px;
+}
+.modal-dialog {
+  width: 400px;
+}
+.modal-content {
+  border-radius: 0;
+}
+.modal-body {
+  display: inline-block;
+  padding: 15px 22px 4px;
+  width: 100%;
+}
+.modal-header h4 {
+  color: #ffffff;
+  text-transform: uppercase;
+}
+.kode-loginform {
+  display: inline-block;
+  width: 100%;
+}
+.kode-loginform p {
+  display: inline-block;
+  width: 100%;
+}
+.kode-loginform p > span {
+  color: #333333;
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+.kode-loginform p input[type="text"], .kode-loginform p input[type="password"] {
+  border: 1px solid #e2e2e2;
+  float: left;
+  height: 42px;
+  width: 100%;
+}
+.kode-loginform p label {
+  float: left;
+  margin: 0;
+}
+.kode-loginform p input[type="checkbox"] {
+  float: left;
+  margin: 7px 10px 0 0;
+}
+.kode-loginform p label span, .kode-loginform p a {
+  color: #333333;
+  font-size: 14px;
+  font-weight: bold;
+}
+.kode-loginform p a {
+  float: left;
+  margin: 14px 0 0;
+}
+.kode-loginform p.kode-submit {
+  border-top: 1px solid #dfdfdf;
+  padding: 18px 0 0;
+}
+.kode-loginform p input[type="submit"] {
+  border: 7px solid;
+  box-shadow: 0 0 0 1px #000 inset;
+  color: #000;
+  float: right;
+  font-weight: bold;
+  padding: 5px 30px;
+  text-transform: uppercase;
+}
+.close {
+  opacity: 0.4;
+}
+.kode-search {
+  float: right;
+  margin: 36px -14px 0 0;
+  position: relative;
+  width: 160px;
+}
+.kode-search::before {
+  border-bottom: 14px solid #000;
+  border-right: 14px solid transparent;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -14px;
+}
+.kode-search::after {
+  border-right: 14px solid transparent;
+  border-top: 14px solid #000;
+  bottom: -14px;
+  content: "";
+  position: absolute;
+  right: 0;
+}
+.kode-search input[type="text"] {
+  border: medium none;
+  box-shadow: none;
+  color: #ffffff;
+  float: left;
+  font-size: 12px;
+  height: 29px;
+  padding: 6px 15px;
+  text-transform: uppercase;
+  width: 100%;
+}
+#mainbanner {
+  float: left;
+  width: 100%;
+}
+#mainbanner .flex-direction-nav {
+  display: none;
+}
+#mainbanner .container {
+  position: relative;
+}
+.flexslider .slides .kode-caption img {
+  display: inline-block;
+  margin-bottom: 16px;
+  width: auto;
+}
+.kode-caption {
+  bottom: 130px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  width: 100%;
+  z-index: 999;
+}
+.kode-caption h2 {
+  background-color: #f00;
+  box-shadow: 0 30px 20px 0 rgba(0, 0, 0, 0.5);
+  color: #000;
+  display: inline-block;
+  font-size: 50px;
+  margin-bottom: 40px;
+  padding: 10px 30px;
+  position: relative;
+  text-transform: uppercase;
+}
+.kode-caption p {
+  font-size: 20px;
+  line-height: normal;
+}
+.kode-caption h2::before {
+  border-bottom: 95px solid #f00;
+  border-left: 50px solid transparent;
+  content: "";
+  left: -50px;
+  position: absolute;
+  top: 0;
+}
+.kode-caption h2::after {
+  border-bottom: 95px solid #f00;
+  border-right: 50px solid transparent;
+  content: "";
+  position: absolute;
+  right: -50px;
+  top: 0;
+}
+.kode-caption p {
+  color: #ffffff;
+  display: inline-block;
+  margin-bottom: 25px;
+  width: 70%;
+}
+.kode-modren-btn {
+  border: 7px solid #ffe325;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3) inset;
+  color: #333333;
+  display: inline-block;
+  font-size: 20px;
+  padding: 6px 35px;
+  text-transform: uppercase;
+}
+.kode-modren-btn:hover {
+  opacity: 0.7;
+}
+.kode-content .kode-pagesection.kode-parallax {
+  background-attachment: fixed !important;
+}
+.kode-dark-overlay {
+  position: relative;
+}
+.kode-dark-overlay::before {
+  background: #000 none repeat scroll 0 0;
+  bottom: 0;
+  content: "";
+  height: 100%;
+  left: 0;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.kode-content {
+  float: left;
+  padding: 40px 0 0;
+  width: 100%;
+}
+.kode-call-action {
+  float: left;
+  text-align: right;
+  width: 100%;
+}
+.kode-call-action .kode-simplebtn {
+  float: right;
+}
+.kode-simplebtn {
+  border: 1px solid #fff;
+  color: #ffffff;
+  display: inline-block;
+  font-size: 18px;
+  margin: 10px 0 0;
+  padding: 12px 40px;
+  position: relative;
+}
+.kode-simplebtn::before {
+  background-color: rgba(0, 0, 0, 0.1);
+  content: "";
+  height: 0;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.kode-simplebtn:hover::before {
+  height: 100%;
+}
+.kode-simplebtn ~ .kode-action-info {
+  padding: 0 220px 0 0;
+}
+.kode-action-info h2 {
+  text-transform: uppercase;
+}
+.kode-action-info h2, .kode-action-info span {
+  color: #ffffff;
+}
+.kode-action-info span {
+  font-size: 16px;
+  text-transform: uppercase;
+}
+.kode-section-title {
+  float: left;
+  margin-bottom: 30px;
+  width: 100%;
+}
+.kode-widget-title {
+  float: left;
+  margin-bottom: 18px;
+  width: 100%;
+}
+.kode-section-title h2, .kode-widget-title h2 {
+  border-bottom: 1px solid;
+  display: inline-block;
+  padding: 0 0 7px;
+  text-transform: uppercase;
+}
+.widget-recent-news ul li:hover time {
+  color: #ffffff;
+}
+
+/*@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}*/
+.header-8 {
+  background-color: rgba(0, 0, 0, 0.6);
+  float: left;
+  padding: 25px 0;
+  text-align: center;
+  transition: all 0.3s ease-in-out 0s;
+  width: 100%;
+}
+
+
+.header-8.stickytop {
+  position:fixed;
+  top:0;
+  padding: 0;
 }
