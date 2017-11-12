@@ -4,4 +4,36 @@ html, body {
 
 }
 
+.btn-floating i
+{
+  display: inline-block;
+  color: #fff;
+}
 
+.fa{
+ font: normal normal normal 14px/1 FontAwesome;
+}
+
+.btn-floating {
+  z-index: 1;
+  overflow: hidden;
+  width: 47px;
+  height: 47px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: #a6c;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.btn-floating.btn-sm i, .btn-floating.btn-small i, .btn-floating.wishlist i {
+  font-size: .96154rem;
+  line-height: 36.15px;
+}
+
+.btn-floating i {
+  width: inherit;
+  font-size: 1.25rem;
+  line-height: 47px;
+  text-align: center;
+}

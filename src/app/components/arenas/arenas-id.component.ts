@@ -3,7 +3,10 @@ import { Component, OnInit } from "@angular/core";
 import { ArenasService } from "./arenas.service";
 import { Arena } from "./arenas";
 import {ActivatedRoute} from "@angular/router";
+import { AgmMap, AgmMarker } from '@agm/core';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
+var google: any;
 @Component({
   moduleId: module.id,
   selector: "arenas-id",
@@ -24,7 +27,7 @@ export class ArenasIdComponent implements OnInit {
     this.id = this.activatedRoute.snapshot.params['id'];
     //console.log('id='+this.id+'route='+this.activatedRoute.snapshot.params['id']);
     this.getArena(this.id);
-    console.log(this.arena);
+    //console.log(this.arena);
   }
 
   ngOnInit() {

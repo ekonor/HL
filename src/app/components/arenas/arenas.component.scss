@@ -445,6 +445,20 @@ h5 {
   border-radius: .25rem;
 }
 
+.item-title a:hover {
+  color: #6091ac !important;
+}
+
+h5 {
+  font-size: 25px;
+  text-align: center;
+  color: #333333;
+  font-family: 'Roboto Slab', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2;
+  //padding-top: 15px;
+}
 .item-title-main p {
   background-color: lightgrey;
   color: #ffffff;
