@@ -1,21 +1,44 @@
-import { Component } from '@angular/core';
-import { RouteConfig, ROUTER_DIRECTIVES } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
+import { AuthenticationService } from '../../auth/index';
+import  { AlertService } from '../alert/alert.service';
 
 @Component({
-  templateUrl: 'login.component.html',
-  directives: [ROUTER_DIRECTIVES]
+  moduleId: module.id,
+  templateUrl: 'login.component.html'
 })
 
-export class loginForm {
-  data: Object = {};
-  constructor(private _router: Router) {}
-  formSubmit() {
-    let uname = this.data.username;
-    let pass = this.data.password;
-    let key = btoa(btoa(uname) + '??' + btoa(pass));
-    console.log(this.data);
-    console.log(key);
-    if( uname == "admin" && pass == "admin")
-    this._router.navigate(['AdminArea']);
+export class LoginComponent implements OnInit {
+  model: any = {};
+  loading = false;
+  returnUrl: string;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private authenticationService: AuthenticationService,
+    private alertService: AlertService) { }
+
+  ngOnInit() {
+    // reset login status
+    this.authenticationService.logout();
+
+    // get return url from route parameters or default to '/'
+    //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = '/';
+  }
+
+  login() {
+    this.loading = true;
+    this.authenticationService.login(this.model.username, this.model.password);
+      /*.subscribe(
+        data => {
+          this.router.navigate([this.returnUrl]);
+        },
+        error => {
+          this.alertService.error(error);
+          this.loading = false;
+        });*/
   }
 }

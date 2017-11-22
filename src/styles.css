@@ -37,3 +37,11 @@ html, body {
   line-height: 47px;
   text-align: center;
 }
+
+.icon-wrap
+{
+  display: inline-flex;
+  vertical-align: middle;
+  align-items: center;
+  width:100%;
+}
