@@ -1,0 +1,38 @@
+import { Component, Injectable, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+
+//import { ChangeDetectionStrategy } from '@angular/core';
+
+import { ArenaService } from "./../shared/arena.service";
+import { ListResponse } from "app/shared/list/list-response";
+import { ArenaListItem } from "app/arenas/shared/arena-list-item";
+
+@Component({
+  moduleId: module.id,
+  selector: "arena-list",
+  inputs: ['content'],
+  //changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: "arena-list.component.html",
+  styleUrls: ["arena-list.component.scss"]
+})
+
+@Injectable()
+export class ArenaListComponent implements OnInit {
+  content: ArenaListItem[];
+
+  constructor( private service: ArenaService,
+               private router: Router) {
+  }
+
+  ngOnInit() {
+  }
+
+  public viewArena(arena: ArenaListItem): void {
+    this.router.navigate([ "arenas", arena.id ]);
+  }
+
+  public getArenaLogo(arena: ArenaListItem): string {
+    let logoSrc = "http://hockey.smargit.com/HockeyApp.WebApi";
+    return logoSrc + arena.logo;
+  }
+}

@@ -1,0 +1,77 @@
+<section class="section pb-5">
+
+  <div class="row">
+
+    <!--Grid column-->
+    <div class="col-lg-5 mb-4">
+
+      <!--Form with header-->
+      <div class="card">
+
+        <div class="card-body">
+          <!--Header-->
+          <div class="item-title-main">
+            <p>{{arena.cityName}}</p>
+          </div>
+          <h5 class="item-title">
+             {{arena.name}}
+             <small>{{arena.arenaTypeName}}</small>
+          </h5>
+          <hr>
+
+          <p class="icon-wrap"><i class="material-icons">&#xe7fb;</i>&nbsp;Вместимость: {{arena.capacity}} чел.</p>
+          <br>
+
+          <!--Body-->
+          <img class="img-fluid rounded" [src]="getArenaLogo(arena)" alt="">
+
+        </div>
+
+      </div>
+      <!--Form with header-->
+
+    </div>
+    <!--Grid column-->
+
+    <!--Grid column-->
+    <div class="col-lg-7">
+
+      <!--Google map-->
+      <!-- <agm-map class="z-depth-1-half map-container" style="height: 400px;" [latitude]="45" [longitude]="67">
+        <agm-marker [latitude]="34" [longitude]="56"></agm-marker>
+      </agm-map> -->
+
+      <br>
+      <!--Buttons-->
+      <div class="row text-center">
+        <div class="col-md-3">
+          <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-map-marker"></i></a>
+          <p>{{arena.address}}</p>
+        </div>
+
+        <div class="col-md-3">
+          <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-phone"></i></a>
+          <p>{{arena.contacts}}</p>
+        </div>
+
+        <div class="col-md-3">
+          <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-envelope"></i></a>
+          <p>{{arena.email}}</p>
+        </div>
+
+        <div class="col-md-3">
+          <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-envelope"></i></a>
+          <p>{{arena.webSite}}</p>
+        </div>
+      </div>
+
+    </div>
+    <!--Grid column-->
+
+  </div>
+
+  <div class="col-lg-12">
+    <p class="section-description pb-4">{{arena.about}}</p>
+  </div>
+</section>
+

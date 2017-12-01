@@ -1,7 +1,7 @@
 
 {
   "/api/*" : {
-    "target": "http://87.117.9.216/Hockeyapp.WebApi/",
+    "target": "http://hockey.smargit.com/HockeyApp.WebApi/",
     "secure": false,
     "logLevel": "debug"
   }

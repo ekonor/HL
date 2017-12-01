@@ -4,9 +4,7 @@ import { AboutComponent } from './components/about/about.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
 import { TournamentsComponent } from './components/tournaments/tournaments.component';
-import { HockeyNewsComponent } from './components/hockey-news/hockey-news.component';
-import { ArenasComponent } from './components/arenas/arenas.component';
-import { ArenasIdComponent } from "./components/arenas/arenas-id.component";
+
 
 //import  { AdminComponent } from "./components/admin/admin.component";
 import { LoginComponent } from "./components/login/login.component";
@@ -24,11 +22,8 @@ import { ConfirmEmailResultComponent } from 'app/components/account/confirm-emai
 
 export const routes: Routes =[
   { path: '', component: HomeComponent },
-  { path: 'hockey-news', component: HockeyNewsComponent },
-  { path: 'arenas/:id', component: ArenasIdComponent },
   { path: 'tournaments', component: TournamentsComponent },
   { path: 'children-teams', component: ChildrenTeamsComponent },
-  { path: 'arenas', component: ArenasComponent },
   { path: 'about', component: AboutComponent },
 
   //{ path: 'admin', component: AdminComponent },

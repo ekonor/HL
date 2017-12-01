@@ -1,0 +1,21 @@
+
+    <form class="filter">
+      <table class="filter">
+        <thead>
+        <tr>
+          <th>
+            <select [(ngModel)]="filter.arenaTypeId" name="arenaTypeId" class="form-control">
+              <option value="">Выберите тип арены</option>
+              <option *ngFor="let arenaType of arenaTypes"  [ngValue]="arenaType.id">{{arenaType.name}}</option>
+            </select>
+          </th>
+          <th><input type="text" name="cityName" [(ngModel)]="filter.cityId" placeholder="Название города" class="form-control"></th>
+          <th><input type="text" name="name" [(ngModel)]="filter.searchText" placeholder="Название или адрес" class="form-control"></th>
+          <th><span class="toggle"><i class="fa fa-angle-up"></i></span></th>
+        </tr>
+        </thead>
+        <tfoot>
+        </tfoot>
+      </table>
+    </form>
+  
