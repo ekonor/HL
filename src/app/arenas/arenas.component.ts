@@ -42,10 +42,16 @@ export class ArenasComponent implements OnInit {
     });
   }
 
+  public onFiltered($event){
+    this.getArenas();
+  }
+
   private getArenas() {
     this.arenaService.getArenas(this.filter, this.listInfo)
-    .then(
-      arenas =>  this.arenaList = arenas,
+    .subscribe(
+      arenas => {
+        this.arenaList = arenas;
+      },
       error => this.errorMessage = error
     );
 

@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit } from "@angular/core";
+import { Component, Injectable, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 import { ArenaService } from "app/arenas/shared/arena.service";
 import { ArenaFilter } from "app/arenas/shared/arena-filter";
@@ -8,14 +8,15 @@ import { City } from "app/core/geo/city";
 @Component({
   moduleId: module.id,
   selector: "arena-filter",
-  inputs: ['filter'],
-  templateUrl: "arena-filter.component.html",
-  styleUrls: ["arena-filter.component.scss"]
+  templateUrl: "arena-filter.component.html"
 })
 
 @Injectable()
 export class ArenaFilterComponent implements OnInit {
-  filter: ArenaFilter;
+
+  @Input() filter: ArenaFilter;
+  @Output() onFiltered = new EventEmitter<boolean>();
+  
   arenaTypes: ArenaType[];
   cities: City[];
   errorMessage: string;
@@ -28,14 +29,19 @@ export class ArenaFilterComponent implements OnInit {
     this.getCities();
   }
 
-  public search(){
-    // todo
+  search() {
+    this.onFiltered.emit();
   }
 
   private getArenaTypes() {
     this.service.getArenaTypes()
-    .then(
-      arenaTypes => this.arenaTypes = arenaTypes,
+    .subscribe(
+      arenaTypes => {
+        let emptyValue : ArenaType = { id: null, name: "Выберите тип арены" };
+        this.arenaTypes = new Array<ArenaType>();
+        this.arenaTypes.push(emptyValue);
+        this.arenaTypes =  this.arenaTypes.concat(arenaTypes);
+      },
       error => this.errorMessage = error
     );
   }

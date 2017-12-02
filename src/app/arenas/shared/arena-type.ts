@@ -1,7 +1,7 @@
 export class ArenaType {
   id: number;
   name: string = '';
-  description: string = '';
+  description?: string;
 
   constructor( values: Object = {} )
   {

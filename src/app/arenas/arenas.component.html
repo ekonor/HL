@@ -9,7 +9,7 @@
     </div>
 
     <div class="col-md-12">
-        <arena-filter [filter]="filter"></arena-filter>
+        <arena-filter [filter]="filter" (onFiltered)="onFiltered($event)"></arena-filter>
     </div>
 
     <arena-list [content]="arenaList.listItems" class="row"></arena-list>

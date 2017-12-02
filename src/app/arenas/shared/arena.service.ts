@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptions } from "@angular/http";
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/toPromise';
@@ -16,53 +15,38 @@ import { ListInfo } from 'app/shared/list/list-info';
 
 
 @Injectable()
-export class ArenaService
-{
-  constructor(private http: Http,
-    private httpClient: HttpClient) {
+export class ArenaService{
+  constructor(private httpClient: HttpClient) {
   }
 
-  public getArenas(filter: ArenaFilter, listInfo: ListInfo): Promise<ListResponse<ArenaListItem>> {
+  public getArenas(filter: ArenaFilter, listInfo: ListInfo): Observable<ListResponse<ArenaListItem>> {
     const methodUrlPrefix = "/list";
     
     let methodUrl = this.getMethodUrl(methodUrlPrefix);
-    let requestOptions = new RequestOptions();
+    let params = new HttpParams();
 
-    //todo 
-    // if(filter.arenaTypeId)
-    //   requestOptions.params.set('arenaTypeId', filter.arenaTypeId.toString());
-    // if(listInfo.skip != null)
-    //   requestOptions.params.set('skip', listInfo.skip.toString());
-    // if(listInfo.take != null)
-    //   requestOptions.params.set('take', listInfo.take.toString());
+    if(filter.arenaTypeId)
+      params = params.append('arenaTypeId', filter.arenaTypeId.toString());
+    if(listInfo.skip != null)
+      params = params.append('skip', listInfo.skip.toString());
+    if(listInfo.take != null)
+      params = params.append('take', listInfo.take.toString());
 
-    let arenas = this.http.get(methodUrl, requestOptions) // todo handle filter
-      .toPromise()
-      .then(this.extractArenas)
-      .catch(this.handleError);
-    return arenas;
+    return this.httpClient.get<ListResponse<ArenaListItem>>(methodUrl, {params: params});
   }
 
-  public getArena(id: number): Promise<ArenaViewItem> {
+  public getArena(id: number): Observable<ArenaViewItem> {
     const methodUrlPrefix = "/" + id;
     let methodUrl = this.getMethodUrl(methodUrlPrefix);
 
-    let arena = this.http.get(methodUrl)
-      .toPromise()
-      .then(this.extractArena)
-      .catch(this.handleError);
-    return arena;
+    return this.httpClient.get<ArenaViewItem>(methodUrl);
   }
 
-  public getArenaTypes(): Promise<ArenaType[]> {
+  public getArenaTypes(): Observable<ArenaType[]> {
     const methodUrlPrefix = "/types";
     let methodUrl = this.getMethodUrl(methodUrlPrefix);
 
-    let arenatypes = this.http.get(methodUrl)
-      .toPromise()
-      .then(this.extractArenasTypes)
-      .catch(this.handleError);
-    return arenatypes;
+    return this.httpClient.get<ArenaType[]>(methodUrl);
   }
 
   public getArenaLogo(arena: ArenaListItem | ArenaViewItem): string {
@@ -93,32 +77,5 @@ export class ArenaService
   private getMethodUrl(methodUrlPrefix: string) : string {
     let baseServiceApiUrl = `/api/v1/arenas`;
     return baseServiceApiUrl + methodUrlPrefix;
-  }
-
-  private extractArenas( response: Response ) : ListResponse<ArenaListItem> {
-    return response.json() as ListResponse<ArenaListItem>;
-  }
-
-  private extractArena(response: Response): ArenaViewItem {
-    return response.json() as ArenaViewItem;
-  }
-
-  private extractArenasTypes( response: Response ) : ArenaType[] {
-    return response.json() as ArenaType[];
-  }
-
-  private handleError( error: any ): any {
-    let message = "";
-
-    if ( error instanceof Response ) {
-      let errorData = error.json().error || JSON.stringify(error.json());
-      message = `${error.status} - ${error.statusText || ''} ${errorData}`
-    } else {
-      message = error.message ? error.message : error.toString();
-    }
-
-    console.error(message);
-
-    return Observable.throw(message);
   }
 }

@@ -6,6 +6,7 @@ import { ActivatedRoute } from "@angular/router";
 import { ArenaService } from "./../shared/arena.service";
 import { ArenaViewItem } from "app/arenas/shared/arena-view-item";
 import { Point } from "app/shared/map/point";
+import { debounce } from "rxjs/operator/debounce";
 
 @Component({
   moduleId: module.id,
@@ -44,7 +45,7 @@ export class ArenaViewComponent{
 
   private getArena(id: number) {
     this.service.getArena(id)
-    .then(
+    .subscribe(
       arena => {
         this.arena = arena;
         this.mapPoint = this.getMapPoint(arena);
