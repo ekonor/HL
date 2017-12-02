@@ -13,10 +13,14 @@ export class PaginationService {
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute) {}
 
-  public setPage(page: number, pageSize: number){
-    let skip = pageSize * (page - 1);
-    let path = this.router.url;
+  public setPage(page: number, pageSize: number) {
+    let path = this.router.url.match(new RegExp("[^?]+"))[0];
+    let currentPagams = {};
 
-    this.router.navigate([path], { queryParams: { skip: skip, take: pageSize}});
+    this.router.navigate([path], { queryParams: {page: page}});
+  }
+
+  public setPageSize(page: number, pageSize: number) {
+    // todo
   }
 }

@@ -19,10 +19,6 @@ export class ArenasComponent implements OnInit {
   arenaList: ListResponse<ArenaListItem>;
   errorMessage: string;
 
-  get page():number {
-    return (this.listInfo.skip / this.listInfo.take) + 1; 
-  }
-
   filter: ArenaFilter = new ArenaFilter();
   listInfo: ListInfo = new ListInfo(); 
 
@@ -35,8 +31,11 @@ export class ArenasComponent implements OnInit {
     // todo заполнить фильтр из url
     this.activatedRoute.params.subscribe(params => {
       debugger;
-      this.listInfo.skip = params["skip"] || 0;
-      this.listInfo.take = params["take"] || 10;
+      var page =  params["page"] || 1;
+      let pageSize = 10;
+
+      this.listInfo.skip = pageSize * (page - 1);;
+      this.listInfo.take = pageSize;
 
       this.getArenas(); 
     });
