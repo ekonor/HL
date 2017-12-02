@@ -39,9 +39,7 @@ export class ArenaViewComponent{
   }*/
 
   public getArenaLogo(arena: ArenaViewItem): string {
-    let logoSrc = "http://hockey.smargit.com/HockeyApp.WebApi";
-    let placeholder = "http://via.placeholder.com/350x150";
-    return arena.logo ? logoSrc + arena.logo : placeholder;
+    return this.service.getArenaLogo(arena);
   }
 
   private getArena(id: number) {

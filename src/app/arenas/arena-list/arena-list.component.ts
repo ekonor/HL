@@ -32,7 +32,6 @@ export class ArenaListComponent implements OnInit {
   }
 
   public getArenaLogo(arena: ArenaListItem): string {
-    let logoSrc = "http://hockey.smargit.com/HockeyApp.WebApi";
-    return logoSrc + arena.logo;
+    return this.service.getArenaLogo(arena);
   }
 }

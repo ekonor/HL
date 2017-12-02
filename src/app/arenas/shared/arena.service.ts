@@ -65,6 +65,12 @@ export class ArenaService
     return arenatypes;
   }
 
+  public getArenaLogo(arena: ArenaListItem | ArenaViewItem): string {
+    let logoSrc = "http://hockey.smargit.com/HockeyApp.WebApi";
+    let placeholder = "http://via.placeholder.com/250x150";
+    return arena.logo ? logoSrc + arena.logo : placeholder;
+  }
+
  /* public addArena( arena: Arena ) {
     return this.http.post(this.url, arena)
       .toPromise()
