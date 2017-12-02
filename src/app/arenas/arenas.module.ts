@@ -10,6 +10,7 @@ import { ArenaFilterComponent } from "app/arenas/arena-filter/arena-filter.compo
 
 import { ArenaService } from "app/arenas/shared/arena.service";
 import { ArenaRoutingModule } from "app/arenas/arenas-routing.module";
+import { SharedModule } from "app/shared/shared.module";
 
 @NgModule({
       declarations: [
@@ -21,7 +22,8 @@ import { ArenaRoutingModule } from "app/arenas/arenas-routing.module";
       imports: [
         BrowserModule, 
         FormsModule,
-        CommonModule ,
+        CommonModule,
+        SharedModule,
         ArenaRoutingModule
       ],
       providers: [

@@ -37,6 +37,7 @@ import { AgmCoreModule } from '@agm/core';
 import { ArenaModule } from 'app/arenas/arenas.module';
 import { CoreModule } from 'app/core/core.module';
 import { NewsModule } from 'app/news/news.module';
+import { SharedModule } from 'app/shared/shared.module';
 /*import { ResetPasswordConfirmationComponent } from 'app/components/account/reset-password-confirmation/reset-password-confirmation.component';
 import { ConfirmEmailComponent } from 'app/components/account/confirm-email/confirm-email.component';
 import { ConfirmEmailResultComponent } from 'app/components/account/confirm-email-result/confirm-email-result.component';
@@ -83,6 +84,7 @@ import { ConfirmEmailResultComponent } from 'app/components/account/confirm-emai
       apiKey: 'AIzaSyAxIKhPCTX9mEy_Jnjn5133_3vuNaILh00'
     }),
     CoreModule,
+    SharedModule,
     ArenaModule,
     NewsModule
   ],

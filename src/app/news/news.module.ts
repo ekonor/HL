@@ -10,6 +10,7 @@ import { NewsComponent } from "app/news/news.component";
 
 import { NewsService } from "app/news/shared/news.service";
 import { NewsRoutingModule } from "app/news/news-routing.module";
+import { SharedModule } from "app/shared/shared.module";
 
 @NgModule({
       declarations: [
@@ -21,7 +22,8 @@ import { NewsRoutingModule } from "app/news/news-routing.module";
       imports: [
         BrowserModule, 
         FormsModule,
-        CommonModule ,
+        CommonModule,
+        SharedModule,
         NewsRoutingModule
       ],
       providers: [
