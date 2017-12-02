@@ -7,9 +7,8 @@ import { Point } from 'app/shared/map/point';
   selector: 'map',
   inputs: ['points'],
   templateUrl: './map.component.html',
-//   styleUrls: ['./pagination.component.scss'],
 })
-export class MapComponent implements OnInit {
+export class MapComponent{
     private _points: Point[];
     
     avg: Point;
@@ -18,12 +17,6 @@ export class MapComponent implements OnInit {
     set points(value : Point[]){
         this._points = value;
         this.avg = this.getAveragePoint(value);
-    }
-    
-    constructor() {
-      }
-
-    ngOnInit(): void {
     }
 
     private getAveragePoint(points : Point[]) : Point {

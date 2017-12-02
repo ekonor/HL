@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="arenaList">
   <div class="row">
     <div class="col-md-12">
       <div class="heading heading-12 margin-top-bottom-30">
@@ -12,9 +12,9 @@
         <arena-filter [filter]="filter"></arena-filter>
     </div>
 
-    <arena-list *ngIf="arenaList" [content]="arenaList.listItems"></arena-list>
+    <arena-list [content]="arenaList.listItems"></arena-list>
 
-    <pagination  [page]="1" [collectionSize]="10" [pageSize]="5"></pagination>
+    <pagination [page]="page" [collectionSize]="arenaList.count" [pageSize]="listInfo.take"></pagination>
 
   </div>
 </div>

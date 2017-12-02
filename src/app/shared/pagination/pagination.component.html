@@ -1,4 +1,6 @@
-<ngb-pagination [(collectionSize)]="collectionSize" [(page)]="page" [(pageSize)]="pageSize" 
+<ngb-pagination [hidden]="collectionSize<=0"
+                [(collectionSize)]="collectionSize" (pageChange)="setPage($event)" 
+                [(page)]="page" [(pageSize)]="pageSize" 
                 [maxSize]="5" [rotate]="true" [ellipses]="true" 
                 [directionLinks]="true" [boundaryLinks]="true">
 </ngb-pagination>

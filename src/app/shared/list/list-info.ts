@@ -3,18 +3,9 @@ export enum SortDir {
     Desc
 }
 
-export class ListInfo{
-    Skip : number;
-
-    /// Сколько взять элеменов 
-    Take : number;
-
-    /// Поле сортировки      
-    OrderBy : string;
-
-    /// Направление сортировки
-    OrderDir: SortDir;
-
-    /// Текст поиска
-    SearchText: string;
+export class ListInfo {
+    skip : number;
+    take : number; /// Сколько взять элеменов 
+    orderBy : string; // Поле сортировки      
+    orderDir: SortDir; // Направление сортировки
 }

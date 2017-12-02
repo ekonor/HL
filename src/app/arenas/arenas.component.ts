@@ -1,9 +1,11 @@
 import { Component, Injectable, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 
 import { ArenaFilter } from "app/arenas/shared/arena-filter";
 import { ArenaService } from "app/arenas/shared/arena.service";
 import { ArenaListItem } from "app/arenas/shared/arena-list-item";
 import { ListResponse } from "app/shared/list/list-response";
+import { ListInfo } from "app/shared/list/list-info";
 
 @Component({
   moduleId: module.id,
@@ -17,40 +19,31 @@ export class ArenasComponent implements OnInit {
   arenaList: ListResponse<ArenaListItem>;
   errorMessage: string;
 
-  /**
-   * @type {number} numberOfArenas The number of arenas, used for max attribute for limit and page.
-   */
-  numberOfArenas: number;
-  /**
-   * @type {number} limit The number of arenas per page.
-   */
-  limit: number;
-
-  /**
-   * @type {number} page The current page.
-   */
-  page: number = 1;
+  get page():number {
+    return (this.listInfo.skip / this.listInfo.take) + 1; 
+  }
 
   filter: ArenaFilter = new ArenaFilter();
+  listInfo: ListInfo = new ListInfo(); 
 
-  pages: number;
-
-  constructor(private service: ArenaService) {
+  constructor(
+    private readonly arenaService: ArenaService,
+    private readonly activatedRoute : ActivatedRoute) {
   }
 
   ngOnInit() {
     // todo заполнить фильтр из url
+    this.activatedRoute.params.subscribe(params => {
+      debugger;
+      this.listInfo.skip = params["skip"] || 0;
+      this.listInfo.take = params["take"] || 10;
 
-    this.getArenas(); 
+      this.getArenas(); 
+    });
   }
-
-  public refresh() {
-    this.getArenas();
-  }
-
 
   private getArenas() {
-    this.service.getArenas(this.filter)
+    this.arenaService.getArenas(this.filter, this.listInfo)
     .then(
       arenas =>  this.arenaList = arenas,
       error => this.errorMessage = error

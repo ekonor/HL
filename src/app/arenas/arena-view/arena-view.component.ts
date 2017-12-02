@@ -13,20 +13,17 @@ import { Point } from "app/shared/map/point";
   templateUrl: "arena-view.component.html",
   styleUrls: ["arena-view.component.scss"]
 })
-export class ArenaViewComponent implements OnInit {
+export class ArenaViewComponent{
   arena: ArenaViewItem;
   id: number;
   mapPoint: Point;
+  
   errorMessage: string;
 
   constructor( private service: ArenaService,
                private activatedRoute: ActivatedRoute) {
     this.id = parseInt(this.activatedRoute.snapshot.params['id']);
     this.getArena(this.id);
-  }
-
-  ngOnInit() {
-
   }
 
   /*public editArena( arena: Arena ) {
@@ -58,7 +55,7 @@ export class ArenaViewComponent implements OnInit {
     );
   }
 
-  private getMapPoint(arena) : Point{
+  private getMapPoint(arena: ArenaViewItem) : Point {
     if(this.arena && this.arena.latitude && this.arena.longitude){
       return { latitude: this.arena.latitude, longitude: this.arena.longitude };
     }

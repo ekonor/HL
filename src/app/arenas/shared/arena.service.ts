@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from "@angular/http";
+import { Http, Response, RequestOptions } from "@angular/http";
+import { HttpParams, HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
@@ -11,19 +12,31 @@ import { ArenaViewItem } from 'app/arenas/shared/arena-view-item';
 import { ArenaFilter } from 'app/arenas/shared/arena-filter';
 import { Arena } from './arena';
 import { ArenaType } from "./arena-type";
+import { ListInfo } from 'app/shared/list/list-info';
 
 
 @Injectable()
 export class ArenaService
 {
-  constructor(private http: Http) {
+  constructor(private http: Http,
+    private httpClient: HttpClient) {
   }
 
-  public getArenas(filter: ArenaFilter): Promise<ListResponse<ArenaListItem>> {
+  public getArenas(filter: ArenaFilter, listInfo: ListInfo): Promise<ListResponse<ArenaListItem>> {
     const methodUrlPrefix = "/list";
+    
     let methodUrl = this.getMethodUrl(methodUrlPrefix);
+    let requestOptions = new RequestOptions();
 
-    let arenas = this.http.get(methodUrl) // todo handle filter
+    //todo 
+    // if(filter.arenaTypeId)
+    //   requestOptions.params.set('arenaTypeId', filter.arenaTypeId.toString());
+    // if(listInfo.skip != null)
+    //   requestOptions.params.set('skip', listInfo.skip.toString());
+    // if(listInfo.take != null)
+    //   requestOptions.params.set('take', listInfo.take.toString());
+
+    let arenas = this.http.get(methodUrl, requestOptions) // todo handle filter
       .toPromise()
       .then(this.extractArenas)
       .catch(this.handleError);

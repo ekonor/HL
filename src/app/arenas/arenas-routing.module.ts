@@ -5,8 +5,8 @@ import { ArenaViewComponent } from 'app/arenas/arena-view/arena-view.component';
 import { ArenasComponent } from 'app/arenas/arenas.component';
 
 export const arenaRoutes: Routes =[
-    { path: 'arenas/:id', component: ArenaViewComponent },
-    { path: 'arenas', component: ArenasComponent }
+    { path: 'arenas', component: ArenasComponent },
+    { path: 'arena/:id', component: ArenaViewComponent }
   ];
   
   export const appRoutingProviders: any[] = [

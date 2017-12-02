@@ -28,7 +28,7 @@ export class ArenaListComponent implements OnInit {
   }
 
   public viewArena(arena: ArenaListItem): void {
-    this.router.navigate([ "arenas", arena.id ]);
+    this.router.navigate([ "arena", arena.id ]);
   }
 
   public getArenaLogo(arena: ArenaListItem): string {

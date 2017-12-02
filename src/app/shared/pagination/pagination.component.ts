@@ -6,11 +6,18 @@ import { PaginationService } from 'app/shared/pagination.service';
 @Component({
   selector: 'pagination',
   inputs: ['page', 'collectionSize', 'pageSize'],
-  templateUrl: './pagination.component.html',
-//   styleUrls: ['./pagination.component.scss'],
+  templateUrl: './pagination.component.html'
 })
 export class PaginationComponent {
-  constructor(private readonly newsService: PaginationService) {
+  page:number;
+  collectionSize: number;
+  pageSize: number;
 
+  constructor(private readonly paginationService: PaginationService) {
+
+  }
+
+  public setPage(page: number){
+    this.paginationService.setPage(page, this.pageSize);
   }
 }
