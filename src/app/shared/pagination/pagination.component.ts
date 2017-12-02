@@ -5,6 +5,7 @@ import { PaginationService } from 'app/shared/pagination.service';
 
 @Component({
   selector: 'pagination',
+  inputs: ['page', 'collectionSize', 'pageSize'],
   templateUrl: './pagination.component.html',
 //   styleUrls: ['./pagination.component.scss'],
 })

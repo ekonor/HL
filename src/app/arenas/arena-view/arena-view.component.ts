@@ -5,6 +5,7 @@ import { ActivatedRoute } from "@angular/router";
 
 import { ArenaService } from "./../shared/arena.service";
 import { ArenaViewItem } from "app/arenas/shared/arena-view-item";
+import { Point } from "app/shared/map/point";
 
 @Component({
   moduleId: module.id,
@@ -15,6 +16,7 @@ import { ArenaViewItem } from "app/arenas/shared/arena-view-item";
 export class ArenaViewComponent implements OnInit {
   arena: ArenaViewItem;
   id: number;
+  mapPoint: Point;
   errorMessage: string;
 
   constructor( private service: ArenaService,
@@ -39,17 +41,26 @@ export class ArenaViewComponent implements OnInit {
     this.router.navigate([ "arenas", "create" ]);
   }*/
 
-  private getArena(id: number) {
-    this.service.getArena(id)
-    .then(
-      arena => this.arena = arena,
-      error => this.errorMessage = error
-    );
-  }
-
   public getArenaLogo(arena: ArenaViewItem): string {
     let logoSrc = "http://hockey.smargit.com/HockeyApp.WebApi";
     let placeholder = "http://via.placeholder.com/350x150";
     return arena.logo ? logoSrc + arena.logo : placeholder;
+  }
+
+  private getArena(id: number) {
+    this.service.getArena(id)
+    .then(
+      arena => {
+        this.arena = arena;
+        this.mapPoint = this.getMapPoint(arena);
+      },
+      error => this.errorMessage = error
+    );
+  }
+
+  private getMapPoint(arena) : Point{
+    if(this.arena && this.arena.latitude && this.arena.longitude){
+      return { latitude: this.arena.latitude, longitude: this.arena.longitude };
+    }
   }
 }

@@ -1,8 +1,4 @@
-<div class="pagination">
-    <a href="#"><i class="fa fa-angle-double-left"></i></a>
-    <a href="#">1</a>
-    <a href="#">2</a>
-    <span>3</span>
-    <a href="#">4</a>
-    <a href="#"><i class="fa fa-angle-double-right"></i></a>
-</div>
+<ngb-pagination [(collectionSize)]="collectionSize" [(page)]="page" [(pageSize)]="pageSize" 
+                [maxSize]="5" [rotate]="true" [ellipses]="true" 
+                [directionLinks]="true" [boundaryLinks]="true">
+</ngb-pagination>

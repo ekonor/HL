@@ -33,13 +33,9 @@
     </div>
     <!--Grid column-->
 
+
     <!--Grid column-->
     <div class="col-lg-7">
-
-      <!--Google map-->
-      <!-- <agm-map class="z-depth-1-half map-container" style="height: 400px;" [latitude]="45" [longitude]="67">
-        <agm-marker [latitude]="34" [longitude]="56"></agm-marker>
-      </agm-map> -->
 
       <br>
       <!--Buttons-->
@@ -64,7 +60,11 @@
           <p>{{arena.webSite}}</p>
         </div>
       </div>
-
+      <div class=row>
+        <div class="col-md-12">
+            <map *ngIf="mapPoint" [points]="[mapPoint]"></map>
+        </div>
+      </div>
     </div>
     <!--Grid column-->
 

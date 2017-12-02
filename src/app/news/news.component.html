@@ -16,7 +16,7 @@
 
         <news-list *ngIf="arenaList" [content]="listData"></news-list>
 
-        <pagination></pagination>
+        <pagination [page]="1" [collectionSize]="10" [pageSize]="5"></pagination>
 
       </div>
 
