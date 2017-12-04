@@ -1,36 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
 
 import { ArenaListItem } from 'app/arenas/shared/arena-list-item';
-import { ListResponse } from 'app/shared/list/list-response';
 import { ArenaViewItem } from 'app/arenas/shared/arena-view-item';
 import { ArenaFilter } from 'app/arenas/shared/arena-filter';
 import { Arena } from './arena';
 import { ArenaType } from "./arena-type";
+import { ListResponse } from 'app/shared/list/list-response';
 import { ListInfo } from 'app/shared/list/list-info';
 
 
 @Injectable()
 export class ArenaService{
-  constructor(private httpClient: HttpClient) {
-  }
+  constructor(private readonly httpClient: HttpClient) {
+    }
 
   public getArenas(filter: ArenaFilter, listInfo: ListInfo): Observable<ListResponse<ArenaListItem>> {
     const methodUrlPrefix = "/list";
     
     let methodUrl = this.getMethodUrl(methodUrlPrefix);
-    let params = new HttpParams();
+    let params = listInfo.toParams();
 
     if(filter.arenaTypeId)
       params = params.append('arenaTypeId', filter.arenaTypeId.toString());
-    if(listInfo.skip != null)
-      params = params.append('skip', listInfo.skip.toString());
-    if(listInfo.take != null)
-      params = params.append('take', listInfo.take.toString());
+    if(filter.cityId)
+      params = params.append('cityId', filter.cityId.toString());
+    if(filter.searchText)
+      params = params.append('searchText', filter.searchText);
 
     return this.httpClient.get<ListResponse<ArenaListItem>>(methodUrl, {params: params});
   }

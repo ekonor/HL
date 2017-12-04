@@ -18,6 +18,6 @@ export class PaginationComponent {
   }
 
   public setPage(page: number){
-    this.paginationService.setPage(page, this.pageSize);
+    this.paginationService.setPage(page);
   }
 }
