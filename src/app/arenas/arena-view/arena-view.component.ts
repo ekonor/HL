@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Params } from "@angular/router";
 import { AgmMap, AgmMarker } from '@agm/core';
 import { ActivatedRoute } from "@angular/router";
@@ -20,11 +20,21 @@ export class ArenaViewComponent{
   mapPoint: Point;
   
   errorMessage: string;
+  private sub : any;
 
   constructor( private service: ArenaService,
                private activatedRoute: ActivatedRoute) {
-    this.id = parseInt(this.activatedRoute.snapshot.params['id']);
-    this.getArena(this.id);
+  }
+
+  ngOnInit() {
+    this.sub = this.activatedRoute.params.subscribe(params => {
+      this.id = parseInt(params['id']);
+      this.getArena(this.id);
+    });
+  }
+
+  ngOnDestroy(){
+    this.sub.unsubscribe();
   }
 
   /*public editArena( arena: Arena ) {
