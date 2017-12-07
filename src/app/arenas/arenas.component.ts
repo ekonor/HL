@@ -7,6 +7,7 @@ import { ArenaListItem } from "app/arenas/shared/arena-list-item";
 import { ListResponse } from "app/shared/list/list-response";
 import { ListInfo } from "app/shared/list/list-info";
 import { PaginationService } from "app/shared/pagination.service";
+import { SortOption } from "app/shared/sorting/sort-option";
 
 @Component({
   moduleId: module.id,
@@ -21,6 +22,7 @@ export class ArenasComponent implements OnInit {
   errorMessage: string;
 
   filter: ArenaFilter = new ArenaFilter();
+  sortOptions: SortOption[] = new Array<SortOption>();
   listInfo: ListInfo = new ListInfo(); 
   pageSize: number;
   
@@ -31,6 +33,12 @@ export class ArenasComponent implements OnInit {
     private readonly paginationService: PaginationService,
     private activatedRoute: ActivatedRoute) {
       this.pageSize = this.paginationService.pageSize;
+      
+      this.sortOptions = [ 
+        { title: "Название", value: "name" },
+        { title: "Город", value: "cityId" },
+        { title: "Тип", value: "arenaTypeId" } // todo replace ids to names here and in api
+      ];
   }
 
   ngOnInit() {
@@ -45,6 +53,13 @@ export class ArenasComponent implements OnInit {
   }
 
   public onFiltered($event){
+    this.getArenas();
+  }
+
+  public onSorted($event){
+    this.listInfo.orderBy = $event.orderBy;
+    this.listInfo.orderDir = $event.orderDir;
+
     this.getArenas();
   }
 

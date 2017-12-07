@@ -39,7 +39,7 @@ export class ListInfo {
             params = params.append("orderBy", this.orderBy);
 
             if(this.orderDir)
-                params = params.append("orderDir", this.orderDir.toString());
+                params = params.append("orderDir", SortDir[this.orderDir]);
         }
         if(this.skip != null)
             params = params.append("skip", this.skip.toString());
