@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpParams, HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 
 import { ArenaListItem } from 'app/arenas/shared/arena-list-item';
@@ -15,6 +15,10 @@ import {baseServeCommandOptions} from "@angular/cli/commands/serve";
 
 @Injectable()
 export class ArenaService {
+  constructor(
+    private readonly httpClient: HttpClient,
+    private readonly apiConfig: ApiConfig) {
+  }
   private apiUrl = "http://hockey.smargit.com/HockeyApp.WebApi/api/v1/";
   constructor(private readonly httpClient: HttpClient, private readonly authService: AuthenticationService) {
     }
