@@ -4,19 +4,24 @@ import { Observable } from "rxjs/Observable";
 
 import { ArenaListItem } from 'app/arenas/shared/arena-list-item';
 import { ArenaViewItem } from 'app/arenas/shared/arena-view-item';
+import { ArenaEditItem } from 'app/arenas/shared/arena-edit-item';
 import { ArenaFilter } from 'app/arenas/shared/arena-filter';
+import { AuthenticationService } from 'app/auth/authentication.service';
 import { ArenaType } from './arena-type';
 import { ListResponse } from 'app/shared/list/list-response';
 import { ListInfo } from 'app/shared/list/list-info';
-import { ApiConfig } from 'app/core/api-config';
+import {baseServeCommandOptions} from "@angular/cli/commands/serve";
 
 
 @Injectable()
 export class ArenaService {
   constructor(
-    private readonly httpClient: HttpClient, 
+    private readonly httpClient: HttpClient,
     private readonly apiConfig: ApiConfig) {
   }
+  private apiUrl = "http://hockey.smargit.com/HockeyApp.WebApi/api/v1/";
+  constructor(private readonly httpClient: HttpClient, private readonly authService: AuthenticationService) {
+    }
 
   public getArenas(filter: ArenaFilter, listInfo: ListInfo): Observable<ListResponse<ArenaListItem>> {
     const methodUrlPrefix = "/list";
@@ -49,7 +54,7 @@ export class ArenaService {
   }
 
   public getArenaLogo(arena: ArenaListItem | ArenaViewItem): string {
-    let logoSrc = this.apiConfig.filesPath;
+    let logoSrc = "http://hockey.smargit.com/HockeyApp.WebApi";
     let placeholder = "http://via.placeholder.com/250x150";
     return arena.logo ? logoSrc + arena.logo : placeholder;
   }
@@ -69,15 +74,18 @@ export class ArenaService {
   }
   */
 
-  public updateArena( arena: ArenaViewItem ) {
-    const methodUrlPrefix = "/" + arena.id;
-    let methodUrl = this.getMethodUrl(methodUrlPrefix);
-    
-    return this.httpClient.put(methodUrl, arena);
+  public updateArena( id: number, arena: ArenaEditItem ) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=utf-8',
+      'X-Requested-With': 'XMLHttpRequest',
+      'Authorization': 'Bearer ' + this.authService.token
+    });
+    return this.httpClient.put(this.apiUrl + '/arenas/' + id, arena, {headers: headers});
   }
 
   private getMethodUrl(methodUrlPrefix: string) : string {
-    let baseServiceApiUrl = this.apiConfig.apiPath + 'arenas';
+    //let baseServiceApiUrl = `/api/v1/arenas`;
+    let baseServiceApiUrl = this.apiUrl + '/arenas';
     return baseServiceApiUrl + methodUrlPrefix;
   }
 }
