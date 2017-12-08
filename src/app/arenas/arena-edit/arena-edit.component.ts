@@ -26,15 +26,21 @@ export class ArenaEditComponent implements OnInit {
     // Получаем id из url.
     // Url вида ...edit/21, где 21 - это id.
     // В роутинге должно быть прописано так edit/:id
-    this.id = this.activatedRoute.snapshot.params['id'];
+    // this.id = this.activatedRoute.snapshot.params['id'];
     // console.log('id='+this.id+'route='+this.activatedRoute.snapshot.params['id']);
-    this.getArena(this.id);
   }
 
   ngOnInit() {
-
+    this.sub = this.activatedRoute.params.subscribe(params => {
+      this.id = parseInt(params['id']);
+      this.getArena(this.id);
+    });
+    this.getArena(this.id);
   }
 
+  ngOnDestroy(){
+    this.sub.unsubscribe();
+  }
   /*public refresh(id) {
     //this.getArena(id);
   }*/
@@ -69,6 +75,7 @@ export class ArenaEditComponent implements OnInit {
   }
 
   private editArena(arena: ArenaViewItem) {
+    console.log("ok");
     this.service.updateArena(arena);
   }
 }

@@ -1,38 +1,48 @@
 <div class="col-md-6 col-md-offset-3">
   <h2>Редактирование арены</h2>
   <form name="form" (ngSubmit)="f.form.valid && editArena()" #f="ngForm" >
+    <input type="hidden" name="id" [(ngModel)]="arena.id" (ngModelChange)="arena.id = $event" required="required" value="{{arena.id}}"/>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
       <label for="name">Название арены</label>
-      <input type="text" class="form-control" name="name" [(ngModel)]="arena.name" #name="ngModel" required="required" />
+      <input type="text" class="form-control" name="name" [(ngModel)]="arena.name" (ngModelChange)="arena.name = $event" #name="ngModel" required="required" />
       <div *ngIf="f.submitted && !name.valid" class="help-block">name is required</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !cityName.valid }">
       <label for="cityName">Город</label>
-      <input type="text" class="form-control" name="cityName" [(ngModel)]="arena.cityName" #cityName="ngModel" required="required" />
+      <input type="text" class="form-control" name="cityName" [(ngModel)]="arena.cityName" (ngModelChange)="arena.cityName = $event" #cityName="ngModel" required="required" />
       <div *ngIf="f.submitted && !cityName.valid" class="help-block">cityName is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !address.valid }">
+      <label for="address">Адрес</label>
+      <input type="text" class="form-control" name="address" [(ngModel)]="arena.address" (ngModelChange)="arena.address = $event" #address="ngModel" required="required"/>
+      <div *ngIf="f.submitted && !address.valid" class="help-block">address is invalid</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !capacity.valid }">
+      <label for="capacity">Вместимость</label>
+      <input type="number" class="form-control" name="capacity" [(ngModel)]="arena.capacity" (ngModelChange)="arena.capacity = $event" #capacity="ngModel" ngModel number="true" required="required"/>
+      <div *ngIf="f.submitted && !capacity.valid" class="help-block">capacity is invalid</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !contacts.valid }">
       <label for="contacts">Контакты</label>
-      <input type="text" class="form-control" name="contacts" [(ngModel)]="arena.contacts" #contacts="ngModel" />
+      <input type="text" class="form-control" name="contacts" [(ngModel)]="arena.contacts" (ngModelChange)="arena.contacts = $event" #contacts="ngModel" required="required" />
       <div *ngIf="f.submitted && !constacts.valid" class="help-block">contacts is invalid</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
       <label for="email">E-mail</label>
-      <input type="email" class="form-control" name="email" [(ngModel)]="arena.email" #email="ngModel" ngModel email="true"/>
+      <input type="email" class="form-control" name="email" [(ngModel)]="arena.email" (ngModelChange)="arena.email = $event" #email="ngModel" ngModel email="true" required="required"/>
       <div *ngIf="f.submitted && !email.valid" class="help-block">email is invalid</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !webSite.valid }">
       <label for="webSite">Site</label>
-      <input type="text" class="form-control" name="webSite" [(ngModel)]="arena.webSite" #email="ngModel"/>
+      <input type="text" class="form-control" name="webSite" [(ngModel)]="arena.webSite" (ngModelChange)="arena.webSite = $event" #webCite="ngModel" required="required"/>
       <div *ngIf="f.submitted && !webSite.valid" class="help-block">webSite is invalid</div>
     </div>
     <div class="form-group">
       <input type="checkbox"><span class="checkbox-title">Удалить?</span>
     </div>
     <div class="form-group">
-      <button [disabled]="loading" class="btn btn-primary">Применить</button>
+      <button [disabled]="loading" class="btn btn-primary" type="submit">Применить</button>
       <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-      <!--a [routerLink]="['/register']" class="btn btn-link">Register</a-->
     </div>
   </form>
 </div>
