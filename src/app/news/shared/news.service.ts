@@ -1,51 +1,48 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, RequestOptionsArgs }       from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
-import { Observable }     from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
 
-import { NewsListResponse, NewsItem } from './news';
+import { NewsListResponse, NewsItem, NewsListItem } from './news';
 import { ListInfo } from 'app/shared/list/list-info';
 import { ApiConfig } from 'app/core/api-config';
+import { Category } from 'app/news/shared/category';
 
 @Injectable()
 export class NewsService {
-  private newsUrl : string;
+  private newsUrl: string;
 
   constructor(
-    private readonly http: Http, 
+    private readonly httpClient: HttpClient,
     private readonly apiConfig: ApiConfig) {
-      this.newsUrl = `${this.apiConfig.apiPath}/news`;
+    this.newsUrl = `${this.apiConfig.apiPath}/news`;
+  }
+
+  public getNewsCategories(): Observable<Category[]> {
+    return this.httpClient.get<Category[]>(`${this.newsUrl}/category/list`);
   }
 
   public getNewsList(listInfo: ListInfo): Observable<NewsListResponse> {
-    let headers = new Headers();
-    headers.set('Content-Type', 'application/json');
-    headers.set("Access-Control-Allow-Origin", "*");
-
-    let params = new URLSearchParams();
-    for(let key in listInfo){
-      params.append(key.toString(), listInfo[key]);
-    }
-
-    let requestOptions =  new RequestOptions({ headers: headers, params: params } as any);
-
-    return this.http.get(`${this.newsUrl}/list`, requestOptions)
-      .map(response => response.json() as NewsListResponse);
-
+    let params = listInfo.toParams();
+    return this.httpClient.get<NewsListResponse>(`${this.newsUrl}/list`, { params: params });
   }
 
-  public getNewsItem(id: number): Promise<NewsItem> {
+  public getResentNewsList(): Observable<NewsListItem[]> {
+    return this.httpClient.get<NewsListItem[]>(`${this.newsUrl}/resent`);
+  }
+
+  public getImportantNewsList(): Observable<NewsListItem[]> {
+    return this.httpClient.get<NewsListItem[]>(`${this.newsUrl}/important`);
+  }
+
+  public getNewsItem(id: number): Observable<NewsItem> {
     const url = `${this.newsUrl}/${id}`;
-    return this.http.get(url)
-      .toPromise()
-      .then(response => response.json() as NewsItem)
-      .catch(this.handleError);
+    return this.httpClient.get<NewsItem>(url);
   }
 
-
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
+  public getNewsLogo(post: any): string {
+    let logoSrc = this.apiConfig.filesPath;
+    let placeholder = "http://via.placeholder.com/250x150";
+    return post.logo ? logoSrc + post.logo : placeholder;
   }
 }

@@ -1,23 +1,23 @@
 import { ListResponse } from "app/shared/list/list-response";
 
 class NewsItemBase {
-  Id: number;
-  CategoryId: number;
-  CategoryName: string;
-  LinkName: string;
-  Title: string;
-  Summary: string;
-  ReplyCount: number;
-  VoteUpCount: number;
-  VoteDownCount: number;
-  Logo: string;
-  CreationDate: Date;
+  id: number;
+  categoryId: number;
+  categoryName: string;
+  linkName: string;
+  title: string;
+  summary: string;
+  replyCount: number;
+  voteUpCount: number;
+  voteDownCount: number;
+  logo: string;
+  creationDate: Date;
   /*Creator: {
     UserId: number;
     UserName: string;
     UserLogo: string;
   }*/
-  State: number;
+  state: number;
 }
 
 /* класс элемента списка новостей */
@@ -29,7 +29,7 @@ export class NewsListResponse extends ListResponse<NewsListItem> {
 }
 
 export class NewsItem extends NewsItemBase {
-  Content: string;
+  content: string;
 }
 
 export class Post {

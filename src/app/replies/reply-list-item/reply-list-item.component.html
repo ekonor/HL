@@ -1,0 +1,20 @@
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">
+            <user-pic [user]="reply.user"></user-pic>
+            <small> {{reply.user.name}} : {{reply.creationDate}}</small>
+        </h4>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <button (click)="addReply(reply.id)" class="btn" [hidden]="!isUserAuthorized()">Ответить</button>
+        <button (click)="addComplain()" class="btn" [hidden]="!isUserAuthorized()">Пожаловаться</button>
+        <button (click)="addVoteUp(reply.id)" class="btn btn-success" [disabled]="!isUserAuthorized()">
+            <i class="fa fa-thumbs-o-up"></i>
+        </button>
+        <span *ngIf="reply.votes!=0" [ngClass]="{'text-success' : reply.votes>0, 'text-danger' : reply.votes<0}">{{reply.votes}}</span>
+        <button (click)="addVoteDown(reply.id)" class="btn btn-danger" [disabled]="!isUserAuthorized()">
+            <i class="fa fa-thumbs-o-down"></i>
+        </button>
+    </div>
+    
+    <reply-list-item [reply]="childReply" *ngFor="let childReply in reply.replies"></reply-list-item>
+</div>

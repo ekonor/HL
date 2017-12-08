@@ -9,12 +9,14 @@ import { PaginationComponent } from "app/shared/pagination/pagination.component"
 import { PaginationService } from "app/shared/pagination.service";
 import { MapComponent } from "app/shared/map/map.component";
 import { SortingComponent } from "app/shared/sorting/sorting.component";
+import { UserPicComponent } from "app/shared/user-pic/user-pic.component";
 
 @NgModule({
       declarations: [
         PaginationComponent,
         MapComponent,
-        SortingComponent
+        SortingComponent,
+        UserPicComponent
       ],
       imports: [
         BrowserModule, 
@@ -30,7 +32,8 @@ import { SortingComponent } from "app/shared/sorting/sorting.component";
         AgmCoreModule,
         PaginationComponent,
         MapComponent,
-        SortingComponent
+        SortingComponent,
+        UserPicComponent
       ],
       providers: [
         PaginationService
