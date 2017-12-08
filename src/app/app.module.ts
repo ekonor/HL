@@ -65,7 +65,7 @@ import { SharedModule } from 'app/shared/shared.module';
     NgbModule.forRoot(),
     MDBBootstrapModule.forRoot(),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAxIKhPCTX9mEy_Jnjn5133_3vuNaILh00'
+      apiKey: 'AIzaSyBpuC7_aFMwlRMvHJJgDFsQ0M5_6RlzNYA' // correct key for hockey-life-pro
     }),
     CoreModule,
     SharedModule,
