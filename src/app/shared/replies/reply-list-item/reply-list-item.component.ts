@@ -1,5 +1,7 @@
 import { Component, Input } from "@angular/core";
-import { Reply } from "app/replies/shared/reply";
+import { Reply } from "app/shared/replies/shared/reply";
+import { ReplyService } from "app/shared/replies/shared/reply.service";
+
 
 @Component({
     selector: 'reply-list-item',
@@ -9,6 +11,10 @@ import { Reply } from "app/replies/shared/reply";
 export class ReplyListItemComponent {
     @Input() reply: Reply;
 
+    constructor(private readonly replyService: ReplyService) {
+
+    }
+
     public addReply(parentReplyId: number) {
 
     }
@@ -17,12 +23,12 @@ export class ReplyListItemComponent {
 
     }
 
-    public addVoteUp(){
+    public addVoteUp() {
 
     }
 
-    public addVoteDown(){
-        
+    public addVoteDown() {
+
     }
 
     isUserAuthorized(): boolean {

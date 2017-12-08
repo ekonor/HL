@@ -14,7 +14,7 @@
 
       <div class="kode-blog-list kode-fullwidth-blog">
 
-        <news-list *ngIf="arenaList" [content]="listData"></news-list>
+        <news-list *ngIf="listData" [content]="listData"></news-list>
 
         <pagination [page]="1" [collectionSize]="10" [pageSize]="5"></pagination>
 
@@ -24,8 +24,6 @@
 
   </div>
 </div>
-
-<!--// Page Content //-->
 
 
 
