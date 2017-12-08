@@ -6,12 +6,17 @@ import 'rxjs/add/operator/map';
 
 import { NewsListResponse, NewsItem } from './news';
 import { ListInfo } from 'app/shared/list/list-info';
+import { ApiConfig } from 'app/core/api-config';
 
 @Injectable()
 export class NewsService {
-  private newsUrl : string = `/api/v1/news`;
+  private newsUrl : string;
 
-  constructor(private http: Http) {}
+  constructor(
+    private readonly http: Http, 
+    private readonly apiConfig: ApiConfig) {
+      this.newsUrl = `${this.apiConfig.apiPath}/news`;
+  }
 
   public getNewsList(listInfo: ListInfo): Observable<NewsListResponse> {
     let headers = new Headers();

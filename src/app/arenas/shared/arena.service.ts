@@ -5,18 +5,18 @@ import { Observable } from "rxjs/Observable";
 import { ArenaListItem } from 'app/arenas/shared/arena-list-item';
 import { ArenaViewItem } from 'app/arenas/shared/arena-view-item';
 import { ArenaFilter } from 'app/arenas/shared/arena-filter';
-//import { Arena } from './arena';
 import { ArenaType } from './arena-type';
 import { ListResponse } from 'app/shared/list/list-response';
 import { ListInfo } from 'app/shared/list/list-info';
-import {baseServeCommandOptions} from "@angular/cli/commands/serve";
+import { ApiConfig } from 'app/core/api-config';
 
 
 @Injectable()
 export class ArenaService {
-  private apiUrl = "http://hockey.smargit.com/HockeyApp.WebApi/api/v1/";
-  constructor(private readonly httpClient: HttpClient) {
-    }
+  constructor(
+    private readonly httpClient: HttpClient, 
+    private readonly apiConfig: ApiConfig) {
+  }
 
   public getArenas(filter: ArenaFilter, listInfo: ListInfo): Observable<ListResponse<ArenaListItem>> {
     const methodUrlPrefix = "/list";
@@ -49,7 +49,7 @@ export class ArenaService {
   }
 
   public getArenaLogo(arena: ArenaListItem | ArenaViewItem): string {
-    let logoSrc = "http://hockey.smargit.com/HockeyApp.WebApi";
+    let logoSrc = this.apiConfig.filesPath;
     let placeholder = "http://via.placeholder.com/250x150";
     return arena.logo ? logoSrc + arena.logo : placeholder;
   }
@@ -70,12 +70,14 @@ export class ArenaService {
   */
 
   public updateArena( arena: ArenaViewItem ) {
-    return this.httpClient.put(this.apiUrl + "/arena/" + arena.id, arena);
+    const methodUrlPrefix = "/" + arena.id;
+    let methodUrl = this.getMethodUrl(methodUrlPrefix);
+    
+    return this.httpClient.put(methodUrl, arena);
   }
 
   private getMethodUrl(methodUrlPrefix: string) : string {
-    //let baseServiceApiUrl = `/api/v1/arenas`;
-    let baseServiceApiUrl = this.apiUrl + '/arenas';
+    let baseServiceApiUrl = this.apiConfig.apiPath + 'arenas';
     return baseServiceApiUrl + methodUrlPrefix;
   }
 }

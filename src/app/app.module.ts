@@ -27,7 +27,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthenticationService } from 'app/auth/authentication.service';
 import { AuthGuard } from 'app/auth/auth.guard';
 import { UserService } from 'app/auth/user.service';
-
+import { ApiConfig } from 'app/core/api-config' 
 
 import { AlertService } from 'app/components/alert/alert.service';
 import { AlertComponent } from 'app/components/alert/alert.component';
@@ -38,7 +38,6 @@ import { NewsModule } from 'app/news/news.module';
 import { SharedModule } from 'app/shared/shared.module';
 
 @NgModule({
-
   declarations: [
     AppComponent,
     HeaderComponent,
@@ -65,7 +64,7 @@ import { SharedModule } from 'app/shared/shared.module';
     NgbModule.forRoot(),
     MDBBootstrapModule.forRoot(),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBpuC7_aFMwlRMvHJJgDFsQ0M5_6RlzNYA' // correct key for hockey-life-pro
+      apiKey: new ApiConfig().googleApiKey
     }),
     CoreModule,
     SharedModule,
@@ -75,6 +74,7 @@ import { SharedModule } from 'app/shared/shared.module';
   providers: [
     appRoutingProviders,
     AuthGuard,
+    ApiConfig,
     AlertService,
     CookieService,
     AuthenticationService,

@@ -1,8 +1,0 @@
-
-{
-  "/api/*" : {
-    "target": "http://hockey.smargit.com/HockeyApp.WebApi/",
-    "secure": false,
-    "logLevel": "debug"
-  }
-}
