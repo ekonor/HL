@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpParams, HttpClient } from '@angular/common/http';
+import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 
 import { ArenaListItem } from 'app/arenas/shared/arena-list-item';
 import { ArenaViewItem } from 'app/arenas/shared/arena-view-item';
+import { ArenaEditItem } from 'app/arenas/shared/arena-edit-item';
 import { ArenaFilter } from 'app/arenas/shared/arena-filter';
-//import { Arena } from './arena';
+import { AuthenticationService } from 'app/auth/authentication.service';
 import { ArenaType } from './arena-type';
 import { ListResponse } from 'app/shared/list/list-response';
 import { ListInfo } from 'app/shared/list/list-info';
@@ -15,7 +16,7 @@ import {baseServeCommandOptions} from "@angular/cli/commands/serve";
 @Injectable()
 export class ArenaService {
   private apiUrl = "http://hockey.smargit.com/HockeyApp.WebApi/api/v1/";
-  constructor(private readonly httpClient: HttpClient) {
+  constructor(private readonly httpClient: HttpClient, private readonly authService: AuthenticationService) {
     }
 
   public getArenas(filter: ArenaFilter, listInfo: ListInfo): Observable<ListResponse<ArenaListItem>> {
@@ -69,8 +70,13 @@ export class ArenaService {
   }
   */
 
-  public updateArena( arena: ArenaViewItem ) {
-    return this.httpClient.put(this.apiUrl + "/arena/" + arena.id, arena);
+  public updateArena( id: number, arena: ArenaEditItem ) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=utf-8',
+      'X-Requested-With': 'XMLHttpRequest',
+      'Authorization': 'Bearer ' + this.authService.token
+    });
+    return this.httpClient.put(this.apiUrl + '/arenas/' + id, arena, {headers: headers});
   }
 
   private getMethodUrl(methodUrlPrefix: string) : string {
