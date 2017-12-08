@@ -10,18 +10,17 @@ import { AuthenticationService } from 'app/auth/authentication.service';
 import { ArenaType } from './arena-type';
 import { ListResponse } from 'app/shared/list/list-response';
 import { ListInfo } from 'app/shared/list/list-info';
-import {baseServeCommandOptions} from "@angular/cli/commands/serve";
+import { ApiConfig } from 'app/core/api-config';
+import { HttpHeaders } from '@angular/common/http';
 
 
 @Injectable()
 export class ArenaService {
   constructor(
     private readonly httpClient: HttpClient,
+    private readonly authService: AuthenticationService,
     private readonly apiConfig: ApiConfig) {
   }
-  private apiUrl = "http://hockey.smargit.com/HockeyApp.WebApi/api/v1/";
-  constructor(private readonly httpClient: HttpClient, private readonly authService: AuthenticationService) {
-    }
 
   public getArenas(filter: ArenaFilter, listInfo: ListInfo): Observable<ListResponse<ArenaListItem>> {
     const methodUrlPrefix = "/list";
@@ -54,7 +53,7 @@ export class ArenaService {
   }
 
   public getArenaLogo(arena: ArenaListItem | ArenaViewItem): string {
-    let logoSrc = "http://hockey.smargit.com/HockeyApp.WebApi";
+    let logoSrc = this.apiConfig.filesPath;
     let placeholder = "http://via.placeholder.com/250x150";
     return arena.logo ? logoSrc + arena.logo : placeholder;
   }
@@ -64,8 +63,6 @@ export class ArenaService {
       .toPromise()
       .catch(this.handleError);
   }
-
-
 
   public deleteArena( arena: Arena ) {
     return this.http.delete(this.url + "/" + arena.id)
@@ -80,12 +77,12 @@ export class ArenaService {
       'X-Requested-With': 'XMLHttpRequest',
       'Authorization': 'Bearer ' + this.authService.token
     });
-    return this.httpClient.put(this.apiUrl + '/arenas/' + id, arena, {headers: headers});
+    return this.httpClient.put(this.apiConfig.apiPath + '/arenas/' + id, arena, {headers: headers});
   }
 
   private getMethodUrl(methodUrlPrefix: string) : string {
     //let baseServiceApiUrl = `/api/v1/arenas`;
-    let baseServiceApiUrl = this.apiUrl + '/arenas';
+    let baseServiceApiUrl = this.apiConfig.apiPath + '/arenas';
     return baseServiceApiUrl + methodUrlPrefix;
   }
 }
