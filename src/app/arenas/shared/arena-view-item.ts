@@ -1,6 +1,7 @@
 export class ArenaViewItem {
   id: number;
   name: string;
+  linkName?: string;
   address?: string;
   email?: string;
   webSite?: string;

@@ -21,15 +21,8 @@ import { TournamentsComponent } from './components/tournaments/tournaments.compo
 import { routing, appRoutingProviders } from './app.routes';
 import { SlidesComponent } from './components/home/slides/slides.component';
 
-//import  { AdminComponent} from "./components/admin/admin.component";
 import { LoginComponent } from "./components/login/login.component";
 import { RegisterComponent } from "./components/register/register.component";
-
-/*import { LoginComponent } from "app/components/account/login/login.component";
-import { ForgotPasswordComponent } from "app/components/account/forgot-password/forgot-password.component";
-import { RegisterComponent } from "app/components/account/register/register.component";
-import { ForgotPasswordConfirmationComponent } from 'app/components/account/forgot-password-confirmation/forgot-password-confirmation.component';
-import { ResetPasswordComponent } from 'app/components/account/reset-password/reset-password.component';*/
 
 import { AlertService } from "app/components/alert/alert.service";
 import { AlertComponent } from "app/components/alert/alert.component";
@@ -38,10 +31,6 @@ import { ArenaModule } from 'app/arenas/arenas.module';
 import { CoreModule } from 'app/core/core.module';
 import { NewsModule } from 'app/news/news.module';
 import { SharedModule } from 'app/shared/shared.module';
-/*import { ResetPasswordConfirmationComponent } from 'app/components/account/reset-password-confirmation/reset-password-confirmation.component';
-import { ConfirmEmailComponent } from 'app/components/account/confirm-email/confirm-email.component';
-import { ConfirmEmailResultComponent } from 'app/components/account/confirm-email-result/confirm-email-result.component';
-*/
 
 @NgModule({
 
@@ -59,7 +48,6 @@ import { ConfirmEmailResultComponent } from 'app/components/account/confirm-emai
     AlertComponent,
 
     LoginComponent,
-   //AdminComponent,
     RegisterComponent
    /* LoginComponent,
     ForgotPasswordComponent,
@@ -80,7 +68,6 @@ import { ConfirmEmailResultComponent } from 'app/components/account/confirm-emai
     NgbModule.forRoot(),
     MDBBootstrapModule.forRoot(),
     AgmCoreModule.forRoot({
-      //apiKey: 'AIzaSyBpuC7_aFMwlRMvHJJgDFsQ0M5_6RlzNYA'
       apiKey: 'AIzaSyAxIKhPCTX9mEy_Jnjn5133_3vuNaILh00'
     }),
     CoreModule,
@@ -93,7 +80,7 @@ import { ConfirmEmailResultComponent } from 'app/components/account/confirm-emai
     AlertService,
     CookieService
   ],
-  bootstrap: [AppComponent],
-  schemas: [NO_ERRORS_SCHEMA]
+  bootstrap: [AppComponent]
+  // schemas: [NO_ERRORS_SCHEMA]
 })
 export class AppModule { }

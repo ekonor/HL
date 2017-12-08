@@ -21,9 +21,9 @@ export class ArenasComponent implements OnInit {
   errorMessage: string;
 
   filter: ArenaFilter = new ArenaFilter();
-  listInfo: ListInfo = new ListInfo(); 
+  listInfo: ListInfo = new ListInfo();
   pageSize: number;
-  
+
   private sub : any;
 
   constructor(
@@ -36,7 +36,7 @@ export class ArenasComponent implements OnInit {
   ngOnInit() {
     this.sub = this.activatedRoute.queryParams.subscribe(params => {
       this.listInfo.createFromParams(params, this.pageSize);
-      this.getArenas(); 
+      this.getArenas();
     });
   }
 

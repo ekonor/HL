@@ -3,14 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ArenaViewComponent } from 'app/arenas/arena-view/arena-view.component';
 import { ArenasComponent } from 'app/arenas/arenas.component';
+import { ArenaEditComponent } from 'app/arenas/arena-edit/arena-edit.component';
 
 export const arenaRoutes: Routes =[
     { path: 'arenas', component: ArenasComponent },
-    { path: 'arena/:id', component: ArenaViewComponent }
+    { path: 'arena/:id', component: ArenaViewComponent },
+    { path: 'arenas/edit/:id', component: ArenaEditComponent },
   ];
-  
+
   export const appRoutingProviders: any[] = [
-  
+
   ];
 
   @NgModule({
@@ -18,5 +20,5 @@ export const arenaRoutes: Routes =[
     exports: [RouterModule],
   })
   export class ArenaRoutingModule { }
-  
+
   // export const routingComponents = [FirstComponent, SecondComponent, ThirdComponent];

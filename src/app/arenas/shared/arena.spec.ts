@@ -1,4 +1,4 @@
-import '@angular/core/testing';
+/*import '@angular/core/testing';
 import { Arena } from './arena';
 
 describe( 'Arena', () =>
@@ -32,4 +32,4 @@ describe( 'Arena', () =>
 
 
   });
-});
+});*/

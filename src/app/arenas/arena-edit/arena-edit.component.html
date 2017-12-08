@@ -1,0 +1,111 @@
+<!--section class="section pb-5">
+
+  <div class="row">
+
+    <div class="col-lg-5 mb-4">
+
+      <div class="card">
+
+        <div class="card-body">
+          <div class="item-title-main">
+            <p>{{arena.cityName}}</p>
+          </div>
+          <h5 class="item-title">
+            <a href="/arenas/{{arena.id}}" alt="Подробнее...">{{arena.name}}</a>
+          </h5>
+          <hr>
+
+          <p class="icon-wrap"><i class="fa fa-users"></i>&nbsp;Вместимость: {{arena.capacity}} чел.</p>
+          <br>
+
+          <img class="img-fluid rounded" src="http://hockey.smargit.com/HockeyApp.WebApi{{arena.logo}}" alt="">
+
+        </div>
+
+      </div>
+
+    </div
+
+    <div class="col-lg-7">
+
+      <agm-map class="z-depth-1-half map-container" style="height: 400px;" [latitude]="45" [longitude]="67">
+        <agm-marker [latitude]="34" [longitude]="56"></agm-marker>
+      </agm-map>
+
+      <br>
+      <div class="row text-center">
+        <div class="col-md-4">
+          <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-map-marker"></i></a>
+          <p>{{arena.address}}</p>
+        </div>
+
+        <div class="col-md-4">
+          <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-phone"></i></a>
+          <p>{{arena.contacts}}</p>
+        </div>
+
+        <div class="col-md-4">
+          <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-envelope"></i></a>
+          <p>{{arena.email}}</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="col-lg-12">
+    <p class="section-description pb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam eum porro a pariatur accusamus veniam.</p>
+  </div>
+
+
+</section-->
+
+<div class="col-md-6 col-md-offset-3">
+  <h2>Редактирование арены</h2>
+  <form name="form" (ngSubmit)="f.form.valid && editArena()" #f="ngForm" >
+    <!--div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+      <label for="username">Название арены</label>
+      <input type="text" class="form-control" name="name" [(ngModel)]="model.name" #name="ngModel" required />
+      <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+    </div-->
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !cityName.valid }">
+      <label for="cityName">Город</label>
+      <input type="text" class="form-control" name="cityName" [(ngModel)]="arena.cityName" #cityName="ngModel" required="required" />
+      <div *ngIf="f.submitted && !cityName.valid" class="help-block">cityName is required</div>
+    </div>
+    <!--div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+      <label for="password">Вместимость</label>
+      <input type="text" class="form-control" name="password" [(ngModel)]="model.capacity" #password="ngModel" required />
+      <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+      <label for="password">Тип арены</label>
+      <input type="text" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
+      <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+      <label for="password">Адрес</label>
+      <input type="text" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
+      <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+      <label for="password">E-mail</label>
+      <input type="text" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
+      <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+      <label for="password">Сайт</label>
+      <input type="text" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
+      <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+    </div-->
+    <div class="form-group">
+      <input type="checkbox"><span class="checkbox-title">Удалить?</span>
+    </div>
+    <div class="form-group">
+      <button [disabled]="loading" class="btn btn-primary">Применить</button>
+      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+      <!--a [routerLink]="['/register']" class="btn btn-link">Register</a-->
+    </div>
+  </form>
+</div>
