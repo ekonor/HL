@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs/Observable";
 import { ListBaseComponent } from 'app/shared/list/list-base.component';
 import { NewsService } from 'app/news/shared/news.service';
-import { NewsListResponse, NewsListItem, NewsItem } from 'app/news/shared/news';
+import { NewsListItem, NewsItem } from 'app/news/shared/news';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

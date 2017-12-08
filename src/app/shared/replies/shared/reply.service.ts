@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 
 import { ApiConfig } from "app/core/api-config";
 import { Observable } from "rxjs/Observable";
-import { Reply } from "app/replies/shared/reply";
+import { Reply } from "app/shared/replies/shared/reply";
 
 @Injectable()
 export class ReplyService {

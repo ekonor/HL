@@ -3,10 +3,11 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 
-import { NewsListResponse, NewsItem, NewsListItem } from './news';
+import { NewsItem, NewsListItem } from './news';
 import { ListInfo } from 'app/shared/list/list-info';
 import { ApiConfig } from 'app/core/api-config';
 import { Category } from 'app/news/shared/category';
+import { ListResponse } from 'app/shared/list/list-response';
 
 @Injectable()
 export class NewsService {
@@ -22,9 +23,9 @@ export class NewsService {
     return this.httpClient.get<Category[]>(`${this.newsUrl}/category/list`);
   }
 
-  public getNewsList(listInfo: ListInfo): Observable<NewsListResponse> {
+  public getNewsList(listInfo: ListInfo): Observable<ListResponse<NewsListItem>> {
     let params = listInfo.toParams();
-    return this.httpClient.get<NewsListResponse>(`${this.newsUrl}/list`, { params: params });
+    return this.httpClient.get<ListResponse<NewsListItem>>(`${this.newsUrl}/list`, { params: params });
   }
 
   public getResentNewsList(): Observable<NewsListItem[]> {

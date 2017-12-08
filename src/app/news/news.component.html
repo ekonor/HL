@@ -1,22 +1,29 @@
-
 <!--// Page Content //-->
 
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="newsList">
   <div class="row">
 
     <div class="col-md-12">
       <div class="heading heading-12 margin-top-bottom-30">
         <p> Все самые интересные и свежие новости о хоккее в одном месте</p>
-        <h1><span class="left"></span>Новости о хоккее и  околохоккейном мире<span class="right"></span></h1>
+        <h1>
+          <span class="left"></span>Новости о хоккее и околохоккейном мире
+          <span class="right"></span>
+        </h1>
         <hr>
       </div>
 
+      <div class="col-md-12 pb-4 pt-2">
+        <!-- <arena-filter [filter]="filter" (onFiltered)="onFiltered($event)"></arena-filter> -->
+
+        <sorting class="pull-right" [orderBy]="listInfo.orderBy" [orderDir]="listInfo.orderDir" [options]="sortOptions" (onSorted)="onSorted($event)"></sorting>
+      </div>
 
       <div class="kode-blog-list kode-fullwidth-blog">
 
-        <news-list *ngIf="listData" [content]="listData"></news-list>
+        <news-list *ngIf="newsList.listItems" [content]="newsList.listItems"></news-list>
 
-        <pagination [page]="1" [collectionSize]="10" [pageSize]="5"></pagination>
+        <pagination [page]="listInfo.page" [collectionSize]="newsList.count" [pageSize]="listInfo.take"></pagination>
 
       </div>
 
@@ -24,7 +31,3 @@
 
   </div>
 </div>
-
-
-
-
