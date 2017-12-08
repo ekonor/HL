@@ -1,18 +1,15 @@
 import { Routes, RouterModule } from '@angular/router';
-import { ChildrenTeamsComponent } from './components/children-teams/children-teams.component';
-import { AboutComponent } from './components/about/about.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
-import { TournamentsComponent } from './components/tournaments/tournaments.component';
-import { LoginComponent } from "./components/login/login.component";
-
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/login/logout.component';
+import { RegisterComponent } from './components/register/register.component';
 
 export const routes: Routes =[
   { path: '', component: HomeComponent },
-  // { path: 'tournaments', component: TournamentsComponent },
-  // { path: 'children-teams', component: ChildrenTeamsComponent },
-  // { path: 'about', component: AboutComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
+  { path: 'registration', component: RegisterComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

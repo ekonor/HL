@@ -21,11 +21,16 @@ import { TournamentsComponent } from './components/tournaments/tournaments.compo
 import { routing, appRoutingProviders } from './app.routes';
 import { SlidesComponent } from './components/home/slides/slides.component';
 
-import { LoginComponent } from "./components/login/login.component";
-import { RegisterComponent } from "./components/register/register.component";
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/login/logout.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AuthenticationService } from 'app/auth/authentication.service';
+import { AuthGuard } from 'app/auth/auth.guard';
+import { UserService } from 'app/auth/user.service';
 
-import { AlertService } from "app/components/alert/alert.service";
-import { AlertComponent } from "app/components/alert/alert.component";
+
+import { AlertService } from 'app/components/alert/alert.service';
+import { AlertComponent } from 'app/components/alert/alert.component';
 import { AgmCoreModule } from '@agm/core';
 import { ArenaModule } from 'app/arenas/arenas.module';
 import { CoreModule } from 'app/core/core.module';
@@ -48,16 +53,8 @@ import { SharedModule } from 'app/shared/shared.module';
     AlertComponent,
 
     LoginComponent,
+    LogoutComponent,
     RegisterComponent
-   /* LoginComponent,
-    ForgotPasswordComponent,
-    ForgotPasswordConfirmationComponent,
-    RegisterComponent,
-    ConfirmEmailComponent,
-    ConfirmEmailResultComponent,
-    ResetPasswordComponent,
-    ResetPasswordConfirmationComponent,
-    ForgotPasswordComponent*/
   ],
   imports: [
     BrowserModule,
@@ -77,10 +74,15 @@ import { SharedModule } from 'app/shared/shared.module';
   ],
   providers: [
     appRoutingProviders,
+    AuthGuard,
     AlertService,
-    CookieService
+    CookieService,
+    AuthenticationService,
+    UserService
+
   ],
   bootstrap: [AppComponent]
   // schemas: [NO_ERRORS_SCHEMA]
 })
+
 export class AppModule { }
