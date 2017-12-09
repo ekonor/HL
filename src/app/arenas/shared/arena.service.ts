@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpParams, HttpClient } from '@angular/common/http';
+import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 
 import { ArenaListItem } from 'app/arenas/shared/arena-list-item';
@@ -10,6 +10,7 @@ import { AuthenticationService } from 'app/auth/authentication.service';
 import { ArenaType } from './arena-type';
 import { ListResponse } from 'app/shared/list/list-response';
 import { ListInfo } from 'app/shared/list/list-info';
+import { ApiConfig } from 'app/core/api-config';
 import {baseServeCommandOptions} from "@angular/cli/commands/serve";
 
 
@@ -17,12 +18,10 @@ import {baseServeCommandOptions} from "@angular/cli/commands/serve";
 export class ArenaService {
   constructor(
     private readonly httpClient: HttpClient,
-    private readonly apiConfig: ApiConfig) {
+    private readonly apiConfig: ApiConfig,
+    private readonly authService: AuthenticationService) {
   }
   private apiUrl = "http://hockey.smargit.com/HockeyApp.WebApi/api/v1/";
-  constructor(private readonly httpClient: HttpClient, private readonly authService: AuthenticationService) {
-    }
-
   public getArenas(filter: ArenaFilter, listInfo: ListInfo): Observable<ListResponse<ArenaListItem>> {
     const methodUrlPrefix = "/list";
 

@@ -27,7 +27,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthenticationService } from 'app/auth/authentication.service';
 import { AuthGuard } from 'app/auth/auth.guard';
 import { UserService } from 'app/auth/user.service';
-import { ApiConfig } from 'app/core/api-config' 
+import { ApiConfig } from 'app/core/api-config';
 
 import { AlertService } from 'app/components/alert/alert.service';
 import { AlertComponent } from 'app/components/alert/alert.component';
