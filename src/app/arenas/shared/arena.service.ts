@@ -70,10 +70,12 @@ export class ArenaService {
   }
   */
 
-  public updateArena( id: number, arena: ArenaViewItem ): Observable<boolean> {
+  public updateArena( id: number, arena: ArenaViewItem, arenaTypeId: number ): Observable<boolean> {
     console.log(arena);
-    const body = JSON.stringify(arena);
-    //const body = JSON.stringify({"contacts": arena.contacts,"longitude": arena.longitude,"latitude": arena.latitude,"about": arena.about,"name": arena.name,"arenaTypeName": arena.arenaTypeName,"address": arena.address,"email": arena.email,"webSite": arena.webSite,"capacity": arena.capacity,"logo": arena.logo,"cityName": arena.cityName});
+    // const body = JSON.stringify(arena);
+    // const body = JSON.stringify({"contacts": arena.contacts,"longitude": arena.longitude,"latitude": arena.latitude,"about": arena.about,"name": arena.name,"arenaTypeName": arena.arenaTypeName,"address": arena.address,"email": arena.email,"webSite": arena.webSite,"capacity": arena.capacity,"logo": arena.logo,"cityName": arena.cityName});
+    const body = JSON.stringify({"contacts": arena.contacts,"longitude": arena.longitude,"latitude": arena.latitude,"about": arena.about,"name": arena.name,"arenaTypeId": arenaTypeId.toString(),"address": arena.address,"email": arena.email,"webSite": arena.webSite,"capacity": arena.capacity,"logo": arena.logo,"cityName": arena.cityName});
+
     console.log(body);
     // const body = JSON.stringify({"contacts":"+7 (3812) 70-71-25","longitude":73.297631,"latitude":55.008851,"about":null,"name":"«Арена Омск 6»","arenaTypeName":null,"address":"644119, г. Омск, ул. Лукашевича, д. 35","email":null,"webSite":"http://www.hawk.ru/tickets/arena-omsk/","capacity":10048,"logo":null,"cityName":null});
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));

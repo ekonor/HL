@@ -21,9 +21,13 @@
       <input type="number" class="form-control" name="capacity" [(ngModel)]="arena.capacity" (ngModelChange)="arena.capacity = $event" #capacity="ngModel" ngModel number="true" id="capacity"/>
       <div *ngIf="f.submitted && capacity != null && !capacity.valid" class="help-block">capacity is invalid</div>
     </div>
-    <select class="form-group" [(ngModel)]="arena.arenaTypeName" name="arenaTypeName" class="form-control" #arenaTypeName="ngModel" id="arenaTypeName">
-      <option *ngFor="let arenaType of arenaTypes"  [ngValue]="arenaType.name">{{arenaType.name}}</option>
+    <select class="form-group" [(ngModel)]="arena.arenaTypeName" name="arenaTypeName" class="form-control" #arenaTypeName="ngModel" id="arenaTypeName" (ngModelChange)="arenaTypeId = $event">
+      <option *ngFor="let arenaType of arenaTypes"  [ngValue]="arenaType.name" >{{arenaType.name}}{{arenaType.id}}</option>
     </select>
+    {{arenaTypeId}}
+    <!--select class="form-group" [(ngModel)]="arenaTypeId" name="arenaTypeId" class="form-control" #arenaTypeId="ngModel" id="arenaTypeId" (ngModelChange)="arenaTypeId = $event">
+      <option *ngFor="let arenaType of arenaTypes"  [ngValue]="arenaType.id" >{{arenaType.name}}{{arenaType.id}}</option>
+    </select-->
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !contacts.valid }">
       <label for="contacts">Контакты</label>
       <input type="text" class="form-control" name="contacts" [(ngModel)]="arena.contacts" (ngModelChange)="arena.contacts = $event" #contacts="ngModel" id="contacts" />
@@ -34,12 +38,12 @@
       <input type="email" class="form-control" name="email" [(ngModel)]="arena.email" (ngModelChange)="arena.email = $event" #email="ngModel" ngModel email="true" id="email"/>
       <div *ngIf="f.submitted && email != null && !email.valid" class="help-block">email is invalid</div>
     </div>
-    <!--div class="form-group" [ngClass]="{ 'has-error': f.submitted && !webSite.valid }">
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !webSite.valid }">
       <label for="webSite">Site</label>
       <input type="text" class="form-control" name="webSite" [(ngModel)]="arena.webSite" (ngModelChange)="arena.webSite = $event" #webSite="ngModel" id="webSite"/>
       <div *ngIf="f.submitted && webSite != null && !webSite.valid" class="help-block">webSite is invalid</div>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !logo.valid }">
+    <!--div class="form-group" [ngClass]="{ 'has-error': f.submitted && !logo.valid }">
       <label for="logo">Лого</label>
       <input type="text" class="form-control" name="logo" [(ngModel)]="arena.logo" (ngModelChange)="arena.logo = $event" #about="ngModel" id="about"/>
       <div *ngIf="f.submitted && logo != null && !logo.valid" class="help-block">logo is invalid</div>
@@ -48,7 +52,7 @@
       <label for="about">Описание</label>
       <input type="text" class="form-control" name="about" [(ngModel)]="arena.about" (ngModelChange)="arena.about = $event" #about="ngModel" id="about">
       <div *ngIf="f.submitted && about != null && !about.valid" class="help-block">about is invalid</div>
-    </div-->
+    </div>
     <!--div class="form-group">
       <input type="checkbox"><span class="checkbox-title">Удалить?</span>
     </div-->

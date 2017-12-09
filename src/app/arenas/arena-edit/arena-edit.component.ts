@@ -20,6 +20,8 @@ export class ArenaEditComponent implements OnInit {
   returnUrl: string;
   loading = false;
   id: number;
+  cityId: number;
+  arenaTypeId: number;
   mapPoint: Point;
   // private sub: any;
   arenaTypes: ArenaType[];
@@ -37,13 +39,14 @@ export class ArenaEditComponent implements OnInit {
     // console.log('id='+this.id+'route='+this.activatedRoute.snapshot.params['id']);
     this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
     this.loading = true;
+    this.id = this.activatedRoute.snapshot.params['id'];
+    this.getArena(this.id);
     this.getArenaTypes();
     /*this.sub = this.activatedRoute.params.subscribe(params => {
       this.id = parseInt(params['id']);
       this.getArena(this.id);
     });*/
-    this.id = this.activatedRoute.snapshot.params['id'];
-    this.getArena(this.id);
+
   }
 
   ngOnInit() {
@@ -96,8 +99,10 @@ export class ArenaEditComponent implements OnInit {
   private editArena(arena: ArenaViewItem) {
     console.log(this.arena);
     console.log(this.id);
-    console.log("ok");
-    this.service.updateArena(this.id, this.arena).subscribe(
+    console.log(this.arenaTypeId);
+    console.log('ok');
+    this.setArenaId();
+    this.service.updateArena(this.id, this.arena, this.arenaTypeId).subscribe(
       data => {
         //console.log(data);
         //this.router.navigate([this.returnUrl]);
@@ -118,6 +123,11 @@ export class ArenaEditComponent implements OnInit {
           this.arenaTypes = new Array<ArenaType>();
           this.arenaTypes.push(emptyValue);
           this.arenaTypes = this.arenaTypes.concat(arenaTypes);
+          this.setArenaId();
+          //const cur: ArenaType = arenaTypes.find(name, this.arena.arenaTypeName);
+          //this.arenaTypeId = cur.id;
+          //console.log(cur);
+
           this.loading = false;
         },
         error => {
@@ -125,5 +135,21 @@ export class ArenaEditComponent implements OnInit {
           this.loading = false;
         }
       );
+  }
+
+  private setArenaId() {
+    let find = false;
+    let i = this.arenaTypes.length;
+    while (i--) {
+      if (this.arenaTypes[i].name === this.arena.arenaTypeName) {
+        this.arenaTypeId = this.arenaTypes[i].id;
+        find = true;
+        //return this.arenaTypes[i].id;
+      }
+    }
+    if (!find) {
+      console.log('error');
+      this.arenaTypeId = -1;
+    }
   }
 }
