@@ -4,7 +4,6 @@ import { Observable } from "rxjs/Observable";
 
 import { ArenaListItem } from 'app/arenas/shared/arena-list-item';
 import { ArenaViewItem } from 'app/arenas/shared/arena-view-item';
-import { ArenaEditItem } from 'app/arenas/shared/arena-edit-item';
 import { ArenaFilter } from 'app/arenas/shared/arena-filter';
 import { AuthenticationService } from 'app/auth/authentication.service';
 import { ArenaType } from './arena-type';
