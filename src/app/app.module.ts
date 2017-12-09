@@ -64,7 +64,7 @@ import { SharedModule } from 'app/shared/shared.module';
     NgbModule.forRoot(),
     MDBBootstrapModule.forRoot(),
     AgmCoreModule.forRoot({
-      apiKey: new ApiConfig().googleApiKey
+      apiKey: 'AIzaSyBpuC7_aFMwlRMvHJJgDFsQ0M5_6RlzNYA'
     }),
     CoreModule,
     SharedModule,

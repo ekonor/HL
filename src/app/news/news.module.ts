@@ -11,12 +11,13 @@ import { NewsComponent } from "app/news/news.component";
 import { NewsService } from "app/news/shared/news.service";
 import { NewsRoutingModule } from "app/news/news-routing.module";
 import { SharedModule } from "app/shared/shared.module";
+import { NewsViewComponent } from "app/news/news-view/news-view.component";
 
 @NgModule({
       declarations: [
         NewsComponent,
         NewsListComponent,
-        // NewsViewComponent,
+        NewsViewComponent,
         // NewsFilterComponent
       ],
       imports: [

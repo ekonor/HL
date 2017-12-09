@@ -9,12 +9,22 @@ import { PaginationComponent } from "app/shared/pagination/pagination.component"
 import { PaginationService } from "app/shared/pagination.service";
 import { MapComponent } from "app/shared/map/map.component";
 import { SortingComponent } from "app/shared/sorting/sorting.component";
+import { UserPicComponent } from "app/shared/user-pic/user-pic.component";
+import { RepliesComponent } from "app/shared/replies/replies.component";
+import { ReplyAddComponent } from "app/shared/replies/reply-add/reply-add.component";
+import { ReplyListItemComponent } from "app/shared/replies/reply-list-item/reply-list-item.component";
+import { ReplyService } from "app/shared/replies/shared/reply.service";
+
 
 @NgModule({
       declarations: [
         PaginationComponent,
         MapComponent,
-        SortingComponent
+        SortingComponent,
+        UserPicComponent,
+        RepliesComponent,
+        ReplyAddComponent,
+        ReplyListItemComponent
       ],
       imports: [
         BrowserModule, 
@@ -30,10 +40,13 @@ import { SortingComponent } from "app/shared/sorting/sorting.component";
         AgmCoreModule,
         PaginationComponent,
         MapComponent,
-        SortingComponent
+        SortingComponent,
+        UserPicComponent,
+        RepliesComponent
       ],
       providers: [
-        PaginationService
+        PaginationService,
+        ReplyService
       ]
     })
     export class SharedModule { }
