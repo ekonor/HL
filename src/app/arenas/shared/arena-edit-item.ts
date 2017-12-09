@@ -1,5 +1,4 @@
 export class ArenaEditItem {
-  id?: number;
   name: string;
   linkName?: string;
   address?: string;
