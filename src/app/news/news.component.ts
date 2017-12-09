@@ -16,7 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 export class NewsComponent {
   newsList: ListResponse<NewsListItem>;
 
-  // filter: ArenaFilter = new ArenaFilter();
+  filter: string;
   listInfo: ListInfo = new ListInfo();
   sortOptions: SortOption[] = new Array<SortOption>();
   pageSize: number;
@@ -30,7 +30,7 @@ export class NewsComponent {
     this.pageSize = this.paginationService.pageSize;
 
     this.sortOptions = [
-      { title: "Название", value: "name" },
+      { title: "Название", value: "Name" },
       // { title: "Город", value: "cityId" },
       // { title: "Тип", value: "arenaTypeId" } // todo replace ids to names here and in api
     ];
@@ -47,7 +47,8 @@ export class NewsComponent {
     this.sub.unsubscribe();
   }
 
-  public onFiltered($event) {
+  public onFiltered(searchText) {
+    this.filter = searchText;
     this.getListData();
   }
 
@@ -60,6 +61,6 @@ export class NewsComponent {
 
 
   protected getListData() {
-    this.newsService.getNewsList(this.listInfo).subscribe(data => this.newsList = data);
+    this.newsService.getNewsList(this.filter, this.listInfo).subscribe(data => this.newsList = data);
   }
 }

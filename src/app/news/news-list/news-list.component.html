@@ -5,7 +5,7 @@
         <time datetime="2008-02-14 20:00">07 <span>may</span></time>
         <h3 [innerHtml]="post.title" ><a href="#"></a></h3>
       </div>
-      <figure><a href="#"><img src="{{post.logo}}" class="img-responsive" alt="Хоккейные новости"></a></figure>
+      <figure><a href="#"><img [src]="getNewsPostLogo()" class="img-responsive" alt="Хоккейные новости"></a></figure>
       <div class="kode-blog-info">
         <ul class="kode-blog-options">
           <li><user-pic [user]="post.creator"></user-pic></li>

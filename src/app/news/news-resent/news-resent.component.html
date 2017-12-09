@@ -1,0 +1,14 @@
+<div class="section-container jumbotron" *ngIf="newsList">
+  <div class="section-title">
+    <p>Недавние новости</p>
+  </div>
+  <ul class="sidebar-recent-post">
+    <li *ngFor="let post of newsList">
+      <hr>
+      <div class="info">
+        <a (click)="viewNewsItem(post)">{{post.title}}</a>
+        <div class="small">{{post.creationDate | date}}</div>
+      </div>
+    </li>
+  </ul>
+</div>

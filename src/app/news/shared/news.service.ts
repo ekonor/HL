@@ -23,8 +23,13 @@ export class NewsService {
     return this.httpClient.get<Category[]>(`${this.newsUrl}/category/list`);
   }
 
-  public getNewsList(listInfo: ListInfo): Observable<ListResponse<NewsListItem>> {
+  public getNewsList(searchText: string, listInfo: ListInfo): Observable<ListResponse<NewsListItem>> {
     let params = listInfo.toParams();
+
+    if (searchText) {
+      params = params.append('searchText', searchText);
+    }
+
     return this.httpClient.get<ListResponse<NewsListItem>>(`${this.newsUrl}/list`, { params: params });
   }
 
@@ -42,6 +47,9 @@ export class NewsService {
   }
 
   public getNewsLogo(post: any): string {
+    if (!post)
+      return '';
+
     let logoSrc = this.apiConfig.filesPath;
     let placeholder = "http://via.placeholder.com/250x150";
     return post.logo ? logoSrc + post.logo : placeholder;

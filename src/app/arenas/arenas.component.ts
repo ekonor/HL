@@ -35,9 +35,9 @@ export class ArenasComponent implements OnInit {
       this.pageSize = this.paginationService.pageSize;
       
       this.sortOptions = [ 
-        { title: "Название", value: "name" },
-        { title: "Город", value: "cityId" },
-        { title: "Тип", value: "arenaTypeId" } // todo replace ids to names here and in api
+        { title: "Название", value: "Name" },
+        { title: "Город", value: "CityName" },
+        { title: "Тип", value: "ArenaTypeName" } 
       ];
   }
 

@@ -1,9 +1,15 @@
 <!--// Page Content //-->
 
-<div class="container-fluid" *ngIf="newsList">
+<div class="container-fluid">
   <div class="row">
+    <div class="col-md-3">
+      <simple-filter (onFiltered)="onFiltered($event)"></simple-filter>
 
-    <div class="col-md-12">
+      <category-list></category-list>
+    </div>
+
+    <div class="col-md-6">
+
       <div class="heading heading-12 margin-top-bottom-30">
         <p> Все самые интересные и свежие новости о хоккее в одном месте</p>
         <h1>
@@ -13,21 +19,24 @@
         <hr>
       </div>
 
-      <div class="col-md-12 pb-4 pt-2">
-        <!-- <arena-filter [filter]="filter" (onFiltered)="onFiltered($event)"></arena-filter> -->
+      <div class="list-body" *ngIf="newsList">
+        <div class="col-md-12 pb-4 pt-2">
+          <sorting class="pull-right" [orderBy]="listInfo.orderBy" [orderDir]="listInfo.orderDir" [options]="sortOptions" (onSorted)="onSorted($event)"></sorting>
+        </div>
 
-        <sorting class="pull-right" [orderBy]="listInfo.orderBy" [orderDir]="listInfo.orderDir" [options]="sortOptions" (onSorted)="onSorted($event)"></sorting>
+        <div class="kode-blog-list kode-fullwidth-blog">
+
+          <news-list *ngIf="newsList.listItems" [content]="newsList.listItems"></news-list>
+
+          <pagination [page]="listInfo.page" [collectionSize]="newsList.count" [pageSize]="listInfo.take"></pagination>
+
+        </div>
       </div>
-
-      <div class="kode-blog-list kode-fullwidth-blog">
-
-        <news-list *ngIf="newsList.listItems" [content]="newsList.listItems"></news-list>
-
-        <pagination [page]="listInfo.page" [collectionSize]="newsList.count" [pageSize]="listInfo.take"></pagination>
-
-      </div>
-
     </div>
 
+    <div class="col-md-3">
+      <news-important></news-important>
+      <news-resent></news-resent>
+    </div>
   </div>
 </div>

@@ -14,10 +14,16 @@ import { Router } from '@angular/router';
 export class NewsListComponent implements OnInit {
   content: NewsListItem[];
 
-  constructor(private readonly router: Router) {
+  constructor(
+    private readonly router: Router,
+    private readonly newsService: NewsService) {
   }
 
   ngOnInit(): void {
+  }
+
+  public getNewsPostLogo(newsItem: NewsListItem): string {
+    return this.newsService.getNewsLogo(newsItem);
   }
 
   public viewNewsItem(post: NewsListItem) {

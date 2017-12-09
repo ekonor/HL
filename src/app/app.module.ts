@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule} from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
@@ -72,6 +72,7 @@ import { SharedModule } from 'app/shared/shared.module';
     NewsModule
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: 'ru' },
     appRoutingProviders,
     AuthGuard,
     ApiConfig,
@@ -79,7 +80,6 @@ import { SharedModule } from 'app/shared/shared.module';
     CookieService,
     AuthenticationService,
     UserService
-
   ],
   bootstrap: [AppComponent]
   // schemas: [NO_ERRORS_SCHEMA]

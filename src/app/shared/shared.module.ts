@@ -14,6 +14,7 @@ import { RepliesComponent } from "app/shared/replies/replies.component";
 import { ReplyAddComponent } from "app/shared/replies/reply-add/reply-add.component";
 import { ReplyListItemComponent } from "app/shared/replies/reply-list-item/reply-list-item.component";
 import { ReplyService } from "app/shared/replies/shared/reply.service";
+import { SimpleFilterComponent } from "app/shared/simple-filter/simple-filter.component";
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ReplyService } from "app/shared/replies/shared/reply.service";
         UserPicComponent,
         RepliesComponent,
         ReplyAddComponent,
-        ReplyListItemComponent
+        ReplyListItemComponent,
+        SimpleFilterComponent
       ],
       imports: [
         BrowserModule, 
@@ -42,7 +44,8 @@ import { ReplyService } from "app/shared/replies/shared/reply.service";
         MapComponent,
         SortingComponent,
         UserPicComponent,
-        RepliesComponent
+        RepliesComponent,
+        SimpleFilterComponent
       ],
       providers: [
         PaginationService,
