@@ -12,9 +12,9 @@ import { debounce } from "rxjs/operator/debounce";
 @Component({
   moduleId: module.id,
   selector: 'arena-id',
-  templateUrl: 'arena-edit.component.html',
+  templateUrl: 'arena-create.component.html',
   // styleUrls: [ "../../../node_modules/bootstrap/dist/css/bootstrap.css" ]
-  styleUrls: ['arena-edit.component.scss']
+  styleUrls: ['arena-create.component.scss']
 })
 export class ArenaEditComponent implements OnInit {
   arena: ArenaViewItem;
