@@ -1,18 +1,18 @@
-export class ArenaEditItem {
-  id?: number;
+export class ArenaViewItem {
   name: string;
   linkName?: string;
   address?: string;
   email?: string;
   webSite?: string;
   capacity?: number;
-  logo?: string;
-  cityName?: string;
+  //logo?: string;
+  cityId?: number;
   contacts?: string;
   longitude?: number;
   latitude?: number;
   about?: string;
-  arenaTypeName?: string;
+  arenaTypeId?: string;
+  startYear?: number;
 
   constructor( values: Object = {} )
   {

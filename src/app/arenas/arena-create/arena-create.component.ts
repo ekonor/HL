@@ -12,11 +12,11 @@ import { debounce } from "rxjs/operator/debounce";
 @Component({
   moduleId: module.id,
   selector: 'arena-id',
-  templateUrl: 'arena-edit.component.html',
+  templateUrl: 'arena-create.component.html',
   // styleUrls: [ "../../../node_modules/bootstrap/dist/css/bootstrap.css" ]
-  styleUrls: ['arena-edit.component.scss']
+  styleUrls: ['arena-create.component.scss']
 })
-export class ArenaEditComponent implements OnInit {
+export class ArenaCreateComponent implements OnInit {
   arena: ArenaViewItem;
   returnUrl: string;
   loading = false;
@@ -32,55 +32,21 @@ export class ArenaEditComponent implements OnInit {
   errorMessage: string;
 
   constructor( private service: ArenaService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private alertService: AlertService ) {
-    // Получаем id из url.
-    // Url вида ...edit/21, где 21 - это id.
-    // В роутинге должно быть прописано так edit/:id
-    // this.id = this.activatedRoute.snapshot.params['id'];
-    // console.log('id='+this.id+'route='+this.activatedRoute.snapshot.params['id']);
+               private router: Router,
+               private activatedRoute: ActivatedRoute,
+               private alertService: AlertService ) {
     this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
     this.loading = true;
-    this.id = this.activatedRoute.snapshot.params['id'];
-    this.getArena(this.id);
+    this.arena = new ArenaViewItem;
+    this.mapPoint = this.getMapPoint(this.arena);
+    console.log(this.arena);
+    this.loading = false;
     this.getArenaTypes();
     this.getCities();
-    this.deleteFlag = false;
-    /*this.sub = this.activatedRoute.params.subscribe(params => {
-      this.id = parseInt(params['id']);
-      this.getArena(this.id);
-    });*/
-
   }
 
   ngOnInit() {
 
-  }
-
-  ngOnDestroy() {
-    //this.sub.unsubscribe();
-  }
-
-  /*public refresh(id) {
-    //this.getArena(id);
-  }*/
-
-  private getArena(id: number) {
-    this.loading = true;
-    this.service.getArena(id)
-      .subscribe(
-        arena => {
-          this.arena = arena;
-          this.mapPoint = this.getMapPoint(arena);
-          console.log(this.arena);
-          this.loading = false;
-        },
-        error => {
-          this.errorMessage = error;
-          this.loading = false;
-        }
-      );
   }
 
   private getMapPoint(arena: ArenaViewItem): Point {
@@ -89,39 +55,21 @@ export class ArenaEditComponent implements OnInit {
     }
   }
 
-  private editArena(arena: ArenaViewItem) {
+  private addArena(arena: ArenaViewItem) {
     console.log(this.arena);
     console.log(this.id);
     console.log(this.arenaTypeId);
     console.log('ok');
     this.setArenaTypeId();
     this.setCityId();
-    this.service.updateArena(this.id, this.arena, this.arenaTypeId, this.cityId).subscribe(
-      data => {
-        //console.log(data);
-        //this.router.navigate([this.returnUrl]);
-      },
-      error => {
-        this.alertService.error(error);
-        this.alertService.error("Не удалось сохранить изменения");
-        this.loading = false;
-      });
-  }
-
-  private deleteArena() {
-    console.log(this.arena);
-    console.log(this.id);
-    console.log('delete');
-    this.setArenaTypeId();
-    this.setCityId();
-    this.service.deleteArena(this.id).subscribe(
+    this.service.addArena(this.arena, this.arenaTypeId, this.cityId).subscribe(
       data => {
         //console.log(data);
         this.router.navigate([this.returnUrl]);
       },
       error => {
         this.alertService.error(error);
-        this.alertService.error("Не удалось удалить арену");
+        this.alertService.error("Не удалось добавить арену");
         this.loading = false;
       });
   }
@@ -195,7 +143,4 @@ export class ArenaEditComponent implements OnInit {
       );
   }
 
-  private setDeleteFlag() {
-    console.log(this.deleteFlag);
-  }
 }

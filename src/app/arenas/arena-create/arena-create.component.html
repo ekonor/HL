@@ -1,16 +1,11 @@
 <div class="col-md-6 col-md-offset-3">
-  <h2>Редактирование арены</h2>
-  <form (ngSubmit)="editArena()" #f="ngForm">
-     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+  <h2>Добавление арены</h2>
+  <form (ngSubmit)="addArena()" #f="ngForm">
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
       <label for="name">Название арены</label>
       <input type="text" class="form-control" name="name" [(ngModel)]="arena.name" (ngModelChange)="arena.name = $event" #name="ngModel" id="name"/>
       <div *ngIf="f.submitted && name != null && !name.valid" class="help-block">name is required</div>
     </div>
-    <!--div class="form-group" [ngClass]="{ 'has-error': f.submitted && !cityName.valid }">
-      <label for="cityName">Город</label>
-      <input type="text" class="form-control" name="cityName" [(ngModel)]="arena.cityName" (ngModelChange)="arena.cityName = $event" #cityName="ngModel" id="cityName" />
-      <div *ngIf="f.submitted && cityName != null && !cityName.valid" class="help-block">cityName is required</div>
-    </div-->
     <select class="form-group" [(ngModel)]="arena.cityName" name="cityName" class="form-control" #cityName="ngModel" id="cityName">
       <option *ngFor="let city of cities"  [ngValue]="city.name" >{{city.name}}</option>
     </select>
@@ -27,9 +22,6 @@
     <select class="form-group" [(ngModel)]="arena.arenaTypeName" name="arenaTypeName" class="form-control" #arenaTypeName="ngModel" id="arenaTypeName" (ngModelChange)="arenaTypeId = $event">
       <option *ngFor="let arenaType of arenaTypes"  [ngValue]="arenaType.name" >{{arenaType.name}}</option>
     </select>
-    <!--select class="form-group" [(ngModel)]="arenaTypeId" name="arenaTypeId" class="form-control" #arenaTypeId="ngModel" id="arenaTypeId" (ngModelChange)="arenaTypeId = $event">
-      <option *ngFor="let arenaType of arenaTypes"  [ngValue]="arenaType.id" >{{arenaType.name}}{{arenaType.id}}</option>
-    </select-->
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !contacts.valid }">
       <label for="contacts">Контакты</label>
       <input type="text" class="form-control" name="contacts" [(ngModel)]="arena.contacts" (ngModelChange)="arena.contacts = $event" #contacts="ngModel" id="contacts" />
@@ -56,11 +48,7 @@
       <div *ngIf="f.submitted && about != null && !about.valid" class="help-block">about is invalid</div>
     </div>
     <div class="form-group">
-      <input [(ngModel)]="deleteFlag" (change)="setDeleteFlag()" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked /><span class="checkbox-title">Удалить?</span>
-    </div>
-    <div class="form-group">
-      <button class="btn btn-primary" type="submit" [disabled]="loading">Применить</button>
-      <button class="btn btn-danger" (click)="deleteArena()" [disabled]="loading || !deleteFlag">Удалить</button>
+      <button class="btn btn-primary" type="submit" [disabled]="loading">Добавить</button>
       <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
     </div>
 
