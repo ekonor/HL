@@ -5,6 +5,7 @@ import { FormsModule }   from '@angular/forms';
 
 import { ArenaViewComponent } from "app/arenas/arena-view/arena-view.component";
 import { ArenaEditComponent } from "app/arenas/arena-edit/arena-edit.component";
+import { ArenaCreateComponent } from "app/arenas/arena-create/arena-create.component";
 import { ArenaListComponent } from "app/arenas/arena-list/arena-list.component";
 import { ArenasComponent } from "app/arenas/arenas.component";
 import { ArenaFilterComponent } from "app/arenas/arena-filter/arena-filter.component";
@@ -19,6 +20,7 @@ import { SharedModule } from "app/shared/shared.module";
         ArenaListComponent,
         ArenaViewComponent,
         ArenaEditComponent,
+        ArenaCreateComponent,
         ArenaFilterComponent
       ],
       imports: [

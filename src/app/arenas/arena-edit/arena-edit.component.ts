@@ -23,6 +23,7 @@ export class ArenaEditComponent implements OnInit {
   id: number;
   cityId: number;
   arenaTypeId: number;
+  deleteFlag: boolean;
   mapPoint: Point;
   // private sub: any;
   arenaTypes: ArenaType[];
@@ -45,6 +46,7 @@ export class ArenaEditComponent implements OnInit {
     this.getArena(this.id);
     this.getArenaTypes();
     this.getCities();
+    this.deleteFlag = false;
     /*this.sub = this.activatedRoute.params.subscribe(params => {
       this.id = parseInt(params['id']);
       this.getArena(this.id);
@@ -102,6 +104,24 @@ export class ArenaEditComponent implements OnInit {
       error => {
         this.alertService.error(error);
         this.alertService.error("Не удалось сохранить изменения");
+        this.loading = false;
+      });
+  }
+
+  private deleteArena() {
+    console.log(this.arena);
+    console.log(this.id);
+    console.log('delete');
+    this.setArenaTypeId();
+    this.setCityId();
+    this.service.deleteArena(this.id).subscribe(
+      data => {
+        //console.log(data);
+        this.router.navigate([this.returnUrl]);
+      },
+      error => {
+        this.alertService.error(error);
+        this.alertService.error("Не удалось удалить арену");
         this.loading = false;
       });
   }
@@ -173,5 +193,9 @@ export class ArenaEditComponent implements OnInit {
           this.loading = false;
         }
       );
+  }
+
+  private setDeleteFlag() {
+    console.log(this.deleteFlag);
   }
 }
