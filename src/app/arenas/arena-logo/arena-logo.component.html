@@ -5,7 +5,7 @@
   <form (ngSubmit)="updateLogo()" #f="ngForm">
     <div class="form-group">
       <label for="logo">Изображение</label>
-      <input type="file" name="logo" class="form-control"(change)="addLogo($event)" id="logo" />
+      <input type="file" name="logo" class="form-control" (change)="addLogo($event)" id="logo" />
       <!--input type="file" #fileInput placeholder="Upload file..." />
       <button type="button" (click)="">Upload</button-->
       <!--div *ngIf="f.submitted && photo != null && !photo.valid" class="help-block">photo is invalid</div-->

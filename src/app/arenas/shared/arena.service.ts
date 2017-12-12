@@ -28,14 +28,14 @@ export class ArenaService {
     let methodUrl = this.getMethodUrl(methodUrlPrefix);
     let params = listInfo.toParams();
 
-    if(filter.arenaTypeId)
+    if (filter.arenaTypeId)
       params = params.append('arenaTypeId', filter.arenaTypeId.toString());
-    if(filter.cityId)
+    if (filter.cityId)
       params = params.append('cityId', filter.cityId.toString());
-    if(filter.searchText)
+    if (filter.searchText)
       params = params.append('searchText', filter.searchText);
 
-    return this.httpClient.get<ListResponse<ArenaListItem>>(methodUrl, {params: params});
+    return this.httpClient.get<ListResponse<ArenaListItem>>(methodUrl, { params: params });
   }
 
   public getArena(id: number): Observable<ArenaViewItem> {
@@ -65,11 +65,11 @@ export class ArenaService {
     return arena.logo ? logoSrc + arena.logo : placeholder;
   }
 
-  public updateArena( id: number, arena: ArenaViewItem, arenaTypeId: number, cityId: number ): Observable<boolean> {
+  public updateArena(id: number, arena: ArenaViewItem, arenaTypeId: number, cityId: number): Observable<ArenaViewItem> {
     console.log(arena);
     // const body = JSON.stringify(arena);
     // const body = JSON.stringify({"contacts": arena.contacts,"longitude": arena.longitude,"latitude": arena.latitude,"about": arena.about,"name": arena.name,"arenaTypeName": arena.arenaTypeName,"address": arena.address,"email": arena.email,"webSite": arena.webSite,"capacity": arena.capacity,"logo": arena.logo,"cityName": arena.cityName});
-    const body = JSON.stringify({"contacts": arena.contacts,"longitude": arena.longitude,"latitude": arena.latitude,"about": arena.about,"name": arena.name,"arenaTypeId": arenaTypeId.toString(),"address": arena.address,"email": arena.email,"webSite": arena.webSite,"capacity": arena.capacity,"logo": arena.logo,"cityId": cityId});
+    const body = JSON.stringify({ "contacts": arena.contacts, "longitude": arena.longitude, "latitude": arena.latitude, "about": arena.about, "name": arena.name, "arenaTypeId": arenaTypeId.toString(), "address": arena.address, "email": arena.email, "webSite": arena.webSite, "capacity": arena.capacity, "logo": arena.logo, "cityId": cityId });
     console.log(body);
     // const body = JSON.stringify({"contacts":"+7 (3812) 70-71-25","longitude":73.297631,"latitude":55.008851,"about":null,"name":"«Арена Омск 6»","arenaTypeName":null,"address":"644119, г. Омск, ул. Лукашевича, д. 35","email":null,"webSite":"http://www.hawk.ru/tickets/arena-omsk/","capacity":10048,"logo":null,"cityName":null});
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -89,56 +89,58 @@ export class ArenaService {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json; charset=utf-8',
         'X-Requested-With': 'XMLHttpRequest',
-        'Authorization': 'Bearer ' + currentUser.token});
-      return this.httpClient.put(this.getMethodUrl('/arenas/' + id), body, {headers: headers});
+        'Authorization': 'Bearer ' + currentUser.token
+      });
+      return this.httpClient.put<ArenaViewItem>(this.getMethodUrl('/arenas/' + id), body, { headers: headers });
     }
   }
 
-  public addArena( arena: ArenaViewItem, arenaTypeId: number, cityId: number ): Observable<boolean> {
+  public addArena(arena: ArenaViewItem, arenaTypeId: number, cityId: number): Observable<number> {
     console.log(arena);
-    const body = JSON.stringify({"contacts": arena.contacts,"longitude": arena.longitude,"latitude": arena.latitude,"about": arena.about,"name": arena.name,"arenaTypeId": arenaTypeId.toString(),"address": arena.address,"email": arena.email,"webSite": arena.webSite,"capacity": arena.capacity,"logo": arena.logo,"cityId": cityId});
+    const body = JSON.stringify({ "contacts": arena.contacts, "longitude": arena.longitude, "latitude": arena.latitude, "about": arena.about, "name": arena.name, "arenaTypeId": arenaTypeId.toString(), "address": arena.address, "email": arena.email, "webSite": arena.webSite, "capacity": arena.capacity, "logo": arena.logo, "cityId": cityId });
     console.log(body);
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
-       const headers = new HttpHeaders({
+      const headers = new HttpHeaders({
         'Content-Type': 'application/json; charset=utf-8',
         'X-Requested-With': 'XMLHttpRequest',
-        'Authorization': 'Bearer ' + currentUser.token});
-       return this.httpClient.post(this.getMethodUrl('/arenas/'), body, {headers: headers});
+        'Authorization': 'Bearer ' + currentUser.token
+      });
+      return this.httpClient.post<number>(this.getMethodUrl('/arenas/'), body, { headers: headers });
     }
   }
 
-  public deleteArena( id: number): Observable<boolean> {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser && currentUser.token) {
-     const headers = new HttpHeaders({
-        'Content-Type': 'application/json; charset=utf-8',
-        'X-Requested-With': 'XMLHttpRequest',
-        'Authorization': 'Bearer ' + currentUser.token});
-     return this.httpClient.delete(this.getMethodUrl('/arenas/' + id), {headers: headers});
-    }
-  }
-
-  public deleteLogo( id: number): Observable<boolean> {
+  public deleteArena(id: number): Observable<void> {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json; charset=utf-8',
         'X-Requested-With': 'XMLHttpRequest',
-        'Authorization': 'Bearer ' + currentUser.token});
-      return this.httpClient.delete(this.getMethodUrl('/arenas/' + id + '/logo'), {headers: headers});
+        'Authorization': 'Bearer ' + currentUser.token
+      });
+      return this.httpClient.delete<void>(this.getMethodUrl('/arenas/' + id), { headers: headers });
     }
   }
 
-  public addLogo( id: number, image: any ): Observable<boolean> {
+  public deleteLogo(id: number): Observable<void> {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
       const headers = new HttpHeaders({
-        // 'Content-Type': 'application/json; charset=utf-8',
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'application/json; charset=utf-8',
         'X-Requested-With': 'XMLHttpRequest',
-        'Authorization': 'Bearer ' + currentUser.token});
-      return this.httpClient.post(this.getMethodUrl('/arenas/' + id + '/logo'), image, {headers: headers});
+        'Authorization': 'Bearer ' + currentUser.token
+      });
+      return this.httpClient.delete<void>(this.getMethodUrl('/arenas/' + id + '/logo'), { headers: headers });
+    }
+  }
+
+  public addLogo(id: number, image: any): Observable<string> {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + currentUser.token
+      });
+      return this.httpClient.post<string>(this.getMethodUrl('/arenas/' + id + '/logo'), image, { headers: headers });
     }
   }
 
