@@ -16,6 +16,8 @@ import { debounce } from "rxjs/operator/debounce";
   // styleUrls: [ "../../../node_modules/bootstrap/dist/css/bootstrap.css" ]
   styleUrls: ['arena-edit.component.scss']
 })
+
+
 export class ArenaEditComponent implements OnInit {
   arena: ArenaViewItem;
   returnUrl: string;
@@ -28,7 +30,7 @@ export class ArenaEditComponent implements OnInit {
   // private sub: any;
   arenaTypes: ArenaType[];
   cities: City[];
-
+  files: any;
   errorMessage: string;
 
   constructor( private service: ArenaService,
@@ -90,7 +92,7 @@ export class ArenaEditComponent implements OnInit {
   }
 
   private editArena(arena: ArenaViewItem) {
-    console.log(this.arena);
+    /*console.log(this.arena);
     console.log(this.id);
     console.log(this.arenaTypeId);
     console.log('ok');
@@ -105,8 +107,52 @@ export class ArenaEditComponent implements OnInit {
         this.alertService.error(error);
         this.alertService.error("Не удалось сохранить изменения");
         this.loading = false;
-      });
+      });*/
+    this.updateLogo();
   }
+
+  private updateLogo()
+  {
+    if (this.files) {
+      /*const files: FileList = this.files;
+       const formData = new FormData();
+       for (let i = 0; i < files.length; i++){
+         formData.append('photo', files[i]);
+       }
+       this.service.deleteLogo(this.id);
+       this.service.addLogo(this.id, formData);*/
+      const formData = new FormData();
+      formData.append('image', this.files[0]);
+      if (this.arena.logo != null) {
+      this.service.deleteLogo(this.id).subscribe(
+        data => {
+        },
+        error => {
+          this.alertService.error(error);
+          this.loading = false;
+        });
+      }
+      this.service.addLogo(this.id, formData).subscribe(
+        data => {
+        },
+        error => {
+          this.alertService.error(error);
+          this.loading = false;
+        });
+    }
+  }
+
+
+  // upload() {
+  //   const fileBrowser = this.fileInput.nativeElement;
+  //   if (fileBrowser.files && fileBrowser.files[0]) {
+  //     const formData = new FormData();
+  //     formData.append("image", fileBrowser.files[0]);
+  //     this.projectService.upload(formData, this.project.id).subscribe(res => {
+  //       // do stuff w/my uploaded file
+  //     });
+  //   }
+  // }
 
   private deleteArena() {
     console.log(this.arena);
@@ -197,5 +243,26 @@ export class ArenaEditComponent implements OnInit {
 
   private setDeleteFlag() {
     console.log(this.deleteFlag);
+  }
+
+  private addLogo(event) {
+    const target = event.target || event.srcElement;
+    this.files = target.files;
+    console.log(this.files);
+    /*if (this.files) {
+      let files :FileList = this.files;
+      const formData = new FormData();
+      for(let i = 0; i < files.length; i++){
+        formData.append('photo', files[i]);
+      }
+    }*/
+  }
+
+  public getArenaLogo(arena: ArenaViewItem): string {
+    return this.service.getArenaLogo(arena);
+  }
+
+  public editLogo(){
+    this.router.navigate([ "arena", "logo", this.arena.id ]);
   }
 }

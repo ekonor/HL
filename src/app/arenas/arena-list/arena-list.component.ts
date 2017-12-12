@@ -32,7 +32,7 @@ export class ArenaListComponent implements OnInit {
   }
 
   public editArena(arena: ArenaListItem): void {
-    this.router.navigate([ "arenas/edit", arena.id ]);
+    this.router.navigate([ "arena/edit", arena.id ]);
   }
 
   public addArena(): void {
