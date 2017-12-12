@@ -5,7 +5,7 @@ export class Reply {
 
     user: UserInfo;
 
-    creationDate: Date;
+    createDate: Date;
     body: string;
 
     voteUpCount: number;

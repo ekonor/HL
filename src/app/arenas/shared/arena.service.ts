@@ -61,7 +61,7 @@ export class ArenaService {
 
   public getArenaLogo(arena: ArenaListItem | ArenaViewItem): string {
     let logoSrc = this.apiConfig.filesPath;
-    let placeholder = "http://via.placeholder.com/250x150";
+    let placeholder = "assets/img/arenas/no_logo.png";
     return arena.logo ? logoSrc + arena.logo : placeholder;
   }
 
