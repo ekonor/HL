@@ -119,6 +119,29 @@ export class ArenaService {
     }
   }
 
+  public deleteLogo( id: number): Observable<boolean> {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': 'Bearer ' + currentUser.token});
+      return this.httpClient.delete(this.getMethodUrl('/arenas/' + id + '/logo'), {headers: headers});
+    }
+  }
+
+  public addLogo( id: number, image: any ): Observable<boolean> {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const headers = new HttpHeaders({
+        // 'Content-Type': 'application/json; charset=utf-8',
+        'Content-Type': 'multipart/form-data',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': 'Bearer ' + currentUser.token});
+      return this.httpClient.post(this.getMethodUrl('/arenas/' + id + '/logo'), image, {headers: headers});
+    }
+  }
+
   private getMethodUrl(methodUrlPrefix: string): string {
     return this.apiConfig.apiPath + methodUrlPrefix;
   }
