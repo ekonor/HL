@@ -10,7 +10,6 @@ import { debounce } from "rxjs/operator/debounce";
   moduleId: module.id,
   selector: 'arena-id',
   templateUrl: 'arena-logo.component.html',
-  // styleUrls: [ "../../../node_modules/bootstrap/dist/css/bootstrap.css" ]
   styleUrls: ['arena-logo.component.scss']
 })
 
@@ -55,18 +54,10 @@ export class ArenaLogoComponent implements OnInit {
 
    private updateLogo() {
     if (this.files) {
-      /*const files: FileList = this.files;
-       const formData = new FormData();
-       for (let i = 0; i < files.length; i++){
-         formData.append('photo', files[i]);
-       }
-       this.service.deleteLogo(this.id);
-       this.service.addLogo(this.id, formData);*/
       const formData = new FormData();
       formData.append('image', this.files[0]);
       this.service.addLogo(this.id, formData).subscribe(
         data => {
-          //this.router.navigate([this.returnUrl]);
         },
         error => {
           this.alertService.error(error);
@@ -79,7 +70,6 @@ export class ArenaLogoComponent implements OnInit {
     console.log('delete');
     this.service.deleteLogo(this.id).subscribe(
       data => {
-        // this.router.navigate([this.returnUrl]);
         this.getArena(this.id);
       },
       error => {
@@ -96,14 +86,6 @@ export class ArenaLogoComponent implements OnInit {
   private addLogo(event) {
     const target = event.target || event.srcElement;
     this.files = target.files;
-    //console.log(this.files);
-    /*if (this.files) {
-      let files :FileList = this.files;
-      const formData = new FormData();
-      for(let i = 0; i < files.length; i++){
-        formData.append('photo', files[i]);
-      }
-    }*/
   }
 
   public getArenaLogo(arena: ArenaViewItem): string {
