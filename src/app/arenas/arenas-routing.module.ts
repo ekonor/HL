@@ -10,7 +10,7 @@ import { ArenaCreateComponent } from 'app/arenas/arena-create/arena-create.compo
 
 
 export const arenaRoutes: Routes =[
-  { path: 'arenas', component: ArenasComponent },
+  { path: 'arenas', component: ArenasComponent, canActivate: [AuthGuard] },
   { path: 'arena/:id', component: ArenaViewComponent },
   { path: 'arenas/create', component: ArenaCreateComponent, canActivate: [AuthGuard], data: { roles: ['SuperAdministrator']} },
   { path: 'arena/edit/:id', component: ArenaEditComponent, canActivate: [AuthGuard], data: { roles: ['SuperAdministrator']} },

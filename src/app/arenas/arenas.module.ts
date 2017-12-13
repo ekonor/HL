@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
+// import { NgxPermissionsModule } from 'ngx-permissions';
 
 import { ArenaViewComponent } from "app/arenas/arena-view/arena-view.component";
 import { ArenaEditComponent } from "app/arenas/arena-edit/arena-edit.component";
@@ -17,6 +18,9 @@ import { SharedModule } from "app/shared/shared.module";
 
 
 @NgModule({
+  // exports: [
+  //   NgxPermissionsModule
+  // ]
       declarations: [
         ArenasComponent,
         ArenaListComponent,

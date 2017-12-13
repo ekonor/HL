@@ -5,6 +5,7 @@ import { HttpModule} from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
+import { Ng2Permission } from 'angular2-permission';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -19,6 +20,7 @@ import { HomeComponent } from './components/home/home.component';
 import { TournamentsComponent } from './components/tournaments/tournaments.component';
 
 import { routing, appRoutingProviders } from './app.routes';
+// import { NgxPermissionsModule } from 'ngx-permissions';
 import { SlidesComponent } from './components/home/slides/slides.component';
 
 import { LoginComponent } from './components/login/login.component';
@@ -62,10 +64,12 @@ import { SharedModule } from 'app/shared/shared.module';
     HttpModule,
     routing,
     NgbModule.forRoot(),
+    Ng2Permission,
     MDBBootstrapModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBpuC7_aFMwlRMvHJJgDFsQ0M5_6RlzNYA'
     }),
+    // NgxPermissionsModule.forRoot(),
     CoreModule,
     SharedModule,
     ArenaModule,

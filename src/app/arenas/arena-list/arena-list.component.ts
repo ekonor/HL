@@ -1,6 +1,6 @@
 import { Component, Injectable, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-
+import { PermissionService } from 'angular2-permission';
 //import { ChangeDetectionStrategy } from '@angular/core';
 
 import { ArenaService } from "./../shared/arena.service";

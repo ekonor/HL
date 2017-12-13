@@ -16,7 +16,14 @@
             <button (click)="viewArena(arena)" alt="Подробнее...">
               {{arena.name}}
                 </button>
-            <a class="btn-floating deep-orange waves-light waves-effect" title="Редактировать арену" (click)="editArena(arena)"><i class="fa fa-pencil"></i></a>
+            <button class="btn-floating deep-orange waves-light waves-effect"
+               title="Редактировать арену"
+               (click)="editArena(arena)"
+               [hasPermission]="['SuperAdministrator']"
+               onAuthorizedPermission="enable"
+               onUnauthorizedPermission="disable">
+              <i class="fa fa-pencil"></i>
+            </button>
           </h5>
           <span class="item-text">
             <p class="icon-wrap"><i class="material-icons">&#xe7fb;</i>Вместимость: {{arena.capacity}} чел.</p>
