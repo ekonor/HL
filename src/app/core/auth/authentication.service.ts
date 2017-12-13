@@ -76,21 +76,16 @@ export class AuthenticationService {
       });
       return this.httpClient.post(this.ulrGetToken, body, {headers: headers})
         .map((response: Response) => {
-          //console.log(response['token']);
-          let token = response['token'];
+          const token = response['token'];
           if (token) {
-            // set token property
             this.token = token;
             // TODO проверка существования роли
             localStorage.setItem('currentUser', JSON.stringify({username: username, token: token, roles: response['roles']}));
             return true;
-          }
-          else {
+          } else {
             return false;
           }
-          return false;
         });
-      return false;
     }
   }
 
