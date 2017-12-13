@@ -24,9 +24,9 @@ import { SlidesComponent } from './components/home/slides/slides.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/login/logout.component';
 import { RegisterComponent } from './components/register/register.component';
-import { AuthenticationService } from 'app/auth/authentication.service';
-import { AuthGuard } from 'app/auth/auth.guard';
-import { UserService } from 'app/auth/user.service';
+import { AuthenticationService } from 'app/core/auth/authentication.service';
+import { AuthGuard } from 'app/core/auth/auth.guard';
+import { UserService } from 'app/core/auth/user.service';
 import { ApiConfig } from 'app/core/api-config';
 
 import { AlertService } from 'app/components/alert/alert.service';

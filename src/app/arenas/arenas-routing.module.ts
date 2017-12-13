@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from 'app/auth/auth.guard';
+import { AuthGuard } from 'app/core/auth/auth.guard';
 
 import { ArenaViewComponent } from 'app/arenas/arena-view/arena-view.component';
 import { ArenasComponent } from 'app/arenas/arenas.component';
