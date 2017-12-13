@@ -53,8 +53,7 @@ export class ArenaLogoComponent implements OnInit {
       );
   }
 
-   private updateLogo()
-  {
+   private updateLogo() {
     if (this.files) {
       /*const files: FileList = this.files;
        const formData = new FormData();
@@ -67,6 +66,7 @@ export class ArenaLogoComponent implements OnInit {
       formData.append('image', this.files[0]);
       this.service.addLogo(this.id, formData).subscribe(
         data => {
+          //this.router.navigate([this.returnUrl]);
         },
         error => {
           this.alertService.error(error);
@@ -79,7 +79,8 @@ export class ArenaLogoComponent implements OnInit {
     console.log('delete');
     this.service.deleteLogo(this.id).subscribe(
       data => {
-        //this.router.navigate([this.returnUrl]);
+        // this.router.navigate([this.returnUrl]);
+        this.getArena(this.id);
       },
       error => {
         this.alertService.error(error);
@@ -95,7 +96,7 @@ export class ArenaLogoComponent implements OnInit {
   private addLogo(event) {
     const target = event.target || event.srcElement;
     this.files = target.files;
-    console.log(this.files);
+    //console.log(this.files);
     /*if (this.files) {
       let files :FileList = this.files;
       const formData = new FormData();
