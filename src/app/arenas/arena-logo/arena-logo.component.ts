@@ -52,7 +52,7 @@ export class ArenaLogoComponent implements OnInit {
       );
   }
 
-   private updateLogo() {
+  public updateLogo() {
     if (this.files) {
       const formData = new FormData();
       formData.append('image', this.files[0]);
@@ -66,7 +66,7 @@ export class ArenaLogoComponent implements OnInit {
     }
   }
 
-  private deleteLogo() {
+  public deleteLogo() {
     console.log('delete');
     this.service.deleteLogo(this.id).subscribe(
       data => {
@@ -79,11 +79,11 @@ export class ArenaLogoComponent implements OnInit {
       });
   }
 
-  private setDeleteFlag() {
+  public setDeleteFlag() {
     console.log(this.deleteFlag);
   }
 
-  private addLogo(event) {
+  public addLogo(event) {
     const target = event.target || event.srcElement;
     this.files = target.files;
   }

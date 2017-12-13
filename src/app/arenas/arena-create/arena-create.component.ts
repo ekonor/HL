@@ -55,7 +55,7 @@ export class ArenaCreateComponent implements OnInit {
     }
   }
 
-  private addArena(arena: ArenaViewItem) {
+  public addArena(arena: ArenaViewItem) {
     console.log(this.arena);
     console.log(this.id);
     console.log(this.arenaTypeId);
