@@ -45,3 +45,7 @@ html, body {
   align-items: center;
   width:100%;
 }
+
+.toggle {
+  cursor: pointer;
+}
