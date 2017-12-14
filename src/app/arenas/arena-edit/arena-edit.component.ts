@@ -91,7 +91,7 @@ export class ArenaEditComponent implements OnInit {
     }
   }
 
-  private editArena(arena: ArenaViewItem) {
+  public editArena(arena: ArenaViewItem) {
     /*console.log(this.arena);
     console.log(this.id);
     console.log(this.arenaTypeId);
@@ -111,7 +111,7 @@ export class ArenaEditComponent implements OnInit {
     this.updateLogo();
   }
 
-  private updateLogo()
+  public updateLogo()
   {
     if (this.files) {
       /*const files: FileList = this.files;
@@ -154,7 +154,7 @@ export class ArenaEditComponent implements OnInit {
   //   }
   // }
 
-  private deleteArena() {
+  public deleteArena() {
     console.log(this.arena);
     console.log(this.id);
     console.log('delete');
@@ -241,11 +241,11 @@ export class ArenaEditComponent implements OnInit {
       );
   }
 
-  private setDeleteFlag() {
+  public setDeleteFlag() {
     console.log(this.deleteFlag);
   }
 
-  private addLogo(event) {
+  public addLogo(event) {
     const target = event.target || event.srcElement;
     this.files = target.files;
     console.log(this.files);

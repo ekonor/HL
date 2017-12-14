@@ -16,12 +16,17 @@ export class ArenaFilterComponent implements OnInit {
 
   @Input() filter: ArenaFilter;
   @Output() onFiltered = new EventEmitter<boolean>();
-  
+
   arenaTypes: ArenaType[];
   cities: City[];
   errorMessage: string;
+  toggled: boolean;
 
   constructor( private service: ArenaService) {
+    const filterState = JSON.parse(localStorage.getItem('arenasFilterState'));
+    // TODO проверка существования поля toggled
+    this.toggled = filterState && filterState.toggled;
+    console.log(this.toggled);
   }
 
   ngOnInit() {
@@ -48,5 +53,12 @@ export class ArenaFilterComponent implements OnInit {
 
   private getCities() {
       // todo
+  }
+
+  public toggle() {
+
+    this.toggled = !this.toggled;
+    console.log(this.toggled);
+    localStorage.setItem('arenasFilterState', JSON.stringify({toggled: this.toggled}));
   }
 }

@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-//import { Http, Headers, Response } from '@angular/http';
+/*import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
@@ -29,21 +28,73 @@ export class AuthenticationService {
         }
       }
     );
-      /*.map((response: Response) => {
-        // login successful if there's a jwt token in the response
-        let token = response.json();
-        if (token && token.token) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          //localStorage.setItem('currentUser', JSON.stringify(user));
-          console.log("ssss");
-        }
-
-        return token;
-      });*/
   }
 
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
   }
+}*/
+
+
+
+import { Injectable } from '@angular/core';
+//import { Http, Headers, Response } from '@angular/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpRequest, HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map'
+import {isNull} from "util";
+
+@Injectable()
+export class AuthenticationService {
+  //  Адрес API
+  private url = "http://hockey.smargit.com/HockeyApp.WebApi/api/v1/";
+  private ulrGetToken = this.url+'/account/generate-token/';
+  private ulrLogout = this.url+'/account/logout/';
+  public token: string;
+
+  constructor(private httpClient: HttpClient) {
+    // set token if saved in local storage
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.token = currentUser && currentUser.token;
+  }
+
+  getToken()
+  {
+    return this.token;
+  }
+
+  login(username: string, password: string): Observable<boolean> {
+    if (isNull(this.token)) {
+      const body = JSON.stringify({
+        email: username,
+        password: password, rememberMe: true
+      });
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        "X-Requested-With": "XMLHttpRequest"
+      });
+      return this.httpClient.post(this.ulrGetToken, body, {headers: headers})
+        .map((response: Response) => {
+          const token = response['token'];
+          if (token) {
+            this.token = token;
+            // TODO проверка существования роли
+            localStorage.setItem('currentUser', JSON.stringify({username: username, token: token, roles: response['roles']}));
+            return true;
+          } else {
+            return false;
+          }
+        });
+    }
+  }
+
+
+
+  logout(): void {
+    // clear token remove user from local storage to log user out
+    this.token = null;
+    localStorage.removeItem('currentUser');
+  }
 }
+
