@@ -92,7 +92,7 @@ export class ArenaEditComponent implements OnInit {
   }
 
   public editArena(arena: ArenaViewItem) {
-    /*console.log(this.arena);
+    console.log(this.arena);
     console.log(this.id);
     console.log(this.arenaTypeId);
     console.log('ok');
@@ -107,7 +107,7 @@ export class ArenaEditComponent implements OnInit {
         this.alertService.error(error);
         this.alertService.error("Не удалось сохранить изменения");
         this.loading = false;
-      });*/
+      });
     this.updateLogo();
   }
 

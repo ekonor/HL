@@ -12,8 +12,8 @@ import { SortOption } from "app/shared/sorting/sort-option";
 @Component({
   moduleId: module.id,
   selector: "arenas",
-  templateUrl: "arenas.component.html",
-  styleUrls: ["arenas.component.scss"]
+  templateUrl: "arenas.component.html"
+  // styleUrls: ["arenas.component.scss"]
 })
 
 @Injectable()
@@ -23,7 +23,7 @@ export class ArenasComponent implements OnInit {
 
   filter: ArenaFilter = new ArenaFilter();
   listInfo: ListInfo = new ListInfo();
-  sortOptions: SortOption[] = new Array<SortOption>();  
+  sortOptions: SortOption[] = new Array<SortOption>();
   pageSize: number;
 
   private sub : any;
@@ -33,11 +33,11 @@ export class ArenasComponent implements OnInit {
     private readonly paginationService: PaginationService,
     private activatedRoute: ActivatedRoute) {
       this.pageSize = this.paginationService.pageSize;
-      
-      this.sortOptions = [ 
+
+      this.sortOptions = [
         { title: "Название", value: "Name" },
         { title: "Город", value: "CityName" },
-        { title: "Тип", value: "ArenaTypeName" } 
+        { title: "Тип", value: "ArenaTypeName" }
       ];
   }
 
