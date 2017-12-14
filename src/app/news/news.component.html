@@ -1,16 +1,13 @@
-<!--// Page Content //-->
-
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 p-4">
       <simple-filter (onFiltered)="onFiltered($event)"></simple-filter>
-
       <category-list></category-list>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 p-4">
 
-      <div class="heading heading-12 margin-top-bottom-30">
+      <div class="">
         <p> Все самые интересные и свежие новости о хоккее в одном месте</p>
         <h1>
           <span class="left"></span>Новости о хоккее и околохоккейном мире
@@ -19,22 +16,23 @@
         <hr>
       </div>
 
-      <div class="list-body" *ngIf="newsList">
-        <div class="col-md-12 pb-4 pt-2">
-          <sorting class="pull-right" [orderBy]="listInfo.orderBy" [orderDir]="listInfo.orderDir" [options]="sortOptions" (onSorted)="onSorted($event)"></sorting>
-        </div>
+      <div class="list-container">
+        <loader [hidden]="!dataIsLoading"></loader>
 
-        <div class="kode-blog-list kode-fullwidth-blog">
+        <div class="list-body" *ngIf="newsList">
+          <div class="col-md-12 pb-4 pt-2">
+            <sorting class="pull-right" [orderBy]="listInfo.orderBy" [orderDir]="listInfo.orderDir" [options]="sortOptions" (onSorted)="onSorted($event)"></sorting>
+          </div>
 
-          <news-list *ngIf="newsList.listItems" [content]="newsList.listItems"></news-list>
-
-          <pagination [page]="listInfo.page" [collectionSize]="newsList.count" [pageSize]="listInfo.take"></pagination>
-
+          <div class="kode-blog-list kode-fullwidth-blog">
+            <news-list *ngIf="newsList.listItems" [content]="newsList.listItems"></news-list>
+            <pagination [page]="listInfo.page" [collectionSize]="newsList.count" [pageSize]="listInfo.take"></pagination>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3  p-4">
       <news-important></news-important>
       <news-resent></news-resent>
     </div>

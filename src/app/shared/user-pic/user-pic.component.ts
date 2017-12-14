@@ -23,6 +23,8 @@ export class UserPicComponent {
     }
 
     public getLogo(): string {
-        return this.apiConfig.filesPath + this.user.logo;
+        let logoSrc = this.apiConfig.filesPath;
+        let placeholder = "assets/img/users/no-logo.png";
+        return this.user.logo ? logoSrc + this.user.logo: placeholder;
     }
 }

@@ -20,6 +20,7 @@ export class NewsComponent {
   listInfo: ListInfo = new ListInfo();
   sortOptions: SortOption[] = new Array<SortOption>();
   pageSize: number;
+  dataIsLoading: boolean;
 
   private sub: any;
 
@@ -59,8 +60,11 @@ export class NewsComponent {
     this.getListData();
   }
 
-
-  protected getListData() {
-    this.newsService.getNewsList(this.filter, this.listInfo).subscribe(data => this.newsList = data);
+  private getListData() {
+    this.dataIsLoading = true;
+    this.newsService.getNewsList(this.filter, this.listInfo).subscribe(
+      data => this.newsList = data,
+      error => { },
+      () => this.dataIsLoading = false);
   }
 }

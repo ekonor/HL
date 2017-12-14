@@ -8,8 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'news-list',
   inputs: ['content'],
-  templateUrl: './news-list.component.html',
-  styleUrls: ['./news-list.component.scss']
+  templateUrl: './news-list.component.html'
 })
 export class NewsListComponent implements OnInit {
   content: NewsListItem[];
@@ -27,7 +26,14 @@ export class NewsListComponent implements OnInit {
   }
 
   public viewNewsItem(post: NewsListItem) {
-    debugger;
     this.router.navigate(['news', post.id]);
+  }
+
+  public viewNewsItemComments(post: NewsListItem) {
+    this.router.navigate(['news', post.id]);
+  }
+
+  public viewNewsCategory(post: NewsListItem){
+    this.router.navigate(['news/category', post.categoryId]);
   }
 }

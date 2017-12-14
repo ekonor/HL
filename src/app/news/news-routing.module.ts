@@ -6,6 +6,8 @@ import { NewsComponent } from 'app/news/news.component';
 
 export const newsRoutes: Routes =[
     { path: 'news', component: NewsComponent },
+    { path: 'news/category/:id', component: NewsComponent },
+    { path: 'news/tag/:id', component: NewsComponent },
     { path: 'news/:id', component: NewsViewComponent },
   ];
 
