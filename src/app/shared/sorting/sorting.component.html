@@ -1,11 +1,17 @@
-<div ngbDropdown [autoClose]="'outside'">
-    <button class="btn btn-outline-primary" id="dropdownConfig" ngbDropdownToggle>Сортировать</button>
-    <div ngbDropdownMenu aria-labelledby="dropdownConfig">
-        <button class="dropdown-item" [ngClass]="{'selected' : isSelectedOption(option.value)}" 
-                    *ngFor="let option of options"  (click)="setSort(option.value)">
-            {{option.title}}
-            <i class="fa fa-long-arrow-up" *ngIf="isSortAsc(option.value)"></i>
-            <i class="fa fa-long-arrow-down" *ngIf="isSortDesc(option.value)"></i>  
-        </button>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div ngbDropdown [autoClose]="'outside'">
+          <button class="btn btn-outline-primary" id="dropdownConfig" ngbDropdownToggle>Сортировать</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownConfig">
+              <button class="dropdown-item" [ngClass]="{'selected' : isSelectedOption(option.value)}"
+                          *ngFor="let option of options"  (click)="setSort(option.value)">
+                  {{option.title}}
+                  <i class="fa fa-long-arrow-up" *ngIf="isSortAsc(option.value)"></i>
+                  <i class="fa fa-long-arrow-down" *ngIf="isSortDesc(option.value)"></i>
+              </button>
+          </div>
+      </div>
     </div>
+  </div>
 </div>

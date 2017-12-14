@@ -8,12 +8,10 @@
       </div>
     </div>
 
-    <div class="col-md-12 pb-4 pt-2">
         <arena-filter [filter]="filter" (onFiltered)="onFiltered($event)"></arena-filter>
-        
+
         <sorting class="pull-right" [orderBy]="listInfo.orderBy" [orderDir]="listInfo.orderDir"
                   [options]="sortOptions" (onSorted)="onSorted($event)"></sorting>
-    </div>
 
     <arena-list [content]="arenaList.listItems" class="row"></arena-list>
 

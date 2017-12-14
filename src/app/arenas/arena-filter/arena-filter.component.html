@@ -1,32 +1,38 @@
-<div class="row pull-right" style="padding-right: 26px;">
-  <button type="button" class="btn btn-grey toggle" (click)="toggle()"><i class="fa fa-angle-up"></i></button>
-</div>
-<div class="jumbotron" [hidden]="toggled">
-    <form>
-        <div class="row">
-          <div class="col-md-4">
-              <select [(ngModel)]="filter.arenaTypeId" name="arenaTypeId" class="form-control">
-                  <option *ngFor="let arenaType of arenaTypes"  [ngValue]="arenaType.id">{{arenaType.name}}</option>
-                </select>
-          </div>
-          <div class="col-md-4">
-            <input type="text" name="cityName" [(ngModel)]="filter.cityId" placeholder="Название города" class="form-control">
-          </div>
-          <div class="col-md-4">
-            <button type="button" class="btn btn-primary" (click)="search()">
-              <i class="fa fa-search"></i>
-            </button>
-            <button type="reset" class="btn btn-default">
-                <i class="fa fa-close"></i>
-              </button>
-          </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8">
-                <input type="text" name="name" [(ngModel)]="filter.searchText" placeholder="Название или адрес" class="form-control">
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-lg-12 col-xs-12">
+      <button type="button" class="btn btn-grey toggle" (click)="toggle()"><i class="fa fa-angle-up"></i></button>
+    </div>
+
+    <div class="jumbotron col-md-12 col-lg-12 col-xs-12" [hidden]="toggled">
+        <form>
+            <div class="row">
+              <div class="col-md-4">
+                  <select [(ngModel)]="filter.arenaTypeId" name="arenaTypeId" class="form-control">
+                      <option *ngFor="let arenaType of arenaTypes"  [ngValue]="arenaType.id">{{arenaType.name}}</option>
+                    </select>
+              </div>
+              <div class="col-md-4">
+                <input type="text" name="cityName" [(ngModel)]="filter.cityId" placeholder="Название города" class="form-control">
+              </div>
+              <div class="col-md-4">
+                <button type="button" class="btn btn-primary" (click)="search()">
+                  <i class="fa fa-search"></i>
+                </button>
+                <button type="reset" class="btn btn-default">
+                    <i class="fa fa-close"></i>
+                  </button>
+              </div>
             </div>
-        </div>
-      </form>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="text" name="name" [(ngModel)]="filter.searchText" placeholder="Название или адрес" class="form-control">
+                </div>
+            </div>
+          </form>
+    </div>
+  </div>
+
 </div>
 
 
