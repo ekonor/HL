@@ -1,8 +1,9 @@
-<div class="section-container jumbotron" *ngIf="newsList">
+<div class="section-container jumbotron">
+  <loader [hidden]="!dataIsLoading"></loader>
   <div class="section-title">
     <p>Недавние новости</p>
   </div>
-  <ul class="sidebar-recent-post">
+  <ul class="sidebar-recent-post" *ngIf="newsList">
     <li *ngFor="let post of newsList">
       <hr>
       <div class="info">

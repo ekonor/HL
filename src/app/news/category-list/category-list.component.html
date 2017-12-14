@@ -1,8 +1,9 @@
-<div class="section-container jumbotron" *ngIf="categoryList">
+<div class="section-container jumbotron">
+  <loader [hidden]="!dataIsLoading"></loader>
   <div class="section-title">
     <p>Категории</p>
   </div>
-  <ul class="sidebar-recent-post">
+  <ul class="sidebar-recent-post" *ngIf="categoryList">
     <li *ngFor="let category of categoryList">
       <hr>
       <div class="info">

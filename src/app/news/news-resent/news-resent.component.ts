@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class NewsResentComponent {
   newsList: NewsListItem[];
+  dataIsLoading: boolean;
 
   constructor(
     private readonly newsService: NewsService,
@@ -25,7 +26,10 @@ export class NewsResentComponent {
   }
 
   private getListData() {
-    this.newsService.getResentNewsList()
-      .subscribe(data => this.newsList = data);
+    this.dataIsLoading = true;
+    this.newsService.getResentNewsList().subscribe(
+      data => this.newsList = data,
+      error => { },
+      () => this.dataIsLoading = false);
   }
 }

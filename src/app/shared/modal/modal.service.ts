@@ -12,7 +12,7 @@
 //     constructor(
 //         private $uibModal: NgbModal,
 //         private appRootUrl: string,
-//         private $uibModalStack: NgbActiveModal ) {
+//         private $uibModalStack: NgbActiveModal) {
 
 //         this.modalSettingsDefault = {
 //             backdrop: true,
@@ -22,47 +22,47 @@
 //             // controller: 'modalController'
 //         }
 //     }
-//     // public OpenComponentModal(modalTitle: string, componentName: string, bindings?) {
-//     //     let resolve = {
-//     //         component: () => {
-//     //             return componentName;
-//     //         },
-//     //         title: () => {
-//     //             return modalTitle;
-//     //         },
-//     //         bindings: () => {
-//     //             return bindings;
+//     //     // public OpenComponentModal(modalTitle: string, componentName: string, bindings?) {
+//     //     //     let resolve = {
+//     //     //         component: () => {
+//     //     //             return componentName;
+//     //     //         },
+//     //     //         title: () => {
+//     //     //             return modalTitle;
+//     //     //         },
+//     //     //         bindings: () => {
+//     //     //             return bindings;
+//     //     //         }
+//     //     //     };
+//     //     //     return this.$uibModal.open({
+//     //     //         animation: true,
+//     //     //         component: 'modalView',
+//     //     //         resolve: resolve
+//     //     //     });
+//     //     // }
+
+//     //     public ShowError(message: string) {
+//     //         if (message && this.addErrorReport) {
+//     //             this.addErrorReport(message);
 //     //         }
-//     //     };
-//     //     return this.$uibModal.open({
-//     //         animation: true,
-//     //         component: 'modalView',
-//     //         resolve: resolve
-//     //     });
-//     // }
+//     //     }
 
-//     public ShowError(message: string) {
-//         if (message && this.addErrorReport) {
-//             this.addErrorReport(message);
-//         }
+//     public ShowModal(modalOptions: ModalOptions, modalSettings?: NgbModalOptions): Promise<any> {
+//         // if (!modalSettings) modalSettings = {};
+//         // modalSett.resolve = { modalOptions: () => { return modalOptions; } };
+//         // return this.show(modalSett).result;
 //     }
 
-//     public ShowModal(modalOptions: ModalOptions,
-//         modalSett?: NgbModalOptions ): Promise<any> {
-//         if (!modalSett) modalSett = {};
-//         modalSett.resolve = { modalOptions: () => { return modalOptions; } };
-//         return this.show(modalSett).result;
-//     }
-
-//     public ShowAlert(message: string, answerCallback?: (state?: number) => void, icon?: string) {
+//     public ShowAlert(message: string, answerCallback?: (state?: number) => void) {
 //         var modalOptions: ModalOptions = {
-//             bodyIcon: (icon ? icon : 'pe-7s-info'),
+//             bodyIcon: ModalIconTypes.IconWarning,
 //             bodyText: message,
 //             yes: {
 //                 buttonText: 'Закрыть',
 //                 getResultAction: ($scope: any, ngbModalService: NgbModal) => { return { state: 0 } }
 //             }
 //         };
+
 //         this.ShowModal(modalOptions).then((res: ModalResult) => {
 //             if (answerCallback) {
 //                 if ('state' in res)
@@ -73,12 +73,9 @@
 //         });
 //     }
 
-//     public ShowConfirm(answer: string,
-//         yesCallback?: () => void,
-//         noCallback?: () => void,
-//         icon?: string) {
+//     public ShowConfirm(answer: string, yesCallback?: () => void, noCallback?: () => void) {
 //         var modalOptions: ModalOptions = {
-//             bodyIcon: icon || ModalIconTypes.IconHelp,
+//             bodyIcon: ModalIconTypes.IconHelp,
 //             bodyText: answer,
 //             yes: {
 //                 buttonText: 'Подтвердить',
@@ -101,12 +98,12 @@
 //         });
 //     }
 
-//     private show(customModalDefaults: NgbModalOptions ): NgbModal  {
-//         this.$uibModalStack.dismissAll(); /* закрываем предыдущие окна перед открытием нового */
-//         //Create temp objects to work with since we're in a singleton service
-//         var tempModalDefaults: NgbModalOptions  = {};
-//         //Map angular-ui modal custom defaults to modal defaults defined in service
-//         angular.extend(tempModalDefaults, customModalDefaults, this.modalSettingsDefault);
-//         return this.$uibModal.open(tempModalDefaults);
-//     };
+//     //     private show(customModalDefaults: NgbModalOptions ): NgbModal  {
+//     //         this.$uibModalStack.dismissAll(); /* закрываем предыдущие окна перед открытием нового */
+//     //         //Create temp objects to work with since we're in a singleton service
+//     //         var tempModalDefaults: NgbModalOptions  = {};
+//     //         //Map angular-ui modal custom defaults to modal defaults defined in service
+//     //         angular.extend(tempModalDefaults, customModalDefaults, this.modalSettingsDefault);
+//     //         return this.$uibModal.open(tempModalDefaults);
+//     //     };
 // }

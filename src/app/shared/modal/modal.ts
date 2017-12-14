@@ -7,11 +7,11 @@ export interface ModalButtons {
 }
 
 export class ModalIconTypes {
-    static IconAttention: string = 'pe-7s-attention';
-    static IconInfo: string = 'pe-7s-info';
-    static IconHelp: string = 'pe-7s-help1';
-    static IconShield: string = 'pe-7s-shield';
-    static IconError: string = 'pe-7s-attention';
+    static IconWarning: string = 'fa-exclamation-triangle';
+    static IconInfo: string = 'fa-info';
+    static IconHelp: string = 'fa-comment-o';
+    static IconShield: string = 'fa-shield';
+    static IconError: string = 'fa-exclamation';
 }
 
 export interface ModalOptions {

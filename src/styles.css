@@ -9,10 +9,10 @@ html, body {
   display: inline-block;
   color: #fff;
 }
-
+/* 
 .fa{
  font: normal normal normal 14px/1 FontAwesome;
-}
+} */
 
 .btn-floating {
   z-index: 1;
@@ -44,4 +44,8 @@ html, body {
   vertical-align: middle;
   align-items: center;
   width:100%;
+}
+
+.section-container{
+  position: relative;
 }

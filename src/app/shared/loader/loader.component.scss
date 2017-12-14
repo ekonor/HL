@@ -1,0 +1,28 @@
+.k-loading-mask {
+    z-index: 100;
+    position: absolute;
+    
+	width: 100%; 
+	height: 100%; 
+	top: 0px; 
+	left: 0px;
+	display:table;
+    overflow: hidden;
+
+    .fa{
+        margin:19px 15px 0px 0px;
+        display:table-cell;
+        vertical-align:middle;
+    }
+
+    &.k-loader{
+        background: rgba(255,255,255,1); 
+        
+        .fa{
+            color:#ddd; 
+        }
+    }
+}
+
+
+

@@ -10,6 +10,7 @@ import { Category } from 'app/news/shared/category';
 })
 export class CategoryListComponent {
   categoryList: Category[];
+  dataIsLoading: boolean;
 
   constructor(
     private readonly newsService: NewsService,
@@ -25,7 +26,11 @@ export class CategoryListComponent {
   }
 
   private getListData() {
-    this.newsService.getNewsCategories()
-      .subscribe(data => this.categoryList = data);
+    this.dataIsLoading = true;
+
+    this.newsService.getNewsCategories().subscribe(
+      data => this.categoryList = data,
+      error => { },
+      () => this.dataIsLoading = false);
   }
 }
