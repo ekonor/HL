@@ -46,10 +46,17 @@ html, body {
   width:100%;
 }
 
-.section-container{
-  position: relative;
+.section-container,
+.list-container
+.view-container{
+	position: relative;
 }
 
 .toggle {
   cursor: pointer;
+}
+
+user-pic img{
+  width: 35px;
+  height: 35px;
 }

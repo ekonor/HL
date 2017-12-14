@@ -1,19 +1,23 @@
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="card text-center">
-                <img class="card-img-top" alt="" [src]="getNewsPostLogo()">
-                <div class=" card-body ">
-                    <h4 class="card-title ">{{newsItem.title}}</h4>
-                    <p class="card-text ">{{newsItem.summary}}</p>
-                    <p class="card-text" [innerHTML]="newsItem.content"></p>
+<div class="view-container">
+    <loader [hidden]="!dataIsLoading"></loader>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="card text-center">
+                    <img class="card-img-top" alt="" [src]="getNewsPostLogo()">
+                    <div class=" card-body ">
+                        <h4 class="card-title ">{{newsItem.title}}</h4>
+                        <p class="card-text ">{{newsItem.summary}}</p>
+                        <p class="card-text" [innerHTML]="newsItem.content"></p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <replies [postId]="id"></replies>
+        <div class="row">
+            <div class="col-xs-12">
+                <replies [postId]="id"></replies>
+            </div>
         </div>
     </div>
 </div>

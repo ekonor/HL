@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class NewsViewComponent implements OnInit {
     newsItem: NewsItem;
     id: number;
+    dataIsLoading: boolean;
 
     private sub: any;
 
@@ -37,7 +38,10 @@ export class NewsViewComponent implements OnInit {
     }
 
     private getNewsPost(id: number) {
-        this.newsService.getNewsItem(id)
-            .subscribe(data => this.newsItem = data);
+        this.dataIsLoading = true;
+        this.newsService.getNewsItem(id).subscribe(
+            data => this.newsItem = data,
+            error => { },
+            () => this.dataIsLoading = false);
     }
 }

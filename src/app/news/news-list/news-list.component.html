@@ -1,30 +1,41 @@
-  <ul class="row">
+<div class="row">
+  <div class="col-md-12 my-4" *ngFor="let post of content">
+    <div class="kode-time-zoon">
+      <time datetime="2008-02-14 20:00">07
+        <span>may</span>
+      </time>
 
-    <li class="col-md-12" *ngFor="let post of content">
-      <div class="kode-time-zoon">
-        <time datetime="2008-02-14 20:00">07 <span>may</span></time>
-        <h3 [innerHtml]="post.title" ><a href="#"></a></h3>
+      <a (click)="viewNewsItem(post)">
+        <h3 [innerText]="post.title"></h3>
+      </a>
+
+      <div class="badge" [innerText]="post.categoryName" (click)="viewNewsCategory(post)"></div>
+    </div>
+    <figure>
+      <a href="#">
+        <img [src]="getNewsPostLogo(post)" class="img-responsive" alt="Хоккейные новости">
+      </a>
+    </figure>
+
+    <div class="kode-blog-info">
+      <div class="row">
+        <div class="col-md-2">
+          <user-pic [user]="post.creator"></user-pic>
+        </div>
+        <div class="col-md-3">
+          <a href="viewNewsItemComments(post)">
+            <i class="fa fa-comment"></i> Коментарии: 3</a>
+        </div>
+        <div class="col-md-2" *ngIf="post.sourceName">
+          <a href="{{post.sourceUrl}}">
+            <i class="fa fa-file-text"></i> Источник: {{post.sourceName}}</a>
+        </div>
       </div>
-      <figure><a href="#"><img [src]="getNewsPostLogo()" class="img-responsive" alt="Хоккейные новости"></a></figure>
-      <div class="kode-blog-info">
-        <ul class="kode-blog-options">
-          <li><user-pic [user]="post.creator"></user-pic></li>
-          <li><a href="#"><i class="fa fa-comment"></i> Коментарии: 3</a></li>
-          <li><a href="#"><i class="fa fa-share-alt"></i> Рекомендованно: 6</a></li>
-          <li><a href="{{post.sourceUrl}}"><i class="fa fa-file-text"></i> Источник: {{post.sourceName}}</a></li>
-        </ul>
-        <ul class="kode-team-network">
-          <li><a class="fa fa-facebook" href="#"></a></li>
-          <li><a class="fa fa-twitter" href="#"></a></li>
-          <li><a class="fa fa-linkedin" href="#"></a></li>
-        </ul>
-        <p [innerHtml]="post.summary"> </p>
-        <button (click)="viewNewsItem(post)" class="kode-modrenbtn thbg-colorhover">Читать далее ...</button>
 
-      </div>
-    </li>
+      <p [innerHtml]="post.summary"> </p>
+      <button (click)="viewNewsItem(post)" class="btn btn-primary">Читать далее ...</button>
 
-  </ul>
+    </div>
+  </div>
 
-
-
+</div>
