@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule } from '@agm/core';
 
@@ -31,16 +31,16 @@ import { LoaderComponent } from "app/shared/loader/loader.component";
         LoaderComponent
       ],
       imports: [
-        BrowserModule, 
+        BrowserModule,
         FormsModule,
         CommonModule,
         NgbModule,
         AgmCoreModule
       ],
       exports: [
-        CommonModule, 
+        CommonModule,
         FormsModule,
-        NgbModule, 
+        NgbModule,
         AgmCoreModule,
         PaginationComponent,
         MapComponent,
@@ -56,4 +56,3 @@ import { LoaderComponent } from "app/shared/loader/loader.component";
       ]
     })
     export class SharedModule { }
-    

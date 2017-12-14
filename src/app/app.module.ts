@@ -5,7 +5,7 @@ import { HttpModule} from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
-import { Ng2Permission } from 'angular2-permission';
+// import { Ng2Permission } from 'angular2-permission';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -64,7 +64,7 @@ import { SharedModule } from 'app/shared/shared.module';
     HttpModule,
     routing,
     NgbModule.forRoot(),
-    Ng2Permission,
+    // Ng2Permission,
     MDBBootstrapModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBpuC7_aFMwlRMvHJJgDFsQ0M5_6RlzNYA'
