@@ -21,8 +21,9 @@ export class LogoutComponent implements OnInit {
     this.authenticationService.logout();
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    this.router.navigate([this.returnUrl]);
+    //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    //this.router.navigate([this.returnUrl]);
+    this.router.navigate(['/']);
   }
 }
 
