@@ -1,21 +1,23 @@
-<div class="col-md-8">
+<div class="container">
+<div class="row">
+<div class="col-md-12 admin-panel">
   <a class="btn-floating deep-orange waves-light waves-effect" title="Добавить арену" (click)="addArena(arena)"><i class="fa fa-plus"></i></a>
 </div>
 <div class="col-lg-4 col-sm-6 blog-item" *ngFor="let arena of content">
       <div class="item h-100">
-        <div class="item-img">
-          <div (click)="viewArena(arena)">
-            <img class="item-img-top" [src]="getArenaLogo(arena)" alt="" onerror = "this.style.display = 'none'">
-          </div>
+        <div class="item-img" >
+          <a (click)="viewArena(arena)">
+            <img class="item-img-top" [src]="getArenaLogo(arena)" alt="" onerror = "this.style.display = 'none'" >
+          </a>
         </div>
         <div class="item-body">
           <div class="item-title-main">
             <p>{{arena.cityName}}</p>
           </div>
-          <h5 class="item-title">
-            <button (click)="viewArena(arena)" alt="Подробнее...">
+          <h5 class="item-title admin-panel">
+            <a (click)="viewArena(arena)" alt="Подробнее...">
               {{arena.name}}
-                </button>
+                </a>
             <!--button class="btn-floating deep-orange waves-light waves-effect"
                title="Редактировать арену"
                (click)="editArena(arena)"
@@ -46,3 +48,5 @@
       </div>
 </div>
 
+</div>
+</div>

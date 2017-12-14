@@ -64,7 +64,6 @@ export class ArenaCreateComponent implements OnInit {
     this.setCityId();
     this.service.addArena(this.arena, this.arenaTypeId, this.cityId).subscribe(
       data => {
-        //console.log(data);
         this.router.navigate([this.returnUrl]);
       },
       error => {
