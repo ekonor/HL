@@ -1,0 +1,22 @@
+<div class="container" *ngIf="schoolList">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="heading heading-12 margin-top-bottom-30">
+          <p> Вся информация о школах хоккея</p>
+          <h1><span class="left"></span>Хоккейные школы<span class="right"></span></h1>
+          <hr>
+        </div>
+      </div>
+  
+          <school-filter [filter]="filter" (onFiltered)="onFiltered($event)"></school-filter>
+  
+          <sorting class="pull-right" [orderBy]="listInfo.orderBy" [orderDir]="listInfo.orderDir"
+                    [options]="sortOptions" (onSorted)="onSorted($event)"></sorting>
+  
+      <school-list [content]="schoolList.listItems" class="row"></school-list>
+  
+      <pagination [page]="listInfo.page" [collectionSize]="schoolList.count" [pageSize]="listInfo.take"></pagination>
+  
+    </div>
+  </div>
+  

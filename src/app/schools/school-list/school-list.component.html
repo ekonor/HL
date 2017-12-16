@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 admin-panel">
+      <a class="btn-floating deep-orange waves-light waves-effect" title="Добавить школу" (click)="addSchool(school)">
+        <i class="fa fa-plus"></i>
+      </a>
+    </div>
+    <div class="col-lg-4 col-sm-6 blog-item" *ngFor="let school of content">
+      <div class="item h-100">
+        <div class="item-img">
+          <a (click)="viewSchool(school)">
+            <img class="item-img-top" [src]="getSchoolLogo(school)" alt="" onerror="this.style.display = 'none'">
+          </a>
+        </div>
+        <div class="item-body">
+          <div class="item-title-main">
+            <p>{{school.cityName}}</p>
+          </div>
+          <h5 class="item-title admin-panel">
+            <a (click)="viewSchool(school)" alt="Подробнее...">
+              {{school.name}}
+            </a>
+
+            <a class="btn-floating deep-orange waves-light waves-effect" title="Редактировать школу" (click)="editSchool(school)">
+              <i class="fa fa-pencil"></i>
+            </a>
+          </h5>
+          <span class="item-text">
+            <p class="icon-wrap" title="Телефон">
+              <i class="fa fa-phone fa-fw"></i> Телефон: {{school.phone}}
+            </p>
+            <p class="icon-wrap" placeholder="Электронная почта">
+              <i class="fa fa-envelope fa-fw"></i>
+              <a href="mailto:{{school.email}}">Электронная почта: {{school.email}}</a>
+            </p>
+            <p class="icon-wrap" placeholder="Адрес">
+              <i class="fa fa-map-marker  fa-fw"></i> Адрес: {{school.address}}
+            </p>
+            <p class="icon-wrap" placeholder="Сайт школы">
+              <i class="fa fa-link fa-fw"></i>
+              <a class="site-link" target="_blank" [href]="school.webSite">Сайт школы: {{school.webSite}}</a>
+            </p>
+            <p class="text-center">
+              <button (click)="viewSchool(school)" class="btn btn-deep-orange waves-effect waves-light">Подробнее...</button>
+            </p>
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

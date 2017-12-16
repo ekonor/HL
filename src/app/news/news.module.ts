@@ -12,6 +12,12 @@ import { NewsViewComponent } from "app/news/news-view/news-view.component";
 import { NewsImportantComponent } from "app/news/news-important/news-important.component";
 import { NewsResentComponent } from "app/news/news-resent/news-resent.component";
 import { CategoryListComponent } from "app/news/category-list/category-list.component";
+import { ReplyService } from "app/news/replies/shared/reply.service";
+import { ReplyListItemComponent } from "app/news/replies/reply-list-item/reply-list-item.component";
+import { ReplyAddComponent } from "app/news/replies/reply-add/reply-add.component";
+import { RepliesComponent } from "app/news/replies/replies.component";
+import { TagListComponent } from "app/news/tag-list/tag-list.component";
+
 
 @NgModule({
       declarations: [
@@ -20,7 +26,11 @@ import { CategoryListComponent } from "app/news/category-list/category-list.comp
         NewsViewComponent,
         NewsImportantComponent,
         NewsResentComponent,
-        CategoryListComponent
+        CategoryListComponent,
+        RepliesComponent,
+        ReplyAddComponent,
+        ReplyListItemComponent,
+        TagListComponent
       ],
       imports: [
         BrowserModule, 
@@ -30,7 +40,8 @@ import { CategoryListComponent } from "app/news/category-list/category-list.comp
         NewsRoutingModule
       ],
       providers: [
-        NewsService
+        NewsService,
+        ReplyService
       ]
     })
     export class NewsModule { }
