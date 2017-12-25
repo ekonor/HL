@@ -1,0 +1,7 @@
+<div [hidden]="noTags">
+    Тэги:
+
+    <span class="badge" *ngFor="let tag of tags">
+        <a (click)="viewTagNews(tag)" [innerText]="tag.name"></a>
+    </span>
+</div>

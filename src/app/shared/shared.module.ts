@@ -16,7 +16,7 @@ import { ReplyListItemComponent } from "app/shared/replies/reply-list-item/reply
 import { ReplyService } from "app/shared/replies/shared/reply.service";
 import { SimpleFilterComponent } from "app/shared/simple-filter/simple-filter.component";
 import { LoaderComponent } from "app/shared/loader/loader.component";
-import  {LoaderEmptyComponent} from "./loader/loader-empty.component";
+import { LoaderEmptyComponent } from "app/shared/loader/loader-empty.component";
 
 
 @NgModule({
@@ -29,7 +29,7 @@ import  {LoaderEmptyComponent} from "./loader/loader-empty.component";
         ReplyAddComponent,
         ReplyListItemComponent,
         SimpleFilterComponent,
-         LoaderComponent,
+        LoaderComponent,
         LoaderEmptyComponent
       ],
       imports: [

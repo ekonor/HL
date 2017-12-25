@@ -8,6 +8,7 @@ import { ListInfo } from 'app/shared/list/list-info';
 import { ApiConfig } from 'app/core/api-config';
 import { Category } from 'app/news/shared/category';
 import { ListResponse } from 'app/shared/list/list-response';
+import { Tag } from 'app/news/shared/tag';
 
 @Injectable()
 export class NewsService {
@@ -53,5 +54,10 @@ export class NewsService {
     let logoSrc = this.apiConfig.filesPath;
     let placeholder = "http://via.placeholder.com/250x150";
     return post.logo ? logoSrc + post.logo : placeholder;
+  }
+
+  public getTags(postId: number): Observable<Tag[]> {
+    const url = `${this.newsUrl}/tags/${postId}`;
+    return this.httpClient.get<Tag[]>(url);
   }
 }

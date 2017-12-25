@@ -1,15 +1,17 @@
-<div class="section-container jumbotron">
+<div class="section-container jumbotron" id="sidebar-recent-post">
   <loader [hidden]="!dataIsLoading"></loader>
-  <div class="section-title">
-    <p>Недавние новости</p>
+
+  <div class="section-title">Недавние новости</div>
+
+  <div class="section-body">
+    <ul *ngIf="newsList">
+      <li *ngFor="let post of newsList">
+        <hr>
+        <div>
+          <a (click)="viewNewsItem(post)">{{post.title}}</a>
+          <div class="small">{{post.creationDate | date}}</div>
+        </div>
+      </li>
+    </ul>
   </div>
-  <ul class="sidebar-recent-post" *ngIf="newsList">
-    <li *ngFor="let post of newsList">
-      <hr>
-      <div class="info">
-        <a (click)="viewNewsItem(post)">{{post.title}}</a>
-        <div class="small">{{post.creationDate | date}}</div>
-      </div>
-    </li>
-  </ul>
 </div>

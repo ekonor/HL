@@ -38,6 +38,7 @@ import { ArenaModule } from 'app/arenas/arenas.module';
 import { CoreModule } from 'app/core/core.module';
 import { NewsModule } from 'app/news/news.module';
 import { SharedModule } from 'app/shared/shared.module';
+import { SchoolModule } from 'app/schools/schools.module';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { SharedModule } from 'app/shared/shared.module';
     CoreModule,
     SharedModule,
     ArenaModule,
-    NewsModule
+    NewsModule,
+    SchoolModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'ru' },
