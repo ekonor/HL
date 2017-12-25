@@ -6,5 +6,5 @@ import { Injectable, Component } from "@angular/core";
     styleUrls: ['./loader.component.scss'], //todo to main styles
 })
 @Injectable()
-export class LoaderComponent {
+export class LoaderEmptyComponent {
 }

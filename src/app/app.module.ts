@@ -39,6 +39,7 @@ import { CoreModule } from 'app/core/core.module';
 import { NewsModule } from 'app/news/news.module';
 import { SharedModule } from 'app/shared/shared.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
