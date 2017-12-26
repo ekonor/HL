@@ -20,6 +20,7 @@ import { HomeComponent } from './components/home/home.component';
 import { TournamentsComponent } from './components/tournaments/tournaments.component';
 
 import { routing, appRoutingProviders } from './app.routes';
+import { RouterModule } from '@angular/router';
 // import { NgxPermissionsModule } from 'ngx-permissions';
 import { SlidesComponent } from './components/home/slides/slides.component';
 
@@ -65,6 +66,7 @@ import { SchoolModule } from 'app/schools/schools.module';
     HttpClientModule,
     HttpModule,
     routing,
+    RouterModule,
     NgbModule.forRoot(),
     // Ng2Permission,
     MDBBootstrapModule.forRoot(),

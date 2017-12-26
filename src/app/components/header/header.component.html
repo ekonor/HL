@@ -16,8 +16,8 @@
             <!--li><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a>
             </li-->
             <!--li><a href="/profile"><i class="fa fa-user"></i>Мой аккаунт</a></li-->
-            <li><a href="/login" data-toggle="modal" data-target="#myModal"><i class="fa fa-sign-in"></i>Вход</a></li>
-            <li><a href="/logout" data-toggle="modal" data-target="#myModal"><i class="fa fa-sign-out"></i>Выход</a></li>
+            <li><a [routerLink]="['/login']" routerLinkActive="active" data-toggle="modal" data-target="#myModal"><i class="fa fa-sign-in"></i>Вход</a></li>
+            <li><a [routerLink]="['/logout']" routerLinkActive="active" data-toggle="modal" data-target="#myModal"><i class="fa fa-sign-out"></i>Выход</a></li>
             <!--li><a href="/registration" data-toggle="modal" data-target="#myModalTwo"><i class="fa fa-user-plus"></i>Регистрация</a></li-->
           </ul>
         </div>
@@ -31,36 +31,16 @@
       <!--NAVIGATION START-->
       <div class="kode-navigation pull-left">
         <ul>
-          <li><a href="index.html">Главная</a>
-            <!--ul class="children">
-              <li><a href="blog-large.html">Boxed Layout</a></li>
-            </ul-->
+          <li><a [routerLink]="['/']" routerLinkActive="active">Главная</a>
           </li>
-          <li><a href="#">Команды</a></li>
-          <li><a href="#">Турниры</a></li>
-          <li><a href="/arenas">Арены</a>
-          <li><a href="/news">Новости</a>
-            <!--ul class="children">
-              <li><a href="blog-large.html">Blog Large</a></li>
-              <li><a href="bloggrid-v2.html">Blog Grid</a></li>
-              <li><a href="blog-detail.html">Blog Detail</a>
-                <ul class="children">
-                  <li><a href="blog-detail-soundcloud.html">Single SoundCloud</a></li>
-                  <li><a href="blog-detail-video.html">Single Video</a></li>
-                </ul>
-              </li>
-            </ul-->
+          <li><a [routerLink]="['/children-teams']" routerLinkActive="active">Команды</a></li>
+          <li><a [routerLink]="['/tournaments']" routerLinkActive="active">Турниры</a></li>
+          <li><a [routerLink]="['/arenas']" routerLinkActive="active">Арены</a>
+          <li><a [routerLink]="['/news']" routerLinkActive="active">Новости</a>
           </li>
         </ul>
       </div>
-      <!--NAVIGATION END-->
-      <!--LOGO START-->
-      <!--div class="logo">
-        <a href="index.html" class="logo"><img src="images/logo.png" alt=""></a>
-      </div-->
-      <!--LOGO END-->
       <nav class="navbar navbar-default">
-
       </nav>
     </div>
   </div>
