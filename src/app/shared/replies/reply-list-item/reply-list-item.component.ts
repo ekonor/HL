@@ -23,11 +23,11 @@ export class ReplyListItemComponent {
 
     }
 
-    public addVoteUp() {
+    public addVoteUp(replyId: number) {
 
     }
 
-    public addVoteDown() {
+    public addVoteDown(replyId: number) {
 
     }
 

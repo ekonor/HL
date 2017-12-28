@@ -8,7 +8,7 @@
                 </h4>
                 <p class="card-text">{{reply.body}}</p>
                 <button (click)="addReply(reply.id)" class="btn" [hidden]="!isUserAuthorized()">Ответить</button>
-                <button (click)="addComplain()" class="btn" [hidden]="!isUserAuthorized()">Пожаловаться</button>
+                <button (click)="addComplain(reply.id)" class="btn" [hidden]="!isUserAuthorized()">Пожаловаться</button>
                 <button (click)="addVoteUp(reply.id)" class="btn btn-success" [disabled]="!isUserAuthorized()">
                     <i class="fa fa-thumbs-o-up"></i>
                 </button>
