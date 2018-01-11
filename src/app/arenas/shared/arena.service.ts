@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpParams, HttpClient } from '@angular/common/http';
-import { Observable } from "rxjs/Observable";
+import { Observable } from 'rxjs/Observable';
 
 import { ArenaListItem } from 'app/arenas/shared/arena-list-item';
 import { ArenaViewItem } from 'app/arenas/shared/arena-view-item';
 import { ArenaFilter } from 'app/arenas/shared/arena-filter';
 import { AuthenticationService } from 'app/core/auth/authentication.service';
 import { ArenaType } from './arena-type';
-import { City } from './city';
+import { City } from '../../core/geo/city';
 import { ListResponse } from 'app/shared/list/list-response';
 import { ListInfo } from 'app/shared/list/list-info';
 import { ApiConfig } from 'app/core/api-config';
@@ -46,7 +46,7 @@ export class ArenaService {
   }
 
   public getCities(): Observable<City[]> {
-    const methodUrlPrefix = "/geo/cities";
+    const methodUrlPrefix = '/geo/cities';
     let methodUrl = this.getMethodUrl(methodUrlPrefix);
 
     return this.httpClient.get<City[]>(methodUrl);
@@ -65,11 +65,11 @@ export class ArenaService {
     return arena.logo ? logoSrc + arena.logo : placeholder;
   }
 
-  public updateArena(id: number, arena: ArenaViewItem, arenaTypeId: number, cityId: number): Observable<ArenaViewItem> {
+  public updateArena(id: number, arena: ArenaViewItem): Observable<ArenaViewItem> {
     console.log(arena);
     // const body = JSON.stringify(arena);
     // const body = JSON.stringify({"contacts": arena.contacts,"longitude": arena.longitude,"latitude": arena.latitude,"about": arena.about,"name": arena.name,"arenaTypeName": arena.arenaTypeName,"address": arena.address,"email": arena.email,"webSite": arena.webSite,"capacity": arena.capacity,"logo": arena.logo,"cityName": arena.cityName});
-    const body = JSON.stringify({ "contacts": arena.contacts, "longitude": arena.longitude, "latitude": arena.latitude, "about": arena.about, "name": arena.name, "arenaTypeId": arenaTypeId.toString(), "address": arena.address, "email": arena.email, "webSite": arena.webSite, "capacity": arena.capacity, "logo": arena.logo, "cityId": cityId });
+    const body = JSON.stringify({ "contacts": arena.contacts, "coordinates": {"longitude": arena.coordinates.longitude, "latitude": arena.coordinates.latitude}, "about": arena.about, "name": arena.name, "arenaTypeId": arena.arenaTypeId, "address": arena.address, "email": arena.email, "webSite": arena.webSite, "capacity": arena.capacity, "logo": arena.logo, "city": arena.city });
     console.log(body);
     // const body = JSON.stringify({"contacts":"+7 (3812) 70-71-25","longitude":73.297631,"latitude":55.008851,"about":null,"name":"«Арена Омск 6»","arenaTypeName":null,"address":"644119, г. Омск, ул. Лукашевича, д. 35","email":null,"webSite":"http://www.hawk.ru/tickets/arena-omsk/","capacity":10048,"logo":null,"cityName":null});
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -95,9 +95,9 @@ export class ArenaService {
     }
   }
 
-  public addArena(arena: ArenaViewItem, arenaTypeId: number, cityId: number): Observable<number> {
+  public addArena(arena: ArenaViewItem): Observable<number> {
     console.log(arena);
-    const body = JSON.stringify({ "contacts": arena.contacts, "longitude": arena.longitude, "latitude": arena.latitude, "about": arena.about, "name": arena.name, "arenaTypeId": arenaTypeId.toString(), "address": arena.address, "email": arena.email, "webSite": arena.webSite, "capacity": arena.capacity, "logo": arena.logo, "cityId": cityId });
+    const body = JSON.stringify({ "contacts": arena.contacts, "coordinates": {"longitude": arena.coordinates.longitude, "latitude": arena.coordinates.latitude}, "about": arena.about, "name": arena.name, "arenaTypeId": arena.arenaTypeId, "address": arena.address, "email": arena.email, "webSite": arena.webSite, "capacity": arena.capacity, "logo": arena.logo, "city": arena.city });
     console.log(body);
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {

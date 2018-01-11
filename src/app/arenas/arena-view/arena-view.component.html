@@ -11,11 +11,11 @@
         <div class="card-body">
           <!--Header-->
           <div class="item-title-main">
-            <p>{{arena.cityName}}</p>
+            <p>{{arena.city&&arena.city.name ? arena.city.name: '' }}</p>
           </div>
           <h5 class="item-title">
              {{arena.name}}
-             <small>{{arena.arenaTypeName}}</small>
+             <small>{{arena.arenaTypeId}}</small>
           </h5>
           <hr>
 

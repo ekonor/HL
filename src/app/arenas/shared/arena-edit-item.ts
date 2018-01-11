@@ -1,3 +1,6 @@
+import { Coordinates } from 'app/core/geo/coordinates';
+import { City } from 'app/core/geo/city';
+
 export class ArenaViewItem {
   name: string;
   linkName?: string;
@@ -5,19 +8,15 @@ export class ArenaViewItem {
   email?: string;
   webSite?: string;
   capacity?: number;
-  //logo?: string;
-  cityId?: number;
+  city?: City = new City;
   contacts?: string;
-  longitude?: number;
-  latitude?: number;
+  coordinates?: Coordinates;
   about?: string;
-  arenaTypeId?: string;
+  arenaTypeId?: number;
   startYear?: number;
 
-  constructor( values: Object = {} )
-  {
+  constructor( values: Object = {} ) {
     Object.assign( this, values );
   }
-}
 
-//https://angular-maps.com
+}

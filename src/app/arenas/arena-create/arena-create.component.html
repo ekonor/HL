@@ -6,8 +6,8 @@
       <input type="text" class="form-control" name="name" [(ngModel)]="arena.name" (ngModelChange)="arena.name = $event" #name="ngModel" id="name"/>
       <div *ngIf="f.submitted && name != null && !name.valid" class="help-block">name is required</div>
     </div>
-    <select class="form-group" [(ngModel)]="arena.cityName" name="cityName" class="form-control" #cityName="ngModel" id="cityName">
-      <option *ngFor="let city of cities"  [ngValue]="city.name" >{{city.name}}</option>
+    <select class="form-group" [(ngModel)]="arena.city" name="city" class="form-control" #city="ngModel" id="city">
+      <option *ngFor="let city of cities"  [ngValue]="city" >{{city.name}}</option>
     </select>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !address.valid }">
       <label for="address">Адрес</label>
@@ -19,8 +19,8 @@
       <input type="number" class="form-control" name="capacity" [(ngModel)]="arena.capacity" (ngModelChange)="arena.capacity = $event" #capacity="ngModel" ngModel number="true" id="capacity"/>
       <div *ngIf="f.submitted && capacity != null && !capacity.valid" class="help-block">capacity is invalid</div>
     </div>
-    <select class="form-group" [(ngModel)]="arena.arenaTypeName" name="arenaTypeName" class="form-control" #arenaTypeName="ngModel" id="arenaTypeName" (ngModelChange)="arenaTypeId = $event">
-      <option *ngFor="let arenaType of arenaTypes"  [ngValue]="arenaType.name" >{{arenaType.name}}</option>
+    <select class="form-group" [(ngModel)]="arena.arenaTypeId" name="arenaTypeId" class="form-control" #arenaTypeId="ngModel" id="arenaTypeId" (ngModelChange)="arena.arenaTypeId = $event">
+      <option *ngFor="let arenaType of arenaTypes"  [ngValue]="arenaType.id" >{{arenaType.name}}</option>
     </select>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !contacts.valid }">
       <label for="contacts">Контакты</label>

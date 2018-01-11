@@ -1,4 +1,4 @@
-import { City } from "app/arenas/shared/city";
+import { City } from "app/core/geo/city";
 import { Arena } from "app/arenas/shared/arena";
 
 export class SchoolListItem

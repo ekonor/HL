@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ArenaService } from 'app/arenas/shared/arena.service';
 import { ArenaViewItem } from 'app/arenas/shared/arena-view-item';
 import { ArenaType } from "app/arenas/shared/arena-type";
-import { City } from "app/arenas/shared/city";
+import { City } from "app/core/geo/city";
 import { ActivatedRoute, Router } from '@angular/router';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import  { AlertService } from 'app/components/alert/alert.service';
@@ -23,8 +23,7 @@ export class ArenaEditComponent implements OnInit {
   returnUrl: string;
   loading = false;
   id: number;
-  cityId: number;
-  arenaTypeId: number;
+  //cityId: number;
   deleteFlag: boolean;
   mapPoint: Point;
   // private sub: any;
@@ -42,6 +41,7 @@ export class ArenaEditComponent implements OnInit {
     // В роутинге должно быть прописано так edit/:id
     // this.id = this.activatedRoute.snapshot.params['id'];
     // console.log('id='+this.id+'route='+this.activatedRoute.snapshot.params['id']);
+    this.arena = new ArenaViewItem;
     this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
     this.loading = true;
     this.id = this.activatedRoute.snapshot.params['id'];
@@ -86,19 +86,19 @@ export class ArenaEditComponent implements OnInit {
   }
 
   private getMapPoint(arena: ArenaViewItem): Point {
-    if (this.arena && this.arena.latitude && this.arena.longitude) {
-      return {latitude: this.arena.latitude, longitude: this.arena.longitude};
+    if (this.arena && this.arena.coordinates.latitude && this.arena.coordinates.longitude) {
+      return {latitude: this.arena.coordinates.latitude, longitude: this.arena.coordinates.longitude};
     }
   }
 
   public editArena(arena: ArenaViewItem) {
     console.log(this.arena);
     console.log(this.id);
-    console.log(this.arenaTypeId);
+    //console.log(this.arenaTypeId);
     console.log('ok');
-    this.setArenaTypeId();
-    this.setCityId();
-    this.service.updateArena(this.id, this.arena, this.arenaTypeId, this.cityId).subscribe(
+    //this.setArenaTypeId();
+    //this.setCityId();
+    this.service.updateArena(this.id, this.arena).subscribe(
       data => {
         //console.log(data);
         //this.router.navigate([this.returnUrl]);
@@ -158,8 +158,8 @@ export class ArenaEditComponent implements OnInit {
     console.log(this.arena);
     console.log(this.id);
     console.log('delete');
-    this.setArenaTypeId();
-    this.setCityId();
+    //this.setArenaTypeId();
+    //this.setCityId();
     this.service.deleteArena(this.id).subscribe(
       data => {
         //console.log(data);
@@ -181,7 +181,6 @@ export class ArenaEditComponent implements OnInit {
           this.arenaTypes = new Array<ArenaType>();
           this.arenaTypes.push(emptyValue);
           this.arenaTypes = this.arenaTypes.concat(arenaTypes);
-          this.setArenaTypeId();
           this.loading = false;
         },
         error => {
@@ -191,8 +190,8 @@ export class ArenaEditComponent implements OnInit {
       );
   }
   /* Перевод выбранного текста Тип арены в айди*/
-  private setArenaTypeId() {
-    let find = false;
+  //private setArenaTypeId() {
+    /*let find = false;
     let i = this.arenaTypes.length;
     while (i--) {
       if (this.arenaTypes[i].name === this.arena.arenaTypeName) {
@@ -203,11 +202,12 @@ export class ArenaEditComponent implements OnInit {
     if (!find) {
       console.log('error');
       this.arenaTypeId = null;
-    }
-  }
+    }*/
+    //this.arenaTypeId = this.arena.;
+  //}
 
   /* Перевод выбранного текста Город в айди*/
-  private setCityId() {
+  /*private setCityId() {
     let find = false;
     let i = this.cities.length;
     while (i--) {
@@ -220,18 +220,18 @@ export class ArenaEditComponent implements OnInit {
       console.log('error');
       this.cityId = null;
     }
-  }
+  }*/
 
   private getCities() {
     this.loading = true;
     this.service.getCities()
       .subscribe(
         cities => {
-          let emptyValue: City = {id: null, name: "Город не указан"};
+          let emptyValue: City = {id: null, name: "Город не указан", countryId: null};
           this.cities = new Array<City>();
           this.cities.push(emptyValue);
           this.cities = this.cities.concat(cities);
-          this.setCityId();
+          console.log(cities);
           this.loading = false;
         },
         error => {

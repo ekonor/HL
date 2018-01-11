@@ -18,12 +18,14 @@ export class ArenaViewComponent{
   arena: ArenaViewItem;
   id: number;
   mapPoint: Point;
-  
+  zoom: number;
+
   errorMessage: string;
-  private sub : any;
+  private sub: any;
 
   constructor( private service: ArenaService,
                private activatedRoute: ActivatedRoute) {
+    this.arena = new ArenaViewItem;
   }
 
   ngOnInit() {
@@ -59,14 +61,19 @@ export class ArenaViewComponent{
       arena => {
         this.arena = arena;
         this.mapPoint = this.getMapPoint(arena);
+        this.zoom = 8;
       },
       error => this.errorMessage = error
     );
   }
 
-  private getMapPoint(arena: ArenaViewItem) : Point {
-    if(this.arena && this.arena.latitude && this.arena.longitude){
-      return { latitude: this.arena.latitude, longitude: this.arena.longitude };
+  private getMapPoint(arena: ArenaViewItem): Point {
+    if (this.arena && this.arena.coordinates && this.arena.coordinates.latitude && this.arena.coordinates.longitude){
+      return { latitude: this.arena.coordinates.latitude, longitude: this.arena.coordinates.longitude };
     }
+  }
+
+  getDefaultIfNull(value: any) {
+
   }
 }
