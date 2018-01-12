@@ -86,7 +86,7 @@ export class ArenaEditComponent implements OnInit {
   }
 
   private getMapPoint(arena: ArenaViewItem): Point {
-    if (this.arena && this.arena.coordinates.latitude && this.arena.coordinates.longitude) {
+    if (this.arena && this.arena.coordinates && this.arena.coordinates.latitude && this.arena.coordinates.longitude) {
       return {latitude: this.arena.coordinates.latitude, longitude: this.arena.coordinates.longitude};
     }
   }

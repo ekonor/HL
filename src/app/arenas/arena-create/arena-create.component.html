@@ -2,9 +2,19 @@
   <h2>Добавление арены</h2>
   <form (ngSubmit)="addArena(arena)" #f="ngForm">
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
-      <label for="name">Название арены</label>
-      <input type="text" class="form-control" name="name" [(ngModel)]="arena.name" (ngModelChange)="arena.name = $event" #name="ngModel" id="name"/>
-      <div *ngIf="f.submitted && name != null && !name.valid" class="help-block">name is required</div>
+      <label for="arenaname">Сокращенное название арены</label>
+      <input type="text" class="form-control" name="arenaname" [(ngModel)]="arena.name" (ngModelChange)="arena.name = $event" #arenaname="ngModel" id="arenaname"/>
+      <div *ngIf="f.submitted && arenaname != null && !arenaname.valid" class="help-block">arenaname is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !fullName.valid }">
+      <label for="fullName">Полное название арены</label>
+      <input type="text" class="form-control" name="fullName" [(ngModel)]="arena.fullName" (ngModelChange)="arena.fullName = $event" #name="ngModel" id="fullName"/>
+      <div *ngIf="f.submitted && fullName != null && !fullName.valid" class="help-block">fullname is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !startYear.valid }">
+      <label for="startYear">Год открытия арены</label>
+      <input type="number" min="1900" max="2050" step="1" number="true" class="form-control" name="startYear" [(ngModel)]="arena.startYear" (ngModelChange)="arena.startYear = $event" #name="ngModel" ngModel id="startYear" [required]="required"/>
+      <div *ngIf="f.submitted && startYear != null && !startYear.valid" class="help-block">startYear is required</div>
     </div>
     <select class="form-group" [(ngModel)]="arena.city" name="city" class="form-control" #city="ngModel" id="city">
       <option *ngFor="let city of cities"  [ngValue]="city" >{{city.name}}</option>

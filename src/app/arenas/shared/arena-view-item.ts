@@ -11,13 +11,14 @@ export class ArenaViewItem {
   capacity?: number;
   logo?: string;
   // cityName?: string;
-  city?: City;
+  city?: City = new City;
   contacts?: string;
   coordinates?: Coordinates = new Coordinates;
   about?: string;
   // arenaTypeName?: string;
   arenaTypeId?: number;
   fullName?: string;
+  startYear: number;
 
   constructor( values: Object = {} ) {
     Object.assign( this, values );

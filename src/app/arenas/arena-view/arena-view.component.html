@@ -14,7 +14,7 @@
             <p>{{arena.city&&arena.city.name ? arena.city.name: '' }}</p>
           </div>
           <h5 class="item-title">
-             {{arena.name}}
+             {{arena.fullName ? arena.fullName : arena.name}}
              <small>{{arena.arenaTypeId}}</small>
           </h5>
           <hr>
