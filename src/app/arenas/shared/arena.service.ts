@@ -56,7 +56,6 @@ export class ArenaService {
     return this.httpClient.get<City[]>(methodUrl, { params: params });
   }
 
-
   public getArenaTypes(): Observable<ArenaType[]> {
     const methodUrlPrefix = '/arenas' + '/types';
     let methodUrl = this.getMethodUrl(methodUrlPrefix);
