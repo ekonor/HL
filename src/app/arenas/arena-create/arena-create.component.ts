@@ -5,9 +5,18 @@ import { ArenaType } from 'app/arenas/shared/arena-type';
 import { City } from 'app/core/geo/city';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import  { AlertService } from 'app/components/alert/alert.service';
+import { AlertService } from 'app/components/alert/alert.service';
 import { Point } from 'app/shared/map/point';
 import { debounce } from 'rxjs/operator/debounce';
+import {Observable} from 'rxjs/Observable';
+import {of} from 'rxjs/observable/of';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/merge';
 
 @Component({
   moduleId: module.id,
@@ -25,8 +34,13 @@ export class ArenaCreateComponent implements OnInit {
   mapPoint: Point;
   // private sub: any;
   arenaTypes: ArenaType[];
-  cities: City[];
+  // cities: City[];
   errorMessage: string;
+
+  city: City;
+  searching = false;
+  hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
+  searchFailed = false;
 
   constructor( private service: ArenaService,
                private router: Router,
@@ -39,7 +53,6 @@ export class ArenaCreateComponent implements OnInit {
     console.log(this.arena);
     this.loading = false;
     this.getArenaTypes();
-    this.getCities();
   }
 
   ngOnInit() {
@@ -50,20 +63,20 @@ export class ArenaCreateComponent implements OnInit {
       return {latitude: this.arena.coordinates.latitude, longitude: this.arena.coordinates.longitude};
     }
   }
-
-  public addArena(arena: ArenaViewItem) {
-    console.log(this.arena);
-    console.log(this.id);
-    this.service.addArena(this.arena).subscribe(
-      data => {
-        this.router.navigate([this.returnUrl]);
-      },
-      error => {
-        this.alertService.error(error);
-        this.alertService.error("Не удалось добавить арену");
-        this.loading = false;
-      });
-  }
+  search = (text$: Observable<string>) =>
+    text$
+      .debounceTime(300)
+      .distinctUntilChanged()
+      .do(() => this.searching = true)
+      .switchMap(term =>
+        this.service.getCities(term)
+          .do(() => this.searchFailed = false)
+          .catch(() => {
+            this.searchFailed = true;
+            return of([]);
+          }))
+      .do(() => this.searching = false)
+      .merge(this.hideSearchingWhenUnsubscribed);
 
   private getArenaTypes() {
     this.loading = true;
@@ -82,54 +95,24 @@ export class ArenaCreateComponent implements OnInit {
         }
       );
   }
-  /* Перевод выбранного текста Тип арены в айди*/
-  // private setArenaTypeId() {
-  //   let find = false;
-  //   let i = this.arenaTypes.length;
-  //   while (i--) {
-  //     if (this.arenaTypes[i].name === this.arena.arenaTypeName) {
-  //       this.arenaTypeId = this.arenaTypes[i].id;
-  //       find = true;
-  //     }
-  //   }
-  //   if (!find) {
-  //     console.log('error');
-  //     this.arenaTypeId = null;
-  //   }
-  // }
+  formatter = (x: {name: string}) => x.name;
 
-  /* Перевод выбранного текста Город в айди*/
-  /*private setCityId() {
-    let find = false;
-    let i = this.cities.length;
-    while (i--) {
-      if (this.cities[i].name === this.arena.cityName) {
-        this.cityId = this.cities[i].id;
-        find = true;
-      }
+  public addArena(arena: ArenaViewItem) {
+    if (!this.city && !this.city.id) {
+      this.alertService.error("Не удалось сохранить изменения");
+      return;
     }
-    if (!find) {
-      console.log('error');
-      this.cityId = null;
-    }
-  }*/
-
-  private getCities() {
-    this.loading = true;
-    this.service.getCities("*")
-      .subscribe(
-        cities => {
-          let emptyValue: City = {id: null, name: 'Город не указан'};
-          this.cities = new Array<City>();
-          this.cities.push(emptyValue);
-          this.cities = this.cities.concat(cities);
-          this.loading = false;
-        },
-        error => {
-          this.errorMessage = error;
-          this.loading = false;
-        }
-      );
+    this.arena.city = this.city;
+    console.log(this.arena);
+    console.log(this.id);
+    this.service.addArena(this.arena).subscribe(
+      data => {
+        this.router.navigate(['/arenas']);
+      },
+      error => {
+        this.alertService.error(error);
+        this.alertService.error("Не удалось добавить арену");
+        this.loading = false;
+      });
   }
-
 }

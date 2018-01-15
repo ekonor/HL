@@ -120,7 +120,7 @@ export class ArenaEditComponent implements OnInit {
     console.log('ok');
     this.service.updateArena(this.id, this.arena).subscribe(
       data => {
-
+        this.router.navigate(['/arenas']);
       },
       error => {
         this.alertService.error(error);
@@ -214,7 +214,7 @@ export class ArenaEditComponent implements OnInit {
     console.log('delete');
     this.service.deleteArena(this.id).subscribe(
       data => {
-        //this.router.navigate([this.returnUrl]);
+        this.router.navigate(['/arenas']);
       },
       error => {
         this.alertService.error(error);
@@ -237,6 +237,7 @@ export class ArenaEditComponent implements OnInit {
         error => {
           this.errorMessage = error;
           this.loading = false;
+          this.router.navigate(['/not-found']);
         }
       );
   }
