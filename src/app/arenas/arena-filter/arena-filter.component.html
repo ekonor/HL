@@ -13,7 +13,18 @@
                     </select>
               </div>
               <div class="col-md-4">
-                <input type="text" name="cityName" [(ngModel)]="filter.cityId" placeholder="Название города" class="form-control">
+                <ng-template #rt let-r="result" let-t="term">
+                  {{ r.name}}
+                </ng-template>
+                <input type="text"
+                       name="cityName"
+                       [(ngModel)]="city"
+                       placeholder="Название города"
+                       class="form-control"
+                       [ngbTypeahead]="autocompleteCity"
+                       [resultTemplate]="rt"
+                       [inputFormatter]="formatter"
+                />
               </div>
               <div class="col-md-4">
                 <button type="button" class="btn btn-primary" (click)="search()">
