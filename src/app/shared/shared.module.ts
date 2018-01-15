@@ -10,10 +10,6 @@ import { PaginationService } from "app/shared/pagination.service";
 import { MapComponent } from "app/shared/map/map.component";
 import { SortingComponent } from "app/shared/sorting/sorting.component";
 import { UserPicComponent } from "app/shared/user-pic/user-pic.component";
-import { RepliesComponent } from "app/shared/replies/replies.component";
-import { ReplyAddComponent } from "app/shared/replies/reply-add/reply-add.component";
-import { ReplyListItemComponent } from "app/shared/replies/reply-list-item/reply-list-item.component";
-import { ReplyService } from "app/shared/replies/shared/reply.service";
 import { SimpleFilterComponent } from "app/shared/simple-filter/simple-filter.component";
 import { LoaderComponent } from "app/shared/loader/loader.component";
 import { LoaderEmptyComponent } from "app/shared/loader/loader-empty.component";
@@ -25,9 +21,6 @@ import { LoaderEmptyComponent } from "app/shared/loader/loader-empty.component";
         MapComponent,
         SortingComponent,
         UserPicComponent,
-        RepliesComponent,
-        ReplyAddComponent,
-        ReplyListItemComponent,
         SimpleFilterComponent,
         LoaderComponent,
         LoaderEmptyComponent
@@ -48,14 +41,12 @@ import { LoaderEmptyComponent } from "app/shared/loader/loader-empty.component";
         MapComponent,
         SortingComponent,
         UserPicComponent,
-        RepliesComponent,
         SimpleFilterComponent,
         LoaderComponent,
         LoaderEmptyComponent
       ],
       providers: [
-        PaginationService,
-        ReplyService
+        PaginationService
       ]
     })
     export class SharedModule { }
