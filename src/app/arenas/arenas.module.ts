@@ -16,6 +16,8 @@ import { ArenaService } from "app/arenas/shared/arena.service";
 import { ArenaRoutingModule } from "app/arenas/arenas-routing.module";
 import { SharedModule } from "app/shared/shared.module";
 
+import { NgxEditorModule } from 'ngx-editor';
+
 
 @NgModule({
   // exports: [
@@ -35,7 +37,8 @@ import { SharedModule } from "app/shared/shared.module";
         FormsModule,
         CommonModule,
         SharedModule,
-        ArenaRoutingModule
+        ArenaRoutingModule,
+        NgxEditorModule
       ],
       providers: [
         ArenaService

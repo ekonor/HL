@@ -41,6 +41,7 @@ import { NewsModule } from 'app/news/news.module';
 import { SharedModule } from 'app/shared/shared.module';
 import { SchoolModule } from 'app/schools/schools.module';
 
+import { NgxEditorModule } from 'ngx-editor'; // https://github.com/Sibiraj-S/ngx-editor/wiki/ngxEditor
 
 @NgModule({
   declarations: [
@@ -78,7 +79,9 @@ import { SchoolModule } from 'app/schools/schools.module';
     SharedModule,
     ArenaModule,
     NewsModule,
-    SchoolModule
+    SchoolModule,
+
+    NgxEditorModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'ru' },
