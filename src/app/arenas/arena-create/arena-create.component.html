@@ -62,7 +62,7 @@
     </div-->
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !about.valid }">
       <label for="about">Описание</label>
-      <input type="text" class="form-control" name="about" [(ngModel)]="arena.about" (ngModelChange)="arena.about = $event" #about="ngModel" id="about">
+      <textarea type="text" class="form-control" name="about" [(ngModel)]="arena.about" (ngModelChange)="arena.about = $event" #about="ngModel" id="about"></textarea>
       <div *ngIf="f.submitted && about != null && !about.valid" class="help-block">about is invalid</div>
     </div>
     <div class="form-group">
