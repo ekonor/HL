@@ -21,8 +21,6 @@ export class ArenaCreateComponent implements OnInit {
   returnUrl: string;
   loading = false;
   id: number;
-  //cityId: number;
-  //arenaTypeId: number;
   deleteFlag: boolean;
   mapPoint: Point;
   // private sub: any;
@@ -45,7 +43,6 @@ export class ArenaCreateComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   private getMapPoint(arena: ArenaViewItem): Point {
@@ -57,10 +54,6 @@ export class ArenaCreateComponent implements OnInit {
   public addArena(arena: ArenaViewItem) {
     console.log(this.arena);
     console.log(this.id);
-    //console.log(this.arenaTypeId);
-    console.log('ok');
-    //this.setArenaTypeId();
-    //this.setCityId();
     this.service.addArena(this.arena).subscribe(
       data => {
         this.router.navigate([this.returnUrl]);
@@ -81,7 +74,6 @@ export class ArenaCreateComponent implements OnInit {
           this.arenaTypes = new Array<ArenaType>();
           this.arenaTypes.push(emptyValue);
           this.arenaTypes = this.arenaTypes.concat(arenaTypes);
-          //this.setArenaTypeId();
           this.loading = false;
         },
         error => {
@@ -124,14 +116,13 @@ export class ArenaCreateComponent implements OnInit {
 
   private getCities() {
     this.loading = true;
-    this.service.getCities()
+    this.service.getCities("*")
       .subscribe(
         cities => {
           let emptyValue: City = {id: null, name: 'Город не указан'};
           this.cities = new Array<City>();
           this.cities.push(emptyValue);
           this.cities = this.cities.concat(cities);
-          //this.setCityId();
           this.loading = false;
         },
         error => {

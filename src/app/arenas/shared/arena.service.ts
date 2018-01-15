@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import {of} from 'rxjs/observable/of';
 
 import { ArenaListItem } from 'app/arenas/shared/arena-list-item';
 import { ArenaViewItem } from 'app/arenas/shared/arena-view-item';
@@ -41,21 +42,24 @@ export class ArenaService {
   public getArena(id: number): Observable<ArenaViewItem> {
     const methodUrlPrefix = '/arenas/' + id;
     let methodUrl = this.getMethodUrl(methodUrlPrefix);
-
     return this.httpClient.get<ArenaViewItem>(methodUrl);
   }
 
-  public getCities(): Observable<City[]> {
+  public getCities(searchTerm: string): Observable<City[]> {
+    if (searchTerm === '') {
+      return of([]);
+    }
     const methodUrlPrefix = '/geo/cities';
     let methodUrl = this.getMethodUrl(methodUrlPrefix);
-
-    return this.httpClient.get<City[]>(methodUrl);
+    let params = new HttpParams();
+    params = params.append('searchTerm', searchTerm);
+    return this.httpClient.get<City[]>(methodUrl, { params: params });
   }
+
 
   public getArenaTypes(): Observable<ArenaType[]> {
     const methodUrlPrefix = '/arenas' + '/types';
     let methodUrl = this.getMethodUrl(methodUrlPrefix);
-
     return this.httpClient.get<ArenaType[]>(methodUrl);
   }
 

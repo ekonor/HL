@@ -3,8 +3,7 @@ export class City {
   name: string;
   countryId?: number;
 
-  constructor( values: Object = {} )
-  {
+  constructor( values: Object = {} ) {
     Object.assign( this, values );
   }
 }

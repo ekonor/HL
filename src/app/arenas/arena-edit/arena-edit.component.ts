@@ -8,6 +8,28 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import  { AlertService } from 'app/components/alert/alert.service';
 import { Point } from "app/shared/map/point";
 import { debounce } from "rxjs/operator/debounce";
+import {Observable} from 'rxjs/Observable';
+import {of} from 'rxjs/observable/of';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/merge';
+
+
+// import {Component, Injectable} from '@angular/core';
+// import {HttpClient, HttpParams} from '@angular/common/http';
+// import {Observable} from 'rxjs/Observable';
+// import {of} from 'rxjs/observable/of';
+// import 'rxjs/add/operator/catch';
+// import 'rxjs/add/operator/debounceTime';
+// import 'rxjs/add/operator/distinctUntilChanged';
+// import 'rxjs/add/operator/do';
+// import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/switchMap';
+// import 'rxjs/add/operator/merge';
 
 @Component({
   moduleId: module.id,
@@ -17,13 +39,11 @@ import { debounce } from "rxjs/operator/debounce";
   styleUrls: ['arena-edit.component.scss']
 })
 
-
 export class ArenaEditComponent implements OnInit {
   arena: ArenaViewItem;
   returnUrl: string;
   loading = false;
   id: number;
-  //cityId: number;
   deleteFlag: boolean;
   mapPoint: Point;
   // private sub: any;
@@ -31,6 +51,11 @@ export class ArenaEditComponent implements OnInit {
   cities: City[];
   files: any;
   errorMessage: string;
+
+  city: City;
+  searching = false;
+  hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
+  searchFailed = false;
 
   constructor( private service: ArenaService,
               private router: Router,
@@ -47,7 +72,6 @@ export class ArenaEditComponent implements OnInit {
     this.id = this.activatedRoute.snapshot.params['id'];
     this.getArena(this.id);
     this.getArenaTypes();
-    this.getCities();
     this.deleteFlag = false;
     /*this.sub = this.activatedRoute.params.subscribe(params => {
       this.id = parseInt(params['id']);
@@ -63,45 +87,40 @@ export class ArenaEditComponent implements OnInit {
   ngOnDestroy() {
     //this.sub.unsubscribe();
   }
-
-  /*public refresh(id) {
-    //this.getArena(id);
-  }*/
-
-  private getArena(id: number) {
-    this.loading = true;
-    this.service.getArena(id)
-      .subscribe(
-        arena => {
-          this.arena = arena;
-          this.mapPoint = this.getMapPoint(arena);
-          console.log(this.arena);
-          this.loading = false;
-        },
-        error => {
-          this.errorMessage = error;
-          this.loading = false;
-        }
-      );
-  }
+  search = (text$: Observable<string>) =>
+    text$
+      .debounceTime(300)
+      .distinctUntilChanged()
+      .do(() => this.searching = true)
+      .switchMap(term =>
+        this.service.getCities(term)
+          .do(() => this.searchFailed = false)
+          .catch(() => {
+            this.searchFailed = true;
+            return of([]);
+          }))
+      .do(() => this.searching = false)
+      .merge(this.hideSearchingWhenUnsubscribed);
 
   private getMapPoint(arena: ArenaViewItem): Point {
     if (this.arena && this.arena.coordinates && this.arena.coordinates.latitude && this.arena.coordinates.longitude) {
       return {latitude: this.arena.coordinates.latitude, longitude: this.arena.coordinates.longitude};
     }
   }
+  formatter = (x: {name: string}) => x.name;
 
   public editArena(arena: ArenaViewItem) {
+    if (!this.city && !this.city.id) {
+      this.alertService.error("Не удалось сохранить изменения");
+      return;
+    }
+    this.arena.city = this.city;
     console.log(this.arena);
     console.log(this.id);
-    //console.log(this.arenaTypeId);
     console.log('ok');
-    //this.setArenaTypeId();
-    //this.setCityId();
     this.service.updateArena(this.id, this.arena).subscribe(
       data => {
-        //console.log(data);
-        //this.router.navigate([this.returnUrl]);
+
       },
       error => {
         this.alertService.error(error);
@@ -111,16 +130,8 @@ export class ArenaEditComponent implements OnInit {
     this.updateLogo();
   }
 
-  public updateLogo()
-  {
+  public updateLogo() {
     if (this.files) {
-      /*const files: FileList = this.files;
-       const formData = new FormData();
-       for (let i = 0; i < files.length; i++){
-         formData.append('photo', files[i]);
-       }
-       this.service.deleteLogo(this.id);
-       this.service.addLogo(this.id, formData);*/
       const formData = new FormData();
       formData.append('image', this.files[0]);
       if (this.arena.logo != null) {
@@ -142,36 +153,6 @@ export class ArenaEditComponent implements OnInit {
     }
   }
 
-
-  // upload() {
-  //   const fileBrowser = this.fileInput.nativeElement;
-  //   if (fileBrowser.files && fileBrowser.files[0]) {
-  //     const formData = new FormData();
-  //     formData.append("image", fileBrowser.files[0]);
-  //     this.projectService.upload(formData, this.project.id).subscribe(res => {
-  //       // do stuff w/my uploaded file
-  //     });
-  //   }
-  // }
-
-  public deleteArena() {
-    console.log(this.arena);
-    console.log(this.id);
-    console.log('delete');
-    //this.setArenaTypeId();
-    //this.setCityId();
-    this.service.deleteArena(this.id).subscribe(
-      data => {
-        //console.log(data);
-        this.router.navigate([this.returnUrl]);
-      },
-      error => {
-        this.alertService.error(error);
-        this.alertService.error("Не удалось удалить арену");
-        this.loading = false;
-      });
-  }
-
   private getArenaTypes() {
     this.loading = true;
     this.service.getArenaTypes()
@@ -189,57 +170,25 @@ export class ArenaEditComponent implements OnInit {
         }
       );
   }
-  /* Перевод выбранного текста Тип арены в айди*/
-  //private setArenaTypeId() {
-    /*let find = false;
-    let i = this.arenaTypes.length;
-    while (i--) {
-      if (this.arenaTypes[i].name === this.arena.arenaTypeName) {
-        this.arenaTypeId = this.arenaTypes[i].id;
-        find = true;
-      }
-    }
-    if (!find) {
-      console.log('error');
-      this.arenaTypeId = null;
-    }*/
-    //this.arenaTypeId = this.arena.;
-  //}
 
-  /* Перевод выбранного текста Город в айди*/
-  /*private setCityId() {
-    let find = false;
-    let i = this.cities.length;
-    while (i--) {
-      if (this.cities[i].name === this.arena.cityName) {
-        this.cityId = this.cities[i].id;
-        find = true;
-      }
-    }
-    if (!find) {
-      console.log('error');
-      this.cityId = null;
-    }
-  }*/
-
-  private getCities() {
-    this.loading = true;
-    this.service.getCities()
-      .subscribe(
-        cities => {
-          let emptyValue: City = {id: null, name: "Город не указан", countryId: null};
-          this.cities = new Array<City>();
-          this.cities.push(emptyValue);
-          this.cities = this.cities.concat(cities);
-          console.log(cities);
-          this.loading = false;
-        },
-        error => {
-          this.errorMessage = error;
-          this.loading = false;
-        }
-      );
-  }
+  // private getCities() {
+  //   this.loading = true;
+  //   this.service.getCities('*')
+  //     .subscribe(
+  //       cities => {
+  //         let emptyValue: City = {id: null, name: "Город не указан", countryId: null};
+  //         this.cities = new Array<City>();
+  //         this.cities.push(emptyValue);
+  //         this.cities = this.cities.concat(cities);
+  //         console.log(cities);
+  //         this.loading = false;
+  //       },
+  //       error => {
+  //         this.errorMessage = error;
+  //         this.loading = false;
+  //       }
+  //     );
+  // }
 
   public setDeleteFlag() {
     console.log(this.deleteFlag);
@@ -249,13 +198,6 @@ export class ArenaEditComponent implements OnInit {
     const target = event.target || event.srcElement;
     this.files = target.files;
     console.log(this.files);
-    /*if (this.files) {
-      let files :FileList = this.files;
-      const formData = new FormData();
-      for(let i = 0; i < files.length; i++){
-        formData.append('photo', files[i]);
-      }
-    }*/
   }
 
   public getArenaLogo(arena: ArenaViewItem): string {
@@ -264,5 +206,38 @@ export class ArenaEditComponent implements OnInit {
 
   public editLogo(){
     this.router.navigate([ "arena", "logo", this.arena.id ]);
+  }
+
+  public deleteArena() {
+    console.log(this.arena);
+    console.log(this.id);
+    console.log('delete');
+    this.service.deleteArena(this.id).subscribe(
+      data => {
+        //this.router.navigate([this.returnUrl]);
+      },
+      error => {
+        this.alertService.error(error);
+        this.alertService.error("Не удалось удалить арену");
+        this.loading = false;
+      });
+  }
+
+  private getArena(id: number) {
+    this.loading = true;
+    this.service.getArena(id)
+      .subscribe(
+        arena => {
+          this.arena = arena;
+          this.mapPoint = this.getMapPoint(arena);
+          this.city = this.arena.city;
+          console.log(this.arena);
+          this.loading = false;
+        },
+        error => {
+          this.errorMessage = error;
+          this.loading = false;
+        }
+      );
   }
 }
