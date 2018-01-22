@@ -10,11 +10,13 @@ import { Point } from 'app/shared/map/point';
 })
 export class MapComponent{
     private _points: Point[];
-    
+
     avg: Point;
-    
+
+    zoom: number = 13;
+
     get points(): Point[]{ return this._points; }
-    set points(value : Point[]){
+    set points(value: Point[]){
         this._points = value;
         this.avg = this.getAveragePoint(value);
     }
@@ -34,7 +36,7 @@ export class MapComponent{
 
             return avg;
         }
-        else 
+        else
             return null;
     }
 }

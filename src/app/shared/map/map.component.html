@@ -1,7 +1,6 @@
 <!--Google map-->
 <div *ngIf="avg">
-    <agm-map class="z-depth-1-half map-container" style="height: 400px;" [latitude]="avg.latitude" [longitude]="avg.longitude">
+    <agm-map class="z-depth-1-half map-container" style="height: 400px;" [zoom]="zoom" [latitude]="avg.latitude" [longitude]="avg.longitude">
             <agm-marker [latitude]="point.latitude" [longitude]="point.longitude" *ngFor="let point of points; let i=index"></agm-marker>
     </agm-map>
 </div>
-      
