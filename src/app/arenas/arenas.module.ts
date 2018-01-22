@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
+import { Ng2Permission } from 'angular2-permission';
 // import { NgxPermissionsModule } from 'ngx-permissions';
 
 import { ArenaViewComponent } from "app/arenas/arena-view/arena-view.component";
@@ -38,7 +39,8 @@ import { NgxEditorModule } from 'ngx-editor';
         CommonModule,
         SharedModule,
         ArenaRoutingModule,
-        NgxEditorModule
+        NgxEditorModule,
+        Ng2Permission
       ],
       providers: [
         ArenaService

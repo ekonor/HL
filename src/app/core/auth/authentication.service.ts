@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpRequest, HttpErrorResponse } f
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {isNull} from "util";
+import { PermissionService } from 'angular2-permission';
 
 @Injectable()
 export class AuthenticationService {
@@ -13,7 +14,8 @@ export class AuthenticationService {
   public token: string;
 
   constructor(private httpClient: HttpClient,
-              private readonly apiConfig: ApiConfig) {
+              private readonly apiConfig: ApiConfig,
+              private permissionService: PermissionService) {
     // set token if saved in local storage
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = currentUser && currentUser.token;
@@ -40,6 +42,11 @@ export class AuthenticationService {
             this.token = token;
             // TODO проверка существования роли
             localStorage.setItem('currentUser', JSON.stringify({username: username, token: token, roles: response['roles']}));
+            // let i = response['roles'].length;
+            // while (i--) {
+            //   this.permissionService.add(response['roles'][i]);
+            // }
+            console.log(this.permissionService.store);
             return true;
           } else {
             return false;
@@ -52,6 +59,7 @@ export class AuthenticationService {
     // clear token remove user from local storage to log user out
     this.token = null;
     localStorage.removeItem('currentUser');
+    this.permissionService.clearStore();
   }
 
   private getMethodUrl(methodUrlPrefix: string): string {

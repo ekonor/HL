@@ -5,7 +5,7 @@ import { HttpModule} from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
-// import { Ng2Permission } from 'angular2-permission';
+import { Ng2Permission } from 'angular2-permission';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -69,7 +69,7 @@ import { NgxEditorModule } from 'ngx-editor'; // https://github.com/Sibiraj-S/ng
     routing,
     RouterModule,
     NgbModule.forRoot(),
-    // Ng2Permission,
+    Ng2Permission,
     MDBBootstrapModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBpuC7_aFMwlRMvHJJgDFsQ0M5_6RlzNYA'
