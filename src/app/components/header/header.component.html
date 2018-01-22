@@ -16,8 +16,26 @@
             <!--li><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a>
             </li-->
             <!--li><a href="/profile"><i class="fa fa-user"></i>Мой аккаунт</a></li-->
-            <li><a [routerLink]="['/login']" routerLinkActive="active"><i class="fa fa-sign-in"></i>Вход</a></li>
-            <li><a [routerLink]="['/logout']" routerLinkActive="active"><i class="fa fa-sign-out"></i>Выход</a></li>
+            <li>
+              <a [routerLink]="['/login']"
+                 routerLinkActive="active"
+                 [hasPermission]="['superadministrator']"
+                 onAuthorizedPermission="hide"
+                 onUnauthorizedPermission="show">
+                <i class="fa fa-sign-in"></i>
+                Вход
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/logout']"
+                   routerLinkActive="active"
+                   [hasPermission]="['superadministrator']"
+                   onAuthorizedPermission="show"
+                   onUnauthorizedPermission="hide">
+                  <i class="fa fa-sign-out"></i>
+                  Выход
+              </a>
+            </li>
             <!--li><a href="/registration" data-toggle="modal" data-target="#myModalTwo"><i class="fa fa-user-plus"></i>Регистрация</a></li-->
           </ul>
         </div>

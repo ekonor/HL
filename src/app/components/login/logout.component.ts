@@ -23,7 +23,7 @@ export class LogoutComponent implements OnInit {
     // get return url from route parameters or default to '/'
     //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     //this.router.navigate([this.returnUrl]);
-    this.router.navigate(['/']);
+    this.router.navigate(['']);
   }
 }
 

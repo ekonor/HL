@@ -42,10 +42,10 @@ export class AuthenticationService {
             this.token = token;
             // TODO проверка существования роли
             localStorage.setItem('currentUser', JSON.stringify({username: username, token: token, roles: response['roles']}));
-            // let i = response['roles'].length;
-            // while (i--) {
-            //   this.permissionService.add(response['roles'][i]);
-            // }
+             let i = response['roles'].length;
+             while (i--) {
+               this.permissionService.add(response['roles'][i]);
+             }
             console.log(this.permissionService.store);
             return true;
           } else {

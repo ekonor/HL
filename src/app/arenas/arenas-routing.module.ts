@@ -8,7 +8,7 @@ import { ArenaEditComponent } from 'app/arenas/arena-edit/arena-edit.component';
 import { ArenaLogoComponent } from 'app/arenas/arena-logo/arena-logo.component';
 import { ArenaCreateComponent } from 'app/arenas/arena-create/arena-create.component';
 
-//import { PermissionGuard, IPermissionGuardModel } from 'angular2-permission';
+// import { PermissionGuard, IPermissionGuardModel } from 'angular2-permission';
 
 
 export const arenaRoutes: Routes =[
