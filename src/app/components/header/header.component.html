@@ -12,28 +12,36 @@
             <li style="float: left; list-style: none; position: relative; width: 720px;" class="bx-clone"><span class="kode-barinfo"><strong>Latest News : </strong> Lorem ipsum dolor sit amet, cons ecte tuer adipiscing elit,</span></li></ul></div><div class="bx-controls bx-has-controls-direction"><div class="bx-controls-direction"><a class="bx-prev" href=""></a><a class="bx-next" href=""></a></div></div></div-->
         </div>
         <div class="col-md-12">
-          <ul class="kode-userinfo">
-            <!--li><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a>
-            </li-->
-            <!--li><a href="/profile"><i class="fa fa-user"></i>Мой аккаунт</a></li-->
+          <ul class="kode-userinfo" [hasPermission]="['superadministrator']"
+              onAuthorizedPermission="hide"
+              onUnauthorizedPermission="show">
             <li>
               <a [routerLink]="['/login']"
-                 routerLinkActive="active"
-                 [hasPermission]="['superadministrator']"
-                 onAuthorizedPermission="hide"
-                 onUnauthorizedPermission="show">
+                 routerLinkActive="active">
                 <i class="fa fa-sign-in"></i>
                 Вход
               </a>
             </li>
+            <!--li><a href="/registration" data-toggle="modal" data-target="#myModalTwo"><i class="fa fa-user-plus"></i>Регистрация</a></li-->
+          </ul>
+          <ul class="kode-userinfo" [hasPermission]="['superadministrator']"
+              onAuthorizedPermission="show"
+              onUnauthorizedPermission="hide">
+            <!--li><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a>
+            </li-->
+            <!--li><a href="/profile"><i class="fa fa-user"></i>Мой аккаунт</a></li-->
+            <li>
+              <a [routerLink]="['']"
+                 routerLinkActive="active">
+                <i class="fa fa-user"></i>
+                Вы вошли как {{username}}
+              </a>
+            </li>
             <li>
               <a [routerLink]="['/logout']"
-                   routerLinkActive="active"
-                   [hasPermission]="['superadministrator']"
-                   onAuthorizedPermission="show"
-                   onUnauthorizedPermission="hide">
-                  <i class="fa fa-sign-out"></i>
-                  Выход
+                 routerLinkActive="active">
+                <i class="fa fa-sign-out"></i>
+                Выход
               </a>
             </li>
             <!--li><a href="/registration" data-toggle="modal" data-target="#myModalTwo"><i class="fa fa-user-plus"></i>Регистрация</a></li-->

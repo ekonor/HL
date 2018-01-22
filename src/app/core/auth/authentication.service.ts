@@ -65,5 +65,13 @@ export class AuthenticationService {
   private getMethodUrl(methodUrlPrefix: string): string {
     return this.apiConfig.apiPath + methodUrlPrefix;
   }
+
+  public getUserName(){
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser) {
+      return currentUser.username;
+    }
+
+}
 }
 
