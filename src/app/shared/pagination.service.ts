@@ -5,7 +5,7 @@ import { ListInfo } from 'app/shared/list/list-info';
 
 @Injectable()
 export class PaginationService {
-  private _pageSize: number = 9;
+  private _pageSize: number = 10;
 
   get pageSize(): number{
     return this._pageSize; // todo from localstorage

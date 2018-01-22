@@ -3,19 +3,22 @@
 <div class="col-md-12 admin-panel">
   <a class="btn-floating deep-orange waves-light waves-effect" title="Добавить арену" (click)="addArena()"><i class="fa fa-plus"></i></a>
 </div>
-<div class="col-lg-4 col-sm-6 blog-item" *ngFor="let arena of content">
+<div class="col-lg-6 col-sm-6 blog-item" *ngFor="let arena of content">
       <div class="item h-100">
-        <div class="item-img" >
-          <a (click)="viewArena(arena)">
-            <img class="item-img-top" [src]="getArenaLogo(arena)" alt="" onerror = "this.style.display = 'none'" >
-          </a>
+        <div class="item-img-wrapper" >
+          <div class="item-img-bg-wrapper" >
+            <img class="item-img-bg" [src]="getArenaLogo(arena)" alt="" onerror = "this.style.display = 'none'">
+          </div>
+            <a (click)="viewArena(arena)">
+              <img class="item-img-main" [src]="getArenaLogo(arena)" alt="" onerror = "this.style.display = 'none'" >
+            </a>
         </div>
         <div class="item-body">
           <div class="item-title-main">
             <p>{{arena.cityName}}</p>
           </div>
           <h5 class="item-title admin-panel">
-            <a (click)="viewArena(arena)" alt="Подробнее...">
+            <a class="title-text" (click)="viewArena(arena)" alt="Подробнее...">
               {{arena.name}}
                 </a>
             <!--button class="btn-floating deep-orange waves-light waves-effect"
@@ -26,7 +29,7 @@
                onUnauthorizedPermission="disable">
               <i class="fa fa-pencil"></i>
             </button-->
-            <a class="btn-floating deep-orange waves-light waves-effect"
+            <a class="btn-floating deep-orange waves-light waves-effect visible-btn"
                     title="Редактировать арену"
                     (click)="editArena(arena)">
               <i class="fa fa-pencil"></i>
@@ -34,15 +37,15 @@
           </h5>
           <span class="item-text">
             <p class="icon-wrap"><i class="material-icons">&#xe7fb;</i>Вместимость: {{arena.capacity}} чел.</p>
-            <p class="icon-wrap"><i class="fa fa-envelope"></i>Электронная почта: <a href="mailto:{{arena.email}}">{{arena.email}}</a></p>
+            <p class="icon-wrap"><i class="fa fa-envelope"></i>Электронная почта:&nbsp;<a class="short-link" href="mailto:{{arena.email}}">{{arena.email}}</a></p>
             <p class="icon-wrap"><i class="fa fa-map-marker"></i>Адрес: {{arena.address}}</p>
             <p class="icon-wrap">
               <i class="fa fa-info-circle"></i>
-              &nbsp;Сайт: <a class="site-link" target="_blank" [href]="arena.webSite">Сайт арены</a>
+              &nbsp;Сайт: <a class="short-link" target="_blank" [href]="arena.webSite">{{arena.webSite}}</a>
             </p>
-            <p class="text-center">
-              <button (click)="viewArena(arena)" class="btn btn-deep-orange waves-effect waves-light">Подробнее...</button>
-            </p>
+          </span>
+          <span class="bottom-btn">
+            <button (click)="viewArena(arena)" class="btn btn-deep-orange waves-effect waves-light">Подробнее...</button>
           </span>
         </div>
       </div>
