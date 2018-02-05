@@ -4,38 +4,16 @@ import { ArenaViewItem } from 'app/arenas/shared/arena-view-item';
 import { ArenaType } from "app/arenas/shared/arena-type";
 import { City } from "app/core/geo/city";
 import { ActivatedRoute, Router } from '@angular/router';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+// import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import  { AlertService } from 'app/components/alert/alert.service';
 import { Point } from "app/shared/map/point";
-import { debounce } from "rxjs/operator/debounce";
-import {Observable} from 'rxjs/Observable';
-import {of} from 'rxjs/observable/of';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/merge';
-
-
-// import {Component, Injectable} from '@angular/core';
-// import {HttpClient, HttpParams} from '@angular/common/http';
+// import { debounce } from "rxjs/operator/debounce";
 // import {Observable} from 'rxjs/Observable';
-// import {of} from 'rxjs/observable/of';
-// import 'rxjs/add/operator/catch';
-// import 'rxjs/add/operator/debounceTime';
-// import 'rxjs/add/operator/distinctUntilChanged';
-// import 'rxjs/add/operator/do';
-// import 'rxjs/add/operator/map';
-// import 'rxjs/add/operator/switchMap';
-// import 'rxjs/add/operator/merge';
 
 @Component({
   moduleId: module.id,
   selector: 'arena-id',
   templateUrl: 'arena-edit.component.html',
-  // styleUrls: [ "../../../node_modules/bootstrap/dist/css/bootstrap.css" ]
   styleUrls: ['arena-edit.component.scss']
 })
 
@@ -46,26 +24,15 @@ export class ArenaEditComponent implements OnInit {
   id: number;
   deleteFlag: boolean;
   mapPoint: Point;
-  // private sub: any;
   arenaTypes: ArenaType[];
-  cities: City[];
   files: any;
   errorMessage: string;
-
   city: City;
-  searching = false;
-  hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
-  searchFailed = false;
 
   constructor( private service: ArenaService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private alertService: AlertService ) {
-    // Получаем id из url.
-    // Url вида ...edit/21, где 21 - это id.
-    // В роутинге должно быть прописано так edit/:id
-    // this.id = this.activatedRoute.snapshot.params['id'];
-    // console.log('id='+this.id+'route='+this.activatedRoute.snapshot.params['id']);
     this.arena = new ArenaViewItem;
     this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
     this.loading = true;
@@ -73,41 +40,17 @@ export class ArenaEditComponent implements OnInit {
     this.getArena(this.id);
     this.getArenaTypes();
     this.deleteFlag = false;
-    /*this.sub = this.activatedRoute.params.subscribe(params => {
-      this.id = parseInt(params['id']);
-      this.getArena(this.id);
-    });*/
-
   }
 
   ngOnInit() {
 
   }
 
-  ngOnDestroy() {
-    //this.sub.unsubscribe();
-  }
-  search = (text$: Observable<string>) =>
-    text$
-      .debounceTime(300)
-      .distinctUntilChanged()
-      .do(() => this.searching = true)
-      .switchMap(term =>
-        this.service.getCities(term)
-          .do(() => this.searchFailed = false)
-          .catch(() => {
-            this.searchFailed = true;
-            return of([]);
-          }))
-      .do(() => this.searching = false)
-      .merge(this.hideSearchingWhenUnsubscribed);
-
   private getMapPoint(arena: ArenaViewItem): Point {
     if (this.arena && this.arena.coordinates && this.arena.coordinates.latitude && this.arena.coordinates.longitude) {
       return {latitude: this.arena.coordinates.latitude, longitude: this.arena.coordinates.longitude};
     }
   }
-  formatter = (x: {name: string}) => x.name;
 
   public editArena(arena: ArenaViewItem) {
     if (!this.city && !this.city.id) {
@@ -120,7 +63,7 @@ export class ArenaEditComponent implements OnInit {
     console.log('ok');
     this.service.updateArena(this.id, this.arena).subscribe(
       data => {
-        this.router.navigate(['/arenas']);
+        //this.router.navigate(['/arenas']);
       },
       error => {
         this.alertService.error(error);
@@ -171,25 +114,6 @@ export class ArenaEditComponent implements OnInit {
       );
   }
 
-  // private getCities() {
-  //   this.loading = true;
-  //   this.service.getCities('*')
-  //     .subscribe(
-  //       cities => {
-  //         let emptyValue: City = {id: null, name: "Город не указан", countryId: null};
-  //         this.cities = new Array<City>();
-  //         this.cities.push(emptyValue);
-  //         this.cities = this.cities.concat(cities);
-  //         console.log(cities);
-  //         this.loading = false;
-  //       },
-  //       error => {
-  //         this.errorMessage = error;
-  //         this.loading = false;
-  //       }
-  //     );
-  // }
-
   public setDeleteFlag() {
     console.log(this.deleteFlag);
   }
@@ -231,7 +155,8 @@ export class ArenaEditComponent implements OnInit {
           this.arena = arena;
           this.mapPoint = this.getMapPoint(arena);
           this.city = this.arena.city;
-          console.log(this.arena);
+          if (this.city == null) { this.city = new City; }
+          //console.log(this.arena);
           this.loading = false;
         },
         error => {
@@ -240,5 +165,11 @@ export class ArenaEditComponent implements OnInit {
           this.router.navigate(['/not-found']);
         }
       );
+  }
+
+  private setCity(city: City) {
+    if (city && city.id) {
+      this.city = city;
+    }
   }
 }

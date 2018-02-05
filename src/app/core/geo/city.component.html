@@ -1,0 +1,8 @@
+<ng-template #rt let-r="result" let-t="term">
+  {{ r.name}}
+</ng-template>
+<label for="city">Город</label>
+<input id="city" name="city" type="text" class="form-control" [(ngModel)]="city" [ngbTypeahead]="search" [resultTemplate]="rt"  [inputFormatter]="formatter" (ngModelChange)="returnCity()"/>
+<span *ngIf="searching">Поиск...</span>
+<div class="invalid-feedback" *ngIf="searchFailed">Извините, городов с заданными параметрами не найдено</div>
+

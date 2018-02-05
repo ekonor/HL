@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule} from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
@@ -8,7 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Ng2Permission } from 'angular2-permission';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+// import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -43,6 +43,8 @@ import { SchoolModule } from 'app/schools/schools.module';
 
 import { NgxEditorModule } from 'ngx-editor'; // https://github.com/Sibiraj-S/ngx-editor/wiki/ngxEditor
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +62,8 @@ import { NgxEditorModule } from 'ngx-editor'; // https://github.com/Sibiraj-S/ng
     LoginComponent,
     LogoutComponent,
     RegisterComponent
+
+
   ],
   imports: [
     BrowserModule,
@@ -93,7 +97,8 @@ import { NgxEditorModule } from 'ngx-editor'; // https://github.com/Sibiraj-S/ng
     AuthenticationService,
     UserService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
   // schemas: [NO_ERRORS_SCHEMA]
 })
 
