@@ -1,6 +1,6 @@
 export class City {
   id: number;
-  name: string;
+  name: string = '';
   countryId?: number;
 
   constructor( values: Object = {} ) {

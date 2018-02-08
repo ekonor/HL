@@ -72,7 +72,7 @@ export class ArenaService {
     console.log(arena);
     const body = JSON.stringify({
       'name': arena.name,
-      'fullName': arena.fullName,
+      'fullName': (arena.fullName ? arena.fullName : arena.name),
       'cityId': arena.city.id,
       'arenaTypeId': arena.arenaTypeId,
       'startYear': arena.startYear,
@@ -97,7 +97,19 @@ export class ArenaService {
 
   public addArena(arena: ArenaViewItem): Observable<number> {
     console.log(arena);
-    const body = JSON.stringify({ "contacts": arena.contacts, "about": arena.about, "name": arena.name, "fullName": (arena.fullName ? arena.fullName : arena.name), "arenaTypeId": arena.arenaTypeId, "address": arena.address, "email": arena.email, "webSite": arena.webSite, "capacity": arena.capacity, "logo": arena.logo, "city": arena.city });
+    const body = JSON.stringify({
+      'name': arena.name,
+      'fullName': (arena.fullName ? arena.fullName : arena.name),
+      'cityId': arena.city.id,
+      'arenaTypeId': arena.arenaTypeId,
+      'startYear': arena.startYear,
+      'address': arena.address,
+      'email': arena.email,
+      'webSite': arena.webSite,
+      'contacts': arena.contacts,
+      'capacity': arena.capacity,
+      'about': arena.about
+    });
     console.log(body);
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
