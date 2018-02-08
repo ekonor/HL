@@ -45,22 +45,23 @@ export class ArenaFilterComponent implements OnInit {
 
   ngOnInit() {
     this.getArenaTypes();
-    this.getCities();
+    this.city = new City;
+    //this.getCities();
   }
-  autocompleteCity = (text$: Observable<string>) =>
-    text$
-      .debounceTime(300)
-      .distinctUntilChanged()
-      .do(() => this.searching = true)
-      .switchMap(term =>
-        this.service.getCities(term)
-          .do(() => this.searchFailed = false)
-          .catch(() => {
-            this.searchFailed = true;
-            return of([]);
-          }))
-      .do(() => this.searching = false)
-      .merge(this.hideSearchingWhenUnsubscribed);
+  // autocompleteCity = (text$: Observable<string>) =>
+  //   text$
+  //     .debounceTime(300)
+  //     .distinctUntilChanged()
+  //     .do(() => this.searching = true)
+  //     .switchMap(term =>
+  //       this.service.getCities(term)
+  //         .do(() => this.searchFailed = false)
+  //         .catch(() => {
+  //           this.searchFailed = true;
+  //           return of([]);
+  //         }))
+  //     .do(() => this.searching = false)
+  //     .merge(this.hideSearchingWhenUnsubscribed);
 
   private getArenaTypes() {
     this.service.getArenaTypes()
@@ -75,9 +76,9 @@ export class ArenaFilterComponent implements OnInit {
     );
   }
 
-  private getCities() {
-      // todo
-  }
+  // private getCities() {
+  //     // todo
+  // }
 
   public toggle() {
 
@@ -85,7 +86,14 @@ export class ArenaFilterComponent implements OnInit {
     console.log(this.toggled);
     localStorage.setItem('arenasFilterState', JSON.stringify({toggled: this.toggled}));
   }
-  formatter = (x: {name: string}) => x.name;
+  // formatter = (x: {name: string}) => x.name;
+
+
+  private setCity(city: City) {
+    if (city && city.id) {
+      this.city = city;
+    }
+  }
 
   search() {
     if (this.city && this.city.id) {

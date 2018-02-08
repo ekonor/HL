@@ -63,7 +63,7 @@ export class ArenaEditComponent implements OnInit {
     console.log('ok');
     this.service.updateArena(this.id, this.arena).subscribe(
       data => {
-        //this.router.navigate(['/arenas']);
+        this.router.navigate(['/arenas']);
       },
       error => {
         this.alertService.error(error);

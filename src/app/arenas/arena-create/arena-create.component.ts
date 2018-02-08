@@ -88,7 +88,7 @@ export class ArenaCreateComponent implements OnInit {
     console.log(this.id);
     this.service.addArena(this.arena).subscribe(
       data => {
-        //this.router.navigate(['/arenas']);
+        this.router.navigate(['/arenas']);
       },
       error => {
         this.alertService.error(error);
