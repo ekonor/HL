@@ -25,6 +25,7 @@ export class ArenasComponent implements OnInit {
   listInfo: ListInfo = new ListInfo();
   sortOptions: SortOption[] = new Array<SortOption>();
   pageSize: number;
+  dataIsLoading: boolean;
 
   private sub : any;
 
@@ -64,12 +65,14 @@ export class ArenasComponent implements OnInit {
   }
 
   private getArenas() {
+  this.dataIsLoading = true;
     this.arenaService.getArenas(this.filter, this.listInfo)
     .subscribe(
       arenas => {
         this.arenaList = arenas;
       },
-      error => this.errorMessage = error
+      error => this.errorMessage = error,
+      () => this.dataIsLoading = false
     );
   }
 }

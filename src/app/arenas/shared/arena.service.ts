@@ -45,7 +45,7 @@ export class ArenaService {
     return this.httpClient.get<ArenaViewItem>(methodUrl);
   }
 
-  public getCities(searchTerm: string): Observable<City[]> {
+  /*public getCities(searchTerm: string): Observable<City[]> {
     if (searchTerm === '') {
       return of([]);
     }
@@ -54,7 +54,7 @@ export class ArenaService {
     let params = new HttpParams();
     params = params.append('searchTerm', searchTerm);
     return this.httpClient.get<City[]>(methodUrl, { params: params });
-  }
+  }*/
 
   public getArenaTypes(): Observable<ArenaType[]> {
     const methodUrlPrefix = '/arenas' + '/types';

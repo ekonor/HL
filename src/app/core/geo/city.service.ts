@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
 
 import { City } from 'app/core/geo/city';
+import { Country} from 'app/core/geo/country';
 import { ApiConfig } from 'app/core/api-config';
 
 
@@ -14,15 +15,27 @@ export class CityService {
     private readonly apiConfig: ApiConfig) {
   }
 
-  public getCities(searchTerm: string): Observable<City[]> {
+  public getCities(searchTerm: string, countryId: number): Observable<City[]> {
     if (searchTerm === '') {
       return of([]);
     }
     const methodUrlPrefix = '/geo/cities';
-    let methodUrl = this.getMethodUrl(methodUrlPrefix);
+    const methodUrl = this.getMethodUrl(methodUrlPrefix);
     let params = new HttpParams();
     params = params.append('searchTerm', searchTerm);
+    params = params.append('countryId', countryId.toString());
     return this.httpClient.get<City[]>(methodUrl, { params: params });
+  }
+
+  public getCountries(searchTerm: string): Observable<City[]> {
+    if (searchTerm === '') {
+      return of([]);
+    }
+    const methodUrlPrefix = '/geo/countries';
+    const methodUrl = this.getMethodUrl(methodUrlPrefix);
+    let params = new HttpParams();
+    params = params.append('searchTerm', searchTerm);
+    return this.httpClient.get<Country[]>(methodUrl, { params: params });
   }
 
   private getMethodUrl(methodUrlPrefix: string): string {

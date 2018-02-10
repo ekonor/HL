@@ -8,26 +8,29 @@
         <form>
             <div class="row">
               <div class="col-md-4">
-                  <select [(ngModel)]="filter.arenaTypeId" name="arenaTypeId" class="form-control">
-                      <option *ngFor="let arenaType of arenaTypes"  [ngValue]="arenaType.id">{{arenaType.name}}</option>
-                    </select>
+                <label for="arenaTypeId">Тип арены</label>
+                <select id="arenaTypeId"[(ngModel)]="filter.arenaTypeId" name="arenaTypeId" class="form-control">
+                  <option *ngFor="let arenaType of arenaTypes"  [ngValue]="arenaType.id">{{arenaType.name}}</option>
+                </select>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-8">
                   <app-city-filter *ngIf="city" [city]="city" (onChanged)="setCity($event)"></app-city-filter>
-              </div>
-              <div class="col-md-4">
-                <button type="button" class="btn btn-primary" (click)="search()">
-                  <i class="fa fa-search"></i>
-                </button>
-                <button type="reset" class="btn btn-default">
-                    <i class="fa fa-close"></i>
-                  </button>
               </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <input type="text" name="name" [(ngModel)]="filter.searchText" placeholder="Название или адрес" class="form-control">
                 </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <button type="button" class="btn btn-primary" (click)="search()">
+                  <i class="fa fa-search"></i>
+                </button>
+                <button type="reset" class="btn btn-default">
+                  <i class="fa fa-close"></i>
+                </button>
+              </div>
             </div>
           </form>
     </div>

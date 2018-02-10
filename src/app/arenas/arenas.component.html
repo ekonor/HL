@@ -3,19 +3,30 @@
     <div class="col-md-12">
       <div class="heading heading-12 margin-top-bottom-30">
         <p> Вся информация о ледовых аренах, стадионах и площадках в одном месте</p>
-        <h1><span class="left"></span>Хоккейные арены и площадки<span class="right"></span></h1>
+        <h1>
+          <span class="left"></span>
+          Хоккейные арены и площадки
+          <span class="right"></span>
+        </h1>
         <hr>
       </div>
     </div>
-
-        <arena-filter [filter]="filter" (onFiltered)="onFiltered($event)"></arena-filter>
-
-        <sorting class="pull-right" [orderBy]="listInfo.orderBy" [orderDir]="listInfo.orderDir"
-                  [options]="sortOptions" (onSorted)="onSorted($event)"></sorting>
-
-    <arena-list [content]="arenaList.listItems" class="row"></arena-list>
-
-    <pagination [page]="listInfo.page" [collectionSize]="arenaList.count" [pageSize]="listInfo.take"></pagination>
-
+    <arena-filter [filter]="filter"
+                  (onFiltered)="onFiltered($event)">
+    </arena-filter>
+    <sorting class="pull-right"
+             [orderBy]="listInfo.orderBy"
+             [orderDir]="listInfo.orderDir"
+             [options]="sortOptions"
+             (onSorted)="onSorted($event)">
+    </sorting>
+    <loader [hidden]="!dataIsLoading"></loader>
+    <arena-list [content]="arenaList.listItems"
+                class="row">
+    </arena-list>
+    <pagination [page]="listInfo.page"
+                [collectionSize]="arenaList.count"
+                [pageSize]="listInfo.take">
+    </pagination>
   </div>
 </div>
