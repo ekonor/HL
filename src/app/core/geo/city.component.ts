@@ -78,15 +78,9 @@ export class CityComponent implements OnInit {
   returnCity() {
     if (this.city && this.city.id) {
       if (this.city.country) {
-        if (this.country && this.country.id && this.country.id !== this.city.country.id) {
           this.country = this.city.country;
-        } else if (!this.country) {
-          this.country = this.city.country;
-        }
       }
       this.onChanged.emit(this.city);
-    } else {
-      this.city = new City;
     }
   }
 
@@ -99,7 +93,7 @@ export class CityComponent implements OnInit {
       }
     } else {
       this.city = new City;
-      this.country = new Country;
+      // this.country = new Country;
     }
   }
 }

@@ -34,7 +34,7 @@ export class ArenaEditComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private alertService: AlertService ) {
-    this.arena = new ArenaViewItem;
+    //this.arena = new ArenaViewItem;
     this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
     this.loading = true;
     this.id = this.activatedRoute.snapshot.params['id'];
