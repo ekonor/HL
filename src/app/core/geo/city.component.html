@@ -8,7 +8,7 @@
            name="country"
            type="text"
            class="form-control"
-           [(ngModel)]="country" 
+           [(ngModel)]="country"
            [ngbTypeahead]="searchCountry"
            [resultTemplate]="rt"
            [inputFormatter]="formatter"
@@ -16,7 +16,7 @@
   </div>
   <div class="col-md-6">
     <label for="city">Город</label>
-    <input id="city"
+    <input [readonly]="!country" id="city"
            name="city"
            type="text"
            class="form-control"
