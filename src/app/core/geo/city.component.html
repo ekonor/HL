@@ -4,17 +4,29 @@
 <div class="row">
   <div class="col-md-6">
     <label for="country">Страна</label>
-    <input id="country" name="country" type="text" class="form-control" [(ngModel)]="country" [ngbTypeahead]="searchCountry" [resultTemplate]="rt"  [inputFormatter]="formatter" />
+    <input id="country"
+           name="country"
+           type="text"
+           class="form-control"
+           [(ngModel)]="country" 
+           [ngbTypeahead]="searchCountry"
+           [resultTemplate]="rt"
+           [inputFormatter]="formatter"
+           (ngModelChange)="updateCountry()"/>
   </div>
   <div class="col-md-6">
     <label for="city">Город</label>
-    <input id="city" name="city" type="text" class="form-control" [(ngModel)]="city" [ngbTypeahead]="searchCity" [resultTemplate]="rt"  [inputFormatter]="formatter" (ngModelChange)="returnCity()"/>
+    <input id="city"
+           name="city"
+           type="text"
+           class="form-control"
+           [(ngModel)]="city"
+           [ngbTypeahead]="searchCity"
+           [resultTemplate]="rt"
+           [inputFormatter]="formatter"
+           (ngModelChange)="returnCity()"/>
     <span *ngIf="searching">Поиск...</span>
     <div class="invalid-feedback" *ngIf="searchFailed">Извините, городов с заданными параметрами не найдено</div>
   </div>
-  {{country.name}}
-  {{country.id}}
-  {{city.name}}
-  {{city.id}}
 </div>
 

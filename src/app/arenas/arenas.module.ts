@@ -1,10 +1,11 @@
-import { NgModule /*, CUSTOM_ELEMENTS_SCHEMA*/ } from "@angular/core";
+import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { Ng2Permission } from 'angular2-permission';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-// import { NgxPermissionsModule } from 'ngx-permissions';
+import { NgxEditorModule } from 'ngx-editor';
+import {CoreModule} from "app/core/core.module";
 
 import { ArenaViewComponent } from "app/arenas/arena-view/arena-view.component";
 import { ArenaEditComponent } from "app/arenas/arena-edit/arena-edit.component";
@@ -18,14 +19,7 @@ import { ArenaService } from "app/arenas/shared/arena.service";
 import { ArenaRoutingModule } from "app/arenas/arenas-routing.module";
 import { SharedModule } from "app/shared/shared.module";
 
-import { NgxEditorModule } from 'ngx-editor';
-import {CoreModule} from "app/core/core.module";
-
-
 @NgModule({
-  // exports: [
-  //   NgxPermissionsModule
-  // ]
       declarations: [
         ArenasComponent,
         ArenaListComponent,
@@ -46,7 +40,6 @@ import {CoreModule} from "app/core/core.module";
         NgbModule,
         CoreModule
       ],
-      //schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       providers: [
         ArenaService
       ]

@@ -23,7 +23,9 @@ export class CityService {
     const methodUrl = this.getMethodUrl(methodUrlPrefix);
     let params = new HttpParams();
     params = params.append('searchTerm', searchTerm);
-    params = params.append('countryId', countryId.toString());
+    if (countryId) {
+      params = params.append('countryId', countryId.toString());
+    }
     return this.httpClient.get<City[]>(methodUrl, { params: params });
   }
 

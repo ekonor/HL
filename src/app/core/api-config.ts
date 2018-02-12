@@ -7,7 +7,7 @@ export class ApiConfig {
 
     constructor() {
         this._apiPath = 'http://api.hockeylife.pro/v1/';
-        this._filesPath = 'http://api.hockeylife.pro';
+        this._filesPath = 'http://api.hockeylife.pro/files/';
     }
 
     get apiPath(): string {

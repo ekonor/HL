@@ -10,12 +10,10 @@ export class ArenaViewItem {
   webSite?: string;
   capacity?: number;
   logo?: string;
-  // cityName?: string;
   city?: City = new City;
   contacts?: string;
   coordinates?: Coordinates = new Coordinates;
   about?: string;
-  // arenaTypeName?: string;
   arenaTypeId?: number;
   fullName?: string;
   startYear: number;

@@ -67,21 +67,39 @@ export class CityComponent implements OnInit {
   ngOnInit() {
     if (!this.city) {
       this.city = new City;
+    } else {
+      this.country = this.city.country;
     }
     if (!this.country) {
       this.country = new Country;
     }
-    // else {
-    //   if (!this.country) {
-    //     let countryId = this.city.countryId;
-    //     this.service.getCountries(term)
-    //   }
-    // }
   }
 
   returnCity() {
     if (this.city && this.city.id) {
+      if (this.city.country) {
+        if (this.country && this.country.id && this.country.id !== this.city.country.id) {
+          this.country = this.city.country;
+        } else if (!this.country) {
+          this.country = this.city.country;
+        }
+      }
       this.onChanged.emit(this.city);
+    } else {
+      this.city = new City;
+    }
+  }
+
+  updateCountry() {
+    if (this.country && this.country.id) {
+      if (this.city && this.city.country) {
+        if (this.city.country.name !== this.country.name) {
+          this.city = new City;
+        }
+      }
+    } else {
+      this.city = new City;
+      this.country = new Country;
     }
   }
 }

@@ -2,6 +2,7 @@
   <app-header></app-header>
   <app-slides> </app-slides>
   <div class="wrapper">
+    <loader [hidden]="!dataIsLoading"></loader>
     <alert></alert>
     <router-outlet></router-outlet>
     <div class="clear"></div>

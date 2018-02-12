@@ -17,7 +17,6 @@ import { ChildrenTeamsComponent } from './components/children-teams/children-tea
 import { AboutComponent } from './components/about/about.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
-import { TournamentsComponent } from './components/tournaments/tournaments.component';
 
 import { routing, appRoutingProviders } from './app.routes';
 import { RouterModule } from '@angular/router';
@@ -55,7 +54,6 @@ import { NgxEditorModule } from 'ngx-editor'; // https://github.com/Sibiraj-S/ng
     AboutComponent,
     NotFoundComponent,
     HomeComponent,
-    TournamentsComponent,
     SlidesComponent,
     AlertComponent,
 

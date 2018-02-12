@@ -20,7 +20,6 @@
              [options]="sortOptions"
              (onSorted)="onSorted($event)">
     </sorting>
-    <loader [hidden]="!dataIsLoading"></loader>
     <arena-list [content]="arenaList.listItems"
                 class="row">
     </arena-list>
