@@ -1,7 +1,8 @@
+<loader [hidden]="!dataIsLoading"></loader>
 <div class="arena-edit row">
 <div class="col-md-6 col-md-offset-3">
   <h2>Редактирование арены</h2>
-  <form (ngSubmit)="editArena(arena)" #f="ngForm">
+  <form *ngIf="arena" (ngSubmit)="editArena(arena)" #f="ngForm">
      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !arenaname.valid }">
       <label for="arenaname">Сокращенное название арены</label>
       <input type="text" class="form-control" name="arenaname" [(ngModel)]="arena.name" (ngModelChange)="arena.name = $event" #arenaname="ngModel" id="arenaname"/>

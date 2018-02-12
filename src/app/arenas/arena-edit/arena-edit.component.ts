@@ -28,6 +28,7 @@ export class ArenaEditComponent implements OnInit {
   files: any;
   errorMessage: string;
   city: City;
+  dataIsLoading: boolean;
 
   constructor( private service: ArenaService,
               private router: Router,
@@ -148,7 +149,7 @@ export class ArenaEditComponent implements OnInit {
   }
 
   private getArena(id: number) {
-    this.loading = true;
+    this.dataIsLoading = true;
     this.service.getArena(id)
       .subscribe(
         arena => {
@@ -156,14 +157,13 @@ export class ArenaEditComponent implements OnInit {
           this.mapPoint = this.getMapPoint(arena);
           this.city = this.arena.city;
           if (this.city == null) { this.city = new City; }
-          //console.log(this.arena);
-          this.loading = false;
+          // this.dataIsLoading = false;
         },
         error => {
           this.errorMessage = error;
-          this.loading = false;
           this.router.navigate(['/not-found']);
-        }
+        },
+        () => this.dataIsLoading = false
       );
   }
 
