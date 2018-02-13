@@ -1,0 +1,58 @@
+<div>222222222</div>
+<div class="tournament-announcement-list container">
+  <div class="row">
+    <!--div class="col-md-12 admin-panel">
+      <a class="btn-floating deep-orange waves-light waves-effect"
+         title="Добавить арену"
+         (click)="addArena()"
+         [hasPermission]="['superadministrator']"
+         onAuthorizedPermission="show"
+         onUnauthorizedPermission="hide">
+        <i class="fa fa-plus"></i>
+      </a>
+    </div-->
+
+    <div class="col-lg-6 col-sm-6 blog-item" *ngFor="let tournamentAnnouncement of content">
+          <div class="item h-100">
+            <div class="item-img-wrapper" >
+              <div class="item-img-bg-wrapper" >
+                <img class="item-img-bg" [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)" alt="" onerror = "this.style.display = 'none'">
+              </div>
+                <a (click)="viewTournamentAnnouncement(tournamentAnnouncement)">
+                  <img class="item-img-main" [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)" alt="" onerror = "this.style.display = 'none'" >
+                </a>
+            </div>
+            <div class="item-body">
+              <div class="item-title-main">
+                <p>{{tournamentAnnouncement.cityName}}</p>
+              </div>
+              <h5 class="item-title admin-panel">
+                <a class="title-text" (click)="viewTournamentAnnouncement(tournamentAnnouncement)" alt="Подробнее...">
+                  {{tournamentAnnouncement.name}}
+                    </a>
+                <!--a class="btn-floating deep-orange waves-light waves-effect visible-btn"
+                   title="Редактировать арену"
+                   (click)="editArena(arena)"
+                   [hasPermission]="['superadministrator']"
+                   onAuthorizedPermission="show"
+                   onUnauthorizedPermission="hide">
+                  <i class="fa fa-pencil"></i>
+                </a-->
+              </h5>
+              <!--span class="item-text">
+                <p class="icon-wrap"><i class="material-icons">&#xe7fb;</i>Вместимость: {{arena.capacity}} чел.</p>
+                <p class="icon-wrap"><i class="fa fa-envelope"></i>Электронная почта:&nbsp;<a class="short-link" href="mailto:{{arena.email}}">{{arena.email}}</a></p>
+                <p class="icon-wrap"><i class="fa fa-map-marker"></i>Адрес: {{arena.address}}</p>
+                <p class="icon-wrap">
+                  <i class="fa fa-info-circle"></i>
+                  &nbsp;Сайт: <a class="short-link" target="_blank" [href]="arena.webSite">{{arena.webSite}}</a>
+                </p>
+              </span-->
+              <span class="bottom-btn">
+                <button (click)="viewTournamentAnnouncement(tournamentAnnouncement)" class="btn btn-deep-orange waves-effect waves-light">Подробнее...</button>
+              </span>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>

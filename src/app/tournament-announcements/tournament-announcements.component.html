@@ -1,0 +1,32 @@
+<loader [hidden]="!dataIsLoading"></loader>
+<div>1111111111</div>
+<div class="tournament-announcements container" *ngIf="tournamentAnnouncementList">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="heading heading-12 margin-top-bottom-30">
+        <h1>
+          <span class="left"></span>
+          Анонсы хоккейных турниров
+          <span class="right"></span>
+        </h1>
+        <hr>
+      </div>
+    </div>
+    <tournament-announcement-filter [filter]="filter"
+                  (onFiltered)="onFiltered($event)">
+    </tournament-announcement-filter>
+    <sorting class="pull-right"
+             [orderBy]="listInfo.orderBy"
+             [orderDir]="listInfo.orderDir"
+             [options]="sortOptions"
+             (onSorted)="onSorted($event)">
+    </sorting>
+    <tournament-announcement-list [content]="tournamentAnnouncementList.listItems"
+                class="row">
+    </tournament-announcement-list>
+    <pagination [page]="listInfo.page"
+                [collectionSize]="tournamentAnnouncementList.count"
+                [pageSize]="listInfo.take">
+    </pagination>
+  </div>
+</div>
