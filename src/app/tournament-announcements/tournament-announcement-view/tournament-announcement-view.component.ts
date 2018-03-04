@@ -9,7 +9,7 @@ import { ArenaService} from 'app/arenas/shared/arena.service';
 import { Arena} from 'app/arenas/shared/arena';
 import { Point } from 'app/shared/map/point';
 import { debounce } from 'rxjs/operator/debounce';
-import {Organization} from "../shared/organization";
+import {Organization} from 'app/tournament-announcements/shared/organization';
 
 @Component({
   moduleId: module.id,
@@ -63,6 +63,10 @@ export class TournamentAnnouncementViewComponent {
 
   public getCostText(tournamentAnnouncement: TournamentAnnouncementViewItem): string {
     return this.service.getCostText(tournamentAnnouncement);
+  }
+
+  public getNoData(): string {
+    return this.service.getNoData();
   }
 
   public getArenaLogo(arena: Arena): string {

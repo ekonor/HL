@@ -101,4 +101,12 @@ export class ArenaFilterComponent implements OnInit {
     }
     this.onFiltered.emit();
   }
+
+  public getToggleIcon() {
+    if (this.toggled) {
+      return 'fa fa-angle-down';
+    } else {
+      return 'fa fa-angle-up';
+    }
+  }
 }

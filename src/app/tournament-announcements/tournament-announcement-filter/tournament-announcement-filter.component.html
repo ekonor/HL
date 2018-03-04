@@ -1,9 +1,8 @@
 <div class="tournament-announcement-filter container">
   <div class="row">
     <div class="col-md-12 col-lg-12 col-xs-12 admin-panel">
-      <span class="toggle" (click)="toggle()" style="margin-left: 5px;"><i class="fa fa-angle-up"></i></span>
+      <span class="toggle" (click)="toggle()" style="margin-left: 5px;"><i [class]="getToggleIcon()"></i></span>
     </div>
-
     <div class="jumbotron col-md-12 col-lg-12 col-xs-12" [hidden]="toggled">
         <form>
             <div class="row">
@@ -17,11 +16,11 @@
                   <app-city-filter *ngIf="city" [city]="city" (onChanged)="setCity($event)"></app-city-filter>
               </div>
             </div>
-            <!--div class="row">
+            <div class="row">
                 <div class="col-md-12">
-                    <input type="text" name="name" [(ngModel)]="filter.searchText" placeholder="Название или адрес" class="form-control">
+                    <input type="text" name="searchText" [(ngModel)]="filter.searchText" placeholder="Название или строка поиска" class="form-control">
                 </div>
-            </div-->
+            </div>
             <div class="row">
               <div class="col-md-4">
                 <button type="button" class="btn btn-primary" (click)="search()">

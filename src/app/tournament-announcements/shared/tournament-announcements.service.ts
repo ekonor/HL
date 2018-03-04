@@ -74,7 +74,12 @@ export class TournamentAnnouncementsService {
 
   public getCostText(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem) {
     if (tournamentAnnouncement.isCommercial) {
-      return tournamentAnnouncement.costType === 'PerTeam' ? tournamentAnnouncement.cost + '/команда' : tournamentAnnouncement.cost + '/чел.';
+      if (tournamentAnnouncement.cost) {
+        return tournamentAnnouncement.costType === 'PerTeam' ? tournamentAnnouncement.cost + '/команда' : tournamentAnnouncement.cost + '/чел.';
+      }
+      else {
+        return this.getNoData();
+      }
     }
     return 'бесплатно';
   }
@@ -82,7 +87,7 @@ export class TournamentAnnouncementsService {
     return this.apiConfig.apiPath + methodUrlPrefix;
   }
 
-  private getNoData() {
+  public getNoData() {
     return 'не определено';
   }
 }
