@@ -1,5 +1,5 @@
 {
-  "include": ["node_modules/angular-bootstrap-md/**/*.ts",  "src/**/*.ts"],
+  "include": ["node_modules/angular-bootstrap-md/**/*.ts",  "src/**/*.ts", "node_modules/angular2-permission/index.ts"],
   "compileOnSave": false,
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
