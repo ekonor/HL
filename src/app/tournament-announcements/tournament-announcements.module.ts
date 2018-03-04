@@ -6,6 +6,7 @@ import { Ng2Permission } from 'angular2-permission';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxEditorModule } from 'ngx-editor';
 import {CoreModule} from 'app/core/core.module';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { TournamentAnnouncementViewComponent} from 'app/tournament-announcements/tournament-announcement-view/tournament-announcement-view.component';
 import { TournamentAnnouncementListComponent } from 'app/tournament-announcements/tournament-announcement-list/tournament-announcement-list.component';
@@ -31,7 +32,8 @@ import { SharedModule } from 'app/shared/shared.module';
         NgxEditorModule,
         Ng2Permission,
         NgbModule,
-        CoreModule
+        CoreModule,
+        MDBBootstrapModule
       ],
       providers: [
         TournamentAnnouncementsService

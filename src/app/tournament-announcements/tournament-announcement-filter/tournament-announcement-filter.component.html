@@ -22,6 +22,36 @@
                 </div>
             </div>
             <div class="row">
+              <div class="col-md-6">
+                <label for="startDateFrom">Дата проведения c</label>
+                <input id="startDateFrom"
+                       type="date"
+                       name="startDateFrom"
+                       [(ngModel)]="filter.startDateFrom"
+                       placeholder="Дата проведения, от"
+                       class="form-control">
+              </div>
+              <div class="col-md-6">
+                <label for="startDateTo">до</label>
+                <input id="startDateTo"
+                       type="date"
+                       name="startDateTo"
+                       [(ngModel)]="filter.startDateTo"
+                       placeholder="Дата проведения, до"
+                       class="form-control">
+              </div>
+            </div>
+          <div class="row">
+            <div class="btn-group mr-4" data-toggle="buttons">
+              <label class="btn btn-primary form-check-label">
+                <input type="checkbox" name="isRegistration" [(ngModel)]="isRegistration" class="form-check-input" autocomplete="off">Идет регистрация
+              </label>
+              <label class="btn btn-primary form-check-label">
+                <input type="checkbox" name="isFinished" [(ngModel)]="isFinished" class="form-check-input" autocomplete="off"> Завершенные
+              </label>
+            </div>
+          </div>
+            <div class="row">
               <div class="col-md-4">
                 <button type="button" class="btn btn-primary" (click)="search()">
                   <i class="fa fa-search"></i>
@@ -34,7 +64,7 @@
           </form>
     </div>
   </div>
-
+{{isRegistration}}{{ isFinished}}
 </div>
 
 

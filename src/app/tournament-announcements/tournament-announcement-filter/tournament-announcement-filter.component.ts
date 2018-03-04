@@ -30,6 +30,8 @@ export class TournamentAnnouncementFilterComponent implements OnInit {
   // arenaTypes: ArenaType[];
   errorMessage: string;
   toggled: boolean;
+  isFinished: boolean;
+  isRegistration: boolean;
 
   searching = false;
   hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
@@ -40,7 +42,9 @@ export class TournamentAnnouncementFilterComponent implements OnInit {
     const filterState = JSON.parse(localStorage.getItem('tournamentAnnouncementFilterFilterState'));
     // TODO проверка существования поля toggled
     this.toggled = filterState && filterState.toggled;
-    console.log(this.toggled);
+    //console.log(this.toggled);
+    this.isFinished = false;
+    this.isRegistration = true;
   }
 
   ngOnInit() {
@@ -62,7 +66,6 @@ export class TournamentAnnouncementFilterComponent implements OnInit {
   // }
 
   public toggle() {
-
     this.toggled = !this.toggled;
     console.log(this.toggled);
     localStorage.setItem('tournamentAnnouncementFilterFilterState', JSON.stringify({toggled: this.toggled}));
@@ -77,6 +80,11 @@ export class TournamentAnnouncementFilterComponent implements OnInit {
   search() {
     if (this.city && this.city.id) {
       this.filter.cityId = this.city.id;
+    }
+    if (this.isRegistration) {
+      this.filter.state = 'ApprovedByModerator';
+    } else if (this.isFinished) {
+        this.filter.state = 'Finished';
     }
     this.onFiltered.emit();
   }

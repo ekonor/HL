@@ -117,10 +117,14 @@
                 <i [class]="getGenderIconClass(tournamentAnnouncement)"></i>
                 Пол участников
               </p>
-              <p class="icon-wrap">
+              <p class="icon-wrap" *ngIf="tournamentAnnouncement.state==='ApprovedByModerator'">
                 <i class="fa fa-bell"></i>
                 Окончание регистрации:
                 {{tournamentAnnouncement.endRegistrationDate? (tournamentAnnouncement.endRegistrationDate | date :  "dd.MM.y") : getNoData()}}
+              </p>
+               <p class="icon-wrap" *ngIf="tournamentAnnouncement.state==='Finished'">
+                <i class="fa fa-bell"></i>
+                Статус: завершен
               </p>
               <span *ngIf="tournamentAnnouncement.isCommercial && tournamentAnnouncement.isCommercial == true">
                 <p class="icon-wrap">

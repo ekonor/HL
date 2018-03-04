@@ -45,6 +45,8 @@ export class TournamentAnnouncementsService {
     if (filter.searchText)
       params = params.append('searchText', filter.searchText);
 
+    console.log(filter);
+
     return this.httpClient.get<ListResponse<TournamentAnnouncementListItem>>(methodUrl, { params: params });
   }
 
