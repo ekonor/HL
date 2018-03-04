@@ -7,27 +7,20 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxEditorModule } from 'ngx-editor';
 import {CoreModule} from 'app/core/core.module';
 
-// import { ArenaViewComponent } from "app/arenas/arena-view/arena-view.component";
-// import { ArenaEditComponent } from "app/arenas/arena-edit/arena-edit.component";
-// import { ArenaLogoComponent} from "app/arenas/arena-logo/arena-logo.component";
-// import { ArenaCreateComponent } from "app/arenas/arena-create/arena-create.component";
+import { TournamentAnnouncementViewComponent} from 'app/tournament-announcements/tournament-announcement-view/tournament-announcement-view.component';
 import { TournamentAnnouncementListComponent } from 'app/tournament-announcements/tournament-announcement-list/tournament-announcement-list.component';
-import { TournamentAnnouncementComponent } from 'app/tournament-announcements/tournament-announcements.component';
+import { TournamentAnnouncementsComponent } from 'app/tournament-announcements/tournament-announcements.component';
 import { TournamentAnnouncementFilterComponent } from 'app/tournament-announcements/tournament-announcement-filter/tournament-announcement-filter.component';
-
 import { TournamentAnnouncementsService } from 'app/tournament-announcements/shared/tournament-announcements.service';
 import { TournamentAnnouncementsRoutingModule } from 'app/tournament-announcements/tournament-announcements-routing.module';
 import { SharedModule } from 'app/shared/shared.module';
 
 @NgModule({
       declarations: [
-        TournamentAnnouncementComponent,
+        TournamentAnnouncementsComponent,
         TournamentAnnouncementListComponent,
-        // ArenaViewComponent,
-        // ArenaEditComponent,
-        // ArenaCreateComponent,
-        // ArenaLogoComponent,
-        TournamentAnnouncementFilterComponent
+        TournamentAnnouncementFilterComponent,
+        TournamentAnnouncementViewComponent
       ],
       imports: [
         BrowserModule,

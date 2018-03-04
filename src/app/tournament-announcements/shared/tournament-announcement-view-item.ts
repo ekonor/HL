@@ -1,15 +1,17 @@
-//import { City } from 'app/core/geo/city';
+import { Coordinates } from 'app/core/geo/coordinates';
+import { City } from 'app/core/geo/city';
 import { Arena } from 'app/arenas/shared/arena';
 import { Organization } from 'app/tournament-announcements/shared/organization';
+import { Team } from 'app/tournament-announcements/shared/team';
 
-export class TournamentAnnouncementListItem {
+export class TournamentAnnouncementViewItem {
   id: number;
   name: string; // Заголовок анонса
   logo?: string;
   state?: string; // Статус анонса (State)
   organization?: Organization; // Организатор турнира
   tournamentId: number;
-  cityName?: string; // city: City; // Город проведения
+  city: City; // Город проведения
   linkName?: string; // ?
   arena?: Arena; // Арена
   startDate?: string; // Дата начала турнира
@@ -24,6 +26,11 @@ export class TournamentAnnouncementListItem {
   minAge?: number; // Если Возрастная группа дети или подростки, то можно указать еще год рождения участников от – до
   maxAge?: number;
   gender?: string; // Пол участников (Gender) – иконкой
+  content?: string; // Текст анонса
+  coordinates?: Coordinates; // Размещение места нахождения арены
+  teams?: Team[]; // Показаны   команды,   участие   которых   в   турнире   подтверждено   организатором
+  currentResponseCount?: number; // сколько заявок утверждено
+  closeCondition?: string;
 
   constructor( values: Object = {} ) {
     Object.assign( this, values );

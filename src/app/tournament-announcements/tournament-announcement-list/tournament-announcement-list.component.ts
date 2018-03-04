@@ -36,7 +36,23 @@ export class TournamentAnnouncementListComponent implements OnInit {
     this.router.navigate([ 'tournament-announcements/create']);
   }
 
-  public geTournamentAnnouncementLogo(tournamentAnnouncement: TournamentAnnouncementListItem): string {
+  public getTournamentAnnouncementLogo(tournamentAnnouncement: TournamentAnnouncementListItem): string {
     return this.service.getTournamentAnnouncementLogo(tournamentAnnouncement);
+  }
+
+  public getRequiredResponseCount(tournamentAnnouncement: TournamentAnnouncementListItem): string {
+    return this.service.getRequiredResponseCountText(tournamentAnnouncement);
+  }
+
+  public getAgeGroupIconClass(tournamentAnnouncement: TournamentAnnouncementListItem): string {
+    return this.service.getAgeGroupIconClass(tournamentAnnouncement);
+  }
+
+  public getGenderIconClass(tournamentAnnouncement: TournamentAnnouncementListItem): string {
+    return this.service.getGenderIconClass(tournamentAnnouncement);
+  }
+
+  public getCostText(tournamentAnnouncement: TournamentAnnouncementListItem): string {
+    return this.service.getCostText(tournamentAnnouncement);
   }
 }

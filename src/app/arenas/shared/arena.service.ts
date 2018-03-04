@@ -5,6 +5,7 @@ import {of} from 'rxjs/observable/of';
 
 import { ArenaListItem } from 'app/arenas/shared/arena-list-item';
 import { ArenaViewItem } from 'app/arenas/shared/arena-view-item';
+import { Arena } from 'app/arenas/shared/arena';
 import { ArenaFilter } from 'app/arenas/shared/arena-filter';
 import { AuthenticationService } from 'app/core/auth/authentication.service';
 import { ArenaType } from './arena-type';
@@ -62,7 +63,7 @@ export class ArenaService {
     return this.httpClient.get<ArenaType[]>(methodUrl);
   }
 
-  public getArenaLogo(arena: ArenaListItem | ArenaViewItem): string {
+  public getArenaLogo(arena: ArenaListItem | ArenaViewItem | Arena ): string {
     let logoSrc = this.apiConfig.filesPath;
     let placeholder = "assets/img/arenas/no_logo.png";
     return arena.logo ? logoSrc + arena.logo : placeholder;

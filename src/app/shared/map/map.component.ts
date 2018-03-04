@@ -14,6 +14,7 @@ export class MapComponent{
     avg: Point;
 
     zoom: number = 13;
+    //height: number = 400;
 
     get points(): Point[]{ return this._points; }
     set points(value: Point[]){

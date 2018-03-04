@@ -9,14 +9,14 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/merge';
 
-import { ArenaService } from 'app/arenas/shared/arena.service';
-import { ArenaFilter } from 'app/arenas/shared/arena-filter';
-import { ArenaType } from 'app/arenas/shared/arena-type';
+import { TournamentAnnouncementsService } from 'app/tournament-announcements/shared/tournament-announcements.service';
+// import { ArenaFilter } from 'app/arenas/shared/arena-filter';
+// import { ArenaType } from 'app/arenas/shared/arena-type';
 import { City } from 'app/core/geo/city';
 import {TournamentAnnouncementFilter} from 'app/tournament-announcements/shared/tournament-announcement-filter';
 
 @Component({
-  moduleId: module.id,
+  //moduleId: module.id,
   selector: 'tournament-announcement-filter',
   templateUrl: 'tournament-announcement-filter.component.html'
 })
@@ -34,9 +34,9 @@ export class TournamentAnnouncementFilterComponent implements OnInit {
   searching = false;
   hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
   searchFailed = false;
-   city: City;
+  city: City;
 
-  constructor( private service: TournamentAnnouncementFilter) {
+  constructor( private service: TournamentAnnouncementsService) {
     const filterState = JSON.parse(localStorage.getItem('tournamentAnnouncementFilterFilterState'));
     // TODO проверка существования поля toggled
     this.toggled = filterState && filterState.toggled;
@@ -68,12 +68,12 @@ export class TournamentAnnouncementFilterComponent implements OnInit {
     localStorage.setItem('tournamentAnnouncementFilterFilterState', JSON.stringify({toggled: this.toggled}));
   }
 
-  // private setCity(city: City) {
-  //   if (city && city.id) {
-  //     this.city = city;
-  //   }
-  // }
-  //
+  private setCity(city: City) {
+    if (city && city.id) {
+      this.city = city;
+    }
+  }
+
   search() {
     if (this.city && this.city.id) {
       this.filter.cityId = this.city.id;

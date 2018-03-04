@@ -1,15 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab|PT+Sans+Caption&subset=latin,cyrillic);
 
-.arena-list {
+.tournament-announcement-list {
   .blog-item {
 
   }
-
-  //.item[_ngcontent-c4],
-  //.item[_ngcontent-c3],
-  //.item[_ngcontent-c5] {
-  //  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .14), 0 3px 3px -2px rgba(0, 0, 0, .2), 0 1px 8px 0 rgba(0, 0, 0, .12);
-  //}
 
   .item[_ngcontent-c]{
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .14), 0 3px 3px -2px rgba(0, 0, 0, .2), 0 1px 8px 0 rgba(0, 0, 0, .12);
@@ -380,5 +374,9 @@
 
   .item-title .title-text {
     //text-overflow: ellipsis;
+  }
+
+  p.icon-wrap i {
+    text-align: center;
   }
 }

@@ -1,0 +1,171 @@
+<loader [hidden]="!dataIsLoading"></loader>
+<section class="tournament-announcement-view section pb-5" *ngIf="tournamentAnnouncement">
+  <div class="row">
+    <div class="col-md-6 blog-item">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="item-title-main">
+            <p>{{tournamentAnnouncement.city && tournamentAnnouncement.city.name ? tournamentAnnouncement.city.name+', ': ''}}{{tournamentAnnouncement.startDate | date :  "dd.MM.y"}}&nbsp;&mdash;&nbsp;{{tournamentAnnouncement.endDate | date :  "dd.MM.y"}}</p>
+          </div>
+          <h5 class="item-title">
+             {{tournamentAnnouncement.name ? tournamentAnnouncement.name : ''}}
+          </h5>
+          <hr>
+          <div class="item-img-wrapper" >
+            <div class="item-img-bg-wrapper" >
+              <img class="item-img-bg"
+                   [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)"
+                   alt="{{tournamentAnnouncement.name}}"
+                   onerror = "this.style.display = 'none'">
+            </div>
+            <div>
+              <img class="item-img-main"
+                   [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)"
+                   alt="{{tournamentAnnouncement.name}}"
+                   onerror = "this.style.display = 'none'" >
+            </div>
+          </div>
+          <span class="item-text">
+            <!--p class="icon-wrap" *ngIf="tournamentAnnouncement && tournamentAnnouncement.arena">
+              <i class="fa fa-street-view"></i>
+              &nbsp;Арена:&nbsp;
+              <a [routerLink]="['/arena',tournamentAnnouncement.arena.id]" routerLinkActive="active">
+                {{tournamentAnnouncement.arena.name}}
+              </a>
+            </p-->
+            <div class="row block-with-logo">
+              <div class="col-md-6">
+                <p>
+                  Арена:
+                </p>
+                <p>
+                  <a [routerLink]="['/arena',tournamentAnnouncement.arena.id]" routerLinkActive="active">
+                    {{tournamentAnnouncement.arena.name}}
+                  </a>
+                </p>
+                <div class="logo-img-wrapper" >
+                  <div class="logo-img-bg-wrapper" >
+                  <img class="logo-img-bg"
+                       [src]="getArenaLogo(tournamentAnnouncement.arena)"
+                       alt="{{tournamentAnnouncement.arena.name}}"
+                       onerror = "this.style.display = 'none'">
+                  </div>
+                  <a [routerLink]="['/arena',tournamentAnnouncement.arena.id]" routerLinkActive="active">
+                  <img class="logo-img-main"
+                       [src]="getArenaLogo(tournamentAnnouncement.arena)"
+                       alt="{{tournamentAnnouncement.arena.name}}"
+                       onerror = "this.style.display = 'none'" >
+                  </a>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <p>
+                  Организатор:
+                </p>
+                <p>
+                  <a [routerLink]="['/organization',tournamentAnnouncement.organization.id]" routerLinkActive="active">
+                    {{tournamentAnnouncement.organization.name}}
+                  </a>
+                </p>
+                <div class="logo-img-wrapper" >
+                  <div class="logo-img-bg-wrapper" >
+                  <img class="logo-img-bg"
+                       [src]="getOrganizationLogo(tournamentAnnouncement.organization)"
+                       alt="{{tournamentAnnouncement.organization.name}}"
+                       onerror = "this.style.display = 'none'">
+                  </div>
+                  <a [routerLink]="['/organization',tournamentAnnouncement.organization.id]" routerLinkActive="active">
+                  <img class="logo-img-main"
+                       [src]="getOrganizationLogo(tournamentAnnouncement.organization)"
+                       alt="{{tournamentAnnouncement.organization.name}}"
+                       onerror = "this.style.display = 'none'" >
+                  </a>
+                </div>
+              </div>
+
+            </div>
+            <!--p class="icon-wrap">
+              <i class="fa fa-info-circle"></i>
+              &nbsp;Организатор:&nbsp;
+              <a [routerLink]="['/organization',tournamentAnnouncement.organization.id]" routerLinkActive="active">
+                {{tournamentAnnouncement.organization.name}}
+              </a>
+            </p-->
+            <p class="icon-wrap">
+              <i class="fa fa-users"></i>
+              Макс. количество участников:
+              {{getRequiredResponseCount(tournamentAnnouncement)}}
+            </p>
+            <p class="icon-wrap">
+              <i [class]="getAgeGroupIconClass(tournamentAnnouncement)"></i>
+              Возрастная группа
+            </p>
+            <p class="icon-wrap"
+               *ngIf="tournamentAnnouncement.ageGroup == 'Подростки'">
+              <i class="material-icons">&#xe7fb;</i>
+              Возраст:
+              {{tournamentAnnouncement.minAge}}-{{tournamentAnnouncement.maxAge}}
+            </p>
+            <p class="icon-wrap">
+              <i [class]="getGenderIconClass(tournamentAnnouncement)"></i>
+              Пол участников
+            </p>
+            <p class="icon-wrap">
+              <i class="fa fa-bell"></i>
+              Окончание регистрации:
+              {{tournamentAnnouncement.endRegistrationDate | date :  "dd.MM.y" }}
+            </p>
+            <span *ngIf="tournamentAnnouncement.isCommercial && tournamentAnnouncement.isCommercial == true">
+              <p class="icon-wrap">
+                <i class="fa fa-rouble"></i>
+                Цена участия: {{getCostText(tournamentAnnouncement)}}
+              </p>
+            </span>
+          </span>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 blog-item">
+      <div class="card h-100 wrapper">
+        <div class="card-body wrapper">
+          <div class="item-title-main">
+            <p>Команды-участники</p>
+          </div>
+          <hr>
+          <div *ngFor="let team of tournamentAnnouncement.teams">
+            <p class="icon-wrap"><i class="fa fa-info-circle"></i><a [routerLink]="['/team',team.id]" routerLinkActive="active">{{team.name}}</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <pre>
+      <p class="section-description pb-4" [innerHTML]="tournamentAnnouncement.content"></p>
+      </pre>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <map *ngIf="mapPoint" [points]="[mapPoint]"></map>
+    </div>
+  </div>
+
+</section>
+
+<!--
+state?: string; // Статус анонса (State)
+createDate?: string; // Дата создания (CreateDate)
+isCommercial: boolean = true; // Признак коммерческий или нет (IsCommercial) – иконка
+cost?: number; // Если коммерческий, указать цену участия (Cost)
+costType?: string; // Тип оплаты (CostType) - c человека или с команды
+ageGroup?: string; // Возрастная группа (AgeGroup
+minAge?: number; // Если Возрастная группа дети или подростки, то можно указать еще год рождения участников от – до
+maxAge?: number;
+gender?: string; // Пол участников (Gender) – иконкой
+teams?: Team[]; // Показаны   команды,   участие   которых   в   турнире   подтверждено   организатором
+currentResponseCount?: number; // сколько заявок утверждено
+closeCondition?: string;-->

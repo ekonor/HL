@@ -17,7 +17,7 @@ import { TournamentAnnouncementFilter } from 'app/tournament-announcements/share
 })
 
 @Injectable()
-export class TournamentAnnouncementComponent implements OnInit {
+export class TournamentAnnouncementsComponent implements OnInit {
   tournamentAnnouncementList: ListResponse<TournamentAnnouncementListItem>;
   errorMessage: string;
 
@@ -36,8 +36,8 @@ export class TournamentAnnouncementComponent implements OnInit {
     this.pageSize = this.paginationService.pageSize;
 
     this.sortOptions = [
-      { title: "Название", value: "Name" },
-      { title: "Дата создания анонса", value: "CreateDate" }
+      { title: 'Название', value: 'Name' },
+      { title: 'Дата создания анонса', value: 'CreateDate' }
     ];
   }
 
@@ -48,15 +48,16 @@ export class TournamentAnnouncementComponent implements OnInit {
     });
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
-  public onFiltered($event){
+  public onFiltered($event) {
+    console.log("filter");
     this.getTournamentAnnouncements();
   }
 
-  public onSorted($event){
+  public onSorted($event) {
     this.listInfo.orderBy = $event.orderBy;
     this.listInfo.orderDir = $event.orderDir;
 
@@ -70,7 +71,10 @@ export class TournamentAnnouncementComponent implements OnInit {
         tournamentAnnouncements => {
           this.tournamentAnnouncementList = tournamentAnnouncements;
         },
-        error => this.errorMessage = error,
+        error => {
+          this.errorMessage = error;
+          console.log(this.errorMessage);
+         },
         () => this.dataIsLoading = false
       );
   }
