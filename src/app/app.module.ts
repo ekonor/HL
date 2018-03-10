@@ -6,6 +6,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import { Ng2Permission } from 'angular2-permission';
+import { registerLocaleData } from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
+registerLocaleData(localeRu);
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 // import { NO_ERRORS_SCHEMA } from '@angular/core';
