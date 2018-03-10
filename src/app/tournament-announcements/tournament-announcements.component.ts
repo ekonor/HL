@@ -53,7 +53,6 @@ export class TournamentAnnouncementsComponent implements OnInit {
   }
 
   public onFiltered($event) {
-    console.log("filter");
     this.getTournamentAnnouncements();
   }
 
@@ -73,7 +72,7 @@ export class TournamentAnnouncementsComponent implements OnInit {
         },
         error => {
           this.errorMessage = error;
-          console.log(this.errorMessage);
+        // console.log(this.errorMessage);
          },
         () => this.dataIsLoading = false
       );

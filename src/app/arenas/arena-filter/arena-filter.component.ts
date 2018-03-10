@@ -27,7 +27,6 @@ export class ArenaFilterComponent implements OnInit {
   @Output() onFiltered = new EventEmitter<boolean>();
 
   arenaTypes: ArenaType[];
-  // cities: City[];
   errorMessage: string;
   toggled: boolean;
 
@@ -46,22 +45,7 @@ export class ArenaFilterComponent implements OnInit {
   ngOnInit() {
     this.getArenaTypes();
     this.city = new City;
-    //this.getCities();
   }
-  // autocompleteCity = (text$: Observable<string>) =>
-  //   text$
-  //     .debounceTime(300)
-  //     .distinctUntilChanged()
-  //     .do(() => this.searching = true)
-  //     .switchMap(term =>
-  //       this.service.getCities(term)
-  //         .do(() => this.searchFailed = false)
-  //         .catch(() => {
-  //           this.searchFailed = true;
-  //           return of([]);
-  //         }))
-  //     .do(() => this.searching = false)
-  //     .merge(this.hideSearchingWhenUnsubscribed);
 
   private getArenaTypes() {
     this.service.getArenaTypes()
@@ -76,18 +60,12 @@ export class ArenaFilterComponent implements OnInit {
     );
   }
 
-  // private getCities() {
-  //     // todo
-  // }
-
   public toggle() {
 
     this.toggled = !this.toggled;
     console.log(this.toggled);
     localStorage.setItem('arenasFilterState', JSON.stringify({toggled: this.toggled}));
   }
-  // formatter = (x: {name: string}) => x.name;
-
 
   private setCity(city: City) {
     if (city && city.id) {

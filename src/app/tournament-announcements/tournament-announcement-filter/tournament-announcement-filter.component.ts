@@ -8,10 +8,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/merge';
-
 import { TournamentAnnouncementsService } from 'app/tournament-announcements/shared/tournament-announcements.service';
-// import { ArenaFilter } from 'app/arenas/shared/arena-filter';
-// import { ArenaType } from 'app/arenas/shared/arena-type';
 import { City } from 'app/core/geo/city';
 import {TournamentAnnouncementFilter} from 'app/tournament-announcements/shared/tournament-announcement-filter';
 
@@ -28,11 +25,8 @@ export class TournamentAnnouncementFilterComponent implements OnInit {
   @Input() filter: TournamentAnnouncementFilter;
   @Output() onFiltered = new EventEmitter<boolean>();
 
-  // arenaTypes: ArenaType[];
   errorMessage: string;
   toggled: boolean;
-  //isFinished: boolean;
-  //isRegistration: boolean;
   state: string;
 
   searching = false;
@@ -44,28 +38,11 @@ export class TournamentAnnouncementFilterComponent implements OnInit {
     const filterState = JSON.parse(localStorage.getItem('tournamentAnnouncementFilterFilterState'));
     // TODO проверка существования поля toggled
     this.toggled = filterState && filterState.toggled;
-    //this.isFinished = false;
-    //this.isRegistration = true;
   }
 
   ngOnInit() {
-    // this.getArenaTypes();
      this.city = new City;
   }
-
-  // private getArenaTypes() {
-  //   this.service.getArenaTypes()
-  //   .subscribe(
-  //     arenaTypes => {
-  //       let emptyValue : ArenaType = { id: null, name: "Выберите тип арены" };
-  //       this.arenaTypes = new Array<ArenaType>();
-  //       this.arenaTypes.push(emptyValue);
-  //       this.arenaTypes =  this.arenaTypes.concat(arenaTypes);
-  //     },
-  //     error => this.errorMessage = error
-  //   );
-  // }
-
   public toggle() {
     this.toggled = !this.toggled;
     console.log(this.toggled);
@@ -82,11 +59,6 @@ export class TournamentAnnouncementFilterComponent implements OnInit {
     if (this.city && this.city.id) {
       this.filter.cityId = this.city.id;
     }
-    // if (this.isRegistration) {
-    //   this.filter.state = 'ApprovedByModerator';
-    // } else if (this.isFinished) {
-    //     this.filter.state = 'Finished';
-    // }
     this.onFiltered.emit();
   }
 

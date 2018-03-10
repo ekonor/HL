@@ -27,7 +27,7 @@ export class ArenasComponent implements OnInit {
   pageSize: number;
   dataIsLoading: boolean;
 
-  private sub : any;
+  private sub: any;
 
   constructor(
     private readonly arenaService: ArenaService,
