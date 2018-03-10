@@ -20,5 +20,8 @@
     word-wrap: break-word;
     cursor: pointer;
   }
+  label.btn-primary.active {
+    background-color: red!important;
+  }
 
 }
