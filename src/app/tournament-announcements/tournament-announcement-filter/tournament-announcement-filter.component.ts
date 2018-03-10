@@ -18,7 +18,8 @@ import {TournamentAnnouncementFilter} from 'app/tournament-announcements/shared/
 @Component({
   //moduleId: module.id,
   selector: 'tournament-announcement-filter',
-  templateUrl: 'tournament-announcement-filter.component.html'
+  templateUrl: 'tournament-announcement-filter.component.html',
+  styleUrls: ['tournament-announcement-filter.component.scss']
 })
 
 @Injectable()
@@ -30,8 +31,9 @@ export class TournamentAnnouncementFilterComponent implements OnInit {
   // arenaTypes: ArenaType[];
   errorMessage: string;
   toggled: boolean;
-  isFinished: boolean;
-  isRegistration: boolean;
+  //isFinished: boolean;
+  //isRegistration: boolean;
+  state: string;
 
   searching = false;
   hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
@@ -42,9 +44,8 @@ export class TournamentAnnouncementFilterComponent implements OnInit {
     const filterState = JSON.parse(localStorage.getItem('tournamentAnnouncementFilterFilterState'));
     // TODO проверка существования поля toggled
     this.toggled = filterState && filterState.toggled;
-    //console.log(this.toggled);
-    this.isFinished = false;
-    this.isRegistration = true;
+    //this.isFinished = false;
+    //this.isRegistration = true;
   }
 
   ngOnInit() {
@@ -81,11 +82,11 @@ export class TournamentAnnouncementFilterComponent implements OnInit {
     if (this.city && this.city.id) {
       this.filter.cityId = this.city.id;
     }
-    if (this.isRegistration) {
-      this.filter.state = 'ApprovedByModerator';
-    } else if (this.isFinished) {
-        this.filter.state = 'Finished';
-    }
+    // if (this.isRegistration) {
+    //   this.filter.state = 'ApprovedByModerator';
+    // } else if (this.isFinished) {
+    //     this.filter.state = 'Finished';
+    // }
     this.onFiltered.emit();
   }
 
