@@ -10,7 +10,7 @@ export class ListInfo {
     take: number; /// Сколько взять элеменов
     orderBy: string; // Поле сортировки
     orderDir: SortDir; // Направление сортировки
-  
+
     get page(): number {
         return Math.floor(this.skip / this.take) + 1;
     }
