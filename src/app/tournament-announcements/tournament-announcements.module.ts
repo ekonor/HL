@@ -16,12 +16,20 @@ import { TournamentAnnouncementsService } from 'app/tournament-announcements/sha
 import { TournamentAnnouncementsRoutingModule } from 'app/tournament-announcements/tournament-announcements-routing.module';
 import { SharedModule } from 'app/shared/shared.module';
 
+
+import { ProfileOrganizatorComponent} from 'app/tournament-announcements/profile-organizator/profile-organizator.component';
+import { TAOListComponent } from 'app/tournament-announcements/profile-organizator/ta-list/tao-list.component';
+//import { TAOrganizatorService } from 'app/tournament-announcements/shared/ta-organizator.service';
+
+
 @NgModule({
       declarations: [
         TournamentAnnouncementsComponent,
         TournamentAnnouncementListComponent,
         TournamentAnnouncementFilterComponent,
-        TournamentAnnouncementViewComponent
+        TournamentAnnouncementViewComponent,
+        ProfileOrganizatorComponent,
+        TAOListComponent
       ],
       imports: [
         BrowserModule,
@@ -37,6 +45,7 @@ import { SharedModule } from 'app/shared/shared.module';
       ],
       providers: [
         TournamentAnnouncementsService
+        // TAOrganizatorService
       ]
     })
     export class TournamentAnnouncementsModule { }
