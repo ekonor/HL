@@ -18,14 +18,14 @@ import { TournamentAnnouncementFilter } from 'app/tournament-announcements/share
 
 @Injectable()
 export class ProfileOrganizatorComponent implements OnInit {
-  tournamentAnnouncementList: ListResponse<TournamentAnnouncementListItem>;
+  tournamentAnnouncementList: ListResponse<TournamentAnnouncementListItem> = new ListResponse<TournamentAnnouncementListItem>;
   errorMessage: string;
 
   filter: TournamentAnnouncementFilter = new TournamentAnnouncementFilter();
   listInfo: ListInfo = new ListInfo();
   sortOptions: SortOption[] = new Array<SortOption>();
   pageSize: number;
-  dataIsLoading: boolean;
+  dataIsLoading: boolean = false;
 
   private sub: any;
 
@@ -65,7 +65,7 @@ export class ProfileOrganizatorComponent implements OnInit {
 
   private getTournamentAnnouncements() {
     this.dataIsLoading = true;
-    this.tournamentService.getTournamentAnnouncements(this.filter, this.listInfo)
+    this.tournamentService.getTournamentAnnouncementsAdmin(this.filter, this.listInfo)
       .subscribe(
         tournamentAnnouncements => {
           this.tournamentAnnouncementList = tournamentAnnouncements;

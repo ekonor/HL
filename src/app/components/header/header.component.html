@@ -12,7 +12,7 @@
             <li style="float: left; list-style: none; position: relative; width: 720px;" class="bx-clone"><span class="kode-barinfo"><strong>Latest News : </strong> Lorem ipsum dolor sit amet, cons ecte tuer adipiscing elit,</span></li></ul></div><div class="bx-controls bx-has-controls-direction"><div class="bx-controls-direction"><a class="bx-prev" href=""></a><a class="bx-next" href=""></a></div></div></div-->
         </div>
         <div class="col-md-12">
-          <ul class="kode-userinfo" [hasPermission]="['superadministrator']"
+          <ul class="kode-userinfo" [hasPermission]="['superadministrator','tournamentadministrator']"
               onAuthorizedPermission="hide"
               onUnauthorizedPermission="show">
             <li>
@@ -24,7 +24,7 @@
             </li>
             <!--li><a href="/registration" data-toggle="modal" data-target="#myModalTwo"><i class="fa fa-user-plus"></i>Регистрация</a></li-->
           </ul>
-          <ul class="kode-userinfo" [hasPermission]="['superadministrator']"
+          <ul class="kode-userinfo" [hasPermission]="['superadministrator','tournamentadministrator']"
               onAuthorizedPermission="show"
               onUnauthorizedPermission="hide">
             <!--li><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a>

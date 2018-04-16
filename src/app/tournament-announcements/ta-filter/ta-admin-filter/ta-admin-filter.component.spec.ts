@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TournamentAnnouncementFilterComponent } from 'app/tournament-announcements/tournament-announcement-filter/tournament-announcement-filter.component';
+import { TournamentAnnouncementFilterComponent } from 'app/tournament-announcements/ta-filter/ta-filter/ta-filter.component';
 
 describe('ArenasComponent', () => {
   let component: TournamentAnnouncementFilterComponent;

@@ -11,9 +11,9 @@
         <hr>
       </div>
     </div>
-    <tournament-announcement-filter [filter]="filter"
+    <ta-filter [filter]="filter"
                   (onFiltered)="onFiltered($event)">
-    </tournament-announcement-filter>
+    </ta-filter>
     <sorting class="pull-right"
              [orderBy]="listInfo.orderBy"
              [orderDir]="listInfo.orderDir"

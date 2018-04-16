@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab|PT+Sans+Caption&subset=latin,cyrillic);
 
 .tao-list {
-  .blog-item {
+  /*.blog-item {
 
   }
 
@@ -47,7 +47,7 @@
   .blog-item[_ngcontent-c5] {
     margin-bottom: 30px;
     display: flex;
-  }
+  }*/
 
   /*.h-100[_ngcontent-c] {
     height: auto !important;
@@ -67,21 +67,11 @@
     display: flex;
   }*/
 
-  .item-title a:hover {
+  /*.item-title a:hover {
     color: #6091ac !important;
-  }
+  }*/
 
-  h5 {
-    font-size: 25px;
-    text-align: center;
-    color: #333333;
-    font-family: 'Roboto Slab', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 2;
-  }
-
-  .item-text:last-child {
+  /*.item-text:last-child {
     margin-bottom: 0;
   }
   .item {
@@ -100,7 +90,7 @@
 
   .item-title a:hover {
     color: #6091ac !important;
-  }
+  }*/
 
   h5 {
     font-size: 25px;
@@ -111,7 +101,7 @@
     font-weight: 400;
     line-height: 2;
   }
-  .item-title-main p {
+  /*.item-title-main p {
     background-color: lightgrey;
     color: #ffffff;
     font-size: 12px;
@@ -128,7 +118,7 @@
     display: block;
     font-size: 18px;
     padding-top: 6px;
-  }
+  }*/
 
   .heading h1 {
     color: #000;
@@ -313,7 +303,7 @@
     text-align: center;
   }
 
-  .item-img-main {
+  /*.item-img-main {
     height: 200px;
     max-width: 100%;
     filter: none;
@@ -349,7 +339,7 @@
     width: -webkit-calc(100% + 100px);
     width: -o-calc(100% + 100px);
     width: calc(100% + 100px);
-  }
+  }*/
 
   .bottom-btn {
     position: absolute;
@@ -372,9 +362,9 @@
     //overflow: hidden;
   }
 
-  .item-title .title-text {
+ // .item-title .title-text {
     //text-overflow: ellipsis;
-  }
+  //}
 
   p.icon-wrap i {
     text-align: center;
@@ -386,9 +376,9 @@
   .blog-item {
     display: flex;
   }
-  .h-100 {
+ /* .h-100 {
     height: auto!important;
-  }
+  }*/
 
   .block-with-logo {
     text-align: center;
@@ -431,5 +421,27 @@
     width: -webkit-calc(100% + 100px);
     width: -o-calc(100% + 100px);
     width: calc(100% + 100px);
+  }
+
+  table.table a {
+      color: #0275d8;
+      text-decoration: none;
+      cursor: pointer;
+  }
+  table.table a:hover {
+    color: #6091ac !important;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  table.table td{
+    white-space: nowrap;
+    //overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  table.table th i {
+    margin: 0 auto
+  }
+  table.table p.icon-wrap {
+    margin: 0 auto
   }
 }

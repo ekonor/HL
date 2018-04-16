@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'app/core/auth/auth.guard';
 
-import { TournamentAnnouncementViewComponent } from 'app/tournament-announcements/tournament-announcement-view/tournament-announcement-view.component';
+import { TournamentAnnouncementViewComponent } from 'app/tournament-announcements/ta-view/tournament-announcement-view.component';
 import { TournamentAnnouncementsComponent } from 'app/tournament-announcements/tournament-announcements.component';
 import {ProfileOrganizatorComponent} from 'app/tournament-announcements/profile-organizator/profile-organizator.component';
 // import { ArenaEditComponent } from 'app/arenas/arena-edit/arena-edit.component';

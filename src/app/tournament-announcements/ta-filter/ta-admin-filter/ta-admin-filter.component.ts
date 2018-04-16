@@ -14,13 +14,13 @@ import {TournamentAnnouncementFilter} from 'app/tournament-announcements/shared/
 
 @Component({
   //moduleId: module.id,
-  selector: 'tournament-announcement-filter',
-  templateUrl: 'tournament-announcement-filter.component.html',
-  styleUrls: ['tournament-announcement-filter.component.scss']
+  selector: 'ta-admin-filter',
+  templateUrl: 'ta-admin-filter.component.html',
+  styleUrls: ['../ta-filter-general.component.scss']
 })
 
 @Injectable()
-export class TournamentAnnouncementFilterComponent implements OnInit {
+export class TAAdminFilterComponent implements OnInit {
 
   @Input() filter: TournamentAnnouncementFilter;
   @Output() onFiltered = new EventEmitter<boolean>();

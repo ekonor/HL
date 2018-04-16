@@ -40,6 +40,10 @@ export class TAOListComponent implements OnInit {
     this.router.navigate([ 'tournament-announcements/create']);
   }
 
+  public listTournaments(): void {
+    this.router.navigate([ 'tournament-announcements']);
+  }
+
   public getTournamentAnnouncementLogo(tournamentAnnouncement: TournamentAnnouncementListItem): string {
     return this.service.getTournamentAnnouncementLogo(tournamentAnnouncement);
   }
@@ -66,6 +70,10 @@ export class TAOListComponent implements OnInit {
 
   public getArenaLogo(arena: Arena): string {
     return this.arenaService.getArenaLogo(arena);
+  }
+
+  public getStateClass(tournamentAnnouncement: TournamentAnnouncementListItem): string {
+    return this.service.getStateClass(tournamentAnnouncement);
   }
 
   // TODO вынести отдельный сервис для организаций (когда буду делать страницу для организации)

@@ -8,18 +8,19 @@ import { NgxEditorModule } from 'ngx-editor';
 import {CoreModule} from 'app/core/core.module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
-import { TournamentAnnouncementViewComponent} from 'app/tournament-announcements/tournament-announcement-view/tournament-announcement-view.component';
-import { TournamentAnnouncementListComponent } from 'app/tournament-announcements/tournament-announcement-list/tournament-announcement-list.component';
+import { TournamentAnnouncementViewComponent} from 'app/tournament-announcements/ta-view/tournament-announcement-view.component';
+import { TournamentAnnouncementListComponent } from 'app/tournament-announcements/ta-list/tournament-announcement-list.component';
 import { TournamentAnnouncementsComponent } from 'app/tournament-announcements/tournament-announcements.component';
-import { TournamentAnnouncementFilterComponent } from 'app/tournament-announcements/tournament-announcement-filter/tournament-announcement-filter.component';
+import { TournamentAnnouncementFilterComponent } from 'app/tournament-announcements/ta-filter/ta-filter/ta-filter.component';
 import { TournamentAnnouncementsService } from 'app/tournament-announcements/shared/tournament-announcements.service';
 import { TournamentAnnouncementsRoutingModule } from 'app/tournament-announcements/tournament-announcements-routing.module';
 import { SharedModule } from 'app/shared/shared.module';
 
 
 import { ProfileOrganizatorComponent} from 'app/tournament-announcements/profile-organizator/profile-organizator.component';
-import { TAOListComponent } from 'app/tournament-announcements/profile-organizator/ta-list/tao-list.component';
-//import { TAOrganizatorService } from 'app/tournament-announcements/shared/ta-organizator.service';
+import { TAOListComponent } from 'app/tournament-announcements/profile-organizator/tao-list/tao-list.component';
+import {TAAdminFilterComponent} from 'app/tournament-announcements/ta-filter/ta-admin-filter/ta-admin-filter.component';
+// import { TAOrganizatorService } from 'app/tournament-announcements/shared/ta-organizator.service';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { TAOListComponent } from 'app/tournament-announcements/profile-organizat
         TournamentAnnouncementsComponent,
         TournamentAnnouncementListComponent,
         TournamentAnnouncementFilterComponent,
+        TAAdminFilterComponent,
         TournamentAnnouncementViewComponent,
         ProfileOrganizatorComponent,
         TAOListComponent
