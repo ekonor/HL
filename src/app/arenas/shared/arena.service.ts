@@ -11,7 +11,7 @@ import { AuthenticationService } from 'app/core/auth/authentication.service';
 import { ArenaType } from './arena-type';
 import { City } from '../../core/geo/city';
 import { ListResponse } from 'app/shared/list/list-response';
-import { ListInfo } from 'app/shared/list/list-info';
+import {ListInfo, SortDir} from 'app/shared/list/list-info';
 import { ApiConfig } from 'app/core/api-config';
 import { HttpHeaders } from '@angular/common/http';
 
@@ -29,6 +29,108 @@ export class ArenaService {
 
     let methodUrl = this.getMethodUrl(methodUrlPrefix);
     let params = listInfo.toParams();
+    console.log("eeeee",params.toString());
+    if (filter.arenaTypeId)
+      params = params.append('arenaTypeId', filter.arenaTypeId.toString());
+    if (filter.cityId)
+      params = params.append('cityId', filter.cityId.toString());
+    if (filter.searchText)
+      params = params.append('searchText', filter.searchText);
+    console.log(params.toString());
+
+    return this.httpClient.get<ListResponse<ArenaListItem>>(methodUrl, { params: params });
+  }
+
+  /*public getArenasR(filter: ArenaFilter, listInfo: ListInfo): Observable<ListResponse<ArenaListItem>> {
+    const methodUrlPrefix = '/arenas' + '/list';
+
+    let methodUrl = this.getMethodUrl(methodUrlPrefix);
+    let params = listInfo.toParams();
+    console.log("eeeee",params);
+    if (filter.arenaTypeId)
+      params = params.append('arenaTypeId', filter.arenaTypeId.toString());
+    if (filter.cityId)
+      params = params.append('cityId', filter.cityId.toString());
+    if (filter.searchText)
+      params = params.append('searchText', filter.searchText);
+    console.log(params.toString());
+
+    return this.httpClient.get<ArenaListItem[]>(methodUrl, { params: params });
+  }*/
+
+ /* public getArenasList(searchTerm: string): Observable<ListResponse<ArenaListItem>> {
+    if (searchTerm === '') {
+      return of([]);
+    }
+    const filter = new ArenaFilter({searchText: searchTerm});
+    let listInfo = new ListInfo();
+    listInfo.orderBy = 'Name';
+    listInfo.skip = 0;
+    listInfo.take = 10;
+    listInfo.orderDir = SortDir.Asc;*/
+    //({skip: 0, take: 10, orderBy: 'Name', orderDir: SortDir.Asc});
+    /*let arenaList = new ListResponse<ArenaListItem>();
+    this.getArenas(filter, listInfo)
+      .subscribe(
+        arenas => {
+          arenaList = arenas;
+        }
+      );*/
+    //return <ListResponse<ArenaListItem>> this.getArenas(filter, listInfo);
+    //return arenaList;
+    //const res = arenaList.listItems;
+    //return new Observable<ArenaListItem[]>(res);
+    //const res =  this.getArenas(filter, listInfo);
+    // arr =  <ArenaListItem[]>(res.listItems);
+    /*this.getArenas(filter, listInfo)
+      .subscribe((result) => {
+        return <ArenaListItem[]>(<ListResponse<ArenaListItem>>(result));
+      });
+*/
+    //console.log(res.listItems);
+
+
+    /*const methodUrlPrefix = '/arenas' + '/list';
+
+    let methodUrl = this.getMethodUrl(methodUrlPrefix);
+    let params = listInfo.toParams();
+    console.log("eeeee",params);
+    if (filter.searchText)
+      params = params.append('searchText', filter.searchText);
+    console.log(params.toString());*/
+
+    //return this.httpClient.get<ListResponse<ArenaListItem>>(methodUrl, { params: params });
+
+    /*if (!res) {
+      return of([]);
+    }*/
+    //console.log(res);
+    //return res['listItems'];
+    //filter.searchText = searchTerm;
+    /*const methodUrlPrefix = '/arenas' + '/list';
+    let methodUrl = this.getMethodUrl(methodUrlPrefix);
+
+    let params = new HttpParams();
+    params = params.append('searchText', searchTerm);*/
+    /*if (countryId) {
+      params = params.append('countryId', countryId.toString());
+    }*/
+
+
+    //<ListResponse<ArenaListItem>> a;
+    /*a = this.httpClient.get<ListResponse<ArenaListItem[]>>(methodUrl, { params: params });
+    if (!a) {
+      return of([]);
+    }
+    return a['listItems'];*/
+ // }
+
+
+  /*public getArenasList(filter: ArenaFilter, listInfo: ListInfo): Observable<ArenaListItem> {
+    const methodUrlPrefix = '/arenas' + '/list';
+
+    let methodUrl = this.getMethodUrl(methodUrlPrefix);
+    let params = listInfo.toParams();
 
     if (filter.arenaTypeId)
       params = params.append('arenaTypeId', filter.arenaTypeId.toString());
@@ -38,7 +140,7 @@ export class ArenaService {
       params = params.append('searchText', filter.searchText);
 
     return this.httpClient.get<ListResponse<ArenaListItem>>(methodUrl, { params: params });
-  }
+  }*/
 
   public getArena(id: number): Observable<ArenaViewItem> {
     const methodUrlPrefix = '/arenas/' + id;

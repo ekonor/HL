@@ -18,7 +18,7 @@ import { TournamentAnnouncementFilter } from 'app/tournament-announcements/share
 
 @Injectable()
 export class ProfileOrganizatorComponent implements OnInit {
-  tournamentAnnouncementList: ListResponse<TournamentAnnouncementListItem> = new ListResponse<TournamentAnnouncementListItem>;
+  tournamentAnnouncementList: ListResponse<TournamentAnnouncementListItem> = new ListResponse<TournamentAnnouncementListItem>();
   errorMessage: string;
 
   filter: TournamentAnnouncementFilter = new TournamentAnnouncementFilter();

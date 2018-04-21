@@ -169,4 +169,98 @@ export class TournamentAnnouncementsService {
   public getNoData() {
     return 'не определено';
   }
+
+  /*public updateArena(id: number, arena: ArenaViewItem): Observable<ArenaViewItem> {
+    console.log(arena);
+    const body = JSON.stringify({
+      'name': arena.name,
+      'fullName': (arena.fullName ? arena.fullName : arena.name),
+      'cityId': arena.city.id,
+      'arenaTypeId': arena.arenaTypeId,
+      'startYear': arena.startYear,
+      'address': arena.address,
+      'email': arena.email,
+      'webSite': arena.webSite,
+      'contacts': arena.contacts,
+      'capacity': arena.capacity,
+      'about': arena.about
+    });
+    console.log(body);
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': 'Bearer ' + currentUser.token
+      });
+      return this.httpClient.put<ArenaViewItem>(this.getMethodUrl('/arenas/' + id), body, { headers: headers });
+    }
+  }
+*/
+  public addTournamentAnnouncement(ta: TournamentAnnouncementViewItem): Observable<number> {
+    console.log(ta);
+    const body = JSON.stringify({
+      'name': ta.name,
+      'startDate': ta.startDate,
+      'endDate': ta.endDate,
+      'content': ta.content,//
+      'requiredResponseCount': ta.requiredResponseCount,
+      'endRegistrationDate': ta.endRegistrationDate,
+      'cityId': ta.city.id,
+      'arenaId': ta.arena.id,//
+      'isCommercial': ta.isCommercial,//
+      'cost': ta.cost,//
+      'costType': ta.costType,//
+      'ageGroup': ta.ageGroup,
+      'minBirthYear': ta.minAge,//
+      'maxBirthYear': ta.maxAge, //
+      'gender': ta.gender,
+      'closeCondition': 'ResponseCountAccomplished'//
+    });
+    console.log(body);
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': 'Bearer ' + currentUser.token
+      });
+      return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/'), body, { headers: headers });
+    }
+  }
+
+  /*public deleteArena(id: number): Observable<void> {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': 'Bearer ' + currentUser.token
+      });
+      return this.httpClient.delete<void>(this.getMethodUrl('/arenas/' + id), { headers: headers });
+    }
+  }
+
+  public deleteLogo(id: number): Observable<void> {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': 'Bearer ' + currentUser.token
+      });
+      return this.httpClient.delete<void>(this.getMethodUrl('/arenas/' + id + '/logo'), { headers: headers });
+    }
+  }
+
+  public addLogo(id: number, image: any): Observable<string> {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + currentUser.token
+      });
+      return this.httpClient.post<string>(this.getMethodUrl('/arenas/' + id + '/logo'), image, { headers: headers });
+    }
+  }
+*/
 }

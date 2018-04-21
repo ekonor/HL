@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Ng2Permission } from 'angular2-permission';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxEditorModule } from 'ngx-editor';
-import {CoreModule} from 'app/core/core.module';
+import { CoreModule } from 'app/core/core.module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { TournamentAnnouncementViewComponent} from 'app/tournament-announcements/ta-view/tournament-announcement-view.component';
@@ -19,7 +19,12 @@ import { SharedModule } from 'app/shared/shared.module';
 
 import { ProfileOrganizatorComponent} from 'app/tournament-announcements/profile-organizator/profile-organizator.component';
 import { TAOListComponent } from 'app/tournament-announcements/profile-organizator/tao-list/tao-list.component';
-import {TAAdminFilterComponent} from 'app/tournament-announcements/ta-filter/ta-admin-filter/ta-admin-filter.component';
+import { TAAdminFilterComponent } from 'app/tournament-announcements/ta-filter/ta-admin-filter/ta-admin-filter.component';
+import { TACreateComponent } from 'app/tournament-announcements/ta-create/ta-create.component';
+
+//import { ArenaFilterComponent } from 'app/arenas/arena-filter/arena-filter.component';
+import { ArenaModule } from 'app/arenas/arenas.module';
+
 // import { TAOrganizatorService } from 'app/tournament-announcements/shared/ta-organizator.service';
 
 
@@ -31,7 +36,8 @@ import {TAAdminFilterComponent} from 'app/tournament-announcements/ta-filter/ta-
         TAAdminFilterComponent,
         TournamentAnnouncementViewComponent,
         ProfileOrganizatorComponent,
-        TAOListComponent
+        TAOListComponent,
+        TACreateComponent
       ],
       imports: [
         BrowserModule,
@@ -43,7 +49,9 @@ import {TAAdminFilterComponent} from 'app/tournament-announcements/ta-filter/ta-
         Ng2Permission,
         NgbModule,
         CoreModule,
-        MDBBootstrapModule
+        MDBBootstrapModule,
+        //ArenaFilterComponent,
+        ArenaModule
       ],
       providers: [
         TournamentAnnouncementsService

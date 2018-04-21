@@ -64,8 +64,6 @@ import { NgxEditorModule } from 'ngx-editor'; // https://github.com/Sibiraj-S/ng
     LoginComponent,
     LogoutComponent,
     RegisterComponent
-
-
   ],
   imports: [
     BrowserModule,

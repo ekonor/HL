@@ -1,0 +1,33 @@
+<ng-template #rt let-r="result" let-t="term">
+  {{ r.name}}
+</ng-template>
+
+<div class="row">
+  <!--div class="col-md-6">
+    <label for="country">Страна</label>
+    <input id="country"
+           name="country"
+           type="text"
+           class="form-control"
+           [(ngModel)]="country"
+           [ngbTypeahead]="searchCountry"
+           [resultTemplate]="rt"
+           [inputFormatter]="formatter"
+           (ngModelChange)="updateCountry()"/>
+  </div-->
+  <div class="col-md-6">
+    <label for="arenaFilter">Арена</label>
+    <input id="arenaFilter"
+           name="arenaFilter"
+           type="text"
+           class="form-control"
+           [(ngModel)]="arena"
+           [ngbTypeahead]="searchArena"
+           [resultTemplate]="rt"
+           [inputFormatter]="formatter"
+           (ngModelChange)="returnArena()"/>
+    <span *ngIf="searching">Поиск...</span>
+    <div class="invalid-feedback" *ngIf="searchFailed">Извините, арен с заданными параметрами не найдено</div>
+  </div>
+</div>
+

@@ -11,11 +11,13 @@ import 'rxjs/add/operator/merge';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
-import { TournamentAnnouncementService } from 'app/tournament-announcements/shared/tournament-announcements.service';
+import { TournamentAnnouncementsService } from 'app/tournament-announcements/shared/tournament-announcements.service';
 import { TournamentAnnouncementViewItem } from 'app/tournament-announcements/shared/tournament-announcement-view-item';
+import { Item } from 'app/tournament-announcements/shared/item';
 // import { ArenaType } from 'app/arenas/shared/arena-type';
 import { City } from 'app/core/geo/city';
 import { AlertService } from 'app/components/alert/alert.service';
+
 // import { Point } from 'app/shared/map/point';
 
 
@@ -33,11 +35,12 @@ export class TACreateComponent implements OnInit {
   id: number;
   // mapPoint: Point;
   // private sub: any;
-  // arenaTypes: ArenaType[];
+  ageTypes: Array<Item>;
+  genderTypes: Array<Item>;
   errorMessage: string;
   // city: City;
 
-  constructor( private service: TournamentAnnouncementService,
+  constructor( private service: TournamentAnnouncementsService,
                private router: Router,
                private activatedRoute: ActivatedRoute,
                private alertService: AlertService ) {
@@ -47,7 +50,8 @@ export class TACreateComponent implements OnInit {
     // this.city = new City;
     // this.mapPoint = this.getMapPoint(this.arena);
     this.loading = false;
-    // this.getArenaTypes();
+    this.getAgeTypes();
+    this.getGenderTypes();
   }
 
   ngOnInit() {
@@ -96,9 +100,23 @@ export class TACreateComponent implements OnInit {
       });
   }
 
-  /* private setCity(city: City) {
+  private getAgeTypes() {
+    this.ageTypes = new Array<Item>();
+    this.ageTypes.push(new Item({value: 'Adult', name: 'Взрослые'}));
+    this.ageTypes.push(new Item({value: 'Youth', name: 'Молодежь'}));
+    this.ageTypes.push(new Item({value: 'Juniors', name: 'Юниоры'}));
+    this.ageTypes.push(new Item({value: 'Kids', name: 'Дети'}));
+  }
+
+  private getGenderTypes() {
+    this.genderTypes =  new Array<Item>();
+    this.genderTypes.push(new Item({value: 'Male', name: 'Мужчины'}));
+    this.genderTypes.push(new Item({value: 'Female', name: 'Женщины'}));
+  }
+
+  private setCity(city: City) {
     if (city && city.id) {
-      this.city = city;
+      this.ta.city = city;
     }
-  } */
+  }
 }

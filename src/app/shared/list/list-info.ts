@@ -11,6 +11,10 @@ export class ListInfo {
     orderBy: string; // Поле сортировки
     orderDir: SortDir; // Направление сортировки
 
+    constructor( values: Object = {} ) {
+      Object.assign( this, values );
+    }
+
     get page(): number {
         return Math.floor(this.skip / this.take) + 1;
     }
