@@ -26,17 +26,18 @@ export class ArenaService {
 
   public getArenas(filter: ArenaFilter, listInfo: ListInfo): Observable<ListResponse<ArenaListItem>> {
     const methodUrlPrefix = '/arenas' + '/list';
-
+// TODO исправить листинфо, сейчас не работает
     let methodUrl = this.getMethodUrl(methodUrlPrefix);
-    let params = listInfo.toParams();
-    console.log("eeeee",params.toString());
-    if (filter.arenaTypeId)
+    //let params = listInfo.toParams();
+    let params = new HttpParams();
+    //console.log("eeeee",params.toString());
+    /*if (filter.arenaTypeId)
       params = params.append('arenaTypeId', filter.arenaTypeId.toString());
     if (filter.cityId)
-      params = params.append('cityId', filter.cityId.toString());
+      params = params.append('cityId', filter.cityId.toString());*/
     if (filter.searchText)
       params = params.append('searchText', filter.searchText);
-    console.log(params.toString());
+    console.log(params);
 
     return this.httpClient.get<ListResponse<ArenaListItem>>(methodUrl, { params: params });
   }

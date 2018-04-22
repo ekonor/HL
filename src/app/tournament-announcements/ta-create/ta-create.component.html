@@ -6,12 +6,10 @@
       <input type="text" class="form-control" name="taname" [(ngModel)]="ta.name" (ngModelChange)="ta.name = $event" #taname="ngModel" id="taname"/>
       <div *ngIf="f.submitted && taname != null && !taname.valid" class="help-block">taname is required</div>
     </div>
-    <!--div class="form-group" [ngClass]="{ 'has-error': f.submitted && city==null}">
-      <label for="taname">Город</label>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && city==null}">
       <app-city-filter *ngIf="city" [city]="city" (onChanged)="setCity($event)"></app-city-filter>
       <div *ngIf="f.submitted && city == null" class="help-block">Укажите город</div>
-    </div-->
-    <!--arena-filter></arena-filter-->
+    </div>
     <arena-select></arena-select>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && startDateFrom==null}">
       <label for="startDateFrom">Дата проведения c</label>

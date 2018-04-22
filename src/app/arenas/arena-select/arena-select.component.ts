@@ -43,7 +43,7 @@ export class ArenaSelectComponent implements OnInit {
       .distinctUntilChanged()
       .do(() => this.searching = true)
       .switchMap(term =>
-        this.service.getArenas(this.filter, this.listInfo)
+        this.service.getArenas(new ArenaFilter({searchText: term}), new ListInfo({skip: 0, take: 10, orderBy: 'Name', orderDir: SortDir.Asc})) // TODO исправить листинфо - не работает
           .map((res) => { this.searchFailed = false; console.log(res.listItems);  return res.listItems; } )
           .catch(() => {
             this.searchFailed = true;
@@ -71,11 +71,11 @@ export class ArenaSelectComponent implements OnInit {
 
   constructor( private service: ArenaService) {
 
-    /*this.listInfo = new ListInfo();
+    this.listInfo = new ListInfo();
     this.listInfo.orderBy = 'Name';
     this.listInfo.skip = 0;
     this.listInfo.take = 10;
-    this.listInfo.orderDir = SortDir.Asc;*/
+    this.listInfo.orderDir = SortDir.Asc;
   }
 
   ngOnInit() {

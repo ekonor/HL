@@ -38,7 +38,7 @@ export class TACreateComponent implements OnInit {
   ageTypes: Array<Item>;
   genderTypes: Array<Item>;
   errorMessage: string;
-  // city: City;
+  city: City;
 
   constructor( private service: TournamentAnnouncementsService,
                private router: Router,
@@ -47,7 +47,7 @@ export class TACreateComponent implements OnInit {
     this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
     this.loading = true;
     this.ta = new TournamentAnnouncementViewItem;
-    // this.city = new City;
+    this.city = new City;
     // this.mapPoint = this.getMapPoint(this.arena);
     this.loading = false;
     this.getAgeTypes();
