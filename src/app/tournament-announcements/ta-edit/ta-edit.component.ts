@@ -12,7 +12,7 @@ import 'rxjs/add/operator/merge';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { TournamentAnnouncementsService } from 'app/tournament-announcements/shared/tournament-announcements.service';
-import { TournamentAnnouncement } from 'app/tournament-announcements/shared/tournament-announcement';
+import { TournamentAnnouncementViewItem } from 'app/tournament-announcements/shared/tournament-announcement-view-item';
 import { Item } from 'app/tournament-announcements/shared/item';
 import { City } from 'app/core/geo/city';
 import { AlertService } from 'app/components/alert/alert.service';
@@ -23,12 +23,12 @@ import { Arena } from 'app/arenas/shared/arena';
 
 @Component({
   moduleId: module.id,
-  selector: 'ta-create',
-  templateUrl: 'ta-create.component.html',
-  styleUrls: ['ta-create.component.scss']
+  selector: 'ta-edit',
+  templateUrl: 'ta-edit.component.html',
+  styleUrls: ['ta-edit.component.scss']
 })
-export class TACreateComponent implements OnInit {
-  ta: TournamentAnnouncement;
+export class TAEditComponent implements OnInit {
+  ta: TournamentAnnouncementViewItem;
   returnUrl: string;
   dataIsLoading: boolean;
   id: number;
@@ -48,8 +48,13 @@ export class TACreateComponent implements OnInit {
                private activatedRoute: ActivatedRoute,
                private alertService: AlertService ) {
     this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
+    //this.ta = new TournamentAnnouncement;
     this.dataIsLoading = true;
-    this.ta = new TournamentAnnouncement;
+    this.id = this.activatedRoute.snapshot.params['id'];
+    this.getTA(this.id);
+    //this.city = new City();
+    // this.arena = new Arena();
+
     this.getAgeTypes();
     this.getGenderTypes();
     this.getCostTypes();
@@ -61,18 +66,42 @@ export class TACreateComponent implements OnInit {
   ngOnInit() {
   }
 
-  public addTournamentAnnouncement(ta: TournamentAnnouncement) {
-     /*if (!this.city && !this.city.id) {
-      this.alertService.error("Не удалось сохранить изменения");
-      return;
-    }*/
-    // this.arena.city = this.city;
-    // console.log(this.arena);
-    // console.log(this.id);
-    // TODO проверка существования города и арены
-    //this.ta.city = this.city;
-    //this.ta.arena = new Arena({ id: this.arena.id, name: this.arena.name });
+  public deleteTA() {
+    console.log(this.ta);
+    console.log(this.id);
+    console.log('delete');
     this.dataIsLoading = true;
+    this.service.deleteTournamentAnnouncement(this.id).subscribe(
+      data => {
+        this.router.navigate(['/tournaments']);
+      },
+      error => {
+        this.alertService.error(error);
+        this.alertService.error("Не удалось удалить анонс");
+        this.dataIsLoading = false;
+      });
+  }
+
+  private getTA(id: number) {
+    this.dataIsLoading = true;
+    this.service.getTournamentAnnouncement(id)
+      .subscribe(
+        ta => {
+          this.ta = ta;
+          this.arena = ta.arena;
+          this.city = this.ta.city;
+          if (this.city == null) { this.city = new City; }
+        },
+        error => {
+          this.alertService.error(error);
+          this.alertService.error("Не удалось изменить анонс турнира");
+          // this.router.navigate(['/not-found']);
+        },
+        () => this.dataIsLoading = false
+      );
+  }
+
+  /*public addTournamentAnnouncement(ta: TournamentAnnouncement) {
     this.service.addTournamentAnnouncement(this.ta).subscribe(
       data => {
         this.router.navigate(['/tournament-announcements']);
@@ -80,17 +109,10 @@ export class TACreateComponent implements OnInit {
       error => {
         this.alertService.error(error);
         this.alertService.error("Не удалось добавить анонс турнира");
-      },
-      () => this.dataIsLoading = false );
-  }
+        this.loading = false;
+      });
+  }*/
 
-  public saveAndSendOnModeration(ta: TournamentAnnouncement) {
-
-  }
-
-  public viewList() {
-    this.router.navigate(['/profile']);
-  }
 // TODO вынести в сервис
   private getAgeTypes() {
     this.ageTypes = new Array<Item>();
@@ -126,23 +148,15 @@ export class TACreateComponent implements OnInit {
   }
   private setCity(city: City) {
     if (city && city.id) {
-      this.ta.cityId = city.id;
+      this.ta.city = city;
       this.city = city;
-    } /*else {
-      this.ta.cityId = null;
-      this.city = null;
-      this.arena = null;
-      this.ta.arenaId = null;
-    }*/
+    }
   }
 
   private setArena(arena: ArenaListItem) {
     if (arena && arena.id) {
-      this.arena = arena; //new Arena({ id: this.arena.id, name: this.arena.name });
-      this.ta.arenaId = arena.id;
-    } /*else {
-      this.arena = null;
-      this.ta.arenaId = null;
-    }*/
+      this.arena = arena;
+      this.ta.arena = arena;
+    }
   }
 }

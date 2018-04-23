@@ -25,7 +25,7 @@ export class ProfileOrganizatorComponent implements OnInit {
   listInfo: ListInfo = new ListInfo();
   sortOptions: SortOption[] = new Array<SortOption>();
   pageSize: number;
-  dataIsLoading: boolean = false;
+  dataIsLoading: boolean;
 
   private sub: any;
 

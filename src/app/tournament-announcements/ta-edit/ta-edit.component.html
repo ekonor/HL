@@ -1,7 +1,7 @@
 <loader [hidden]="!dataIsLoading"></loader>
-<div class="ta-create col-md-6 col-md-offset-3" *ngIf="ta">
-  <h2>Добавление анонса турнира</h2>
-  {{ta | json}} {{isCommercialTypes}}
+<div class="ta-edit col-md-6 col-md-offset-3" *ngIf="ta">
+  <h2>Редактирование анонса турнира</h2>
+  {{ta | json}}
   <form (ngSubmit)="addTournamentAnnouncement(ta)" #f="ngForm">
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !taname.valid }">
       <label for="taname">Название анонса</label>
@@ -72,12 +72,6 @@
       <input type="number" min="0" max="2000" step="1" class="form-control" name="cost" [(ngModel)]="ta.cost" (ngModelChange)="ta.cost = $event" #cost="ngModel" ngModel number="true" id="cost"/>
       <div *ngIf="f.submitted && cost != null && !cost.valid" class="help-block">cost is invalid</div>
     </div>
-    <div class="form-group">
-      <label for="isCommercial">Закрытие турнира</label>
-      <select class="form-group" [(ngModel)]="ta.closeCondition" name="closeCondition" class="form-control" #closeCondition="ngModel" id="closeCondition" (ngModelChange)="ta.closeCondition = $event">
-        <option *ngFor="let closeType of closeTypes"  [ngValue]="closeType.value" >{{closeType.name}}</option>
-      </select>
-    </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && endRegistrationDate==null}">
       <label for="endRegistrationDate">Окончание регистрации</label>
       <input id="endRegistrationDate"
@@ -114,10 +108,13 @@
       <div *ngIf="f.submitted && about != null && !about.valid" class="help-block">about is invalid</div>
     </div-->
     <div class="form-group">
-      <button class="btn btn-primary" type="submit" [disabled]="dataIsLoading">Сохранить как черновик</button>
-      <button class="btn btn-danger" (click)="saveAndSendOnModeration(ta)" [disabled]="dataIsLoading">Сохранить и отправить на модерацию</button>
-      <button class="btn btn-primary" (click)="viewList()"  [disabled]="dataIsLoading">Отменить изменения и вернуться к списку</button>
-      <img *ngIf="dataIsLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+      <input [(ngModel)]="deleteFlag" (change)="setDeleteFlag()" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked /><span class="checkbox-title">Удалить?</span>
     </div>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit" [disabled]="loading">Сохранить и отправить на модерацию</button>
+      <button class="btn btn-danger" (click)="deleteArena()" [disabled]="loading || !deleteFlag">Удалить</button>
+      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+    </div>
+
   </form>
 </div>

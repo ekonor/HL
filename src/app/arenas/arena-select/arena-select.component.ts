@@ -24,12 +24,13 @@ import { ArenaFilter } from 'app/arenas/shared/arena-filter';
 export class ArenaSelectComponent implements OnInit {
 
   @Input() arena: ArenaListItem;
+  @Input() cityId: number;
   @Output() onChanged = new EventEmitter<ArenaListItem>();
 
-  city: City;
+  // city: City;
 
-  filter: ArenaFilter = new ArenaFilter();
-  listInfo: ListInfo = new ListInfo();
+  //filter: ArenaFilter = new ArenaFilter();
+  //listInfo: ListInfo = new ListInfo();
   //sortOptions: SortOption[] = new Array<SortOption>();
   //pageSize: number;
 
@@ -43,7 +44,7 @@ export class ArenaSelectComponent implements OnInit {
       .distinctUntilChanged()
       .do(() => this.searching = true)
       .switchMap(term =>
-        this.service.getArenas(new ArenaFilter({searchText: term}), new ListInfo({skip: 0, take: 10, orderBy: 'Name', orderDir: SortDir.Asc})) // TODO исправить листинфо - не работает
+        this.service.getArenas(this.cityId ? new ArenaFilter({searchText: term, cityId: this.cityId}) : new ArenaFilter({searchText: term}), new ListInfo({skip: 0, take: 10, orderBy: 'Name', orderDir: SortDir.Asc})) // TODO исправить листинфо - не работает
           .map((res) => { this.searchFailed = false; console.log(res.listItems);  return res.listItems; } )
           .catch(() => {
             this.searchFailed = true;
@@ -71,18 +72,24 @@ export class ArenaSelectComponent implements OnInit {
 
   constructor( private service: ArenaService) {
 
-    this.listInfo = new ListInfo();
+    /*this.listInfo = new ListInfo();
     this.listInfo.orderBy = 'Name';
     this.listInfo.skip = 0;
     this.listInfo.take = 10;
-    this.listInfo.orderDir = SortDir.Asc;
+    this.listInfo.orderDir = SortDir.Asc;*/
+
+    /*if (!this.city) {
+      this.city = new City();
+    }*/
   }
 
   ngOnInit() {
-    /*if (!this.city) {
-      this.city = new City;
-    } else {
-      this.city = this.arena.city;
+    /*if (!this.arena) {
+      this.arena = new ArenaListItem();
+    }*/
+
+    /*else if (this.arena) {
+      this.city = this.arena.cityName;
     }
     if (!this.city) {
       this.city = new City;
@@ -90,11 +97,14 @@ export class ArenaSelectComponent implements OnInit {
   }
 
   returnArena() {
-    /*if (this.arena && this.arena.id) {
-      if (this.arena.city) {
+    if (this.arena && this.arena.id) {
+      /*if (this.arena.city) {
           this.city = this.arena.city;
-      }
+      }*/
+      // this.cityId = this.arena.cityId;
       this.onChanged.emit(this.arena);
+    } /*else {
+      this.onChanged.emit(null);
     }*/
   }
 

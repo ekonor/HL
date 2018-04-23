@@ -21,7 +21,7 @@ import { ProfileOrganizatorComponent} from 'app/tournament-announcements/profile
 import { TAOListComponent } from 'app/tournament-announcements/profile-organizator/tao-list/tao-list.component';
 import { TAAdminFilterComponent } from 'app/tournament-announcements/ta-filter/ta-admin-filter/ta-admin-filter.component';
 import { TACreateComponent } from 'app/tournament-announcements/ta-create/ta-create.component';
-
+import { TAEditComponent } from 'app/tournament-announcements/ta-edit/ta-edit.component';
 //import { ArenaFilterComponent } from 'app/arenas/arena-filter/arena-filter.component';
 import { ArenaModule } from 'app/arenas/arenas.module';
 
@@ -37,7 +37,8 @@ import { ArenaModule } from 'app/arenas/arenas.module';
         TournamentAnnouncementViewComponent,
         ProfileOrganizatorComponent,
         TAOListComponent,
-        TACreateComponent
+        TACreateComponent,
+        TAEditComponent
       ],
       imports: [
         BrowserModule,

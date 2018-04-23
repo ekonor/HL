@@ -31,7 +31,7 @@ export class TournamentAnnouncementViewComponent {
   constructor( private service: TournamentAnnouncementsService,
                private arenaService: ArenaService,
                private activatedRoute: ActivatedRoute) {
-    this.tournamentAnnouncement = new TournamentAnnouncementViewItem;
+    //this.tournamentAnnouncement = new TournamentAnnouncementViewItem();
   }
 
   ngOnInit() {
@@ -50,19 +50,31 @@ export class TournamentAnnouncementViewComponent {
   }
 
   public getRequiredResponseCount(tournamentAnnouncement: TournamentAnnouncementViewItem): string {
-    return this.service.getRequiredResponseCountText(tournamentAnnouncement);
+    if (tournamentAnnouncement) {
+      return this.service.getRequiredResponseCountText(tournamentAnnouncement);
+    }
+    return this.getNoData();
   }
 
   public getAgeGroupIconClass(tournamentAnnouncement: TournamentAnnouncementViewItem): string {
-    return this.service.getAgeGroupIconClass(tournamentAnnouncement);
+    if (tournamentAnnouncement) {
+      return this.service.getAgeGroupIconClass(tournamentAnnouncement);
+    }
+    return this.getNoData();
   }
 
   public getGenderIconClass(tournamentAnnouncement: TournamentAnnouncementViewItem): string {
-    return this.service.getGenderIconClass(tournamentAnnouncement);
+    if (tournamentAnnouncement) {
+      return this.service.getGenderIconClass(tournamentAnnouncement);
+    }
+    return this.getNoData();
   }
 
   public getCostText(tournamentAnnouncement: TournamentAnnouncementViewItem): string {
-    return this.service.getCostText(tournamentAnnouncement);
+    if (tournamentAnnouncement) {
+      return this.service.getCostText(tournamentAnnouncement);
+    }
+    return this.getNoData();
   }
 
   public getNoData(): string {
@@ -70,12 +82,18 @@ export class TournamentAnnouncementViewComponent {
   }
 
   public getArenaLogo(arena: Arena): string {
-    return this.arenaService.getArenaLogo(arena);
+    if (arena) {
+      return this.arenaService.getArenaLogo(arena);
+    }
+    return '';
   }
 
   // TODO вынести отдельный сервис для организаций (когда буду делать страницу для организации)
   public getOrganizationLogo(organization: Organization): string {
-    return this.service.getTournamentAnnouncementLogo(this.tournamentAnnouncement);
+    if (organization && this.tournamentAnnouncement) { // TODO NEED FIX
+      return this.service.getTournamentAnnouncementLogo(this.tournamentAnnouncement);
+    }
+    return '';
   }
 
   private getTournamentAnnouncement(id: number) {

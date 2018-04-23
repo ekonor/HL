@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { TournamentAnnouncementListItem } from 'app/tournament-announcements/shared/tournament-announcement-list-item';
 import { TournamentAnnouncementFilter } from 'app/tournament-announcements/shared/tournament-announcement-filter';
 import { TournamentAnnouncementViewItem } from 'app/tournament-announcements/shared/tournament-announcement-view-item';
+import { TournamentAnnouncement } from 'app/tournament-announcements/shared/tournament-announcement';
 import { AuthenticationService } from 'app/core/auth/authentication.service';
 import { ListResponse } from 'app/shared/list/list-response';
 import { ListInfo } from 'app/shared/list/list-info';
@@ -53,7 +54,6 @@ export class TournamentAnnouncementsService {
   public getTournamentAnnouncementsAdmin(filter: TournamentAnnouncementFilter, listInfo: ListInfo): Observable<ListResponse<TournamentAnnouncementListItem>> {
     const methodUrlPrefix = '/tournament-announcements' + '/tournament-admin-list';
 
-    console.log(filter.cityId);
     const methodUrl = this.getMethodUrl(methodUrlPrefix);
     let params = listInfo.toParams();
 
@@ -96,23 +96,33 @@ export class TournamentAnnouncementsService {
 
   public getTournamentAnnouncement(id: number): Observable<TournamentAnnouncementViewItem> {
     const methodUrlPrefix = '/tournament-announcements/' + id;
-    let methodUrl = this.getMethodUrl(methodUrlPrefix);
+    const methodUrl = this.getMethodUrl(methodUrlPrefix);
+
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': 'Bearer ' + currentUser.token
+      });
+      return this.httpClient.get<TournamentAnnouncementViewItem>(methodUrl,{ headers: headers });
+    }
     return this.httpClient.get<TournamentAnnouncementViewItem>(methodUrl);
   }
 
-  public getRequiredResponseCountText(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem) {
+  public getRequiredResponseCountText(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem | TournamentAnnouncement ) {
     return tournamentAnnouncement.requiredResponseCount ? tournamentAnnouncement.requiredResponseCount + ' чел.' : this.getNoData();
   }
 
-  public getAgeGroupIconClass(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem) {
+  public getAgeGroupIconClass(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem | TournamentAnnouncement ) {
     return tournamentAnnouncement.ageGroup === 'Children' ? 'fa fa-child' : 'fa fa-male';
   }
 
-  public getGenderIconClass(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem) {
+  public getGenderIconClass(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem | TournamentAnnouncement ) {
     return tournamentAnnouncement.gender === 'Female' ? 'fa fa-female' : 'fa fa-male';
   }
 
-  public getStateClass(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem) {
+  public getStateClass(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem ) {
     let stateClass = '';
     switch(tournamentAnnouncement.state) {
       case 'Draft': {
@@ -151,12 +161,11 @@ export class TournamentAnnouncementsService {
     return stateClass;
   }
 
-  public getCostText(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem) {
+  public getCostText(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem | TournamentAnnouncement ) {
     if (tournamentAnnouncement.isCommercial) {
       if (tournamentAnnouncement.cost) {
         return tournamentAnnouncement.costType === 'PerTeam' ? tournamentAnnouncement.cost + '/команда' : tournamentAnnouncement.cost + '/чел.';
-      }
-      else {
+      } else {
         return this.getNoData();
       }
     }
@@ -170,7 +179,33 @@ export class TournamentAnnouncementsService {
     return 'не определено';
   }
 
-  /*public updateArena(id: number, arena: ArenaViewItem): Observable<ArenaViewItem> {
+  public sendOnModeration(id: number): Observable<number> {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const body = JSON.stringify({'id': id});
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': 'Bearer ' + currentUser.token
+      });
+      return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/' + id + '/send-on-moderation'), body, { headers: headers });
+    }
+  }
+
+  public closeTournamentAnnouncement(id: number): Observable<number> {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const body = JSON.stringify({'state': 'Canceled'} );
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': 'Bearer ' + currentUser.token
+      });
+      return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/' + id + '/close'), body, { headers: headers });
+    }
+  }
+
+  /*public updateQuickTournamentAnnouncement(id: number, ta: TournamentAnnouncementListItem): Observable<TournamentAnnouncementListItem> {
     console.log(arena);
     const body = JSON.stringify({
       'name': arena.name,
@@ -195,27 +230,27 @@ export class TournamentAnnouncementsService {
       });
       return this.httpClient.put<ArenaViewItem>(this.getMethodUrl('/arenas/' + id), body, { headers: headers });
     }
-  }
-*/
-  public addTournamentAnnouncement(ta: TournamentAnnouncementViewItem): Observable<number> {
+  }*/
+
+  public addTournamentAnnouncement(ta: TournamentAnnouncement): Observable<number> {
     console.log(ta);
     const body = JSON.stringify({
       'name': ta.name,
       'startDate': ta.startDate,
       'endDate': ta.endDate,
       'content': ta.content,//
-      'requiredResponseCount': ta.requiredResponseCount,
+      'requiredResponseCount': ta.requiredResponseCount.toString(),
       'endRegistrationDate': ta.endRegistrationDate,
-      'cityId': ta.city.id,
-      'arenaId': ta.arena.id,//
+      'cityId': ta.cityId,
+      'arenaId': ta.arenaId,
       'isCommercial': ta.isCommercial,//
       'cost': ta.cost,//
       'costType': ta.costType,//
       'ageGroup': ta.ageGroup,
-      'minBirthYear': ta.minAge,//
-      'maxBirthYear': ta.maxAge, //
+      'minBirthYear': 0, //ta.minBirthYear,//
+      'maxBirthYear': 0, //ta.maxBirthYear, //
       'gender': ta.gender,
-      'closeCondition': 'ResponseCountAccomplished'//
+      'closeCondition': ta.closeCondition //'ResponseCountAccomplished'//
     });
     console.log(body);
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -229,7 +264,7 @@ export class TournamentAnnouncementsService {
     }
   }
 
-  /*public deleteArena(id: number): Observable<void> {
+  public deleteTournamentAnnouncement(id: number): Observable<void> {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
       const headers = new HttpHeaders({
@@ -237,11 +272,11 @@ export class TournamentAnnouncementsService {
         'X-Requested-With': 'XMLHttpRequest',
         'Authorization': 'Bearer ' + currentUser.token
       });
-      return this.httpClient.delete<void>(this.getMethodUrl('/arenas/' + id), { headers: headers });
+      return this.httpClient.delete<void>(this.getMethodUrl('/announcements/' + id), { headers: headers });
     }
   }
 
-  public deleteLogo(id: number): Observable<void> {
+ /* public deleteLogo(id: number): Observable<void> {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
       const headers = new HttpHeaders({

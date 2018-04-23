@@ -1,5 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import  { AlertService } from 'app/components/alert/alert.service';
 
 import { TournamentAnnouncementsService } from 'app/tournament-announcements/shared/tournament-announcements.service';
 import { ListResponse } from 'app/shared/list/list-response';
@@ -22,7 +23,8 @@ export class TAOListComponent implements OnInit {
 
   constructor( private service: TournamentAnnouncementsService,
                private arenaService: ArenaService,
-               private router: Router) {
+               private router: Router,
+               private alertService: AlertService ) {
   }
 
   ngOnInit() {
@@ -33,7 +35,7 @@ export class TAOListComponent implements OnInit {
   }
 
   public editTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementListItem): void {
-    this.router.navigate([ 'tournament-announcement/edit', tournamentAnnouncement.id ]);
+    this.router.navigate([ 'tournament-announcements/edit', tournamentAnnouncement.id ]);
   }
 
   public addTournamentAnnouncement(): void {
@@ -44,6 +46,46 @@ export class TAOListComponent implements OnInit {
     this.router.navigate([ 'tournament-announcements']);
   }
 
+  /*public draftToModerateTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementListItem) {
+    tournamentAnnouncement.state = 'WaitModeration';
+    this.service.updateTournamentAnnouncement(tournamentAnnouncement);
+  }*/
+
+  public sendOnModeration(tournamentAnnouncement: TournamentAnnouncementListItem) {
+    this.service.sendOnModeration(tournamentAnnouncement.id).subscribe(
+      data => {
+        //this.router.navigate(['/tournament-announcements']);
+      },
+      error => {
+        this.alertService.error(error);
+        this.alertService.error("Не удалось отправить на модерацию анонс турнира");
+      },
+      () => {} );
+  }
+
+  public deleteTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementListItem) {
+    this.service.deleteTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
+      data => {
+        //this.router.navigate(['/tournament-announcements']);
+      },
+      error => {
+        this.alertService.error(error);
+        this.alertService.error("Не удалось удалить анонс турнира");
+      },
+      () => {} );
+  }
+
+  public closeTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementListItem) {
+    this.service.closeTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
+      data => {
+        //this.router.navigate(['/tournament-announcements']);
+      },
+      error => {
+        this.alertService.error(error);
+        this.alertService.error("Не удалось завершить прием заявок");
+      },
+      () => {} );
+  }
   public getTournamentAnnouncementLogo(tournamentAnnouncement: TournamentAnnouncementListItem): string {
     return this.service.getTournamentAnnouncementLogo(tournamentAnnouncement);
   }
@@ -69,7 +111,10 @@ export class TAOListComponent implements OnInit {
   }
 
   public getArenaLogo(arena: Arena): string {
-    return this.arenaService.getArenaLogo(arena);
+    if (arena) {
+      return this.arenaService.getArenaLogo(arena);
+    }
+    return '';
   }
 
   public getStateClass(tournamentAnnouncement: TournamentAnnouncementListItem): string {

@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-6 blog-item">
       <div class="card h-100">
-        <div class="card-body">
+        <div class="card-body" *ngIf="tournamentAnnouncement">
           <div class="item-title-main">
             <p>{{tournamentAnnouncement.city && tournamentAnnouncement.city.name ? tournamentAnnouncement.city.name+', ': ''}}{{tournamentAnnouncement.startDate | date :  "dd.MM.y"}}&nbsp;&mdash;&nbsp;{{tournamentAnnouncement.endDate | date :  "dd.MM.y"}}</p>
           </div>
@@ -13,13 +13,13 @@
           <hr>
           <div class="item-img-wrapper" >
             <div class="item-img-bg-wrapper" >
-              <img class="item-img-bg"
+              <img class="item-img-bg" *ngIf="tournamentAnnouncement"
                    [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)"
                    alt="{{tournamentAnnouncement.name}}"
                    onerror = "this.style.display = 'none'">
             </div>
             <div>
-              <img class="item-img-main"
+              <img class="item-img-main" *ngIf="tournamentAnnouncement"
                    [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)"
                    alt="{{tournamentAnnouncement.name}}"
                    onerror = "this.style.display = 'none'" >
@@ -39,18 +39,18 @@
                   Арена:
                 </p>
                 <p>
-                  <a [routerLink]="['/arena',tournamentAnnouncement.arena.id]" routerLinkActive="active">
+                  <a  *ngIf="tournamentAnnouncement.arena" [routerLink]="['/arena',tournamentAnnouncement.arena.id]" routerLinkActive="active">
                     {{tournamentAnnouncement.arena.name}}
                   </a>
                 </p>
                 <div class="logo-img-wrapper" >
                   <div class="logo-img-bg-wrapper" >
-                  <img class="logo-img-bg"
+                  <img class="logo-img-bg" *ngIf="tournamentAnnouncement && tournamentAnnouncement.arena"
                        [src]="getArenaLogo(tournamentAnnouncement.arena)"
                        alt="{{tournamentAnnouncement.arena.name}}"
                        onerror = "this.style.display = 'none'">
                   </div>
-                  <a [routerLink]="['/arena',tournamentAnnouncement.arena.id]" routerLinkActive="active">
+                  <a *ngIf="tournamentAnnouncement && tournamentAnnouncement.arena" [routerLink]="['/arena',tournamentAnnouncement.arena.id]" routerLinkActive="active">
                   <img class="logo-img-main"
                        [src]="getArenaLogo(tournamentAnnouncement.arena)"
                        alt="{{tournamentAnnouncement.arena.name}}"
@@ -64,18 +64,18 @@
                   Организатор:
                 </p>
                 <p>
-                  <a [routerLink]="['/organization',tournamentAnnouncement.organization.id]" routerLinkActive="active">
+                  <a  *ngIf="tournamentAnnouncement &&  tournamentAnnouncement.organization" [routerLink]="['/organization',tournamentAnnouncement.organization.id]" routerLinkActive="active">
                     {{tournamentAnnouncement.organization.name}}
                   </a>
                 </p>
                 <div class="logo-img-wrapper" >
                   <div class="logo-img-bg-wrapper" >
-                  <img class="logo-img-bg"
+                  <img class="logo-img-bg" *ngIf="tournamentAnnouncement && tournamentAnnouncement.organization"
                        [src]="getOrganizationLogo(tournamentAnnouncement.organization)"
                        alt="{{tournamentAnnouncement.organization.name}}"
                        onerror = "this.style.display = 'none'">
                   </div>
-                  <a [routerLink]="['/organization',tournamentAnnouncement.organization.id]" routerLinkActive="active">
+                  <a *ngIf="tournamentAnnouncement && tournamentAnnouncement.organization" [routerLink]="['/organization',tournamentAnnouncement.organization.id]" routerLinkActive="active">
                   <img class="logo-img-main"
                        [src]="getOrganizationLogo(tournamentAnnouncement.organization)"
                        alt="{{tournamentAnnouncement.organization.name}}"
@@ -115,12 +115,46 @@
                 Цена участия: {{getCostText(tournamentAnnouncement)}}
               </p>
             </span>
+            <span>
+              <a *ngIf="tournamentAnnouncement.state == 'Draft'" class="visible-btn"
+                 title="Редактировать анонс"
+                 (click)="editTournamentAnnouncement(tournamentAnnouncement)"
+                 [hasPermission]="['tournamentadministrator']"
+                 onAuthorizedPermission="show"
+                 onUnauthorizedPermission="hide">
+                <i class="fa fa-pencil"></i>
+              </a>
+              <a *ngIf="tournamentAnnouncement.state == 'Draft'" class="visible-btn"
+                 title="Отправить на модерацию"
+                 (click)="sendOnModeration(tournamentAnnouncement)"
+                 [hasPermission]="['tournamentadministrator']"
+                 onAuthorizedPermission="show"
+                 onUnauthorizedPermission="hide">
+                <i class="fa fa-book"></i>
+              </a>
+              <a *ngIf="tournamentAnnouncement.state == 'Draft' || tournamentAnnouncement.state == 'RejectedByModerator'" class="visible-btn"
+                 title="Удалить анонс"
+                 (click)="deleteTournamentAnnouncement(tournamentAnnouncement)"
+                 [hasPermission]="['tournamentadministrator']"
+                 onAuthorizedPermission="show"
+                 onUnauthorizedPermission="hide">
+                <i class="fa fa-book"></i>
+              </a>
+              <a *ngIf="tournamentAnnouncement.state == 'ApprovedByModerator'" class="visible-btn"
+                 title="Завершить прием заявок"
+                 (click)="deleteTournamentAnnouncement(tournamentAnnouncement)"
+                 [hasPermission]="['tournamentadministrator']"
+                 onAuthorizedPermission="show"
+                 onUnauthorizedPermission="hide">
+                <i class="fa fa-book"></i>
+              </a>
+            </span>
           </span>
 
         </div>
       </div>
     </div>
-    <div class="col-md-6 blog-item">
+    <div class="col-md-6 blog-item" *ngIf="tournamentAnnouncement">
       <div class="card h-100 wrapper">
         <div class="card-body wrapper">
           <div class="item-title-main">

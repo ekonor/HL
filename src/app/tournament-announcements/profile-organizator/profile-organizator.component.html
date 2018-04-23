@@ -1,5 +1,5 @@
 <loader [hidden]="!dataIsLoading"></loader>
-<div class="profile-organizator container">
+<div class="profile-organizator container" *ngIf="tournamentAnnouncementList">
   <div class="row">
     <div class="col-md-12">
       <div class="heading heading-12 margin-top-bottom-30">
@@ -11,11 +11,11 @@
         <hr>
       </div>
     </div>
-    <ta-admin-filter
+    <ta-admin-filter *ngIf="tournamentAnnouncementList"
       [filter]="filter"
       (onFiltered)="onFiltered($event)">
     </ta-admin-filter>
-    <sorting class="pull-right"
+    <sorting *ngIf="tournamentAnnouncementList" class="pull-right"
              [orderBy]="listInfo.orderBy"
              [orderDir]="listInfo.orderDir"
              [options]="sortOptions"
@@ -27,7 +27,7 @@
     <!--ta-list [content]="tournamentAnnouncementList.listItems"
                                   class="row">
     </ta-list-->
-    <pagination [page]="listInfo.page"
+    <pagination *ngIf="tournamentAnnouncementList" [page]="listInfo.page"
                 [collectionSize]="tournamentAnnouncementList.count"
                 [pageSize]="listInfo.take">
     </pagination>

@@ -59,6 +59,8 @@
         <i class="fa fa-rouble"></i>
         </p>
       </th>
+      <th>
+      </th>
     </tr>
     </thead>
     <tbody *ngIf="content">
@@ -72,7 +74,7 @@
                  alt="{{tournamentAnnouncement.name}}"
                  onerror = "this.style.display = 'none'">
           </div>
-          <a [routerLink]="['/tournament',tournamentAnnouncement.id]" routerLinkActive="active">
+          <a [routerLink]="['/tournament-announcement',tournamentAnnouncement.id]" routerLinkActive="active">
             <img class="logo-img-main"
                  [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)"
                  alt="{{tournamentAnnouncement.name}}"
@@ -81,7 +83,7 @@
         </div>
       </td>
       <td>
-        <a [routerLink]="['/tournament',tournamentAnnouncement.id]" routerLinkActive="active">
+        <a *ngIf="tournamentAnnouncement" [routerLink]="['/tournament-announcement',tournamentAnnouncement.id]" routerLinkActive="active">
           {{tournamentAnnouncement.name}}
         </a>
       </td>
@@ -92,11 +94,11 @@
         <div class="logo-img-wrapper" >
           <div class="logo-img-bg-wrapper" >
             <img class="logo-img-bg"
-                 [src]="getArenaLogo(tournamentAnnouncement.arena)"
+                 *ngIf="tournamentAnnouncement && tournamentAnnouncement.arena" [src]="getArenaLogo(tournamentAnnouncement.arena)"
                  alt="{{tournamentAnnouncement.arena.name}}"
                  onerror = "this.style.display = 'none'">
           </div>
-          <a [routerLink]="['/arena',tournamentAnnouncement.arena.id]" routerLinkActive="active">
+          <a *ngIf="tournamentAnnouncement && tournamentAnnouncement.arena" [routerLink]="['/arena',tournamentAnnouncement.arena.id]" routerLinkActive="active">
             <img class="logo-img-main"
                  [src]="getArenaLogo(tournamentAnnouncement.arena)"
                  alt="{{tournamentAnnouncement.arena.name}}"
@@ -105,7 +107,7 @@
         </div>
       </td>
       <td>
-        <a [routerLink]="['/arena',tournamentAnnouncement.arena.id]" routerLinkActive="active">
+        <a *ngIf="tournamentAnnouncement && tournamentAnnouncement.arena" [routerLink]="['/arena',tournamentAnnouncement.arena.id]" routerLinkActive="active">
           {{tournamentAnnouncement.arena.name}}
         </a>
       </td>
@@ -125,6 +127,40 @@
       </td>
       <td>
         {{getCostText(tournamentAnnouncement)}}
+      </td>
+      <td>
+        <a *ngIf="tournamentAnnouncement.state == 'Draft'" class="visible-btn"
+           title="Редактировать анонс"
+           (click)="editTournamentAnnouncement(tournamentAnnouncement)"
+           [hasPermission]="['tournamentadministrator']"
+           onAuthorizedPermission="show"
+           onUnauthorizedPermission="hide">
+          <i class="fa fa-pencil"></i>
+        </a>
+        <a *ngIf="tournamentAnnouncement.state == 'Draft'" class="visible-btn"
+           title="Отправить на модерацию"
+           (click)="sendOnModeration(tournamentAnnouncement)"
+           [hasPermission]="['tournamentadministrator']"
+           onAuthorizedPermission="show"
+           onUnauthorizedPermission="hide">
+          <i class="fa fa-book"></i>
+        </a>
+        <a *ngIf="tournamentAnnouncement.state == 'Draft' || tournamentAnnouncement.state == 'RejectedByModerator'" class="visible-btn"
+           title="Удалить анонс"
+           (click)="deleteTournamentAnnouncement(tournamentAnnouncement)"
+           [hasPermission]="['tournamentadministrator']"
+           onAuthorizedPermission="show"
+           onUnauthorizedPermission="hide">
+          <i class="fa fa-book"></i>
+        </a>
+        <a *ngIf="tournamentAnnouncement.state == 'ApprovedByModerator'" class="visible-btn"
+           title="Завершить прием заявок"
+           (click)="closeTournamentAnnouncement(tournamentAnnouncement)"
+           [hasPermission]="['tournamentadministrator']"
+           onAuthorizedPermission="show"
+           onUnauthorizedPermission="hide">
+          <i class="fa fa-book"></i>
+        </a>
       </td>
     </tr>
     </tbody>

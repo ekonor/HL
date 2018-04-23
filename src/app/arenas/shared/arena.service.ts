@@ -31,10 +31,10 @@ export class ArenaService {
     //let params = listInfo.toParams();
     let params = new HttpParams();
     //console.log("eeeee",params.toString());
-    /*if (filter.arenaTypeId)
+    if (filter.arenaTypeId)
       params = params.append('arenaTypeId', filter.arenaTypeId.toString());
     if (filter.cityId)
-      params = params.append('cityId', filter.cityId.toString());*/
+      params = params.append('cityId', filter.cityId.toString());
     if (filter.searchText)
       params = params.append('searchText', filter.searchText);
     console.log(params);

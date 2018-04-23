@@ -82,6 +82,9 @@ export class CityComponent implements OnInit {
       }
       this.onChanged.emit(this.city);
     }
+    /*else {
+      this.onChanged.emit(null);
+    }*/
   }
 
   updateCountry() {
