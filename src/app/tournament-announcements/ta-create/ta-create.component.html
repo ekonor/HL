@@ -89,7 +89,7 @@
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !content.valid }">
       <label for="content">Текст анонса</label>
-      <app-ngx-editor [placeholder]="'Текст анонса'" [height]="200" class="form-control" name="about" [(ngModel)]="ta.content" (ngModelChange)="ta.content = $event" #about="ngModel" id="content"></app-ngx-editor>
+      <app-ngx-editor [placeholder]="'Текст анонса'" [height]="200" class="form-control" name="content" [(ngModel)]="ta.content" (ngModelChange)="ta.content = $event" #content="ngModel" id="content"></app-ngx-editor>
       <div *ngIf="f.submitted && content != null && !content.valid" class="help-block">content is invalid</div>
       </div>
     <!--div class="form-group">
