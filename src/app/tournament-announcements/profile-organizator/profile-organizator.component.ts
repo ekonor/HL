@@ -72,6 +72,8 @@ export class ProfileOrganizatorComponent implements OnInit {
         },
         error => {
           this.errorMessage = error;
+          this.dataIsLoading = false;
+          alert('Не удалось получить список анонсов');
           // console.log(this.errorMessage);
         },
         () => this.dataIsLoading = false

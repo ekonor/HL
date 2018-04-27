@@ -75,7 +75,7 @@ export class TACreateComponent implements OnInit {
     this.dataIsLoading = true;
     this.service.addTournamentAnnouncement(this.ta).subscribe(
       data => {
-        this.router.navigate(['/tournament-announcements']);
+        this.router.navigate(['/profile']);
       },
       error => {
         this.alertService.error(error);

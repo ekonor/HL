@@ -1,4 +1,4 @@
-<div class="tao-list section">
+<div class="tao-list section" [hidden]="dataIsLoading">
   <div class="col-md-12 admin-panel">
     <a class="btn-floating deep-orange waves-light waves-effect"
        title="Добавить анонс"
@@ -135,7 +135,7 @@
            [hasPermission]="['tournamentadministrator']"
            onAuthorizedPermission="show"
            onUnauthorizedPermission="hide">
-          <i class="fa fa-pencil"></i>
+          <i [class]="getEditIconClass()"></i>
         </a>
         <a *ngIf="tournamentAnnouncement.state == 'Draft'" class="visible-btn"
            title="Отправить на модерацию"
@@ -143,7 +143,7 @@
            [hasPermission]="['tournamentadministrator']"
            onAuthorizedPermission="show"
            onUnauthorizedPermission="hide">
-          <i class="fa fa-book"></i>
+          <i [class]="getSendOnModerationIconClass()"></i>
         </a>
         <a *ngIf="tournamentAnnouncement.state == 'Draft' || tournamentAnnouncement.state == 'RejectedByModerator'" class="visible-btn"
            title="Удалить анонс"
@@ -151,7 +151,7 @@
            [hasPermission]="['tournamentadministrator']"
            onAuthorizedPermission="show"
            onUnauthorizedPermission="hide">
-          <i class="fa fa-book"></i>
+          <i [class]="getDeleteIconClass()"></i>
         </a>
         <a *ngIf="tournamentAnnouncement.state == 'ApprovedByModerator'" class="visible-btn"
            title="Завершить прием заявок"
@@ -159,7 +159,7 @@
            [hasPermission]="['tournamentadministrator']"
            onAuthorizedPermission="show"
            onUnauthorizedPermission="hide">
-          <i class="fa fa-book"></i>
+          <i [class]="getCloseIconClass()"></i>
         </a>
       </td>
     </tr>

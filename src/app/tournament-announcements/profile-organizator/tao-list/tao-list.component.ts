@@ -1,6 +1,7 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+// import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import  { AlertService } from 'app/components/alert/alert.service';
+import { AlertService } from 'app/components/alert/alert.service';
 
 import { TournamentAnnouncementsService } from 'app/tournament-announcements/shared/tournament-announcements.service';
 import { ListResponse } from 'app/shared/list/list-response';
@@ -12,14 +13,14 @@ import { Arena} from 'app/arenas/shared/arena';
 @Component({
   moduleId: module.id,
   selector: 'tao-list',
-  inputs: ['content'],
   templateUrl: 'tao-list.component.html',
   styleUrls: ['tao-list.component.scss']
 })
 
 @Injectable()
 export class TAOListComponent implements OnInit {
-  content: TournamentAnnouncementListItem[];
+ @Input() content: TournamentAnnouncementListItem[];
+ @Output() onChanged = new EventEmitter<number>();
 
   constructor( private service: TournamentAnnouncementsService,
                private arenaService: ArenaService,
@@ -64,15 +65,16 @@ export class TAOListComponent implements OnInit {
   }
 
   public deleteTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementListItem) {
+    const id = tournamentAnnouncement.id;
     this.service.deleteTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
       data => {
         //this.router.navigate(['/tournament-announcements']);
       },
       error => {
         this.alertService.error(error);
-        this.alertService.error("Не удалось удалить анонс турнира");
+        this.alertService.error('Не удалось удалить анонс турнира');
       },
-      () => {} );
+      () => { alert('Анонс удален успешно');  this.onChanged.emit(id); } );
   }
 
   public closeTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementListItem) {
@@ -124,5 +126,21 @@ export class TAOListComponent implements OnInit {
   // TODO вынести отдельный сервис для организаций (когда буду делать страницу для организации)
   public getOrganizationLogo(/*organization: Organization*/ tournamentAnnouncement: TournamentAnnouncementListItem): string {
     return this.service.getTournamentAnnouncementLogo(tournamentAnnouncement);
+  }
+
+  public getCloseIconClass(): string {
+    return this.service.getCloseIconClass();
+  }
+
+  public getSendOnModerationIconClass(): string {
+    return this.service.getSendOnModerationIconClass();
+  }
+
+  public getDeleteIconClass(): string {
+    return this.service.getDeleteIconClass();
+  }
+
+  public getEditIconClass(): string {
+    return this.service.getEditIconClass();
   }
 }

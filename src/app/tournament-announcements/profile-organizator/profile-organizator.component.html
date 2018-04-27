@@ -11,23 +11,26 @@
         <hr>
       </div>
     </div>
-    <ta-admin-filter *ngIf="tournamentAnnouncementList"
+    <ta-admin-filter [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList"
       [filter]="filter"
       (onFiltered)="onFiltered($event)">
     </ta-admin-filter>
-    <sorting *ngIf="tournamentAnnouncementList" class="pull-right"
+    <sorting [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList" class="pull-right"
              [orderBy]="listInfo.orderBy"
              [orderDir]="listInfo.orderDir"
              [options]="sortOptions"
              (onSorted)="onSorted($event)">
     </sorting>
-    <tao-list *ngIf="tournamentAnnouncementList" [content]="tournamentAnnouncementList.listItems"
-                                  class="row">
+    <tao-list [hidden]="dataIsLoading"
+              *ngIf="tournamentAnnouncementList"
+              [content]="tournamentAnnouncementList.listItems"
+              (onChanged)="getTournamentAnnouncements()"
+              class="row">
     </tao-list>
     <!--ta-list [content]="tournamentAnnouncementList.listItems"
                                   class="row">
     </ta-list-->
-    <pagination *ngIf="tournamentAnnouncementList" [page]="listInfo.page"
+    <pagination [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList" [page]="listInfo.page"
                 [collectionSize]="tournamentAnnouncementList.count"
                 [pageSize]="listInfo.take">
     </pagination>

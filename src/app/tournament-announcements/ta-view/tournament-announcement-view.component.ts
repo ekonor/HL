@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Params } from '@angular/router';
 import { AgmMap, AgmMarker } from '@agm/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from 'app/components/alert/alert.service';
 
 import { TournamentAnnouncementsService } from 'app/tournament-announcements/shared/tournament-announcements.service';
 import { TournamentAnnouncementViewItem } from 'app/tournament-announcements/shared/tournament-announcement-view-item';
@@ -28,9 +29,13 @@ export class TournamentAnnouncementViewComponent {
   errorMessage: string;
   private sub: any;
 
+  returnUrl: string;
+
   constructor( private service: TournamentAnnouncementsService,
                private arenaService: ArenaService,
-               private activatedRoute: ActivatedRoute) {
+               private activatedRoute: ActivatedRoute,
+               private alertService: AlertService,
+               private router: Router) {
     //this.tournamentAnnouncement = new TournamentAnnouncementViewItem();
   }
 
@@ -39,6 +44,8 @@ export class TournamentAnnouncementViewComponent {
       this.id = parseInt(params['id']);
       this.getTournamentAnnouncement(this.id);
     });
+
+    this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
   }
 
   ngOnDestroy(){
@@ -96,6 +103,64 @@ export class TournamentAnnouncementViewComponent {
     return '';
   }
 
+  public getCloseIconClass(): string {
+    return this.service.getCloseIconClass();
+  }
+
+  private getMapPoint(tournamentAnnouncement: TournamentAnnouncementViewItem): Point {
+    if (this.tournamentAnnouncement && this.tournamentAnnouncement.coordinates && this.tournamentAnnouncement.coordinates.latitude && this.tournamentAnnouncement.coordinates.longitude){
+      return { latitude: this.tournamentAnnouncement.coordinates.latitude, longitude: this.tournamentAnnouncement.coordinates.longitude };
+    }
+  }
+
+  public getSendOnModerationIconClass(): string {
+    return this.service.getSendOnModerationIconClass();
+  }
+
+  public getDeleteIconClass(): string {
+    return this.service.getDeleteIconClass();
+  }
+
+  public getEditIconClass(): string {
+    return this.service.getEditIconClass();
+  }
+
+  public sendOnModeration(tournamentAnnouncement: TournamentAnnouncementViewItem) {
+    this.service.sendOnModeration(tournamentAnnouncement.id).subscribe(
+      data => {
+        //this.router.navigate(['/tournament-announcements']);
+      },
+      error => {
+        this.alertService.error(error);
+        this.alertService.error("Не удалось отправить на модерацию анонс турнира");
+      },
+      () => {} );
+  }
+
+  public deleteTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementViewItem) {
+    this.service.deleteTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
+      data => {
+        //this.router.navigate(['/tournament-announcements']);
+      },
+      error => {
+        this.alertService.error(error);
+        this.alertService.error("Не удалось удалить анонс турнира");
+      },
+      () => { alert('Анонс успешно удален. Вы будете перенаправлены на предыдущую страницу.'); this.router.navigate([this.returnUrl]); } );
+  }
+
+  public closeTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementViewItem) {
+    this.service.closeTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
+      data => {
+        //this.router.navigate(['/tournament-announcements']);
+      },
+      error => {
+        this.alertService.error(error);
+        this.alertService.error("Не удалось завершить прием заявок");
+      },
+      () => {} );
+  }
+
   private getTournamentAnnouncement(id: number) {
     this.dataIsLoading = true;
     this.service.getTournamentAnnouncement(id)
@@ -105,14 +170,11 @@ export class TournamentAnnouncementViewComponent {
         this.mapPoint = this.getMapPoint(tournamentAnnouncement);
         this.zoom = 8;
       },
-      error => this.errorMessage = error,
+      error => {
+        this.errorMessage = error;
+        this.router.navigate([this.returnUrl]);
+      },
       () => this.dataIsLoading = false
     );
-  }
-
-  private getMapPoint(tournamentAnnouncement: TournamentAnnouncementViewItem): Point {
-    if (this.tournamentAnnouncement && this.tournamentAnnouncement.coordinates && this.tournamentAnnouncement.coordinates.latitude && this.tournamentAnnouncement.coordinates.longitude){
-      return { latitude: this.tournamentAnnouncement.coordinates.latitude, longitude: this.tournamentAnnouncement.coordinates.longitude };
-    }
   }
 }

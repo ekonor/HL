@@ -121,6 +121,22 @@ export class TournamentAnnouncementsService {
   public getGenderIconClass(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem | TournamentAnnouncement ) {
     return tournamentAnnouncement.gender === 'Female' ? 'fa fa-female' : 'fa fa-male';
   }
+// TODO вынести в общий класс
+  public getCloseIconClass(): string {
+    return 'fa fa-hand-stop-o';
+  }
+
+  public getSendOnModerationIconClass(): string {
+    return 'fa fa-mail-forward';
+  }
+
+  public getDeleteIconClass(): string {
+    return 'fa fa-close';
+  }
+
+  public getEditIconClass(): string {
+    return 'fa fa-pencil';
+  }
 
   public getStateClass(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem ) {
     let stateClass = '';
@@ -180,28 +196,32 @@ export class TournamentAnnouncementsService {
   }
 
   public sendOnModeration(id: number): Observable<number> {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser && currentUser.token) {
-      const body = JSON.stringify({'id': id});
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json; charset=utf-8',
-        'X-Requested-With': 'XMLHttpRequest',
-        'Authorization': 'Bearer ' + currentUser.token
-      });
-      return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/' + id + '/send-on-moderation'), body, { headers: headers });
+    if (confirm('Вы действительно хотите отправить анонс на модерацию?')) {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (currentUser && currentUser.token) {
+        const body = JSON.stringify({'id': id});
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json; charset=utf-8',
+          'X-Requested-With': 'XMLHttpRequest',
+          'Authorization': 'Bearer ' + currentUser.token
+        });
+        return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/' + id + '/send-on-moderation'), body, {headers: headers});
+      }
     }
   }
 
   public closeTournamentAnnouncement(id: number): Observable<number> {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser && currentUser.token) {
-      const body = JSON.stringify({'state': 'Canceled'} );
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json; charset=utf-8',
-        'X-Requested-With': 'XMLHttpRequest',
-        'Authorization': 'Bearer ' + currentUser.token
-      });
-      return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/' + id + '/close'), body, { headers: headers });
+    if (confirm('Вы действительно хотите остановить прием заявок для анонса?')) {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (currentUser && currentUser.token) {
+        const body = JSON.stringify({'state': 'Canceled'});
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json; charset=utf-8',
+          'X-Requested-With': 'XMLHttpRequest',
+          'Authorization': 'Bearer ' + currentUser.token
+        });
+        return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/' + id + '/close'), body, {headers: headers});
+      }
     }
   }
 
@@ -233,46 +253,52 @@ export class TournamentAnnouncementsService {
   }*/
 
   public addTournamentAnnouncement(ta: TournamentAnnouncement): Observable<number> {
-    console.log(ta);
-    const body = JSON.stringify({
-      'name': ta.name,
-      'startDate': ta.startDate,
-      'endDate': ta.endDate,
-      'content': ta.content,//
-      'requiredResponseCount': ta.requiredResponseCount.toString(),
-      'endRegistrationDate': ta.endRegistrationDate,
-      'cityId': ta.cityId,
-      'arenaId': ta.arenaId,
-      'isCommercial': ta.isCommercial,//
-      'cost': ta.cost,//
-      'costType': ta.costType,//
-      'ageGroup': ta.ageGroup,
-      'minBirthYear': 0, //ta.minBirthYear,//
-      'maxBirthYear': 0, //ta.maxBirthYear, //
-      'gender': ta.gender,
-      'closeCondition': ta.closeCondition //'ResponseCountAccomplished'//
-    });
-    console.log(body);
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser && currentUser.token) {
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json; charset=utf-8',
-        'X-Requested-With': 'XMLHttpRequest',
-        'Authorization': 'Bearer ' + currentUser.token
+    if (confirm('Вы действительно хотите сохранить анонс?')) {
+      console.log(ta);
+      const body = JSON.stringify({
+        'name': ta.name,
+        'startDate': ta.startDate ? ta.startDate + 'T00:00:00.000Z' : null,
+        'endDate': ta.endDate ? ta.endDate + 'T00:00:00.000Z' : null,
+        'content': ta.content,
+        'requiredResponseCount': ta.requiredResponseCount.toString(),
+        'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate + 'T00:00:00.000Z' : null, // TODO NEED FIX!!! убрать время и этот костыль!
+        'cityId': ta.cityId,
+        'arenaId': ta.arenaId,
+        'isCommercial': ta.isCommercial,
+        'cost': ta.cost,
+        'costType': ta.costType,
+        'ageGroup': ta.ageGroup,
+        'minBirthYear': 0, //ta.minBirthYear,//
+        'maxBirthYear': 0, //ta.maxBirthYear, //
+        'gender': ta.gender,
+        'closeCondition': ta.closeCondition //'ResponseCountAccomplished'
       });
-      return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/'), body, { headers: headers });
+      console.log(body);
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (currentUser && currentUser.token) {
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json; charset=utf-8',
+          'X-Requested-With': 'XMLHttpRequest',
+          'Authorization': 'Bearer ' + currentUser.token
+        });
+        return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/'), body, {headers: headers});
+      }
     }
   }
 
   public deleteTournamentAnnouncement(id: number): Observable<void> {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser && currentUser.token) {
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json; charset=utf-8',
-        'X-Requested-With': 'XMLHttpRequest',
-        'Authorization': 'Bearer ' + currentUser.token
-      });
-      return this.httpClient.delete<void>(this.getMethodUrl('/announcements/' + id), { headers: headers });
+    if (confirm('Вы действительно хотите удалить анонс?')) {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (currentUser && currentUser.token) {
+        let params = new HttpParams();
+        params.append('id', id.toString());
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json; charset=utf-8',
+          'X-Requested-With': 'XMLHttpRequest',
+          'Authorization': 'Bearer ' + currentUser.token
+        });
+        return this.httpClient.delete<void>(this.getMethodUrl('/tournament-announcements/' + id), {params: params, headers: headers});
+      }
     }
   }
 
