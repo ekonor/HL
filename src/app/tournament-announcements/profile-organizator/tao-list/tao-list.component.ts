@@ -53,40 +53,76 @@ export class TAOListComponent implements OnInit {
   }*/
 
   public sendOnModeration(tournamentAnnouncement: TournamentAnnouncementListItem) {
-    this.service.sendOnModeration(tournamentAnnouncement.id).subscribe(
-      data => {
-        //this.router.navigate(['/tournament-announcements']);
-      },
-      error => {
-        this.alertService.error(error);
-        this.alertService.error("Не удалось отправить на модерацию анонс турнира");
-      },
-      () => {} );
+    if (confirm('Вы действительно хотите отправить анонс на модерацию?')) {
+      const id = tournamentAnnouncement.id;
+      this.service.sendOnModeration(tournamentAnnouncement.id).subscribe(
+        data => {
+          //this.router.navigate(['/tournament-announcements']);
+        },
+        error => {
+          this.alertService.error(error);
+          this.alertService.error("Не удалось отправить на модерацию анонс турнира");
+          alert('Не удалось отправить анонс на модерацию');
+        },
+        () => {
+          alert('Анонс успешно отправлен на модерацию, ожидайте решения модератора');
+          this.onChanged.emit(id);
+        });
+    }
   }
 
   public deleteTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementListItem) {
-    const id = tournamentAnnouncement.id;
-    this.service.deleteTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
-      data => {
-        //this.router.navigate(['/tournament-announcements']);
-      },
-      error => {
-        this.alertService.error(error);
-        this.alertService.error('Не удалось удалить анонс турнира');
-      },
-      () => { alert('Анонс удален успешно');  this.onChanged.emit(id); } );
+    if (confirm('Вы действительно хотите удалить анонс?')) {
+      const id = tournamentAnnouncement.id;
+      this.service.deleteTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
+        data => {
+          //this.router.navigate(['/tournament-announcements']);
+        },
+        error => {
+          this.alertService.error(error);
+          this.alertService.error('Не удалось удалить анонс турнира');
+          alert('Не удалось удалить анонс турнира');
+        },
+        () => {
+          alert('Анонс удален успешно');
+          this.onChanged.emit(id);
+        });
+    }
+  }
+
+  public cancelTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementListItem) {
+    if (confirm('Вы действительно хотите отменить турнир?')) {
+      this.service.cancelTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
+        data => {
+        },
+        error => {
+          this.alertService.error(error);
+          this.alertService.error('Не удалось отменить турнир');
+          alert('Не удалось отменить турнир');
+        },
+        () => {
+          alert('Турнир успешно отменен');
+        });
+    }
   }
 
   public closeTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementListItem) {
-    this.service.closeTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
-      data => {
-        //this.router.navigate(['/tournament-announcements']);
-      },
-      error => {
-        this.alertService.error(error);
-        this.alertService.error("Не удалось завершить прием заявок");
-      },
-      () => {} );
+    if (confirm('Вы действительно хотите завершить прием заявок?')) {
+      const id = tournamentAnnouncement.id;
+      this.service.closeTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
+        data => {
+          //this.router.navigate(['/tournament-announcements']);
+        },
+        error => {
+          this.alertService.error(error);
+          this.alertService.error("Не удалось завершить прием заявок");
+          alert('Не удалось завершить прием заявок');
+        },
+        () => {
+          alert('Прием заявок успешно завершен');
+          this.onChanged.emit(id);
+        });
+    }
   }
   public getTournamentAnnouncementLogo(tournamentAnnouncement: TournamentAnnouncementListItem): string {
     return this.service.getTournamentAnnouncementLogo(tournamentAnnouncement);
@@ -123,6 +159,10 @@ export class TAOListComponent implements OnInit {
     return this.service.getStateClass(tournamentAnnouncement);
   }
 
+  public getStateTitle(tournamentAnnouncement: TournamentAnnouncementListItem): string {
+    return this.service.getStateTitle(tournamentAnnouncement);
+  }
+
   // TODO вынести отдельный сервис для организаций (когда буду делать страницу для организации)
   public getOrganizationLogo(/*organization: Organization*/ tournamentAnnouncement: TournamentAnnouncementListItem): string {
     return this.service.getTournamentAnnouncementLogo(tournamentAnnouncement);
@@ -130,6 +170,10 @@ export class TAOListComponent implements OnInit {
 
   public getCloseIconClass(): string {
     return this.service.getCloseIconClass();
+  }
+
+  public getCancelIconClass(): string {
+    return this.service.getCancelIconClass();
   }
 
   public getSendOnModerationIconClass(): string {

@@ -1,6 +1,6 @@
 <div class="tao-list section" [hidden]="dataIsLoading">
   <div class="col-md-12 admin-panel">
-    <a class="btn-floating deep-orange waves-light waves-effect"
+    <a class="visible-btn"
        title="Добавить анонс"
        (click)="addTournamentAnnouncement()"
        [hasPermission]="['tournamentadministrator']"
@@ -8,13 +8,13 @@
        onUnauthorizedPermission="hide">
       <i class="fa fa-plus"></i>
     </a>
-    <a class="btn-floating deep-orange waves-light waves-effect"
+    <a class="visible-btn"
        title="Полный список"
        (click)="listTournaments()"
        [hasPermission]="['tournamentadministrator']"
        onAuthorizedPermission="show"
        onUnauthorizedPermission="hide">
-      <i class="fa fa-eye"></i>
+      <i class="fa fa-align-justify"></i>
     </a>
   </div>
   <table class="table" *ngIf="content && content.length>0">
@@ -64,7 +64,7 @@
     </tr>
     </thead>
     <tbody *ngIf="content">
-    <tr *ngFor="let tournamentAnnouncement of content" [class]="getStateClass(tournamentAnnouncement)">
+    <tr *ngFor="let tournamentAnnouncement of content" [class]="getStateClass(tournamentAnnouncement)" [title]="getStateTitle(tournamentAnnouncement)">
       <th scope="row">{{content?.indexOf(tournamentAnnouncement)+1}}</th>
       <td>
         <div class="logo-img-wrapper" >
@@ -128,7 +128,7 @@
       <td>
         {{getCostText(tournamentAnnouncement)}}
       </td>
-      <td>
+      <td class="admin-panel">
         <a *ngIf="tournamentAnnouncement.state == 'Draft'" class="visible-btn"
            title="Редактировать анонс"
            (click)="editTournamentAnnouncement(tournamentAnnouncement)"
@@ -160,6 +160,14 @@
            onAuthorizedPermission="show"
            onUnauthorizedPermission="hide">
           <i [class]="getCloseIconClass()"></i>
+        </a>
+        <a *ngIf="tournamentAnnouncement.state == 'ApprovedByModerator'" class="visible-btn"
+           title="Отменить турнир"
+           (click)="cancelTournamentAnnouncement(tournamentAnnouncement)"
+           [hasPermission]="['tournamentadministrator']"
+           onAuthorizedPermission="show"
+           onUnauthorizedPermission="hide">
+          <i [class]="getCancelIconClass()"></i>
         </a>
       </td>
     </tr>

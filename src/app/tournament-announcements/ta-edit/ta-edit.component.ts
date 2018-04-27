@@ -19,7 +19,15 @@ import { AlertService } from 'app/components/alert/alert.service';
 import { ArenaListItem } from 'app/arenas/shared/arena-list-item';
 import { Arena } from 'app/arenas/shared/arena';
 
+/*Date.prototype.yyyymmdd = function() {
+  let mm = this.getMonth() + 1; // getMonth() is zero-based
+  let dd = this.getDate();
 
+  return [this.getFullYear(),
+    (mm > 9 ? '' : '0') + mm,
+    (dd > 9 ? '' : '0') + dd
+  ].join('');
+};*/
 
 @Component({
   moduleId: module.id,
@@ -27,11 +35,13 @@ import { Arena } from 'app/arenas/shared/arena';
   templateUrl: 'ta-edit.component.html',
   styleUrls: ['ta-edit.component.scss']
 })
+
 export class TAEditComponent implements OnInit {
   ta: TournamentAnnouncementViewItem;
   returnUrl: string;
   dataIsLoading: boolean;
   id: number;
+  deleteFlag: boolean;
   // mapPoint: Point;
   // private sub: any;
   ageTypes: Array<Item>;
@@ -43,6 +53,10 @@ export class TAEditComponent implements OnInit {
   city: City;
   arena: ArenaListItem;
 
+  startDate: string;
+  endDate: string;
+  endRegistrationDate: string;
+
   constructor( private service: TournamentAnnouncementsService,
                private router: Router,
                private activatedRoute: ActivatedRoute,
@@ -52,66 +66,60 @@ export class TAEditComponent implements OnInit {
     this.dataIsLoading = true;
     this.id = this.activatedRoute.snapshot.params['id'];
     this.getTA(this.id);
-    //this.city = new City();
-    // this.arena = new Arena();
-
     this.getAgeTypes();
     this.getGenderTypes();
     this.getCostTypes();
     this.getIsCommercialTypes();
     this.getCloseTypes();
     this.dataIsLoading = false;
+    this.deleteFlag = false;
   }
 
   ngOnInit() {
   }
 
   public deleteTA() {
-    console.log(this.ta);
-    console.log(this.id);
-    console.log('delete');
-    this.dataIsLoading = true;
-    this.service.deleteTournamentAnnouncement(this.id).subscribe(
-      data => {
-        this.router.navigate(['/tournaments']);
-      },
-      error => {
-        this.alertService.error(error);
-        this.alertService.error("Не удалось удалить анонс");
-        this.dataIsLoading = false;
-      });
-  }
-
-  private getTA(id: number) {
-    this.dataIsLoading = true;
-    this.service.getTournamentAnnouncement(id)
-      .subscribe(
-        ta => {
-          this.ta = ta;
-          this.arena = ta.arena;
-          this.city = this.ta.city;
-          if (this.city == null) { this.city = new City; }
+    if (confirm('Вы действительно хотите удалить анонс?')) {
+      console.log(this.ta);
+      console.log(this.id);
+      console.log('delete');
+      this.dataIsLoading = true;
+      this.service.deleteTournamentAnnouncement(this.id).subscribe(
+        data => {
         },
         error => {
           this.alertService.error(error);
-          this.alertService.error("Не удалось изменить анонс турнира");
-          // this.router.navigate(['/not-found']);
+          this.alertService.error('Не удалось удалить анонс');
+          alert('Не удалось удалить анонс турнира');
+          this.dataIsLoading = false;
         },
-        () => this.dataIsLoading = false
+        () => {
+          this.dataIsLoading = false;
+          alert('Анонс успешно удален. Вы будете перенаправлены на страницу профиля.');
+          this.router.navigate(['/profile']);
+        }
       );
+    }
   }
 
-  /*public addTournamentAnnouncement(ta: TournamentAnnouncement) {
-    this.service.addTournamentAnnouncement(this.ta).subscribe(
-      data => {
-        this.router.navigate(['/tournament-announcements']);
-      },
-      error => {
-        this.alertService.error(error);
-        this.alertService.error("Не удалось добавить анонс турнира");
-        this.loading = false;
-      });
-  }*/
+  public updateTournamentAnnouncement(ta: TournamentAnnouncementViewItem) {
+    if (confirm('Вы действительно хотите сохранить анонс как черновик?')) {
+      this.updateTA();
+    }
+  }
+
+  public viewList() {
+    if (confirm('Вы действительно хотите отменить изменения и вернуться в профиль?')) {
+      this.router.navigate(['/profile']);
+    }
+  }
+
+  public saveAndSendOnModeration() {
+    if (confirm('Вы действительно хотите сохранить изменения и отправить анонс на модерацию? После отправки редактирование анонса станет недоступно')) {
+      this.updateTA();
+      this.sendOnModeration();
+    }
+  }
 
 // TODO вынести в сервис
   private getAgeTypes() {
@@ -157,6 +165,95 @@ export class TAEditComponent implements OnInit {
     if (arena && arena.id) {
       this.arena = arena;
       this.ta.arena = arena;
+    }
+  }
+
+  public sendOnModeration() {
+    this.service.sendOnModeration(this.ta.id).subscribe(
+      data => {
+      },
+      error => {
+        this.alertService.error(error);
+        this.alertService.error('Не удалось отправить на модерацию анонс турнира');
+        alert('Не удалось отправить анонс на модерацию');
+      },
+      () => {
+        alert('Анонс успешно отправлен на модерацию, ожидайте решения модератора');
+      });
+  }
+
+  public setDeleteFlag() {
+    console.log(this.deleteFlag);
+  }
+
+  private getTA(id: number) {
+    this.dataIsLoading = true;
+    this.service.getTournamentAnnouncement(id)
+      .subscribe(
+        ta => {
+          this.ta = ta;
+          this.arena = ta.arena;
+          this.city = this.ta.city;
+          if (this.city == null) { this.city = new City; }
+          this.setDt();
+        },
+        error => {
+          this.alertService.error(error);
+          this.alertService.error('Не удалось получить анонс турнира');
+          alert('Не удалось загрузить анонс. Вы будете перенаправлены на страницу профиля.');
+          this.router.navigate(['/profile']);
+          // this.router.navigate(['/not-found']);
+        },
+        () => this.dataIsLoading = false
+      );
+  }
+
+  private updateTA() {
+    this.dataIsLoading = true;
+    this.getDt();
+    // ta.state = 'Draft';
+    this.service.updateTournamentAnnouncement(this.ta).subscribe(
+      data => {
+      },
+      error => {
+        this.alertService.error(error);
+        this.alertService.error('Не удалось обновить анонс турнира');
+        alert('Не удалось обновить анонс турнира');
+        this.dataIsLoading = false;
+      },
+      () => {
+        alert('Анонс успешно сохранен. Вы будете перенаправлены на страницу профиля.');
+        this.dataIsLoading = false;
+        this.router.navigate(['/profile']);
+      }
+    );
+  }
+
+  private setDt() {
+    if (this.ta != null) {
+      if (this.ta.startDate) {
+        this.startDate = this.service.getYYYYMMDD(this.ta.startDate);
+      }
+      if (this.ta.endDate) {
+        this.endDate = this.service.getYYYYMMDD(this.ta.endDate);
+      }
+      if (this.ta.endRegistrationDate) {
+        this.endRegistrationDate = this.service.getYYYYMMDD(this.ta.endRegistrationDate);
+      }
+    }
+  }
+
+  private getDt() {
+    if (this.ta != null) {
+      if (this.startDate) {
+        this.ta.startDate = new Date(this.startDate);
+      }
+      if (this.endDate) {
+        this.ta.endDate = new Date(this.endDate);
+      }
+      if (this.endRegistrationDate) {
+        this.ta.endRegistrationDate = new Date(this.endRegistrationDate);
+      }
     }
   }
 }

@@ -126,6 +126,10 @@ export class TournamentAnnouncementsService {
     return 'fa fa-hand-stop-o';
   }
 
+  public getCancelIconClass(): string {
+    return 'fa fa-ban';
+  }
+
   public getSendOnModerationIconClass(): string {
     return 'fa fa-mail-forward';
   }
@@ -177,6 +181,45 @@ export class TournamentAnnouncementsService {
     return stateClass;
   }
 
+  public getStateTitle(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem ) {
+    let stateTitle = '';
+    switch(tournamentAnnouncement.state) {
+      case 'Draft': {
+        stateTitle = 'Черновик';
+        break;
+      }
+      case 'WaitModeration': {
+        stateTitle = 'Анонс ожидает модерации';
+        break;
+      }
+      case 'ApprovedByModerator': {
+        stateTitle = 'Анонс одобрен модератором';
+        break;
+      }
+      case 'RejectedByModerator': {
+        stateTitle = 'Анонс отклонен модератором';
+        break;
+      }
+      case 'Canceled': {
+        stateTitle = 'Прием заявок завершен';
+        break;
+      }
+      case 'Deleted': {
+        stateTitle = 'Турнир отменен';
+        break;
+      }
+      case 'Finished': {
+        stateTitle = 'Турнир завершен';
+        break;
+      }
+      default: {
+        //statements;
+        break;
+      }
+    }
+    return stateTitle;
+  }
+
   public getCostText(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem | TournamentAnnouncement ) {
     if (tournamentAnnouncement.isCommercial) {
       if (tournamentAnnouncement.cost) {
@@ -196,7 +239,7 @@ export class TournamentAnnouncementsService {
   }
 
   public sendOnModeration(id: number): Observable<number> {
-    if (confirm('Вы действительно хотите отправить анонс на модерацию?')) {
+    // if (confirm('Вы действительно хотите отправить анонс на модерацию?')) {
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
       if (currentUser && currentUser.token) {
         const body = JSON.stringify({'id': id});
@@ -207,11 +250,26 @@ export class TournamentAnnouncementsService {
         });
         return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/' + id + '/send-on-moderation'), body, {headers: headers});
       }
-    }
+   // }
+  }
+
+  public cancelTournamentAnnouncement(id: number): Observable<number> {
+    // if (confirm('Вы действительно хотите отменить турнир?')) {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (currentUser && currentUser.token) {
+        const body = JSON.stringify({'state': 'Deleted'});
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json; charset=utf-8',
+          'X-Requested-With': 'XMLHttpRequest',
+          'Authorization': 'Bearer ' + currentUser.token
+        });
+        return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/' + id + '/close'), body, {headers: headers});
+      }
+    // }
   }
 
   public closeTournamentAnnouncement(id: number): Observable<number> {
-    if (confirm('Вы действительно хотите остановить прием заявок для анонса?')) {
+    //if (confirm('Вы действительно хотите завершить прием заявок?')) {
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
       if (currentUser && currentUser.token) {
         const body = JSON.stringify({'state': 'Canceled'});
@@ -222,7 +280,7 @@ export class TournamentAnnouncementsService {
         });
         return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/' + id + '/close'), body, {headers: headers});
       }
-    }
+    //}
   }
 
   /*public updateQuickTournamentAnnouncement(id: number, ta: TournamentAnnouncementListItem): Observable<TournamentAnnouncementListItem> {
@@ -253,15 +311,18 @@ export class TournamentAnnouncementsService {
   }*/
 
   public addTournamentAnnouncement(ta: TournamentAnnouncement): Observable<number> {
-    if (confirm('Вы действительно хотите сохранить анонс?')) {
+    //if (confirm('Вы действительно хотите сохранить анонс?')) {
       console.log(ta);
       const body = JSON.stringify({
         'name': ta.name,
-        'startDate': ta.startDate ? ta.startDate + 'T00:00:00.000Z' : null,
-        'endDate': ta.endDate ? ta.endDate + 'T00:00:00.000Z' : null,
+        /*'startDate': ta.startDate ? ta.startDate + 'T00:00:00.000Z' : null,
+        'endDate': ta.endDate ? ta.endDate + 'T00:00:00.000Z' : null,*/
+        'startDate': ta.startDate ? ta.startDate.toString() : null,
+        'endDate': ta.endDate ? ta.endDate.toString() : null,
         'content': ta.content,
         'requiredResponseCount': ta.requiredResponseCount.toString(),
-        'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate + 'T00:00:00.000Z' : null, // TODO NEED FIX!!! убрать время и этот костыль!
+        // 'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate + 'T00:00:00.000Z' : null, // TODO NEED FIX!!! убрать время и этот костыль!
+        'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate.toString() : null, // TODO NEED FIX!!! убрать время и этот костыль!
         'cityId': ta.cityId,
         'arenaId': ta.arenaId,
         'isCommercial': ta.isCommercial,
@@ -283,11 +344,48 @@ export class TournamentAnnouncementsService {
         });
         return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/'), body, {headers: headers});
       }
-    }
+   // }
+  }
+
+  public updateTournamentAnnouncement(ta: TournamentAnnouncementViewItem): Observable<number> {
+    // if (confirm('Вы действительно хотите сохранить анонс?')) {
+      console.log(ta);
+      const body = JSON.stringify({
+        'name': ta.name,
+        /*'startDate': ta.startDate ? ta.startDate + 'T00:00:00.000Z' : null,
+        'endDate': ta.endDate ? ta.endDate + 'T00:00:00.000Z' : null,*/
+        'startDate': ta.startDate ? ta.startDate.toString() : null,
+        'endDate': ta.endDate ? ta.endDate.toString() : null,
+        'content': ta.content,
+        'requiredResponseCount': ta.requiredResponseCount.toString(),
+        // 'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate + 'T00:00:00.000Z' : null, // TODO NEED FIX!!! убрать время и этот костыль!
+        'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate.toString() : null, // TODO NEED FIX!!! убрать время и этот костыль!
+        'city': ta.city ? ta.city: null,
+        'arena': ta.arena ? ta.arena : null,
+        'isCommercial': ta.isCommercial,
+        'cost': ta.cost,
+        'costType': ta.costType,
+        'ageGroup': ta.ageGroup,
+        'minBirthYear': 0, //ta.minBirthYear,//
+        'maxBirthYear': 0, //ta.maxBirthYear, //
+        'gender': ta.gender,
+        'closeCondition': ta.closeCondition //'ResponseCountAccomplished'
+      });
+      console.log(body);
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (currentUser && currentUser.token) {
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json; charset=utf-8',
+          'X-Requested-With': 'XMLHttpRequest',
+          'Authorization': 'Bearer ' + currentUser.token
+        });
+        return this.httpClient.put<number>(this.getMethodUrl('/tournament-announcements/'+ta.id), body, {headers: headers});
+      }
+   // }
   }
 
   public deleteTournamentAnnouncement(id: number): Observable<void> {
-    if (confirm('Вы действительно хотите удалить анонс?')) {
+    // if (confirm('Вы действительно хотите удалить анонс?')) {
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
       if (currentUser && currentUser.token) {
         let params = new HttpParams();
@@ -299,7 +397,7 @@ export class TournamentAnnouncementsService {
         });
         return this.httpClient.delete<void>(this.getMethodUrl('/tournament-announcements/' + id), {params: params, headers: headers});
       }
-    }
+    // }
   }
 
  /* public deleteLogo(id: number): Observable<void> {
@@ -324,4 +422,14 @@ export class TournamentAnnouncementsService {
     }
   }
 */
+ // TODO NEED FIX - убрать костыль!!!
+  public getYYYYMMDD(dt_value: Date): string {
+    const dt = new Date(dt_value);
+    const mm = dt.getMonth() + 1; // getMonth() is zero-based
+    const dd = dt.getDate();
+    return [dt.getFullYear(),
+      (mm > 9 ? '' : '0') + mm,
+      (dd > 9 ? '' : '0') + dd
+    ].join('-');
+  }
 }

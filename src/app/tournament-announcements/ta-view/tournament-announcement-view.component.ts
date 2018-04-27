@@ -29,7 +29,7 @@ export class TournamentAnnouncementViewComponent {
   errorMessage: string;
   private sub: any;
 
-  returnUrl: string;
+  //returnUrl: string;
 
   constructor( private service: TournamentAnnouncementsService,
                private arenaService: ArenaService,
@@ -45,7 +45,7 @@ export class TournamentAnnouncementViewComponent {
       this.getTournamentAnnouncement(this.id);
     });
 
-    this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
+    //this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
   }
 
   ngOnDestroy(){
@@ -107,6 +107,10 @@ export class TournamentAnnouncementViewComponent {
     return this.service.getCloseIconClass();
   }
 
+  public getCancelIconClass(): string {
+    return this.service.getCancelIconClass();
+  }
+
   private getMapPoint(tournamentAnnouncement: TournamentAnnouncementViewItem): Point {
     if (this.tournamentAnnouncement && this.tournamentAnnouncement.coordinates && this.tournamentAnnouncement.coordinates.latitude && this.tournamentAnnouncement.coordinates.longitude){
       return { latitude: this.tournamentAnnouncement.coordinates.latitude, longitude: this.tournamentAnnouncement.coordinates.longitude };
@@ -126,39 +130,68 @@ export class TournamentAnnouncementViewComponent {
   }
 
   public sendOnModeration(tournamentAnnouncement: TournamentAnnouncementViewItem) {
-    this.service.sendOnModeration(tournamentAnnouncement.id).subscribe(
-      data => {
-        //this.router.navigate(['/tournament-announcements']);
-      },
-      error => {
-        this.alertService.error(error);
-        this.alertService.error("Не удалось отправить на модерацию анонс турнира");
-      },
-      () => {} );
+    if (confirm('Вы действительно хотите отправить анонс на модерацию?')) {
+      this.service.sendOnModeration(tournamentAnnouncement.id).subscribe(
+        data => {
+        },
+        error => {
+          this.alertService.error(error);
+          this.alertService.error("Не удалось отправить на модерацию анонс турнира");
+          alert('Не удалось отправить анонс на модерацию');
+        },
+        () => {
+          alert('Анонс успешно отправлен на модерацию, ожидайте решения модератора');
+        });
+    }
   }
 
   public deleteTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementViewItem) {
-    this.service.deleteTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
-      data => {
-        //this.router.navigate(['/tournament-announcements']);
-      },
-      error => {
-        this.alertService.error(error);
-        this.alertService.error("Не удалось удалить анонс турнира");
-      },
-      () => { alert('Анонс успешно удален. Вы будете перенаправлены на предыдущую страницу.'); this.router.navigate([this.returnUrl]); } );
+    if (confirm('Вы действительно хотите удалить анонс?')) {
+      this.service.deleteTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
+        data => {
+        },
+        error => {
+          this.alertService.error(error);
+          this.alertService.error("Не удалось удалить анонс турнира");
+        },
+        () => {
+          alert('Анонс успешно удален. Вы будете перенаправлены на страницу профиля.');
+          this.router.navigate(['/profile']);
+        }
+      );
+    }
   }
 
   public closeTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementViewItem) {
-    this.service.closeTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
-      data => {
-        //this.router.navigate(['/tournament-announcements']);
-      },
-      error => {
-        this.alertService.error(error);
-        this.alertService.error("Не удалось завершить прием заявок");
-      },
-      () => {} );
+    if (confirm('Вы действительно хотите завершить прием заявок?')) {
+      this.service.closeTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
+        data => {
+        },
+        error => {
+          this.alertService.error(error);
+          this.alertService.error('Не удалось завершить прием заявок');
+          alert('Не удалось завершить прием заявок');
+        },
+        () => {
+          alert('Прием заявок успешно завершен');
+        });
+    }
+  }
+
+  public cancelTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementViewItem) {
+    if (confirm('Вы действительно хотите отменить турнир?')) {
+      this.service.cancelTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
+        data => {
+        },
+        error => {
+          this.alertService.error(error);
+          this.alertService.error('Не удалось отменить турнир');
+          alert('Не удалось отменить турнир');
+        },
+        () => {
+          alert('Турнир успешно отменен');
+        });
+    }
   }
 
   private getTournamentAnnouncement(id: number) {
@@ -172,7 +205,8 @@ export class TournamentAnnouncementViewComponent {
       },
       error => {
         this.errorMessage = error;
-        this.router.navigate([this.returnUrl]);
+        alert('Не удалось загрузить анонс. Вы будете перенаправлены на страницу профиля.');
+        this.router.navigate(['/profile']);
       },
       () => this.dataIsLoading = false
     );

@@ -115,7 +115,7 @@
                 Цена участия: {{getCostText(tournamentAnnouncement)}}
               </p>
             </span>
-            <span>
+            <span class="admin-panel">
               <a *ngIf="tournamentAnnouncement.state == 'Draft'" class="visible-btn"
                  title="Редактировать анонс"
                  (click)="editTournamentAnnouncement(tournamentAnnouncement)"
@@ -147,6 +147,14 @@
                  onAuthorizedPermission="show"
                  onUnauthorizedPermission="hide">
                  <i [class]="getCloseIconClass()"></i>
+              </a>
+              <a *ngIf="tournamentAnnouncement.state == 'ApprovedByModerator'" class="visible-btn"
+                 title="Отменить турнир"
+                 (click)="cancelTournamentAnnouncement(tournamentAnnouncement)"
+                 [hasPermission]="['tournamentadministrator']"
+                 onAuthorizedPermission="show"
+                 onUnauthorizedPermission="hide">
+                 <i [class]="getCancelIconClass()"></i>
               </a>
             </span>
           </span>

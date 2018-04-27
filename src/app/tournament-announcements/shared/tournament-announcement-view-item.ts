@@ -14,10 +14,10 @@ export class TournamentAnnouncementViewItem {
   city: City; // Город проведения
   linkName?: string; // ?
   arena?: Arena; // Арена
-  startDate?: string; // Дата начала турнира
-  endDate?: string; // Дата окончания турнира
+  startDate?: Date; // Дата начала турнира
+  endDate?: Date; // Дата окончания турнира
   createDate?: string; // Дата создания (CreateDate)
-  endRegistrationDate?: string; // Дата окончания регистрации (EndRegistrationDate)
+  endRegistrationDate?: Date; // Дата окончания регистрации (EndRegistrationDate)
   requiredResponseCount?: number; // Кол-во участников – максимально допустимое в турнире (RequiredResponseCount)
   isCommercial: boolean = true; // Признак коммерческий или нет (IsCommercial) – иконка
   cost?: number; // Если коммерческий, указать цену участия (Cost)

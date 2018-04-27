@@ -43,6 +43,10 @@ export class TACreateComponent implements OnInit {
   city: City;
   arena: ArenaListItem;
 
+  startDate: string;
+  endDate: string;
+  endRegistrationDate: string;
+
   constructor( private service: TournamentAnnouncementsService,
                private router: Router,
                private activatedRoute: ActivatedRoute,
@@ -61,35 +65,46 @@ export class TACreateComponent implements OnInit {
   ngOnInit() {
   }
 
+  // сохранение как черновик
   public addTournamentAnnouncement(ta: TournamentAnnouncement) {
-     /*if (!this.city && !this.city.id) {
-      this.alertService.error("Не удалось сохранить изменения");
-      return;
-    }*/
-    // this.arena.city = this.city;
-    // console.log(this.arena);
-    // console.log(this.id);
-    // TODO проверка существования города и арены
-    //this.ta.city = this.city;
-    //this.ta.arena = new Arena({ id: this.arena.id, name: this.arena.name });
-    this.dataIsLoading = true;
-    this.service.addTournamentAnnouncement(this.ta).subscribe(
-      data => {
-        this.router.navigate(['/profile']);
-      },
-      error => {
-        this.alertService.error(error);
-        this.alertService.error("Не удалось добавить анонс турнира");
-      },
-      () => this.dataIsLoading = false );
+    if (confirm('Вы действительно хотите сохранить анонс?')) {
+      // TODO проверка существования города и арены
+      this.getDt();
+      this.dataIsLoading = true;
+      this.service.addTournamentAnnouncement(this.ta).subscribe(
+        data => {
+          this.router.navigate(['/profile']);
+        },
+        error => {
+          this.alertService.error(error);
+          this.alertService.error("Не удалось добавить анонс турнира");
+        },
+        () => this.dataIsLoading = false);
+    }
   }
 
-  public saveAndSendOnModeration(ta: TournamentAnnouncement) {
-
-  }
+  /*public saveAndSendOnModeration(ta: TournamentAnnouncement) {
+    if (confirm('Вы действительно хотите сохранить изменения и отправить анонс на модерацию?')) {
+      ta.state = 'WaitModeration';
+      // TODO проверка существования города и арены
+      this.getDt();
+      this.dataIsLoading = true;
+      this.service.addTournamentAnnouncement(this.ta).subscribe(
+        data => {
+          this.router.navigate(['/profile']);
+        },
+        error => {
+          this.alertService.error(error);
+          this.alertService.error("Не удалось добавить анонс турнира");
+        },
+        () => this.dataIsLoading = false);
+    }
+  }*/
 
   public viewList() {
-    this.router.navigate(['/profile']);
+    if (confirm('Вы действительно хотите отменить изменения и вернуться в профиль?')) {
+      this.router.navigate(['/profile']);
+    }
   }
 // TODO вынести в сервис
   private getAgeTypes() {
@@ -144,5 +159,33 @@ export class TACreateComponent implements OnInit {
       this.arena = null;
       this.ta.arenaId = null;
     }*/
+  }
+
+  private setDt() {
+    if (this.ta != null) {
+      if (this.ta.startDate) {
+        this.startDate = this.service.getYYYYMMDD(this.ta.startDate);
+      }
+      if (this.ta.endDate) {
+        this.endDate = this.service.getYYYYMMDD(this.ta.endDate);
+      }
+      if (this.ta.endRegistrationDate) {
+        this.endRegistrationDate = this.service.getYYYYMMDD(this.ta.endRegistrationDate);
+      }
+    }
+  }
+
+  private getDt() {
+    if (this.ta != null) {
+      if (this.startDate) {
+        this.ta.startDate = new Date(this.startDate);
+      }
+      if (this.endDate) {
+        this.ta.endDate = new Date(this.endDate);
+      }
+      if (this.endRegistrationDate) {
+        this.ta.endRegistrationDate = new Date(this.endRegistrationDate);
+      }
+    }
   }
 }

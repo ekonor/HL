@@ -2,7 +2,7 @@
 <div class="ta-edit col-md-6 col-md-offset-3" *ngIf="ta">
   <h2>Редактирование анонса турнира</h2>
   {{ta | json}}
-  <form (ngSubmit)="addTournamentAnnouncement(ta)" #f="ngForm">
+  <form (ngSubmit)="updateTournamentAnnouncement(ta)" #f="ngForm">
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !taname.valid }">
       <label for="taname">Название анонса</label>
       <input type="text" class="form-control" name="taname" [(ngModel)]="ta.name" (ngModelChange)="ta.name = $event" #taname="ngModel" id="taname"/>
@@ -21,7 +21,7 @@
       <input id="startDate"
              type="date"
              name="startDate"
-             [(ngModel)]="ta.startDate"
+             [(ngModel)]="startDate"
              placeholder="Дата проведения, от"
              class="form-control">
     </div>
@@ -30,7 +30,7 @@
       <input id="endDate"
              type="date"
              name="endDate"
-             [(ngModel)]="ta.endDate"
+             [(ngModel)]="endDate"
              placeholder="Дата проведения, до"
              class="form-control">
     </div>
@@ -67,7 +67,7 @@
         <option *ngFor="let costType of costTypes"  [ngValue]="costType.value" >{{costType.name}}</option>
       </select>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !ta.cost.valid }">
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && ta.cost && !ta.cost.valid }">
       <label for="cost">Стоимость участия</label>
       <input type="number" min="0" max="2000" step="1" class="form-control" name="cost" [(ngModel)]="ta.cost" (ngModelChange)="ta.cost = $event" #cost="ngModel" ngModel number="true" id="cost"/>
       <div *ngIf="f.submitted && cost != null && !cost.valid" class="help-block">cost is invalid</div>
@@ -77,44 +77,25 @@
       <input id="endRegistrationDate"
              type="date"
              name="endRegistrationDate"
-             [(ngModel)]="ta.endRegistrationDate"
+             [(ngModel)]="endRegistrationDate"
              placeholder="Окончание регистрации"
              class="form-control">
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !content.valid }">
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && content && !content.valid }">
       <label for="content">Текст анонса</label>
       <app-ngx-editor [placeholder]="'Текст анонса'" [height]="200" class="form-control" name="about" [(ngModel)]="ta.content" (ngModelChange)="ta.content = $event" #about="ngModel" id="content"></app-ngx-editor>
       <div *ngIf="f.submitted && content != null && !content.valid" class="help-block">content is invalid</div>
       </div>
-    <!--div class="form-group">
-      <label for="ageGroup">Тип участия</label>
-      <select class="form-group" [(ngModel)]="ta.costType" name="costType" class="form-control" #costType="ngModel" id="costType" (ngModelChange)="ta.costType = $event">
-        <option *ngFor="let ageType of ageTypes"  [ngValue]="ageType" >{{ageType}}</option>
-      </select>
-    </div-->
-    <!--div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
-      <label for="email">E-mail</label>
-      <input type="email" class="form-control" name="email" [(ngModel)]="arena.email" (ngModelChange)="arena.email = $event" #email="ngModel" ngModel email="true" id="email"/>
-      <div *ngIf="f.submitted && email != null && !email.valid" class="help-block">email is invalid</div>
-    </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !webSite.valid }">
-      <label for="webSite">Сайт</label>
-      <input type="text" class="form-control" name="webSite" [(ngModel)]="arena.webSite" (ngModelChange)="arena.webSite = $event" #webSite="ngModel" id="webSite"/>
-      <div *ngIf="f.submitted && webSite != null && !webSite.valid" class="help-block">webSite is invalid</div>
-    </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !about.valid }">
-      <label for="about">Описание</label>
-      <app-ngx-editor [placeholder]="'Описание арены'" [height]="200" class="form-control" name="about" [(ngModel)]="arena.about" (ngModelChange)="arena.about = $event" #about="ngModel" id="about"></app-ngx-editor>
-      <div *ngIf="f.submitted && about != null && !about.valid" class="help-block">about is invalid</div>
-    </div-->
     <div class="form-group">
       <input [(ngModel)]="deleteFlag" (change)="setDeleteFlag()" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked /><span class="checkbox-title">Удалить?</span>
     </div>
     <div class="form-group">
-      <button class="btn btn-primary" type="submit" [disabled]="loading">Сохранить и отправить на модерацию</button>
-      <button class="btn btn-danger" (click)="deleteArena()" [disabled]="loading || !deleteFlag">Удалить</button>
+      <button class="btn btn-primary" (click)="updateTournamentAnnouncement()" [disabled]="dataIsLoading">Сохранить как черновик</button>
+      <button class="btn btn-danger" (click)="saveAndSendOnModeration()" [disabled]="dataIsLoading">Сохранить и отправить на модерацию</button>
+      <button class="btn btn-danger" (click)="deleteTA()" [disabled]="dataIsLoading || !deleteFlag">Удалить</button>
+      <button class="btn btn-primary" (click)="viewList()" [disabled]="dataIsLoading">Отменить изменения и вернуться к списку</button>
+
       <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
     </div>
-
   </form>
 </div>
