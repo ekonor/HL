@@ -317,17 +317,17 @@ export class TournamentAnnouncementsService {
         'name': ta.name,
         /*'startDate': ta.startDate ? ta.startDate + 'T00:00:00.000Z' : null,
         'endDate': ta.endDate ? ta.endDate + 'T00:00:00.000Z' : null,*/
-        'startDate': ta.startDate ? ta.startDate.toString() : null,
-        'endDate': ta.endDate ? ta.endDate.toString() : null,
+        'startDate': ta.startDate ? ta.startDate.toISOString() : null,
+        'endDate': ta.endDate ? ta.endDate.toISOString() : null,
         'content': ta.content,
         'requiredResponseCount': ta.requiredResponseCount.toString(),
         // 'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate + 'T00:00:00.000Z' : null, // TODO NEED FIX!!! убрать время и этот костыль!
-        'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate.toString() : null, // TODO NEED FIX!!! убрать время и этот костыль!
+        'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate.toISOString() : null, // TODO NEED FIX!!! убрать время и этот костыль!
         'cityId': ta.cityId,
         'arenaId': ta.arenaId,
         'isCommercial': ta.isCommercial,
-        'cost': ta.cost,
-        'costType': ta.costType,
+        'cost': ta.isCommercial ? ta.cost : null,
+        'costType': ta.isCommercial ? ta.costType : null,
         'ageGroup': ta.ageGroup,
         'minBirthYear': 0, //ta.minBirthYear,//
         'maxBirthYear': 0, //ta.maxBirthYear, //
@@ -354,17 +354,17 @@ export class TournamentAnnouncementsService {
         'name': ta.name,
         /*'startDate': ta.startDate ? ta.startDate + 'T00:00:00.000Z' : null,
         'endDate': ta.endDate ? ta.endDate + 'T00:00:00.000Z' : null,*/
-        'startDate': ta.startDate ? ta.startDate.toString() : null,
-        'endDate': ta.endDate ? ta.endDate.toString() : null,
+        'startDate': ta.startDate ? ta.startDate.toISOString() : null,
+        'endDate': ta.endDate ? ta.endDate.toISOString() : null,
         'content': ta.content,
         'requiredResponseCount': ta.requiredResponseCount.toString(),
         // 'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate + 'T00:00:00.000Z' : null, // TODO NEED FIX!!! убрать время и этот костыль!
-        'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate.toString() : null, // TODO NEED FIX!!! убрать время и этот костыль!
-        'city': ta.city ? ta.city: null,
+        'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate.toISOString() : null, // TODO NEED FIX!!! убрать время и этот костыль!
+        'city': ta.city ? ta.city : null,
         'arena': ta.arena ? ta.arena : null,
         'isCommercial': ta.isCommercial,
-        'cost': ta.cost,
-        'costType': ta.costType,
+        'cost': ta.isCommercial ? ta.cost : null,
+        'costType': ta.isCommercial ? ta.costType : null,
         'ageGroup': ta.ageGroup,
         'minBirthYear': 0, //ta.minBirthYear,//
         'maxBirthYear': 0, //ta.maxBirthYear, //

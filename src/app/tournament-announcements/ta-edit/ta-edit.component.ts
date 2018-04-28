@@ -104,7 +104,10 @@ export class TAEditComponent implements OnInit {
 
   public updateTournamentAnnouncement(ta: TournamentAnnouncementViewItem) {
     if (confirm('Вы действительно хотите сохранить анонс как черновик?')) {
-      this.updateTA();
+      if (this.updateTA()) {
+        alert('Вы будете перенаправлены на страницу профиля');
+        this.router.navigate(['/profile']);
+      }
     }
   }
 
@@ -208,10 +211,14 @@ export class TAEditComponent implements OnInit {
       );
   }
 
-  private updateTA() {
+  private updateTA(): boolean {
     this.dataIsLoading = true;
     this.getDt();
     // ta.state = 'Draft';
+    if (!this.ta.isCommercial) {
+      this.ta.cost = null;
+      this.ta.costType = null;
+    }
     this.service.updateTournamentAnnouncement(this.ta).subscribe(
       data => {
       },
@@ -220,13 +227,16 @@ export class TAEditComponent implements OnInit {
         this.alertService.error('Не удалось обновить анонс турнира');
         alert('Не удалось обновить анонс турнира');
         this.dataIsLoading = false;
+        return false;
       },
       () => {
-        alert('Анонс успешно сохранен. Вы будете перенаправлены на страницу профиля.');
+        alert('Анонс успешно сохранен');
         this.dataIsLoading = false;
-        this.router.navigate(['/profile']);
+        return true;
+        //this.router.navigate(['/profile']);
       }
     );
+    return false;
   }
 
   private setDt() {

@@ -103,6 +103,10 @@ export class TournamentAnnouncementViewComponent {
     return '';
   }
 
+  public editTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementViewItem): void {
+    this.router.navigate([ 'tournament-announcements/edit', tournamentAnnouncement.id ]);
+  }
+
   public getCloseIconClass(): string {
     return this.service.getCloseIconClass();
   }

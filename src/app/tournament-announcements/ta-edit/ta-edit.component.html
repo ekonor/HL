@@ -1,8 +1,7 @@
 <loader [hidden]="!dataIsLoading"></loader>
 <div class="ta-edit col-md-6 col-md-offset-3" *ngIf="ta">
   <h2>Редактирование анонса турнира</h2>
-  {{ta | json}}
-  <form (ngSubmit)="updateTournamentAnnouncement(ta)" #f="ngForm">
+  <form #f="ngForm">
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !taname.valid }">
       <label for="taname">Название анонса</label>
       <input type="text" class="form-control" name="taname" [(ngModel)]="ta.name" (ngModelChange)="ta.name = $event" #taname="ngModel" id="taname"/>
@@ -61,13 +60,13 @@
         <option *ngFor="let isCommercialType of isCommercialTypes"  [ngValue]="isCommercialType.value" >{{isCommercialType.name}}</option>
       </select>
     </div>
-    <div class="form-group">
-      <label for="isCommercial">Тип оплаты</label>
+    <div *ngIf="ta.isCommercial" class="form-group">
+      <label for="costType">Тип оплаты</label>
       <select class="form-group" [(ngModel)]="ta.costType" name="costType" class="form-control" #costType="ngModel" id="costType" (ngModelChange)="ta.costType = $event">
         <option *ngFor="let costType of costTypes"  [ngValue]="costType.value" >{{costType.name}}</option>
       </select>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && ta.cost && !ta.cost.valid }">
+    <div *ngIf="ta.isCommercial" class="form-group" [ngClass]="{ 'has-error': f.submitted && ta.cost && !ta.cost.valid }">
       <label for="cost">Стоимость участия</label>
       <input type="number" min="0" max="2000" step="1" class="form-control" name="cost" [(ngModel)]="ta.cost" (ngModelChange)="ta.cost = $event" #cost="ngModel" ngModel number="true" id="cost"/>
       <div *ngIf="f.submitted && cost != null && !cost.valid" class="help-block">cost is invalid</div>

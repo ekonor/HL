@@ -70,6 +70,10 @@ export class TACreateComponent implements OnInit {
     if (confirm('Вы действительно хотите сохранить анонс?')) {
       // TODO проверка существования города и арены
       this.getDt();
+      if (!this.ta.isCommercial) {
+        this.ta.cost = null;
+        this.ta.costType = null;
+      }
       this.dataIsLoading = true;
       this.service.addTournamentAnnouncement(this.ta).subscribe(
         data => {

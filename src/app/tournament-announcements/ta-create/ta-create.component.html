@@ -1,7 +1,6 @@
 <loader [hidden]="!dataIsLoading"></loader>
 <div class="ta-create col-md-6 col-md-offset-3" *ngIf="ta">
   <h2>Добавление анонса турнира</h2>
-  {{ta | json}} {{isCommercialTypes}}
   <form (ngSubmit)="addTournamentAnnouncement(ta)" #f="ngForm">
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !taname.valid }">
       <label for="taname">Название анонса</label>
@@ -34,10 +33,6 @@
              placeholder="Дата проведения, до"
              class="form-control">
     </div>
-    <!--div class="form-group" [ngClass]="{ 'has-error': f.submitted && city==null}">
-      <app-city-filter *ngIf="city" [city]="city" (onChanged)="setCity($event)"></app-city-filter>
-      <div *ngIf="f.submitted && city == null" class="help-block">Укажите город</div>
-    </div-->
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !ta.requiredResponseCount.valid }">
       <label for="requiredResponseCount">Максимальное количество участников</label>
       <input type="number" min="0" max="2000" step="1" class="form-control" name="requiredResponseCount" [(ngModel)]="ta.requiredResponseCount" (ngModelChange)="ta.requiredResponseCount = $event" #requiredResponseCount="ngModel" ngModel number="true" id="requiredResponseCount"/>
@@ -61,13 +56,13 @@
         <option *ngFor="let isCommercialType of isCommercialTypes"  [ngValue]="isCommercialType.value" >{{isCommercialType.name}}</option>
       </select>
     </div>
-    <div class="form-group">
-      <label for="isCommercial">Тип оплаты</label>
+    <div *ngIf="ta.isCommercial" class="form-group">
+      <label for="costType">Тип оплаты</label>
       <select class="form-group" [(ngModel)]="ta.costType" name="costType" class="form-control" #costType="ngModel" id="costType" (ngModelChange)="ta.costType = $event">
         <option *ngFor="let costType of costTypes"  [ngValue]="costType.value" >{{costType.name}}</option>
       </select>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !ta.cost.valid }">
+    <div *ngIf="ta.isCommercial" class="form-group" [ngClass]="{ 'has-error': f.submitted && !ta.cost.valid }">
       <label for="cost">Стоимость участия</label>
       <input type="number" min="0" max="2000" step="1" class="form-control" name="cost" [(ngModel)]="ta.cost" (ngModelChange)="ta.cost = $event" #cost="ngModel" ngModel number="true" id="cost"/>
       <div *ngIf="f.submitted && cost != null && !cost.valid" class="help-block">cost is invalid</div>
@@ -92,27 +87,6 @@
       <app-ngx-editor [placeholder]="'Текст анонса'" [height]="200" class="form-control" name="content" [(ngModel)]="ta.content" (ngModelChange)="ta.content = $event" #content="ngModel" id="content"></app-ngx-editor>
       <div *ngIf="f.submitted && content != null && !content.valid" class="help-block">content is invalid</div>
       </div>
-    <!--div class="form-group">
-      <label for="ageGroup">Тип участия</label>
-      <select class="form-group" [(ngModel)]="ta.costType" name="costType" class="form-control" #costType="ngModel" id="costType" (ngModelChange)="ta.costType = $event">
-        <option *ngFor="let ageType of ageTypes"  [ngValue]="ageType" >{{ageType}}</option>
-      </select>
-    </div-->
-    <!--div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
-      <label for="email">E-mail</label>
-      <input type="email" class="form-control" name="email" [(ngModel)]="arena.email" (ngModelChange)="arena.email = $event" #email="ngModel" ngModel email="true" id="email"/>
-      <div *ngIf="f.submitted && email != null && !email.valid" class="help-block">email is invalid</div>
-    </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !webSite.valid }">
-      <label for="webSite">Сайт</label>
-      <input type="text" class="form-control" name="webSite" [(ngModel)]="arena.webSite" (ngModelChange)="arena.webSite = $event" #webSite="ngModel" id="webSite"/>
-      <div *ngIf="f.submitted && webSite != null && !webSite.valid" class="help-block">webSite is invalid</div>
-    </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !about.valid }">
-      <label for="about">Описание</label>
-      <app-ngx-editor [placeholder]="'Описание арены'" [height]="200" class="form-control" name="about" [(ngModel)]="arena.about" (ngModelChange)="arena.about = $event" #about="ngModel" id="about"></app-ngx-editor>
-      <div *ngIf="f.submitted && about != null && !about.valid" class="help-block">about is invalid</div>
-    </div-->
     <div class="form-group">
       <button class="btn btn-primary" type="submit" [disabled]="dataIsLoading">Сохранить как черновик</button>
       <!--button class="btn btn-danger" (click)="saveAndSendOnModeration(ta)" [disabled]="dataIsLoading">Сохранить и отправить на модерацию</button-->
