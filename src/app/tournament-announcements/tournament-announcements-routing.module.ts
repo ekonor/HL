@@ -14,7 +14,7 @@ import { TAEditComponent } from 'app/tournament-announcements/ta-edit/ta-edit.co
 export const tournamentAnnouncementsRoutes: Routes = [
   { path: 'tournament-announcements', component: TournamentAnnouncementsComponent, canActivate: [AuthGuard]},
   { path: 'tournament-announcement/:id', component: TournamentAnnouncementViewComponent, canActivate: [AuthGuard]},
-  { path: 'profile', component: TAAdminComponent, canActivate: [AuthGuard], data: { roles: ['SuperAdministrator', 'TournamentAdministrator', 'TournamentModerator']}},
+  { path: 'profile', component: TAAdminComponent, canActivate: [AuthGuard], data: { roles: ['SuperAdministrator', 'TournamentAdministrator', 'TournamentAnnouncementModerator']}},
   { path: 'tournament-announcements/create', component: TACreateComponent, canActivate: [AuthGuard], data: { roles: ['SuperAdministrator', 'TournamentAdministrator']}},
   { path: 'tournament-announcements/edit/:id', component: TAEditComponent, canActivate: [AuthGuard], data: { roles: ['SuperAdministrator', 'TournamentAdministrator']}}
 

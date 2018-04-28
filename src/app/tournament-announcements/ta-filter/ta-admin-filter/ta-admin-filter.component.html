@@ -35,7 +35,7 @@
                      class="form-control">
             </div>
           </div>
-          <div class="row"
+          <!--div class="row"
                [hasPermission]="['tournamentadministrator']"
                onAuthorizedPermission="hide"
                onUnauthorizedPermission="show">
@@ -59,7 +59,7 @@
                 </label>
               </div>
             </div>
-          </div>
+          </div-->
           <div class="row"
                [hasPermission]="['tournamentadministrator']"
                onAuthorizedPermission="show"
@@ -84,7 +84,28 @@
               </div>
             </div>
           </div>
-          <div class="row" [hasPermission]="['tournamentadministrator']"
+          <div class="row"
+               [hasPermission]="['tournamentannouncementmoderator']"
+               onAuthorizedPermission="show"
+               onUnauthorizedPermission="hide">
+            <div class="col-md-12">
+              <div class="btn-group btn-group-toggle" ngbRadioGroup name="state" [(ngModel)]="filter.state">
+                <label class="btn-primary fixed-size-button-md label-button" ngbButtonLabel>
+                  <input type="radio" name="isRegistration" ngbButton value="ApprovedByModerator">Одобрены
+                </label>
+                <label class="btn-primary fixed-size-button-md label-button" ngbButtonLabel>
+                  <input type="radio" name="isWait" ngbButton value="WaitModeration">Ожидают модерации
+                </label>
+                <label class="btn-primary fixed-size-button-md label-button" ngbButtonLabel>
+                  <input type="radio" name="isReject" ngbButton value="RejectedByModerator">Отклонены
+                </label>
+                <!--label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
+                  <input type="radio" name="isFinished" ngbButton value="Finished">Завершенные
+                </label-->
+              </div>
+            </div>
+          </div>
+          <!--div class="row" [hasPermission]="['tournamentadministrator']"
                onAuthorizedPermission="hide"
                onUnauthorizedPermission="show">
             <div class="col-md-12">
@@ -116,26 +137,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <!--div class="row">
-            <div class="col-md-6">
-              <label for="startDateFrom">Год рождения, от</label>
-              <input id="startDateFrom"
-                     type="date"
-                     name="startDateFrom"
-                     [(ngModel)]="filter.startDateFrom"
-                     placeholder="Год рождения, от"
-                     class="form-control">
-            </div>
-            <div class="col-md-6">
-              <label for="startDateTo">до</label>
-              <input id="startDateTo"
-                     type="date"
-                     name="startDateTo"
-                     [(ngModel)]="filter."
-                     placeholder="Год рождения, до"
-                     class="form-control">
             </div>
           </div-->
           <div class="row">

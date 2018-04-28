@@ -187,4 +187,28 @@ export class TAAdminListComponent implements OnInit {
   public getEditIconClass(): string {
     return this.service.getEditIconClass();
   }
+
+  public getModerationIconClass(flag: boolean): string {
+    return this.service.getModerationIconClass(flag);
+  }
+
+  private moderate(tournamentAnnouncement: TournamentAnnouncementListItem, flag: boolean) {
+    if (tournamentAnnouncement) {
+      if (confirm( flag ? 'Вы действительно хотите одобрить анонс?' : 'Вы действительно хотите отклонить анонс?' )) {
+        const id = tournamentAnnouncement.id;
+        this.service.moderateTournamentAnnouncement(tournamentAnnouncement.id, flag).subscribe(
+          data => {
+          },
+          error => {
+            this.alertService.error(error);
+            this.alertService.error( flag ? 'Не удалось одобрить анонс' : 'Не удалось отклонить анонс');
+            alert(flag ? 'Не удалось одобрить анонс' : 'Не удалось отклонить анонс');
+          },
+          () => {
+            alert(flag ? 'Анонс успешно одобрен' : 'Анонс успешно отклонен');
+            this.onChanged.emit(id);
+          });
+      }
+    }
+  }
 }

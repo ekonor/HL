@@ -52,9 +52,6 @@ export class TournamentAnnouncementsService {
   }
 
   public getTournamentAnnouncementsAdmin(filter: TournamentAnnouncementFilter, listInfo: ListInfo): Observable<ListResponse<TournamentAnnouncementListItem>> {
-    const methodUrlPrefix = '/tournament-announcements' + '/tournament-admin-list';
-
-    const methodUrl = this.getMethodUrl(methodUrlPrefix);
     let params = listInfo.toParams();
 
     if (filter.cityId)
@@ -75,7 +72,14 @@ export class TournamentAnnouncementsService {
       params = params.append('searchText', filter.searchText);
     // console.log(filter);
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser && currentUser.token) {
+    if (currentUser && currentUser.token && currentUser.roles) {
+      let methodUrlPrefix;
+      if (currentUser.roles.indexOf('TournamentAnnouncementModerator') !== -1) {
+        methodUrlPrefix = '/tournament-announcements' + '/tournament-moderator-list';
+      } else if (currentUser.roles.indexOf('TournamentAdministrator') !== -1) {
+        methodUrlPrefix = '/tournament-announcements' + '/tournament-admin-list';
+      }
+      const methodUrl = this.getMethodUrl(methodUrlPrefix);
       const headers = new HttpHeaders({
         'Content-Type': 'application/json; charset=utf-8',
         'X-Requested-With': 'XMLHttpRequest',
@@ -142,6 +146,9 @@ export class TournamentAnnouncementsService {
     return 'fa fa-pencil';
   }
 
+  public getModerationIconClass(flag: boolean): string {
+    return flag ? 'fa fa-check' : 'fa fa-ban';
+  }
   public getStateClass(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem ) {
     let stateClass = '';
     switch(tournamentAnnouncement.state) {
@@ -266,6 +273,19 @@ export class TournamentAnnouncementsService {
         return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/' + id + '/close'), body, {headers: headers});
       }
     // }
+  }
+
+  public moderateTournamentAnnouncement(id: number, flag: boolean): Observable<number> {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const body = JSON.stringify({'state': ( flag ? 'ApprovedByModerator' : 'RejectedByModerator' )});
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': 'Bearer ' + currentUser.token
+      });
+      return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/' + id + '/moderate'), body, {headers: headers});
+    }
   }
 
   public closeTournamentAnnouncement(id: number): Observable<number> {
