@@ -17,16 +17,12 @@ import { TournamentAnnouncementsRoutingModule } from 'app/tournament-announcemen
 import { SharedModule } from 'app/shared/shared.module';
 
 
-import { ProfileOrganizatorComponent} from 'app/tournament-announcements/profile-organizator/profile-organizator.component';
-import { TAOListComponent } from 'app/tournament-announcements/profile-organizator/tao-list/tao-list.component';
+import { TAAdminComponent} from 'app/tournament-announcements/ta-admin/ta-admin.component';
+import { TAAdminListComponent } from 'app/tournament-announcements/ta-admin/ta-admin-list/ta-admin-list.component';
 import { TAAdminFilterComponent } from 'app/tournament-announcements/ta-filter/ta-admin-filter/ta-admin-filter.component';
 import { TACreateComponent } from 'app/tournament-announcements/ta-create/ta-create.component';
 import { TAEditComponent } from 'app/tournament-announcements/ta-edit/ta-edit.component';
-//import { ArenaFilterComponent } from 'app/arenas/arena-filter/arena-filter.component';
 import { ArenaModule } from 'app/arenas/arenas.module';
-
-// import { TAOrganizatorService } from 'app/tournament-announcements/shared/ta-organizator.service';
-
 
 @NgModule({
       declarations: [
@@ -35,8 +31,8 @@ import { ArenaModule } from 'app/arenas/arenas.module';
         TournamentAnnouncementFilterComponent,
         TAAdminFilterComponent,
         TournamentAnnouncementViewComponent,
-        ProfileOrganizatorComponent,
-        TAOListComponent,
+        TAAdminComponent,
+        TAAdminListComponent,
         TACreateComponent,
         TAEditComponent
       ],
@@ -51,7 +47,6 @@ import { ArenaModule } from 'app/arenas/arenas.module';
         NgbModule,
         CoreModule,
         MDBBootstrapModule,
-        //ArenaFilterComponent,
         ArenaModule
       ],
       providers: [

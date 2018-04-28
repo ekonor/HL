@@ -12,12 +12,12 @@ import { TournamentAnnouncementFilter } from 'app/tournament-announcements/share
 
 @Component({
   moduleId: module.id,
-  selector: 'profile-organizator',
-  templateUrl: 'profile-organizator.component.html'
+  selector: 'ta-admin',
+  templateUrl: 'ta-admin.component.html'
 })
 
 @Injectable()
-export class ProfileOrganizatorComponent implements OnInit {
+export class TAAdminComponent implements OnInit {
   tournamentAnnouncementList: ListResponse<TournamentAnnouncementListItem> = new ListResponse<TournamentAnnouncementListItem>();
   errorMessage: string;
 

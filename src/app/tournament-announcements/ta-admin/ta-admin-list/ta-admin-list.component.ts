@@ -12,13 +12,13 @@ import { Arena} from 'app/arenas/shared/arena';
 
 @Component({
   moduleId: module.id,
-  selector: 'tao-list',
-  templateUrl: 'tao-list.component.html',
-  styleUrls: ['tao-list.component.scss']
+  selector: 'ta-admin-list',
+  templateUrl: 'ta-admin-list.component.html',
+  styleUrls: ['ta-admin-list.component.scss']
 })
 
 @Injectable()
-export class TAOListComponent implements OnInit {
+export class TAAdminListComponent implements OnInit {
  @Input() content: TournamentAnnouncementListItem[];
  @Output() onChanged = new EventEmitter<number>();
 

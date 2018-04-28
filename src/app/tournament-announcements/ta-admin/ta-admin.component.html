@@ -21,12 +21,12 @@
              [options]="sortOptions"
              (onSorted)="onSorted($event)">
     </sorting>
-    <tao-list [hidden]="dataIsLoading"
+    <ta-admin-list [hidden]="dataIsLoading"
               *ngIf="tournamentAnnouncementList"
               [content]="tournamentAnnouncementList.listItems"
               (onChanged)="getTournamentAnnouncements()"
               class="row">
-    </tao-list>
+    </ta-admin-list>
     <!--ta-list [content]="tournamentAnnouncementList.listItems"
                                   class="row">
     </ta-list-->

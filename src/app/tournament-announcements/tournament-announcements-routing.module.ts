@@ -4,7 +4,7 @@ import { AuthGuard } from 'app/core/auth/auth.guard';
 
 import { TournamentAnnouncementViewComponent } from 'app/tournament-announcements/ta-view/tournament-announcement-view.component';
 import { TournamentAnnouncementsComponent } from 'app/tournament-announcements/tournament-announcements.component';
-import { ProfileOrganizatorComponent } from 'app/tournament-announcements/profile-organizator/profile-organizator.component';
+import { TAAdminComponent } from 'app/tournament-announcements/ta-admin/ta-admin.component';
 import { TACreateComponent } from 'app/tournament-announcements/ta-create/ta-create.component';
 import { TAEditComponent } from 'app/tournament-announcements/ta-edit/ta-edit.component';
 // import { ArenaEditComponent } from 'app/arenas/arena-edit/arena-edit.component';
@@ -14,7 +14,7 @@ import { TAEditComponent } from 'app/tournament-announcements/ta-edit/ta-edit.co
 export const tournamentAnnouncementsRoutes: Routes = [
   { path: 'tournament-announcements', component: TournamentAnnouncementsComponent, canActivate: [AuthGuard]},
   { path: 'tournament-announcement/:id', component: TournamentAnnouncementViewComponent, canActivate: [AuthGuard]},
-  { path: 'profile', component: ProfileOrganizatorComponent, canActivate: [AuthGuard], data: { roles: ['SuperAdministrator', 'TournamentAdministrator']}},
+  { path: 'profile', component: TAAdminComponent, canActivate: [AuthGuard], data: { roles: ['SuperAdministrator', 'TournamentAdministrator', 'TournamentModerator']}},
   { path: 'tournament-announcements/create', component: TACreateComponent, canActivate: [AuthGuard], data: { roles: ['SuperAdministrator', 'TournamentAdministrator']}},
   { path: 'tournament-announcements/edit/:id', component: TAEditComponent, canActivate: [AuthGuard], data: { roles: ['SuperAdministrator', 'TournamentAdministrator']}}
 
