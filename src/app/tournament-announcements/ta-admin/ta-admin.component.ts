@@ -13,7 +13,8 @@ import { TournamentAnnouncementFilter } from 'app/tournament-announcements/share
 @Component({
   moduleId: module.id,
   selector: 'ta-admin',
-  templateUrl: 'ta-admin.component.html'
+  templateUrl: 'ta-admin.component.html',
+  styleUrls: ['ta-admin.component.scss']
 })
 
 @Injectable()

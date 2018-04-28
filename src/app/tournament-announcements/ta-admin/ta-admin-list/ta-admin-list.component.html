@@ -1,5 +1,5 @@
 <div class="ta-admin-list section" [hidden]="dataIsLoading">
-  <div class="col-md-12 admin-panel">
+  <div class="row admin-panel">
     <a class="visible-btn"
        title="Добавить анонс"
        (click)="addTournamentAnnouncement()"
@@ -20,7 +20,7 @@
   <table class="table" *ngIf="content && content.length>0">
     <thead>
     <tr>
-      <th>#</th>
+      <th class="td-small">#</th>
       <th colspan="2">Название</th>
       <th>Начало</th>
       <th>Окончание</th>
@@ -35,16 +35,16 @@
         </p>
       </th>
       <th>
-        <p class="icon-wrap">
+        <p class="icon-wrap td-middle">
           <i class="fa fa-users"></i>
         </p>
       </th>
-      <th>
+      <th class="td-small">
         <p class="icon-wrap">
           <i class="fa fa-male"></i>/<i class="fa fa-child"></i>
         </p>
       </th>
-      <th>
+      <th class="td-small">
         <p class="icon-wrap">
           <i class="fa fa-male"></i>/<i class="fa fa-female"></i>
         </p>
@@ -60,12 +60,13 @@
         </p>
       </th>
       <th>
+        &nbsp;
       </th>
     </tr>
     </thead>
     <tbody *ngIf="content">
     <tr *ngFor="let tournamentAnnouncement of content" [class]="getStateClass(tournamentAnnouncement)" [title]="getStateTitle(tournamentAnnouncement)">
-      <th scope="row">{{content?.indexOf(tournamentAnnouncement)+1}}</th>
+      <th class="td-small" scope="row">{{content?.indexOf(tournamentAnnouncement)+1}}</th>
       <td>
         <div class="logo-img-wrapper" >
           <div class="logo-img-bg-wrapper" >
@@ -111,13 +112,13 @@
           {{tournamentAnnouncement.arena.name}}
         </a>
       </td>
-      <td>{{getRequiredResponseCount(tournamentAnnouncement)}}</td>
+      <td class="td-middle">{{getRequiredResponseCount(tournamentAnnouncement)}}</td>
       <td>
         <p class="icon-wrap">
           <i [class]="getAgeGroupIconClass(tournamentAnnouncement)"></i>
         </p>
       </td>
-      <td>
+      <td class="td-small">
         <p class="icon-wrap">
           <i [class]="getGenderIconClass(tournamentAnnouncement)"></i>
         </p>
@@ -128,71 +129,67 @@
       <td>
         {{getCostText(tournamentAnnouncement)}}
       </td>
-      <td class="admin-panel" [hasPermission]="['tournamentadministrator']"
-          onAuthorizedPermission="show"
-          onUnauthorizedPermission="hide">
-        <a *ngIf="tournamentAnnouncement.state == 'Draft'" class="visible-btn"
-           title="Редактировать анонс"
-           (click)="editTournamentAnnouncement(tournamentAnnouncement)"
-           [hasPermission]="['tournamentadministrator']"
-           onAuthorizedPermission="show"
-           onUnauthorizedPermission="hide">
-          <i [class]="getEditIconClass()"></i>
-        </a>
-        <a *ngIf="tournamentAnnouncement.state == 'Draft'" class="visible-btn"
-           title="Отправить на модерацию"
-           (click)="sendOnModeration(tournamentAnnouncement)"
-           [hasPermission]="['tournamentadministrator']"
-           onAuthorizedPermission="show"
-           onUnauthorizedPermission="hide">
-          <i [class]="getSendOnModerationIconClass()"></i>
-        </a>
-        <a *ngIf="tournamentAnnouncement.state == 'Draft' || tournamentAnnouncement.state == 'RejectedByModerator'" class="visible-btn"
-           title="Удалить анонс"
-           (click)="deleteTournamentAnnouncement(tournamentAnnouncement)"
-           [hasPermission]="['tournamentadministrator']"
-           onAuthorizedPermission="show"
-           onUnauthorizedPermission="hide">
-          <i [class]="getDeleteIconClass()"></i>
-        </a>
-        <a *ngIf="tournamentAnnouncement.state == 'ApprovedByModerator'" class="visible-btn"
-           title="Завершить прием заявок"
-           (click)="closeTournamentAnnouncement(tournamentAnnouncement)"
-           [hasPermission]="['tournamentadministrator']"
-           onAuthorizedPermission="show"
-           onUnauthorizedPermission="hide">
-          <i [class]="getCloseIconClass()"></i>
-        </a>
-        <a *ngIf="tournamentAnnouncement.state == 'ApprovedByModerator'" class="visible-btn"
-           title="Отменить турнир"
-           (click)="cancelTournamentAnnouncement(tournamentAnnouncement)"
-           [hasPermission]="['tournamentadministrator']"
-           onAuthorizedPermission="show"
-           onUnauthorizedPermission="hide">
-          <i [class]="getCancelIconClass()"></i>
-        </a>
-        nbsp;
-      </td>
-      <td class="admin-panel" [hasPermission]="['tournamentannouncementmoderator']"
-          onAuthorizedPermission="show"
-          onUnauthorizedPermission="hide">
-        <a *ngIf="tournamentAnnouncement.state == 'WaitModeration'" class="visible-btn"
-           title="Одобрить"
-           (click)="moderate(tournamentAnnouncement, true)"
-           [hasPermission]="['tournamentadministrator']"
-           onAuthorizedPermission="show"
-           onUnauthorizedPermission="hide">
-          <i [class]="getModerationIconClass(true)"></i>
-        </a>
-        <a *ngIf="tournamentAnnouncement.state == 'WaitModeration'" class="visible-btn"
-           title="Отклонить"
-           (click)="moderate(tournamentAnnouncement, false)"
-           [hasPermission]="['tournamentadministrator']"
-           onAuthorizedPermission="show"
-           onUnauthorizedPermission="hide">
-          <i [class]="getModerationIconClass(false)"></i>
-        </a>
-        &nbsp;
+      <td class="admin-panel">
+        <span [hasPermission]="['tournamentadministrator']">
+          <a *ngIf="tournamentAnnouncement.state == 'Draft'" class="visible-btn"
+             title="Редактировать анонс"
+             (click)="editTournamentAnnouncement(tournamentAnnouncement)"
+             [hasPermission]="['tournamentadministrator']"
+             onAuthorizedPermission="show"
+             onUnauthorizedPermission="hide">
+            <i [class]="getEditIconClass()"></i>
+          </a>
+          <a *ngIf="tournamentAnnouncement.state == 'Draft'" class="visible-btn"
+             title="Отправить на модерацию"
+             (click)="sendOnModeration(tournamentAnnouncement)"
+             [hasPermission]="['tournamentadministrator']"
+             onAuthorizedPermission="show"
+             onUnauthorizedPermission="hide">
+            <i [class]="getSendOnModerationIconClass()"></i>
+          </a>
+          <a *ngIf="tournamentAnnouncement.state == 'Draft' || tournamentAnnouncement.state == 'RejectedByModerator'" class="visible-btn"
+             title="Удалить анонс"
+             (click)="deleteTournamentAnnouncement(tournamentAnnouncement)"
+             [hasPermission]="['tournamentadministrator']"
+             onAuthorizedPermission="show"
+             onUnauthorizedPermission="hide">
+            <i [class]="getDeleteIconClass()"></i>
+          </a>
+          <a *ngIf="tournamentAnnouncement.state == 'ApprovedByModerator'" class="visible-btn"
+             title="Завершить прием заявок"
+             (click)="closeTournamentAnnouncement(tournamentAnnouncement)"
+             [hasPermission]="['tournamentadministrator']"
+             onAuthorizedPermission="show"
+             onUnauthorizedPermission="hide">
+            <i [class]="getCloseIconClass()"></i>
+          </a>
+          <a *ngIf="tournamentAnnouncement.state == 'ApprovedByModerator'" class="visible-btn"
+             title="Отменить турнир"
+             (click)="cancelTournamentAnnouncement(tournamentAnnouncement)"
+             [hasPermission]="['tournamentadministrator']"
+             onAuthorizedPermission="show"
+             onUnauthorizedPermission="hide">
+            <i [class]="getCancelIconClass()"></i>
+          </a>
+        </span>
+        <span [hasPermission]="['tournamentannouncementmoderator']">
+          <a *ngIf="tournamentAnnouncement.state == 'WaitModeration'" class="visible-btn"
+             title="Одобрить"
+             (click)="moderate(tournamentAnnouncement, true)"
+             [hasPermission]="['tournamentannouncementmoderator']"
+             onAuthorizedPermission="show"
+             onUnauthorizedPermission="hide">
+            <i [class]="getModerationIconClass(true)"></i>
+          </a>
+          <a *ngIf="tournamentAnnouncement.state == 'WaitModeration'" class="visible-btn"
+             title="Отклонить"
+             (click)="moderate(tournamentAnnouncement, false)"
+             [hasPermission]="['tournamentannouncementmoderator']"
+             onAuthorizedPermission="show"
+             onUnauthorizedPermission="hide">
+            <i [class]="getModerationIconClass(false)"></i>
+          </a>
+        </span>
       </td>
     </tr>
     </tbody>
