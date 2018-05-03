@@ -27,9 +27,6 @@
               (onChanged)="getTournamentAnnouncements()"
               class="row">
     </ta-admin-list>
-    <!--ta-list [content]="tournamentAnnouncementList.listItems"
-                                  class="row">
-    </ta-list-->
     <pagination [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList" [page]="listInfo.page"
                 [collectionSize]="tournamentAnnouncementList.count"
                 [pageSize]="listInfo.take">

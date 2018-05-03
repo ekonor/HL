@@ -368,7 +368,6 @@ export class TournamentAnnouncementsService {
   }
 
   public updateTournamentAnnouncement(ta: TournamentAnnouncementViewItem): Observable<number> {
-    // if (confirm('Вы действительно хотите сохранить анонс?')) {
       console.log(ta);
       const body = JSON.stringify({
         'name': ta.name,
@@ -380,8 +379,8 @@ export class TournamentAnnouncementsService {
         'requiredResponseCount': ta.requiredResponseCount.toString(),
         // 'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate + 'T00:00:00.000Z' : null, // TODO NEED FIX!!! убрать время и этот костыль!
         'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate.toISOString() : null, // TODO NEED FIX!!! убрать время и этот костыль!
-        'city': ta.city ? ta.city : null,
-        'arena': ta.arena ? ta.arena : null,
+        'cityId': ta.city ? ta.city.id : null,
+        'arena': ta.arena ? ta.arena.id : null,
         'isCommercial': ta.isCommercial,
         'cost': ta.isCommercial ? ta.cost : null,
         'costType': ta.isCommercial ? ta.costType : null,
