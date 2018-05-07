@@ -14,7 +14,7 @@ export class TournamentAnnouncement {
   ageGroup?: string; // Возрастная группа (AgeGroup
   minBirthYear?: number;
   maxBirthYear?: number;
-  gender?: string; // Пол участников (Gender) – иконкой
+  gender?: string = 'Male'; // Пол участников (Gender) – иконкой
   content?: string; // Текст анонса
   closeCondition: string = 'ResponseCountAccomplished';
 

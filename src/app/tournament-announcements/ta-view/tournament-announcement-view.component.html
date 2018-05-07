@@ -87,7 +87,7 @@
             </div>
             <p class="icon-wrap">
               <i class="fa fa-users"></i>
-              Макс. количество участников:
+              Макс. количество команд-участников:
               {{getRequiredResponseCount(tournamentAnnouncement)}}
             </p>
             <p class="icon-wrap">
@@ -110,7 +110,7 @@
               {{tournamentAnnouncement.endRegistrationDate | date :  "dd.MM.y" }}
             </p>
             <span *ngIf="tournamentAnnouncement.isCommercial && tournamentAnnouncement.isCommercial == true">
-              <p class="icon-wrap">
+              <p class="icon-wrap" *ngIf="tournamentAnnouncement.cost">
                 <i class="fa fa-rouble"></i>
                 Цена участия: {{getCostText(tournamentAnnouncement)}}
               </p>
@@ -172,6 +172,7 @@
           <div *ngFor="let team of tournamentAnnouncement.teams">
             <p class="icon-wrap"><i class="fa fa-info-circle"></i><a [routerLink]="['/team',team.id]" routerLinkActive="active">{{team.name}}</a></p>
           </div>
+          <div class="text-center" *ngIf="tournamentAnnouncement.teams.length == 0">Пока никто не откликнулся</div>
         </div>
       </div>
     </div>

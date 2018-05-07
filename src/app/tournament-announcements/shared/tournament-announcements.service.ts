@@ -115,7 +115,7 @@ export class TournamentAnnouncementsService {
   }
 
   public getRequiredResponseCountText(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem | TournamentAnnouncement ) {
-    return tournamentAnnouncement.requiredResponseCount ? tournamentAnnouncement.requiredResponseCount + ' чел.' : this.getNoData();
+    return tournamentAnnouncement.requiredResponseCount ? tournamentAnnouncement.requiredResponseCount + '' : this.getNoData();
   }
 
   public getAgeGroupIconClass(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem | TournamentAnnouncement ) {
@@ -242,11 +242,11 @@ export class TournamentAnnouncementsService {
   }
 
   public getNoData() {
-    return 'не определено';
+    //return 'не определено';
+    return '';
   }
 
   public sendOnModeration(id: number): Observable<number> {
-    // if (confirm('Вы действительно хотите отправить анонс на модерацию?')) {
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
       if (currentUser && currentUser.token) {
         const body = JSON.stringify({'id': id});
@@ -257,11 +257,9 @@ export class TournamentAnnouncementsService {
         });
         return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/' + id + '/send-on-moderation'), body, {headers: headers});
       }
-   // }
   }
 
   public cancelTournamentAnnouncement(id: number): Observable<number> {
-    // if (confirm('Вы действительно хотите отменить турнир?')) {
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
       if (currentUser && currentUser.token) {
         const body = JSON.stringify({'state': 'Deleted'});
@@ -272,7 +270,6 @@ export class TournamentAnnouncementsService {
         });
         return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/' + id + '/close'), body, {headers: headers});
       }
-    // }
   }
 
   public moderateTournamentAnnouncement(id: number, flag: boolean): Observable<number> {
@@ -289,7 +286,6 @@ export class TournamentAnnouncementsService {
   }
 
   public closeTournamentAnnouncement(id: number): Observable<number> {
-    //if (confirm('Вы действительно хотите завершить прием заявок?')) {
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
       if (currentUser && currentUser.token) {
         const body = JSON.stringify({'state': 'Canceled'});
@@ -300,7 +296,6 @@ export class TournamentAnnouncementsService {
         });
         return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/' + id + '/close'), body, {headers: headers});
       }
-    //}
   }
 
   /*public updateQuickTournamentAnnouncement(id: number, ta: TournamentAnnouncementListItem): Observable<TournamentAnnouncementListItem> {
@@ -331,7 +326,6 @@ export class TournamentAnnouncementsService {
   }*/
 
   public addTournamentAnnouncement(ta: TournamentAnnouncement): Observable<number> {
-    //if (confirm('Вы действительно хотите сохранить анонс?')) {
       console.log(ta);
       const body = JSON.stringify({
         'name': ta.name,
@@ -364,7 +358,6 @@ export class TournamentAnnouncementsService {
         });
         return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/'), body, {headers: headers});
       }
-   // }
   }
 
   public updateTournamentAnnouncement(ta: TournamentAnnouncementViewItem): Observable<number> {
@@ -404,7 +397,6 @@ export class TournamentAnnouncementsService {
   }
 
   public deleteTournamentAnnouncement(id: number): Observable<void> {
-    // if (confirm('Вы действительно хотите удалить анонс?')) {
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
       if (currentUser && currentUser.token) {
         let params = new HttpParams();
@@ -416,7 +408,6 @@ export class TournamentAnnouncementsService {
         });
         return this.httpClient.delete<void>(this.getMethodUrl('/tournament-announcements/' + id), {params: params, headers: headers});
       }
-    // }
   }
 
  /* public deleteLogo(id: number): Observable<void> {

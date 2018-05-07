@@ -23,7 +23,7 @@ export class TournamentAnnouncementListItem {
   ageGroup?: string; // Возрастная группа (AgeGroup
   minAge?: number; // Если Возрастная группа дети или подростки, то можно указать еще год рождения участников от – до
   maxAge?: number;
-  gender?: string; // Пол участников (Gender) – иконкой
+  gender?: string = 'Male'; // Пол участников (Gender) – иконкой
 
   constructor( values: Object = {} ) {
     Object.assign( this, values );

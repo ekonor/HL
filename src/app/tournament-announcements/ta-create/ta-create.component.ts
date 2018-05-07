@@ -81,11 +81,17 @@ export class TACreateComponent implements OnInit {
         },
         error => {
           this.alertService.error(error);
-          this.alertService.error("Не удалось добавить анонс турнира");
+          this.alertService.error('Не удалось добавить анонс турнира');
+          this.dataIsLoading = false;
+          alert('Не удалось сохранить анонс турнира');
         },
-        () => this.dataIsLoading = false);
+        () => {
+          this.dataIsLoading = false;
+          alert('Анонс турнира сохранен успешно. Сейчас Вы будете перенаправлены в профиль.');
+          this.router.navigate(['/profile']);
+        });
+      }
     }
-  }
 
   /*public saveAndSendOnModeration(ta: TournamentAnnouncement) {
     if (confirm('Вы действительно хотите сохранить изменения и отправить анонс на модерацию?')) {

@@ -75,10 +75,24 @@
     //padding-top: 15px;
   }
 
-  .item-title-main p {
+  /*.item-title-main p {
     background-color: lightgrey;
     color: #ffffff;
     font-size: 12px;
+    text-align: center;
+    padding: 0 5px 0 5px;
+    text-transform: uppercase;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+  }*/
+  .item-title-main p {
+    background-color: black;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
     text-align: center;
     padding: 0 5px 0 5px;
     text-transform: uppercase;
@@ -95,13 +109,16 @@
     padding-top: 6px;
   }
 
-  .item-title-main[_ngcontent-c4] p[_ngcontent-c4] {
-    background-color: lightgrey;
+  .item-title-main[_ngcontent-c4] p[_ngcontent-c4],
+  .item-title-main[_ngcontent-c5] p[_ngcontent-c5],
+  .item-title-main[_ngcontent-c6] p[_ngcontent-c6]{
+    background-color: black;
     color: #ffffff;
-    font-size: 12px;
+    font-size: 16px;
+    font-weight: bold;
     text-align: center;
+    padding: 0 5px 0 5px;
     text-transform: uppercase;
-    transition: all 0.4s ease-in-out;
   }
 
   .item-title a {
