@@ -16,6 +16,8 @@ import { SimpleFilterComponent } from "app/shared/simple-filter/simple-filter.co
 import { LoaderComponent } from "app/shared/loader/loader.component";
 import { LoaderEmptyComponent } from "app/shared/loader/loader-empty.component";
 
+import { DatepickerComponent } from 'app/shared/datepicker/datepicker.component';
+
 
 @NgModule({
       declarations: [
@@ -25,7 +27,8 @@ import { LoaderEmptyComponent } from "app/shared/loader/loader-empty.component";
         UserPicComponent,
         SimpleFilterComponent,
         LoaderComponent,
-        LoaderEmptyComponent
+        LoaderEmptyComponent,
+        DatepickerComponent
       ],
       imports: [
         BrowserModule,
@@ -46,7 +49,8 @@ import { LoaderEmptyComponent } from "app/shared/loader/loader-empty.component";
         UserPicComponent,
         SimpleFilterComponent,
         LoaderComponent,
-        LoaderEmptyComponent
+        LoaderEmptyComponent,
+        DatepickerComponent
       ],
       providers: [
         PaginationService

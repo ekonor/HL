@@ -90,7 +90,9 @@ export class TACreateComponent implements OnInit {
           alert('Анонс турнира сохранен успешно. Сейчас Вы будете перенаправлены в профиль.');
           this.router.navigate(['/profile']);
         });
+      this.dataIsLoading = false;
       }
+    this.dataIsLoading = false;
     }
 
   /*public saveAndSendOnModeration(ta: TournamentAnnouncement) {
@@ -198,4 +200,5 @@ export class TACreateComponent implements OnInit {
       }
     }
   }
+
 }
