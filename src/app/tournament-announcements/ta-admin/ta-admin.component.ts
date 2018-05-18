@@ -38,7 +38,8 @@ export class TAAdminComponent implements OnInit {
 
     this.sortOptions = [
       { title: 'Название', value: 'Name' },
-      { title: 'Дата создания анонса', value: 'CreateDate' }
+      { title: 'Дата создания анонса', value: 'CreateDate' },
+      { title: 'Дата начала турнира', value: 'StartDate' }
     ];
   }
 

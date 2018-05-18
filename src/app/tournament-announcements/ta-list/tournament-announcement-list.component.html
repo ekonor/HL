@@ -46,7 +46,7 @@
                 </a>
               </p-->
               <div class="row block-with-logo">
-                <div class="col-md-6">
+                <div class="col-md-6" *ngIf="tournamentAnnouncement.arena">
                   <p>
                     Арена:
                   </p>
@@ -70,8 +70,9 @@
                     </a>
                   </div>
                 </div>
-
-                <div class="col-md-6">
+                <div class="col-md-6" *ngIf="!tournamentAnnouncement.arena">&nbsp;</div>
+                <div class="col-md-6" *ngIf="!tournamentAnnouncement.organization">&nbsp;</div>
+                <div class="col-md-6" *ngIf="tournamentAnnouncement.organization">
                   <p>
                     Организатор:
                   </p>

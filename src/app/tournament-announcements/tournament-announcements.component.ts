@@ -37,7 +37,8 @@ export class TournamentAnnouncementsComponent implements OnInit {
 
     this.sortOptions = [
       { title: 'Название', value: 'Name' },
-      { title: 'Дата создания анонса', value: 'CreateDate' }
+      { title: 'Дата создания анонса', value: 'CreateDate' },
+      { title: 'Дата начала турнира', value: 'StartDate' }
     ];
     //this.filter = new TournamentAnnouncementFilter();
     this.filter.state = 'ApprovedByModerator';
@@ -62,6 +63,7 @@ export class TournamentAnnouncementsComponent implements OnInit {
     this.listInfo.orderBy = $event.orderBy;
     this.listInfo.orderDir = $event.orderDir;
 
+    console.log(this.listInfo);
     this.getTournamentAnnouncements();
   }
 
