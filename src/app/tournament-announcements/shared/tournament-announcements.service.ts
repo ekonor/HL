@@ -327,27 +327,32 @@ export class TournamentAnnouncementsService {
 
   public addTournamentAnnouncement(ta: TournamentAnnouncement): Observable<number> {
       console.log(ta);
-      const body = JSON.stringify({
+      /*console.log(JSON.stringify(ta, (key, value) => {
+        if (value !== null) { return value; }
+      }));*/
+      const body = JSON.stringify(ta, (key, value) => {
+        if (value !== null) { /* if (typeof value === Date) { return value.toISOString(); } */ return value; }
+      });
+        /*JSON.stringify({
         'name': ta.name,
-        /*'startDate': ta.startDate ? ta.startDate + 'T00:00:00.000Z' : null,
-        'endDate': ta.endDate ? ta.endDate + 'T00:00:00.000Z' : null,*/
         'startDate': ta.startDate ? ta.startDate.toISOString() : null,
         'endDate': ta.endDate ? ta.endDate.toISOString() : null,
         'content': ta.content,
-        'requiredResponseCount': ta.requiredResponseCount.toString(),
+        //'requiredResponseCount': ta.requiredResponseCount.toString(),
         // 'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate + 'T00:00:00.000Z' : null, // TODO NEED FIX!!! убрать время и этот костыль!
         'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate.toISOString() : null, // TODO NEED FIX!!! убрать время и этот костыль!
         'cityId': ta.cityId,
         'arenaId': ta.arenaId,
         'isCommercial': ta.isCommercial,
-        'cost': ta.isCommercial ? ta.cost : null,
+        'cost': ta.isCommercial ? ( ta.cost ? ta.cost : null ) : null,
         'costType': ta.isCommercial ? ta.costType : null,
         'ageGroup': ta.ageGroup,
         'minBirthYear': 0, //ta.minBirthYear,//
         'maxBirthYear': 0, //ta.maxBirthYear, //
-        'gender': ta.gender,
-        'closeCondition': ta.closeCondition //'ResponseCountAccomplished'
-      });
+        'gender': ta.gender
+        //'closeCondition': ta.closeCondition ? ta.closeCondition : null //'ResponseCountAccomplished'
+      });*/
+      //if (ta.closeCondition !== null) { ( body['closeCondition'] = ta.closeCondition ); }
       console.log(body);
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
       if (currentUser && currentUser.token) {
@@ -362,7 +367,7 @@ export class TournamentAnnouncementsService {
 
   public updateTournamentAnnouncement(ta: TournamentAnnouncementViewItem): Observable<number> {
       console.log(ta);
-      const body = JSON.stringify({
+      let body = JSON.stringify({
         'name': ta.name,
         /*'startDate': ta.startDate ? ta.startDate + 'T00:00:00.000Z' : null,
         'endDate': ta.endDate ? ta.endDate + 'T00:00:00.000Z' : null,*/
@@ -375,14 +380,15 @@ export class TournamentAnnouncementsService {
         'cityId': ta.city ? ta.city.id : null,
         'arena': ta.arena ? ta.arena.id : null,
         'isCommercial': ta.isCommercial,
-        'cost': ta.isCommercial ? ta.cost : null,
+        'cost': ta.isCommercial ? ( ta.cost ? ta.cost : null ) : null,
         'costType': ta.isCommercial ? ta.costType : null,
         'ageGroup': ta.ageGroup,
         'minBirthYear': 0, //ta.minBirthYear,//
         'maxBirthYear': 0, //ta.maxBirthYear, //
-        'gender': ta.gender,
-        'closeCondition': ta.closeCondition //'ResponseCountAccomplished'
+        'gender': ta.gender
+        // 'closeCondition': ta.closeCondition ? ta.closeCondition : null //'ResponseCountAccomplished'
       });
+      if (ta.closeCondition) { ( body['closeCondition'] = ta.closeCondition ); }
       console.log(body);
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
       if (currentUser && currentUser.token) {

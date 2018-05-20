@@ -15,58 +15,10 @@
       <arena-select  [cityId]="city.id" [arena]="arena" (onChanged)="setArena($event)"></arena-select>
       <div *ngIf="f.submitted && arena == null" class="help-block">Укажите арену</div>
     </div>
-    <!--div class="form-group" [ngClass]="{ 'has-error': f.submitted && startDate==null}">
-      <label for="startDate">Дата проведения c</label>
-      <input id="startDate"
-             type="date"
-             name="startDate"
-             [(ngModel)]="ta.startDate"
-             placeholder="Дата проведения, от"
-             class="form-control">
-    </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && endDate==null}">
-      <label for="endDate">до</label>
-      <input id="endDate"
-             type="date"
-             name="endDate"
-             [(ngModel)]="ta.endDate"
-             placeholder="Дата проведения, до"
-             class="form-control">
-    </div-->
-    <!--div class="form-group" [ngClass]="{ 'has-error': f.submitted && startDate==null}">
-      <label for="sDate">Дата проведения, c</label-->
-      <!--div class="input-group">
-        <input class="form-control" placeholder="yyyy-mm-dd"
-               name="startDate" [(ngModel)]="ta.startDate" ngbDatepicker #startDate="ngbDatepicker">
-        <div class="input-group-append">
-          <button class="btn btn-outline-grey btn-calendar" (click)="startDate.toggle()" type="button">
-            <i class="fa fa-calendar"></i>
-          </button>
-        </div>
-      </div-->
-      <!--div class="input-group">
-        <input class="form-control" placeholder="yyyy-mm-dd"
-               name="sDate" [(ngModel)]="mi" ngbDatepicker #c2="ngModel" #sDate="ngbDatepicker">
-        <div class="input-group-append">
-          <button class="btn btn-outline-grey btn-calendar" (click)="sDate.toggle()" type="button">
-            <i class="fa fa-calendar"></i>
-          </button>
-        </div>
-      </div>
-    </div-->
-
-    <!--div class="form-group" [ngClass]="{ 'has-error': f.submitted && endDate==null}">
-      <label for="eDate">Дата проведения, до</label>
-      <div class="input-group">
-        <input class="form-control" placeholder="yyyy-mm-dd"
-               name="eDate" [(ngModel)]="endDate" ngbDatepicker #eDate="ngbDatepicker">
-        <div class="input-group-append">
-          <button class="btn btn-outline-grey btn-calendar" (click)="eDate.toggle()" type="button">
-            <i class="fa fa-calendar"></i>
-          </button>
-        </div>
-      </div>
-    </div-->
+    <label>Дата проведения, c</label>
+    <app-datepicker [dt]="ta.startDate" (onChanged)="onChangedStartDt($event)"></app-datepicker>
+    <label>Дата проведения, до</label>
+    <app-datepicker [dt]="ta.endDate" (onChanged)="onChangedEndDt($event)"></app-datepicker>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !ta.requiredResponseCount.valid }">
       <label for="requiredResponseCount">Максимальное количество участников</label>
       <input type="number" min="0" max="2000" step="1" class="form-control" name="requiredResponseCount" [(ngModel)]="ta.requiredResponseCount" (ngModelChange)="ta.requiredResponseCount = $event" #requiredResponseCount="ngModel" ngModel number="true" id="requiredResponseCount"/>
@@ -107,29 +59,8 @@
         <option *ngFor="let closeType of closeTypes"  [ngValue]="closeType.value" >{{closeType.name}}</option>
       </select>
     </div>
-    <!--div class="form-group" [ngClass]="{ 'has-error': f.submitted && endRegistrationDate==null}">
-      <label for="endRegistrationDate">Окончание регистрации</label>
-      <input id="endRegistrationDate"
-             type="date"
-             name="endRegistrationDate"
-             [(ngModel)]="ta.endRegistrationDate"
-             placeholder="Окончание регистрации"
-             class="form-control">
-    </div-->
-    <!--div class="form-group" [ngClass]="{ 'has-error': f.submitted && endRegistrationDate==null}">
-      <label for="endRegDate">Окончание регистрации</label>
-      <div class="input-group">
-        <input class="form-control" placeholder="yyyy-mm-dd"
-               name="endRegDate" [(ngModel)]="endRegistrationDate" ngbDatepicker #endRegDate="ngbDatepicker">
-        <div class="input-group-append">
-          <button class="btn btn-outline-grey btn-calendar" (click)="endRegDate.toggle()" type="button">
-            <i class="fa fa-calendar"></i>
-          </button>
-        </div>
-      </div>
-      
-    </div-->
-    <app-datepicker></app-datepicker>
+    <label>Окончание регистрации</label>
+    <app-datepicker [dt]="ta.endRegistrationDate" (onChanged)="onChangedEndRegDt($event)"></app-datepicker>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !content.valid }">
       <label for="content">Текст анонса</label>
       <app-ngx-editor [placeholder]="'Текст анонса'" [height]="200" class="form-control" name="content" [(ngModel)]="ta.content" (ngModelChange)="ta.content = $event" #content="ngModel" id="content"></app-ngx-editor>

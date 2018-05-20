@@ -16,7 +16,7 @@ import { SimpleFilterComponent } from "app/shared/simple-filter/simple-filter.co
 import { LoaderComponent } from "app/shared/loader/loader.component";
 import { LoaderEmptyComponent } from "app/shared/loader/loader-empty.component";
 
-import { DatepickerComponent } from 'app/shared/datepicker/datepicker.component';
+import { NgbDateNativeAdapter, DatepickerComponent } from 'app/shared/datepicker/datepicker.component';
 
 
 @NgModule({
@@ -53,7 +53,8 @@ import { DatepickerComponent } from 'app/shared/datepicker/datepicker.component'
         DatepickerComponent
       ],
       providers: [
-        PaginationService
+        PaginationService,
+        NgbDateNativeAdapter
       ]
     })
     export class SharedModule { }

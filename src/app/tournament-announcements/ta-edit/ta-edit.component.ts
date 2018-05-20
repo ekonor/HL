@@ -135,6 +135,7 @@ export class TAEditComponent implements OnInit {
 
   private getCloseTypes() {
     this.closeTypes = new Array<Item>();
+    this.closeTypes.push(new Item({value: null, name: ''}));
     this.closeTypes.push(new Item({value: 'ResponseCountAccomplished', name: 'Набор необходимого количества участников'}));
     this.closeTypes.push(new Item({value: 'EndRegistrationDatePassed', name: 'Окончание срока регистрации'}));
     this.closeTypes.push(new Item({value: 'ResponseCountAccomplishedAndEndRegistrationDatePassed', name: 'Набор участников и окончание срока регистрации'}));
