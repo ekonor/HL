@@ -15,24 +15,10 @@
       <arena-select  [cityId]="city.id" [arena]="arena" (onChanged)="setArena($event)"></arena-select>
       <div *ngIf="f.submitted && arena == null" class="help-block">Укажите арену</div>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && startDate==null}">
-      <label for="startDate">Дата проведения c</label>
-      <input id="startDate"
-             type="date"
-             name="startDate"
-             [(ngModel)]="startDate"
-             placeholder="Дата проведения, от"
-             class="form-control">
-    </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && endDate==null}">
-      <label for="endDate">до</label>
-      <input id="endDate"
-             type="date"
-             name="endDate"
-             [(ngModel)]="endDate"
-             placeholder="Дата проведения, до"
-             class="form-control">
-    </div>
+    <label>Дата проведения, c</label>
+    <app-datepicker [dt]="ta.startDate" (onChanged)="onChangedStartDt($event)"></app-datepicker>
+    <label>Дата проведения, до</label>
+    <app-datepicker [dt]="ta.endDate" (onChanged)="onChangedEndDt($event)"></app-datepicker>
     <!--div class="form-group" [ngClass]="{ 'has-error': f.submitted && city==null}">
       <app-city-filter *ngIf="city" [city]="city" (onChanged)="setCity($event)"></app-city-filter>
       <div *ngIf="f.submitted && city == null" class="help-block">Укажите город</div>
@@ -71,15 +57,8 @@
       <input type="number" min="0" max="2000" step="1" class="form-control" name="cost" [(ngModel)]="ta.cost" (ngModelChange)="ta.cost = $event" #cost="ngModel" ngModel number="true" id="cost"/>
       <div *ngIf="f.submitted && cost != null && !cost.valid" class="help-block">cost is invalid</div>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && endRegistrationDate==null}">
-      <label for="endRegistrationDate">Окончание регистрации</label>
-      <input id="endRegistrationDate"
-             type="date"
-             name="endRegistrationDate"
-             [(ngModel)]="endRegistrationDate"
-             placeholder="Окончание регистрации"
-             class="form-control">
-    </div>
+    <label>Окончание регистрации</label>
+    <app-datepicker [dt]="ta.endRegistrationDate" (onChanged)="onChangedEndRegDt($event)"></app-datepicker>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && content && !content.valid }">
       <label for="content">Текст анонса</label>
       <app-ngx-editor [placeholder]="'Текст анонса'" [height]="200" class="form-control" name="about" [(ngModel)]="ta.content" (ngModelChange)="ta.content = $event" #about="ngModel" id="content"></app-ngx-editor>

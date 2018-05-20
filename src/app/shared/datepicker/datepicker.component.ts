@@ -1,65 +1,3 @@
-/* import {NgbDateAdapter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-import { Component, Injectable, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/merge';
-
-@Injectable()
-export class NgbDateNativeAdapter extends NgbDateAdapter<Date> {
-
-  fromModel(date: Date): NgbDateStruct {
-    return (date && date.getFullYear) ? {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()} : null;
-  }
-
-  toModel(date: NgbDateStruct): Date {
-    return date ? new Date(date.year, date.month - 1, date.day) : null;
-  }
-}
-
-@Component({
-  selector: 'app-datepicker',
-  templateUrl: 'datepicker.component.html',
-  styleUrls: ['datepicker.component.scss'],
-
-  // NOTE: For this example we are only providing current component, but probably
-  // NOTE: you will want to provide your main App Module
-  providers: [{provide: NgbDateAdapter, useClass: NgbDateNativeAdapter}]
-})
-
-@Injectable()
-export class DatepickerComponent {
-
-  // @Input() dt: Date;
- // @Output() onChanged = new EventEmitter<Date>();
-
-  model2: Date;
-  c2: string;
-  // errorMessage: string;
-  // searching = false;
-  // hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
-  // searchFailed = false;
-
-  constructor() {
-
-  }
-
-  private pickDt() {
-    console.log(this.model2);
-    console.log(this.c2);
-    //this.onChanged.emit(this.dt);
-  }
-
-  get today() {
-    return new Date();
-  }
-
-}*/
-
 import {NgbDateAdapter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import { Component, Injectable, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
@@ -74,12 +12,10 @@ import 'rxjs/add/operator/merge';
 export class NgbDateNativeAdapter extends NgbDateAdapter<Date> {
 
   fromModel(date: Date): NgbDateStruct {
-    console.log("fromModel");
     return (date && date.getFullYear) ? {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()} : null;
   }
 
   toModel(date: NgbDateStruct): Date {
-    console.log("toModel");
     return date ? new Date(date.year, date.month - 1, date.day) : null;
   }
 }
