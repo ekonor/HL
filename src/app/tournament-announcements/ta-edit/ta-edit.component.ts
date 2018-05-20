@@ -199,7 +199,7 @@ export class TAEditComponent implements OnInit {
           this.arena = ta.arena;
           this.city = this.ta.city;
           if (this.city == null) { this.city = new City; }
-          this.setDt();
+          //this.setDt();
         },
         error => {
           this.alertService.error(error);
@@ -214,7 +214,7 @@ export class TAEditComponent implements OnInit {
 
   private updateTA(): boolean {
     this.dataIsLoading = true;
-    this.getDt();
+    //this.getDt();
     // ta.state = 'Draft';
     if (!this.ta.isCommercial) {
       this.ta.cost = null;
@@ -240,7 +240,7 @@ export class TAEditComponent implements OnInit {
     return false;
   }
 
-  private setDt() {
+  /*private setDt() {
     if (this.ta != null) {
       if (this.ta.startDate) {
         this.startDate = this.service.getYYYYMMDD(this.ta.startDate);
@@ -266,5 +266,17 @@ export class TAEditComponent implements OnInit {
         this.ta.endRegistrationDate = new Date(this.endRegistrationDate);
       }
     }
+  }*/
+
+  private onChangedStartDt(dt: Date) {
+    this.ta.startDate = dt;
+  }
+
+  private onChangedEndDt(dt: Date) {
+    this.ta.endDate = dt;
+  }
+
+  private onChangedEndRegDt(dt: Date) {
+    this.ta.endRegistrationDate = dt;
   }
 }

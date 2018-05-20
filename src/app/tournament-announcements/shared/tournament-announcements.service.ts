@@ -307,14 +307,13 @@ export class TournamentAnnouncementsService {
       const body = JSON.stringify(ta, (key, value) => {
         if (value !== null) { /* if (typeof value === Date) { return value.toISOString(); } */ return value; }
       });
-        /*JSON.stringify({
+        /* JSON.stringify({
         'name': ta.name,
         'startDate': ta.startDate ? ta.startDate.toISOString() : null,
         'endDate': ta.endDate ? ta.endDate.toISOString() : null,
         'content': ta.content,
-        //'requiredResponseCount': ta.requiredResponseCount.toString(),
-        // 'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate + 'T00:00:00.000Z' : null, // TODO NEED FIX!!! убрать время и этот костыль!
-        'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate.toISOString() : null, // TODO NEED FIX!!! убрать время и этот костыль!
+        // 'requiredResponseCount': ta.requiredResponseCount.toString(),
+        'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate.toISOString() : null,
         'cityId': ta.cityId,
         'arenaId': ta.arenaId,
         'isCommercial': ta.isCommercial,
@@ -324,9 +323,9 @@ export class TournamentAnnouncementsService {
         'minBirthYear': 0, //ta.minBirthYear,//
         'maxBirthYear': 0, //ta.maxBirthYear, //
         'gender': ta.gender
-        //'closeCondition': ta.closeCondition ? ta.closeCondition : null //'ResponseCountAccomplished'
-      });*/
-      //if (ta.closeCondition !== null) { ( body['closeCondition'] = ta.closeCondition ); }
+        // 'closeCondition': ta.closeCondition ? ta.closeCondition : null //'ResponseCountAccomplished'
+      }); */
+      // if (ta.closeCondition !== null) { ( body['closeCondition'] = ta.closeCondition ); }
       console.log(body);
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
       if (currentUser && currentUser.token) {
@@ -341,16 +340,25 @@ export class TournamentAnnouncementsService {
 
   public updateTournamentAnnouncement(ta: TournamentAnnouncementViewItem): Observable<number> {
       console.log(ta);
-      let body = JSON.stringify({
+      let curTA = new TournamentAnnouncement(ta);
+      delete curTA['city'];
+      delete curTA['arena'];
+      delete curTA['coordinates'];
+      delete curTA['organization'];
+      delete curTA['teams'];
+      delete curTA['logo'];
+      delete curTA['tournamentId'];
+      delete curTA['createDate'];
+      curTA.cityId = ta.city ? ta.city.id : null;
+      curTA.arenaId = ta.arena ? ta.arena.id : null;
+      console.log('curTA',curTA);
+      /* let body = JSON.stringify({
         'name': ta.name,
-        /*'startDate': ta.startDate ? ta.startDate + 'T00:00:00.000Z' : null,
-        'endDate': ta.endDate ? ta.endDate + 'T00:00:00.000Z' : null,*/
         'startDate': ta.startDate ? ta.startDate.toISOString() : null,
         'endDate': ta.endDate ? ta.endDate.toISOString() : null,
         'content': ta.content,
         'requiredResponseCount': ta.requiredResponseCount.toString(),
-        // 'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate + 'T00:00:00.000Z' : null, // TODO NEED FIX!!! убрать время и этот костыль!
-        'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate.toISOString() : null, // TODO NEED FIX!!! убрать время и этот костыль!
+        'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate.toISOString() : null,
         'cityId': ta.city ? ta.city.id : null,
         'arena': ta.arena ? ta.arena.id : null,
         'isCommercial': ta.isCommercial,
@@ -360,9 +368,11 @@ export class TournamentAnnouncementsService {
         'minBirthYear': 0, //ta.minBirthYear,//
         'maxBirthYear': 0, //ta.maxBirthYear, //
         'gender': ta.gender
-        // 'closeCondition': ta.closeCondition ? ta.closeCondition : null //'ResponseCountAccomplished'
+      }); */
+
+      const body = JSON.stringify(curTA, (key, value) => {
+        if (value !== null) { /* if (typeof value === Date) { return value.toISOString(); } */ return value; }
       });
-      if (ta.closeCondition) { ( body['closeCondition'] = ta.closeCondition ); }
       console.log(body);
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
       if (currentUser && currentUser.token) {
@@ -371,7 +381,7 @@ export class TournamentAnnouncementsService {
           'X-Requested-With': 'XMLHttpRequest',
           'Authorization': 'Bearer ' + currentUser.token
         });
-        return this.httpClient.put<number>(this.getMethodUrl('/tournament-announcements/'+ta.id), body, {headers: headers});
+        return this.httpClient.put<number>(this.getMethodUrl('/tournament-announcements/' + ta.id), body, {headers: headers});
       }
    // }
   }

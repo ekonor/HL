@@ -8,8 +8,9 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/merge';
-@Injectable()
-export class NgbDateNativeAdapter extends NgbDateAdapter<Date> {
+
+//@Injectable()
+/*export class NgbDateNativeAdapter extends NgbDateAdapter<Date> {
 
   fromModel(date: Date): NgbDateStruct {
     return (date && date.getFullYear) ? {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()} : null;
@@ -18,7 +19,7 @@ export class NgbDateNativeAdapter extends NgbDateAdapter<Date> {
   toModel(date: NgbDateStruct): Date {
     return date ? new Date(date.year, date.month - 1, date.day) : null;
   }
-}
+}*/
 
 @Component({
   selector: 'app-datepicker',
@@ -28,13 +29,18 @@ export class NgbDateNativeAdapter extends NgbDateAdapter<Date> {
   // NOTE: you will want to provide your main App Module
   // providers: [{provide: NgbDateAdapter, useClass: NgbDateNativeAdapter}]
 })
+@Injectable()
 export class DatepickerComponent implements OnInit {
   @Input() dt: Date;
   @Output() onChanged = new EventEmitter<Date>();
   dtModel: NgbDateStruct;
 
+  constructor() {
+  }
+
   ngOnInit() {
-    this.dtModel = (this.dt && this.dt.getFullYear) ? {year: this.dt.getFullYear(), month: this.dt.getMonth() + 1, day: this.dt.getDate()} : null;
+    this.dt = new Date(this.dt);
+    this.dtModel = (this.dt && this.dt.getFullYear()) ? {year: this.dt.getFullYear(), month: this.dt.getMonth() + 1, day: this.dt.getDate()} : null;
   }
 
   /* get today() {
