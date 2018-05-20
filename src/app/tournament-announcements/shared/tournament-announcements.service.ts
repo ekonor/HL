@@ -300,33 +300,9 @@ export class TournamentAnnouncementsService {
   }
 
   public addTournamentAnnouncement(ta: TournamentAnnouncement): Observable<number> {
-      console.log(ta);
-      /*console.log(JSON.stringify(ta, (key, value) => {
-        if (value !== null) { return value; }
-      }));*/
       const body = JSON.stringify(ta, (key, value) => {
-        if (value !== null) { /* if (typeof value === Date) { return value.toISOString(); } */ return value; }
+        if (value !== null) { return value; }
       });
-        /* JSON.stringify({
-        'name': ta.name,
-        'startDate': ta.startDate ? ta.startDate.toISOString() : null,
-        'endDate': ta.endDate ? ta.endDate.toISOString() : null,
-        'content': ta.content,
-        // 'requiredResponseCount': ta.requiredResponseCount.toString(),
-        'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate.toISOString() : null,
-        'cityId': ta.cityId,
-        'arenaId': ta.arenaId,
-        'isCommercial': ta.isCommercial,
-        'cost': ta.isCommercial ? ( ta.cost ? ta.cost : null ) : null,
-        'costType': ta.isCommercial ? ta.costType : null,
-        'ageGroup': ta.ageGroup,
-        'minBirthYear': 0, //ta.minBirthYear,//
-        'maxBirthYear': 0, //ta.maxBirthYear, //
-        'gender': ta.gender
-        // 'closeCondition': ta.closeCondition ? ta.closeCondition : null //'ResponseCountAccomplished'
-      }); */
-      // if (ta.closeCondition !== null) { ( body['closeCondition'] = ta.closeCondition ); }
-      console.log(body);
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
       if (currentUser && currentUser.token) {
         const headers = new HttpHeaders({
@@ -339,8 +315,8 @@ export class TournamentAnnouncementsService {
   }
 
   public updateTournamentAnnouncement(ta: TournamentAnnouncementViewItem): Observable<number> {
-      console.log(ta);
       let curTA = new TournamentAnnouncement(ta);
+      // NEED FIX - change object to new type in the component before sending to this service
       delete curTA['city'];
       delete curTA['arena'];
       delete curTA['coordinates'];
@@ -351,29 +327,11 @@ export class TournamentAnnouncementsService {
       delete curTA['createDate'];
       curTA.cityId = ta.city ? ta.city.id : null;
       curTA.arenaId = ta.arena ? ta.arena.id : null;
-      console.log('curTA',curTA);
-      /* let body = JSON.stringify({
-        'name': ta.name,
-        'startDate': ta.startDate ? ta.startDate.toISOString() : null,
-        'endDate': ta.endDate ? ta.endDate.toISOString() : null,
-        'content': ta.content,
-        'requiredResponseCount': ta.requiredResponseCount.toString(),
-        'endRegistrationDate': ta.endRegistrationDate ? ta.endRegistrationDate.toISOString() : null,
-        'cityId': ta.city ? ta.city.id : null,
-        'arena': ta.arena ? ta.arena.id : null,
-        'isCommercial': ta.isCommercial,
-        'cost': ta.isCommercial ? ( ta.cost ? ta.cost : null ) : null,
-        'costType': ta.isCommercial ? ta.costType : null,
-        'ageGroup': ta.ageGroup,
-        'minBirthYear': 0, //ta.minBirthYear,//
-        'maxBirthYear': 0, //ta.maxBirthYear, //
-        'gender': ta.gender
-      }); */
 
       const body = JSON.stringify(curTA, (key, value) => {
-        if (value !== null) { /* if (typeof value === Date) { return value.toISOString(); } */ return value; }
+        if (value !== null) { return value; }
       });
-      console.log(body);
+
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
       if (currentUser && currentUser.token) {
         const headers = new HttpHeaders({
@@ -383,7 +341,6 @@ export class TournamentAnnouncementsService {
         });
         return this.httpClient.put<number>(this.getMethodUrl('/tournament-announcements/' + ta.id), body, {headers: headers});
       }
-   // }
   }
 /* Удаление анонса */
   public deleteTournamentAnnouncement(id: number): Observable<void> {
@@ -423,7 +380,7 @@ export class TournamentAnnouncementsService {
   }
 */
  // TODO NEED FIX - убрать костыль!!!
-   public getYYYYMMDD(dt_value: Date): string {
+ /*  public getYYYYMMDD(dt_value: Date): string {
     const dt = new Date(dt_value);
     const mm = dt.getMonth() + 1; // getMonth() is zero-based
     const dd = dt.getDate();
@@ -431,5 +388,5 @@ export class TournamentAnnouncementsService {
       (mm > 9 ? '' : '0') + mm,
       (dd > 9 ? '' : '0') + dd
     ].join('-');
-  }
+  } */
 }
