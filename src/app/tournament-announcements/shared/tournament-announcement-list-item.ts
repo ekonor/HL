@@ -10,7 +10,7 @@ export class TournamentAnnouncementListItem {
   organization?: Organization; // Организатор турнира
   tournamentId: number;
   cityName?: string; // city: City; // Город проведения
-  linkName?: string; // ?
+  linkName: string; // ?
   arena?: Arena; // Арена
   startDate?: Date; // Дата начала турнира
   endDate?: Date; // Дата окончания турнира

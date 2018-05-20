@@ -107,8 +107,8 @@ export class TournamentAnnouncementViewComponent {
     this.router.navigate([ 'tournament-announcements/edit', tournamentAnnouncement.id ]);
   }
 
-  public getCloseIconClass(): string {
-    return this.service.getCloseIconClass();
+  public getFinishIconClass(): string {
+    return this.service.getFinishIconClass();
   }
 
   public getCancelIconClass(): string {
@@ -166,9 +166,9 @@ export class TournamentAnnouncementViewComponent {
     }
   }
 
-  public closeTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementViewItem) {
+  public finishTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementViewItem) {
     if (confirm('Вы действительно хотите завершить прием заявок?')) {
-      this.service.closeTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
+      this.service.finishTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
         data => {
         },
         error => {

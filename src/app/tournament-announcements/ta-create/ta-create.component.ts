@@ -174,7 +174,7 @@ export class TACreateComponent implements OnInit {
     }*/
   }
 
-  private setDt() {
+  /*private setDt() {
     if (this.ta != null) {
       if (this.ta.startDate) {
         this.startDate = this.service.getYYYYMMDD(this.ta.startDate);
@@ -186,7 +186,7 @@ export class TACreateComponent implements OnInit {
         this.endRegistrationDate = this.service.getYYYYMMDD(this.ta.endRegistrationDate);
       }
     }
-  }
+  }*/
 
   private getDt() {
     if (this.ta != null) {

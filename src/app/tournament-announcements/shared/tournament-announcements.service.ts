@@ -126,7 +126,7 @@ export class TournamentAnnouncementsService {
     return tournamentAnnouncement.gender === 'Female' ? 'fa fa-female' : 'fa fa-male';
   }
 // TODO вынести в общий класс
-  public getCloseIconClass(): string {
+  public getFinishIconClass(): string {
     return 'fa fa-hand-stop-o';
   }
 
@@ -208,15 +208,15 @@ export class TournamentAnnouncementsService {
         break;
       }
       case 'Canceled': {
-        stateTitle = 'Прием заявок завершен';
-        break;
-      }
-      case 'Deleted': {
         stateTitle = 'Турнир отменен';
         break;
       }
+      case 'Deleted': {
+        stateTitle = 'Турнир удален';
+        break;
+      }
       case 'Finished': {
-        stateTitle = 'Турнир завершен';
+        stateTitle = 'Прием заявок завершен';
         break;
       }
       default: {
@@ -259,10 +259,11 @@ export class TournamentAnnouncementsService {
       }
   }
 
+/* Отменить турнир */
   public cancelTournamentAnnouncement(id: number): Observable<number> {
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
       if (currentUser && currentUser.token) {
-        const body = JSON.stringify({'state': 'Deleted'});
+        const body = JSON.stringify({'state': 'Canceled'});
         const headers = new HttpHeaders({
           'Content-Type': 'application/json; charset=utf-8',
           'X-Requested-With': 'XMLHttpRequest',
@@ -284,11 +285,11 @@ export class TournamentAnnouncementsService {
       return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/' + id + '/moderate'), body, {headers: headers});
     }
   }
-
-  public closeTournamentAnnouncement(id: number): Observable<number> {
+/* Завершить прием заявок */
+  public finishTournamentAnnouncement(id: number): Observable<number> {
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
       if (currentUser && currentUser.token) {
-        const body = JSON.stringify({'state': 'Canceled'});
+        const body = JSON.stringify({'state': 'Finished'});
         const headers = new HttpHeaders({
           'Content-Type': 'application/json; charset=utf-8',
           'X-Requested-With': 'XMLHttpRequest',
@@ -297,33 +298,6 @@ export class TournamentAnnouncementsService {
         return this.httpClient.post<number>(this.getMethodUrl('/tournament-announcements/' + id + '/close'), body, {headers: headers});
       }
   }
-
-  /*public updateQuickTournamentAnnouncement(id: number, ta: TournamentAnnouncementListItem): Observable<TournamentAnnouncementListItem> {
-    console.log(arena);
-    const body = JSON.stringify({
-      'name': arena.name,
-      'fullName': (arena.fullName ? arena.fullName : arena.name),
-      'cityId': arena.city.id,
-      'arenaTypeId': arena.arenaTypeId,
-      'startYear': arena.startYear,
-      'address': arena.address,
-      'email': arena.email,
-      'webSite': arena.webSite,
-      'contacts': arena.contacts,
-      'capacity': arena.capacity,
-      'about': arena.about
-    });
-    console.log(body);
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser && currentUser.token) {
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json; charset=utf-8',
-        'X-Requested-With': 'XMLHttpRequest',
-        'Authorization': 'Bearer ' + currentUser.token
-      });
-      return this.httpClient.put<ArenaViewItem>(this.getMethodUrl('/arenas/' + id), body, { headers: headers });
-    }
-  }*/
 
   public addTournamentAnnouncement(ta: TournamentAnnouncement): Observable<number> {
       console.log(ta);
@@ -401,7 +375,7 @@ export class TournamentAnnouncementsService {
       }
    // }
   }
-
+/* Удаление анонса */
   public deleteTournamentAnnouncement(id: number): Observable<void> {
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
       if (currentUser && currentUser.token) {
@@ -439,7 +413,7 @@ export class TournamentAnnouncementsService {
   }
 */
  // TODO NEED FIX - убрать костыль!!!
-  public getYYYYMMDD(dt_value: Date): string {
+   public getYYYYMMDD(dt_value: Date): string {
     const dt = new Date(dt_value);
     const mm = dt.getMonth() + 1; // getMonth() is zero-based
     const dd = dt.getDate();

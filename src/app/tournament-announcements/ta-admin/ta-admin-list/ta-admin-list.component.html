@@ -158,11 +158,11 @@
           </a>
           <a *ngIf="tournamentAnnouncement.state == 'ApprovedByModerator'" class="visible-btn"
              title="Завершить прием заявок"
-             (click)="closeTournamentAnnouncement(tournamentAnnouncement)"
+             (click)="finishTournamentAnnouncement(tournamentAnnouncement)"
              [hasPermission]="['tournamentadministrator']"
              onAuthorizedPermission="show"
              onUnauthorizedPermission="hide">
-            <i [class]="getCloseIconClass()"></i>
+            <i [class]="getFinishIconClass()"></i>
           </a>
           <a *ngIf="tournamentAnnouncement.state == 'ApprovedByModerator'" class="visible-btn"
              title="Отменить турнир"

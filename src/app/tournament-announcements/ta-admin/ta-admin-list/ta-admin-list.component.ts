@@ -92,6 +92,7 @@ export class TAAdminListComponent implements OnInit {
 
   public cancelTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementListItem) {
     if (confirm('Вы действительно хотите отменить турнир?')) {
+      const id = tournamentAnnouncement.id;
       this.service.cancelTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
         data => {
         },
@@ -102,14 +103,15 @@ export class TAAdminListComponent implements OnInit {
         },
         () => {
           alert('Турнир успешно отменен');
+          this.onChanged.emit(id);
         });
     }
   }
 
-  public closeTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementListItem) {
+  public finishTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementListItem) {
     if (confirm('Вы действительно хотите завершить прием заявок?')) {
       const id = tournamentAnnouncement.id;
-      this.service.closeTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
+      this.service.finishTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
         data => {
           //this.router.navigate(['/tournament-announcements']);
         },
@@ -168,8 +170,8 @@ export class TAAdminListComponent implements OnInit {
     return this.service.getTournamentAnnouncementLogo(tournamentAnnouncement);
   }
 
-  public getCloseIconClass(): string {
-    return this.service.getCloseIconClass();
+  public getFinishIconClass(): string {
+    return this.service.getFinishIconClass();
   }
 
   public getCancelIconClass(): string {
