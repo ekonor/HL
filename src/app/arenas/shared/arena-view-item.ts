@@ -1,3 +1,5 @@
+/* Арена для просмотра, редактирования и создания на отдельной странице */
+
 import { Coordinates } from 'app/core/geo/coordinates';
 import { City } from 'app/core/geo/city';
 

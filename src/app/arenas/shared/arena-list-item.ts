@@ -1,3 +1,5 @@
+/* Арена в общем списке или select-е */
+
 export class ArenaListItem {
   id: number;
   name: string;

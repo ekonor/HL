@@ -88,12 +88,12 @@ export class TournamentAnnouncementViewComponent {
     return this.service.getNoData();
   }
 
-  public getArenaLogo(arena: Arena): string {
+  /* public getArenaLogo(arena: Arena): string {
     if (arena) {
       return this.arenaService.getArenaLogo(arena);
     }
     return '';
-  }
+  } */
 
   // TODO вынести отдельный сервис для организаций (когда буду делать страницу для организации)
   public getOrganizationLogo(organization: Organization): string {

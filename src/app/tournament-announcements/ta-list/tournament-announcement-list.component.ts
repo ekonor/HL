@@ -64,9 +64,9 @@ export class TournamentAnnouncementListComponent implements OnInit {
     return this.service.getNoData();
   }
 
-  public getArenaLogo(arena: Arena): string {
+  /* public getArenaLogo(arena: Arena): string {
     return this.arenaService.getArenaLogo(arena);
-  }
+  }*/
 
   // TODO вынести отдельный сервис для организаций (когда буду делать страницу для организации)
   public getOrganizationLogo(/*organization: Organization*/ tournamentAnnouncement: TournamentAnnouncementListItem): string {

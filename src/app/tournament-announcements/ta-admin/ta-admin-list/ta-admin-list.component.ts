@@ -150,12 +150,12 @@ export class TAAdminListComponent implements OnInit {
     return this.service.getNoData();
   }
 
-  public getArenaLogo(arena: Arena): string {
+  /*public getArenaLogo(arena: Arena): string {
     if (arena) {
       return this.arenaService.getArenaLogo(arena);
     }
     return '';
-  }
+  }*/
 
   public getStateClass(tournamentAnnouncement: TournamentAnnouncementListItem): string {
     return this.service.getStateClass(tournamentAnnouncement);

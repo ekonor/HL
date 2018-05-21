@@ -35,30 +35,9 @@
             </p-->
             <div class="row block-with-logo">
               <div class="col-md-6">
-                <p>
-                  Арена:
-                </p>
-                <p>
-                  <a  *ngIf="tournamentAnnouncement.arena" [routerLink]="['/arena',tournamentAnnouncement.arena.id]" routerLinkActive="active">
-                    {{tournamentAnnouncement.arena.name}}
-                  </a>
-                </p>
-                <div class="logo-img-wrapper" >
-                  <div class="logo-img-bg-wrapper" >
-                  <img class="logo-img-bg" *ngIf="tournamentAnnouncement && tournamentAnnouncement.arena"
-                       [src]="getArenaLogo(tournamentAnnouncement.arena)"
-                       alt="{{tournamentAnnouncement.arena.name}}"
-                       onerror = "this.style.display = 'none'">
-                  </div>
-                  <a *ngIf="tournamentAnnouncement && tournamentAnnouncement.arena" [routerLink]="['/arena',tournamentAnnouncement.arena.id]" routerLinkActive="active">
-                  <img class="logo-img-main"
-                       [src]="getArenaLogo(tournamentAnnouncement.arena)"
-                       alt="{{tournamentAnnouncement.arena.name}}"
-                       onerror = "this.style.display = 'none'" >
-                  </a>
-                </div>
+                <p>Арена:</p>
+                <arena-pic *ngIf="tournamentAnnouncement.arena" [arena]="tournamentAnnouncement.arena"></arena-pic>
               </div>
-
               <div class="col-md-6">
                 <p>
                   Организатор:

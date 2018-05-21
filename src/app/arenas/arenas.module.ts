@@ -18,7 +18,8 @@ import { ArenaFilterComponent } from 'app/arenas/arena-filter/arena-filter.compo
 import { ArenaService } from 'app/arenas/shared/arena.service';
 import { ArenaRoutingModule } from 'app/arenas/arenas-routing.module';
 import { SharedModule } from 'app/shared/shared.module';
-import {ArenaSelectComponent} from 'app/arenas/arena-select/arena-select.component';
+import { ArenaSelectComponent } from 'app/arenas/arena-select/arena-select.component';
+import { ArenaPicComponent } from 'app/arenas/arena-pic/arena-pic.component';
 
 @NgModule({
       declarations: [
@@ -29,7 +30,8 @@ import {ArenaSelectComponent} from 'app/arenas/arena-select/arena-select.compone
         ArenaCreateComponent,
         ArenaLogoComponent,
         ArenaFilterComponent,
-        ArenaSelectComponent
+        ArenaSelectComponent,
+        ArenaPicComponent
       ],
       imports: [
         BrowserModule,
@@ -44,7 +46,8 @@ import {ArenaSelectComponent} from 'app/arenas/arena-select/arena-select.compone
       ],
       exports: [
         ArenaFilterComponent,
-        ArenaSelectComponent
+        ArenaSelectComponent,
+        ArenaPicComponent
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       providers: [
