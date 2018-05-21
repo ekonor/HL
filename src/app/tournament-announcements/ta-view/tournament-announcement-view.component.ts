@@ -104,7 +104,7 @@ export class TournamentAnnouncementViewComponent {
   }
 
   public editTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementViewItem): void {
-    this.router.navigate([ 'tournament-announcements/edit', tournamentAnnouncement.id ]);
+    this.router.navigate([ 'tournament-announcement/edit', tournamentAnnouncement.id ]);
   }
 
   public getFinishIconClass(): string {

@@ -36,7 +36,7 @@ export class TAAdminListComponent implements OnInit {
   }
 
   public editTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementListItem): void {
-    this.router.navigate([ 'tournament-announcements/edit', tournamentAnnouncement.id ]);
+    this.router.navigate([ 'tournament-announcement/edit', tournamentAnnouncement.id ]);
   }
 
   public addTournamentAnnouncement(): void {

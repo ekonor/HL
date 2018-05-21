@@ -357,7 +357,7 @@ export class TournamentAnnouncementsService {
       }
   }
 
- /* public deleteLogo(id: number): Observable<void> {
+ public deleteLogo(id: number): Observable<void> {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
       const headers = new HttpHeaders({
@@ -365,7 +365,7 @@ export class TournamentAnnouncementsService {
         'X-Requested-With': 'XMLHttpRequest',
         'Authorization': 'Bearer ' + currentUser.token
       });
-      return this.httpClient.delete<void>(this.getMethodUrl('/arenas/' + id + '/logo'), { headers: headers });
+      return this.httpClient.delete<void>(this.getMethodUrl('/tournament-announcements/' + id + '/logo'), { headers: headers });
     }
   }
 
@@ -375,10 +375,10 @@ export class TournamentAnnouncementsService {
       const headers = new HttpHeaders({
         'Authorization': 'Bearer ' + currentUser.token
       });
-      return this.httpClient.post<string>(this.getMethodUrl('/arenas/' + id + '/logo'), image, { headers: headers });
+      return this.httpClient.post<string>(this.getMethodUrl('/tournament-announcements/' + id + '/logo'), image, { headers: headers });
     }
   }
-*/
+
  // TODO NEED FIX - убрать костыль!!!
  /*  public getYYYYMMDD(dt_value: Date): string {
     const dt = new Date(dt_value);

@@ -53,6 +53,8 @@ export class TAEditComponent implements OnInit {
   city: City;
   arena: ArenaListItem;
 
+  files: any;
+
   startDate: string;
   endDate: string;
   endRegistrationDate: string;
@@ -76,6 +78,12 @@ export class TAEditComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  public addLogo(event) {
+    const target = event.target || event.srcElement;
+    this.files = target.files;
+    // console.log(this.files);
   }
 
   public deleteTA() {
@@ -172,6 +180,36 @@ export class TAEditComponent implements OnInit {
     }
   }
 
+  public editLogo(){
+    this.router.navigate([ "tournament-announcement", "logo", this.ta.id ]);
+  }
+
+  public updateLogo() {
+    if (this.files) {
+      this.dataIsLoading = true;
+      const formData = new FormData();
+      formData.append('image', this.files[0]);
+      if (this.arena.logo != null) {
+        this.service.deleteLogo(this.id).subscribe(
+          data => {
+          },
+          error => {
+            this.alertService.error(error);
+            this.dataIsLoading = false;
+          });
+      }
+      this.service.addLogo(this.id, formData).subscribe(
+        data => {
+        },
+        error => {
+          this.alertService.error(error);
+          this.dataIsLoading = false;
+          alert('Не удалось обновить логотип');
+        });
+    }
+    this.dataIsLoading = false;
+  }
+
   public sendOnModeration() {
     this.service.sendOnModeration(this.ta.id).subscribe(
       data => {
@@ -212,32 +250,8 @@ export class TAEditComponent implements OnInit {
       );
   }
 
-  private updateTA(): boolean {
-    this.dataIsLoading = true;
-    //this.getDt();
-    // ta.state = 'Draft';
-    if (!this.ta.isCommercial) {
-      this.ta.cost = null;
-      this.ta.costType = null;
-    }
-    this.service.updateTournamentAnnouncement(this.ta).subscribe(
-      data => {
-      },
-      error => {
-        this.alertService.error(error);
-        this.alertService.error('Не удалось обновить анонс турнира');
-        alert('Не удалось обновить анонс турнира');
-        this.dataIsLoading = false;
-        return false;
-      },
-      () => {
-        alert('Анонс успешно сохранен');
-        this.dataIsLoading = false;
-        return true;
-        //this.router.navigate(['/profile']);
-      }
-    );
-    return false;
+  public getTournamentAnnouncementLogo(ta: TournamentAnnouncementViewItem): string {
+    return this.service.getTournamentAnnouncementLogo(ta);
   }
 
   /*private setDt() {
@@ -278,5 +292,34 @@ export class TAEditComponent implements OnInit {
 
   private onChangedEndRegDt(dt: Date) {
     this.ta.endRegistrationDate = dt;
+  }
+
+  private updateTA(): boolean {
+    this.dataIsLoading = true;
+    //this.getDt();
+    // ta.state = 'Draft';
+    if (!this.ta.isCommercial) {
+      this.ta.cost = null;
+      this.ta.costType = null;
+    }
+    this.service.updateTournamentAnnouncement(this.ta).subscribe(
+      data => {
+        this.updateLogo();
+      },
+      error => {
+        this.alertService.error(error);
+        this.alertService.error('Не удалось обновить анонс турнира');
+        alert('Не удалось обновить анонс турнира');
+        this.dataIsLoading = false;
+        return false;
+      },
+      () => {
+        alert('Анонс успешно сохранен');
+        this.dataIsLoading = false;
+        return true;
+        //this.router.navigate(['/profile']);
+      }
+    );
+    return false;
   }
 }

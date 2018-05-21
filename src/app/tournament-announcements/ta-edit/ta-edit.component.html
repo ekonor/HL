@@ -1,81 +1,89 @@
 <loader [hidden]="!dataIsLoading"></loader>
-<div class="ta-edit col-md-6 col-md-offset-3" *ngIf="ta">
-  <h2>Редактирование анонса турнира</h2>
-  <form #f="ngForm">
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !taname.valid }">
-      <label for="taname">Название анонса</label>
-      <input type="text" class="form-control" name="taname" [(ngModel)]="ta.name" (ngModelChange)="ta.name = $event" #taname="ngModel" id="taname"/>
-      <div *ngIf="f.submitted && taname != null && !taname.valid" class="help-block">taname is required</div>
-    </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && city==null}">
-      <app-city-filter [city]="city" (onChanged)="setCity($event)"></app-city-filter>
-      <div *ngIf="f.submitted && city == null" class="help-block">Укажите город</div>
-    </div>
-    <div class="form-group" *ngIf="city" [ngClass]="{ 'has-error': f.submitted && city==null}">
-      <arena-select  [cityId]="city.id" [arena]="arena" (onChanged)="setArena($event)"></arena-select>
-      <div *ngIf="f.submitted && arena == null" class="help-block">Укажите арену</div>
-    </div>
-    <div class="form-group">
-      <label>Дата проведения, c</label>
-      <app-datepicker [dt]="ta.startDate" (onChanged)="onChangedStartDt($event)"></app-datepicker>
-    </div>
-    <div class="form-group">
-      <label>Дата проведения, до</label>
-      <app-datepicker [dt]="ta.endDate" (onChanged)="onChangedEndDt($event)"></app-datepicker>
-    </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !ta.requiredResponseCount.valid }">
-      <label for="requiredResponseCount">Максимальное количество участников</label>
-      <input type="number" min="0" max="2000" step="1" class="form-control" name="requiredResponseCount" [(ngModel)]="ta.requiredResponseCount" (ngModelChange)="ta.requiredResponseCount = $event" #requiredResponseCount="ngModel" ngModel number="true" id="requiredResponseCount"/>
-      <div *ngIf="f.submitted && requiredResponseCount != null && !requiredResponseCount.valid" class="help-block">requiredResponseCount is invalid</div>
-    </div>
-    <div class="form-group">
-      <label for="ageGroup">Возрастная группа</label>
-      <select class="form-group" [(ngModel)]="ta.ageGroup" name="ageGroup" class="form-control" #ageGroup="ngModel" id="ageGroup" (ngModelChange)="ta.ageGroup = $event">
-        <option *ngFor="let ageType of ageTypes"  [ngValue]="ageType.value" >{{ageType.name}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="ageGroup">Пол участников</label>
-      <select class="form-group" [(ngModel)]="ta.gender" name="gender" class="form-control" #gender="ngModel" id="gender" (ngModelChange)="ta.gender = $event">
-        <option *ngFor="let genderType of genderTypes"  [ngValue]="genderType.value" >{{genderType.name}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="isCommercial">Коммерческий?</label>
-      <select class="form-group" [(ngModel)]="ta.isCommercial" name="isCommercial" class="form-control" #isCommercial="ngModel" id="isCommercial" (ngModelChange)="ta.isCommercial = $event">
-        <option *ngFor="let isCommercialType of isCommercialTypes"  [ngValue]="isCommercialType.value" >{{isCommercialType.name}}</option>
-      </select>
-    </div>
-    <div *ngIf="ta.isCommercial" class="form-group">
-      <label for="costType">Тип оплаты</label>
-      <select class="form-group" [(ngModel)]="ta.costType" name="costType" class="form-control" #costType="ngModel" id="costType" (ngModelChange)="ta.costType = $event">
-        <option *ngFor="let costType of costTypes"  [ngValue]="costType.value" >{{costType.name}}</option>
-      </select>
-    </div>
-    <div *ngIf="ta.isCommercial" class="form-group" [ngClass]="{ 'has-error': f.submitted && ta.cost && !ta.cost.valid }">
-      <label for="cost">Стоимость участия</label>
-      <input type="number" min="0" max="2000" step="1" class="form-control" name="cost" [(ngModel)]="ta.cost" (ngModelChange)="ta.cost = $event" #cost="ngModel" ngModel number="true" id="cost"/>
-      <div *ngIf="f.submitted && cost != null && !cost.valid" class="help-block">cost is invalid</div>
-    </div>
-    <div class="form-group">
-      <label>Окончание регистрации</label>
-      <app-datepicker [dt]="ta.endRegistrationDate" (onChanged)="onChangedEndRegDt($event)"></app-datepicker>
-    </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && content && !content.valid }">
-      <label for="content">Текст анонса</label>
-      <app-ngx-editor [placeholder]="'Текст анонса'" [height]="200" class="form-control" name="about" [(ngModel)]="ta.content" (ngModelChange)="ta.content = $event" #about="ngModel" id="content"></app-ngx-editor>
-      <div *ngIf="f.submitted && content != null && !content.valid" class="help-block">content is invalid</div>
+<div *ngIf="ta" class="ta-edit row">
+  <div class="ta-edit col-md-6 col-md-offset-3" *ngIf="ta">
+    <h2>Редактирование анонса турнира</h2>
+    <form #f="ngForm">
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !taname.valid }">
+        <label for="taname">Название анонса</label>
+        <input type="text" class="form-control" name="taname" [(ngModel)]="ta.name" (ngModelChange)="ta.name = $event" #taname="ngModel" id="taname"/>
+        <div *ngIf="f.submitted && taname != null && !taname.valid" class="help-block">taname is required</div>
       </div>
-    <div class="form-group">
-      <input [(ngModel)]="deleteFlag" (change)="setDeleteFlag()" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked /><span class="checkbox-title">Удалить?</span>
-    </div>
-    <div class="form-group">
-      <button class="btn btn-primary" (click)="updateTournamentAnnouncement()" [disabled]="dataIsLoading">Сохранить как черновик</button>
-      <button class="btn btn-danger" (click)="saveAndSendOnModeration()" [disabled]="dataIsLoading">Сохранить и отправить на модерацию</button>
-      <button class="btn btn-danger" (click)="deleteTA()" [disabled]="dataIsLoading || !deleteFlag">Удалить</button>
-      <button class="btn btn-primary" (click)="viewList()" [disabled]="dataIsLoading">Отменить изменения и вернуться к списку</button>
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && city==null}">
+        <app-city-filter [city]="city" (onChanged)="setCity($event)"></app-city-filter>
+        <div *ngIf="f.submitted && city == null" class="help-block">Укажите город</div>
+      </div>
+      <div class="form-group" *ngIf="city" [ngClass]="{ 'has-error': f.submitted && city==null}">
+        <arena-select  [cityId]="city.id" [arena]="arena" (onChanged)="setArena($event)"></arena-select>
+        <div *ngIf="f.submitted && arena == null" class="help-block">Укажите арену</div>
+      </div>
+      <div class="form-group">
+        <label>Дата проведения, c</label>
+        <app-datepicker [dt]="ta.startDate" (onChanged)="onChangedStartDt($event)"></app-datepicker>
+      </div>
+      <div class="form-group">
+        <label>Дата проведения, до</label>
+        <app-datepicker [dt]="ta.endDate" (onChanged)="onChangedEndDt($event)"></app-datepicker>
+      </div>
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !ta.requiredResponseCount.valid }">
+        <label for="requiredResponseCount">Максимальное количество участников</label>
+        <input type="number" min="0" max="2000" step="1" class="form-control" name="requiredResponseCount" [(ngModel)]="ta.requiredResponseCount" (ngModelChange)="ta.requiredResponseCount = $event" #requiredResponseCount="ngModel" ngModel number="true" id="requiredResponseCount"/>
+        <div *ngIf="f.submitted && requiredResponseCount != null && !requiredResponseCount.valid" class="help-block">requiredResponseCount is invalid</div>
+      </div>
+      <div class="form-group">
+        <label for="ageGroup">Возрастная группа</label>
+        <select class="form-group" [(ngModel)]="ta.ageGroup" name="ageGroup" class="form-control" #ageGroup="ngModel" id="ageGroup" (ngModelChange)="ta.ageGroup = $event">
+          <option *ngFor="let ageType of ageTypes"  [ngValue]="ageType.value" >{{ageType.name}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="ageGroup">Пол участников</label>
+        <select class="form-group" [(ngModel)]="ta.gender" name="gender" class="form-control" #gender="ngModel" id="gender" (ngModelChange)="ta.gender = $event">
+          <option *ngFor="let genderType of genderTypes"  [ngValue]="genderType.value" >{{genderType.name}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="isCommercial">Коммерческий?</label>
+        <select class="form-group" [(ngModel)]="ta.isCommercial" name="isCommercial" class="form-control" #isCommercial="ngModel" id="isCommercial" (ngModelChange)="ta.isCommercial = $event">
+          <option *ngFor="let isCommercialType of isCommercialTypes"  [ngValue]="isCommercialType.value" >{{isCommercialType.name}}</option>
+        </select>
+      </div>
+      <div *ngIf="ta.isCommercial" class="form-group">
+        <label for="costType">Тип оплаты</label>
+        <select class="form-group" [(ngModel)]="ta.costType" name="costType" class="form-control" #costType="ngModel" id="costType" (ngModelChange)="ta.costType = $event">
+          <option *ngFor="let costType of costTypes"  [ngValue]="costType.value" >{{costType.name}}</option>
+        </select>
+      </div>
+      <div *ngIf="ta.isCommercial" class="form-group" [ngClass]="{ 'has-error': f.submitted && ta.cost && !ta.cost.valid }">
+        <label for="cost">Стоимость участия</label>
+        <input type="number" min="0" max="2000" step="1" class="form-control" name="cost" [(ngModel)]="ta.cost" (ngModelChange)="ta.cost = $event" #cost="ngModel" ngModel number="true" id="cost"/>
+        <div *ngIf="f.submitted && cost != null && !cost.valid" class="help-block">cost is invalid</div>
+      </div>
+      <div class="form-group">
+        <label>Окончание регистрации</label>
+        <app-datepicker [dt]="ta.endRegistrationDate" (onChanged)="onChangedEndRegDt($event)"></app-datepicker>
+      </div>
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && content && !content.valid }">
+        <label for="content">Текст анонса</label>
+        <app-ngx-editor [placeholder]="'Текст анонса'" [height]="200" class="form-control" name="about" [(ngModel)]="ta.content" (ngModelChange)="ta.content = $event" #about="ngModel" id="content"></app-ngx-editor>
+        <div *ngIf="f.submitted && content != null && !content.valid" class="help-block">content is invalid</div>
+        </div>
+      <div class="form-group">
+        <input [(ngModel)]="deleteFlag" (change)="setDeleteFlag()" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked /><span class="checkbox-title">Удалить?</span>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" (click)="updateTournamentAnnouncement()" [disabled]="dataIsLoading">Сохранить как черновик</button>
+        <button class="btn btn-danger" (click)="saveAndSendOnModeration()" [disabled]="dataIsLoading">Сохранить и отправить на модерацию</button>
+        <button class="btn btn-danger" (click)="deleteTA()" [disabled]="dataIsLoading || !deleteFlag">Удалить</button>
+        <button class="btn btn-primary" (click)="viewList()" [disabled]="dataIsLoading">Отменить изменения и вернуться к списку</button>
 
-      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-    </div>
-  </form>
+        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+      </div>
+    </form>
+  </div>
+
+  <div class="col-md-6 col-md-offset-3">
+    <h2>Редактирование изображений</h2>
+    <img class="img-fluid rounded" [src]="getTournamentAnnouncementLogo(ta)" alt="">
+    <a class="btn-floating deep-orange waves-light waves-effect" title="Редактировать изображение" (click)="editLogo()"><i class="fa fa-pencil"></i></a>
+  </div>
 </div>

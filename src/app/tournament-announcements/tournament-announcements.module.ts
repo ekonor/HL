@@ -16,12 +16,13 @@ import { TournamentAnnouncementsService } from 'app/tournament-announcements/sha
 import { TournamentAnnouncementsRoutingModule } from 'app/tournament-announcements/tournament-announcements-routing.module';
 import { SharedModule } from 'app/shared/shared.module';
 
-
 import { TAAdminComponent} from 'app/tournament-announcements/ta-admin/ta-admin.component';
 import { TAAdminListComponent } from 'app/tournament-announcements/ta-admin/ta-admin-list/ta-admin-list.component';
 import { TAAdminFilterComponent } from 'app/tournament-announcements/ta-filter/ta-admin-filter/ta-admin-filter.component';
 import { TACreateComponent } from 'app/tournament-announcements/ta-create/ta-create.component';
 import { TAEditComponent } from 'app/tournament-announcements/ta-edit/ta-edit.component';
+import { TALogoComponent } from 'app/tournament-announcements/ta-logo/ta-logo.component';
+
 import { ArenaModule } from 'app/arenas/arenas.module';
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ArenaModule } from 'app/arenas/arenas.module';
         TAAdminComponent,
         TAAdminListComponent,
         TACreateComponent,
-        TAEditComponent
+        TAEditComponent,
+        TALogoComponent
       ],
       imports: [
         BrowserModule,
