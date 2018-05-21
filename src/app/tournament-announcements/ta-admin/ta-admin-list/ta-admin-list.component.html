@@ -93,7 +93,7 @@
       <td>{{tournamentAnnouncement.endDate | date :  "dd.MM.y"}}</td>
       <td>{{tournamentAnnouncement.cityName ? tournamentAnnouncement.cityName: ''}}</td>
       <td>
-          <arena-pic *ngIf="tournamentAnnouncement.arena" [arena]="tournamentAnnouncement.arena" []></arena-pic>
+          <arena-pic *ngIf="tournamentAnnouncement.arena" [arena]="tournamentAnnouncement.arena" [position]="'horizontal'"></arena-pic>
       </td>
       <td>
         <a *ngIf="tournamentAnnouncement && tournamentAnnouncement.arena" [routerLink]="['/arena',tournamentAnnouncement.arena.id]" routerLinkActive="active">

@@ -20,18 +20,18 @@
   </div>
 </div>
 
-<div class="arena-pic" *ngIf="position=='horizontal'">
+<div class="organization-pic" *ngIf="position=='horizontal'">
   <div class="logo-img-wrapper" >
     <div class="logo-img-bg-wrapper" >
       <img class="logo-img-bg"
-           *ngIf="arena" [src]="getArenaLogo(arena)"
-           alt="{{arena.name}}"
+           *ngIf="org" [src]="getOrganizationLogo(org)"
+           alt="{{org.name}}"
            onerror = "this.style.display = 'none'">
     </div>
-    <a *ngIf="arena" [routerLink]="['/arena',arena.id]" routerLinkActive="active">
+    <a *ngIf="org" [routerLink]="['/organization',org.id]" routerLinkActive="active">
       <img class="logo-img-main"
-           [src]="getArenaLogo(arena)"
-           alt="{{arena.name}}"
+           [src]="getOrganizationLogo(org)"
+           alt="{{org.name}}"
            onerror = "this.style.display = 'none'" >
     </a>
   </div>
