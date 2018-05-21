@@ -42,27 +42,8 @@
                 <p>
                   Организатор:
                 </p>
-                <p>
-                  <a  *ngIf="tournamentAnnouncement &&  tournamentAnnouncement.organization" [routerLink]="['/organization',tournamentAnnouncement.organization.id]" routerLinkActive="active">
-                    {{tournamentAnnouncement.organization.name}}
-                  </a>
-                </p>
-                <div class="logo-img-wrapper" >
-                  <div class="logo-img-bg-wrapper" >
-                  <img class="logo-img-bg" *ngIf="tournamentAnnouncement && tournamentAnnouncement.organization"
-                       [src]="getOrganizationLogo(tournamentAnnouncement.organization)"
-                       alt="{{tournamentAnnouncement.organization.name}}"
-                       onerror = "this.style.display = 'none'">
-                  </div>
-                  <a *ngIf="tournamentAnnouncement && tournamentAnnouncement.organization" [routerLink]="['/organization',tournamentAnnouncement.organization.id]" routerLinkActive="active">
-                  <img class="logo-img-main"
-                       [src]="getOrganizationLogo(tournamentAnnouncement.organization)"
-                       alt="{{tournamentAnnouncement.organization.name}}"
-                       onerror = "this.style.display = 'none'" >
-                  </a>
-                </div>
+                 <organization-pic *ngIf="tournamentAnnouncement.organization" [org]="tournamentAnnouncement.organization"></organization-pic>
               </div>
-
             </div>
             <p class="icon-wrap">
               <i class="fa fa-users"></i>

@@ -9,7 +9,7 @@
                  alt=""
                  onerror = "this.style.display = 'none'">
           </div>
-          <a [routerLink]="['/tournament-announcements',tournamentAnnouncement.id]" routerLinkActive="active">
+          <a [routerLink]="['/tournament-announcement',tournamentAnnouncement.id]" routerLinkActive="active">
             <img class="item-img-main"
                  [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)"
                  alt=""
@@ -41,27 +41,8 @@
                   <p>
                     Организатор:
                   </p>
-                  <p>
-                    <a [routerLink]="['/organization',tournamentAnnouncement.organization.id]" routerLinkActive="active">
-                      {{tournamentAnnouncement.organization.name}}
-                    </a>
-                  </p>
-                  <div class="logo-img-wrapper" >
-                    <div class="logo-img-bg-wrapper" >
-                    <img class="logo-img-bg"
-                         [src]="getOrganizationLogo(tournamentAnnouncement.organization)"
-                         alt="{{tournamentAnnouncement.organization.name}}"
-                         onerror = "this.style.display = 'none'">
-                    </div>
-                    <a [routerLink]="['/organization',tournamentAnnouncement.organization.id]" routerLinkActive="active">
-                    <img class="logo-img-main"
-                         [src]="getOrganizationLogo(tournamentAnnouncement)"
-                         alt="{{tournamentAnnouncement.organization.name}}"
-                         onerror = "this.style.display = 'none'" >
-                    </a>
-                  </div>
+                  <organization-pic *ngIf="tournamentAnnouncement.organization" [org]="tournamentAnnouncement.organization"></organization-pic>
                 </div>
-
               </div>
 
               <p class="icon-wrap">

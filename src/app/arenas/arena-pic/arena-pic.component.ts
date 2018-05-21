@@ -12,7 +12,6 @@ import { ArenaService } from 'app/arenas/shared/arena.service';
 @Component({
     selector: 'arena-pic',
     templateUrl: 'arena-pic.component.html'
-   //  styleUrls: ['arena-pic.component.scss']
 })
 
 @Injectable()

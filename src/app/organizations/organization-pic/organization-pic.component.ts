@@ -11,7 +11,6 @@ import { OrganizationService } from 'app/organizations/shared/organization.servi
 @Component({
     selector: 'organization-pic',
     templateUrl: 'organization-pic.component.html'
-    // styleUrls: ['organization-pic.component.scss']
 })
 
 @Injectable()
