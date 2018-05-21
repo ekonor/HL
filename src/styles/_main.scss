@@ -16,3 +16,44 @@ user-pic img {
   width: 35px;
   height: 35px;
 }
+
+/* Arena Pic, Organization Pic */
+.logo-img-main {
+  height: 50px;
+  max-width: 50px;
+  filter: none;
+  position: relative;
+}
+
+.logo-img-wrapper {
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  position: relative;
+  margin: 0 auto 5px auto;
+}
+
+.logo-img-bg-wrapper {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  text-align: center;
+  overflow: hidden;
+}
+
+.logo-img-bg {
+  position: absolute;
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+  background: transparent;
+  top: -50px;
+  left: -50px;
+  width: -moz-calc(100% + 100px);
+  width: -webkit-calc(100% + 100px);
+  width: -o-calc(100% + 100px);
+  width: calc(100% + 100px);
+}
+/* END OF Arena Pic, Organization Pic  */

@@ -10,7 +10,7 @@ import { ArenaService} from 'app/arenas/shared/arena.service';
 import { Arena} from 'app/arenas/shared/arena';
 import { Point } from 'app/shared/map/point';
 import { debounce } from 'rxjs/operator/debounce';
-import {Organization} from 'app/tournament-announcements/shared/organization';
+import {Organization} from 'app/organizations/shared/organization';
 
 @Component({
   moduleId: module.id,

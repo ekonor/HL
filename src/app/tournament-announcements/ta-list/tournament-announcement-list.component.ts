@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { TournamentAnnouncementsService } from 'app/tournament-announcements/shared/tournament-announcements.service';
 import { ListResponse } from 'app/shared/list/list-response';
 import { TournamentAnnouncementListItem } from 'app/tournament-announcements/shared/tournament-announcement-list-item';
-import {Organization} from 'app/tournament-announcements/shared/organization';
+import {Organization} from 'app/organizations/shared/organization';
 import { ArenaService} from 'app/arenas/shared/arena.service';
 import { Arena} from 'app/arenas/shared/arena';
 

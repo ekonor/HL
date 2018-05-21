@@ -10,15 +10,16 @@ import { ArenaListItem } from 'app/arenas/shared/arena-list-item';
 import { ArenaService } from 'app/arenas/shared/arena.service';
 
 @Component({
-    selector: "arena-pic",
-    templateUrl: "arena-pic.component.html",
-    styleUrls: ['arena-pic.component.scss']
+    selector: 'arena-pic',
+    templateUrl: 'arena-pic.component.html'
+   //  styleUrls: ['arena-pic.component.scss']
 })
 
 @Injectable()
 export class ArenaPicComponent {
     @Input() arena: ArenaListItem | ArenaViewItem | Arena;
     @Input() position: string;
+
     /* Первый вариант - вертикальный:
     * название арены и под ним лого;
     * второй (position=='horizontal') - горизонтальный:
@@ -30,7 +31,7 @@ export class ArenaPicComponent {
         private readonly arenaService: ArenaService ) {
     }
 
-    public openProfile(): void {
+    public viewArena(): void {
         this.router.navigate(['arena', this.arena.id]);
     }
 

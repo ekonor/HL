@@ -1,6 +1,6 @@
 //import { City } from 'app/core/geo/city';
 import { Arena } from 'app/arenas/shared/arena';
-import { Organization } from 'app/tournament-announcements/shared/organization';
+import { Organization } from 'app/organizations/shared/organization';
 
 export class TournamentAnnouncementListItem {
   id: number;

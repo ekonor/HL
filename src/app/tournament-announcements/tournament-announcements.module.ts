@@ -24,7 +24,7 @@ import { TAEditComponent } from 'app/tournament-announcements/ta-edit/ta-edit.co
 import { TALogoComponent } from 'app/tournament-announcements/ta-logo/ta-logo.component';
 
 import { ArenaModule } from 'app/arenas/arenas.module';
-
+import { OrganizationModule } from 'app/organizations/organizations.module';
 @NgModule({
       declarations: [
         TournamentAnnouncementsComponent,
@@ -49,7 +49,8 @@ import { ArenaModule } from 'app/arenas/arenas.module';
         NgbModule,
         CoreModule,
         MDBBootstrapModule,
-        ArenaModule
+        ArenaModule,
+        OrganizationModule
       ],
       providers: [
         TournamentAnnouncementsService
