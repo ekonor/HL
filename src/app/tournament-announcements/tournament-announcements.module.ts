@@ -22,6 +22,7 @@ import { TAAdminFilterComponent } from 'app/tournament-announcements/ta-filter/t
 import { TACreateComponent } from 'app/tournament-announcements/ta-create/ta-create.component';
 import { TAEditComponent } from 'app/tournament-announcements/ta-edit/ta-edit.component';
 import { TALogoComponent } from 'app/tournament-announcements/ta-logo/ta-logo.component';
+import { TAPicComponent } from 'app/tournament-announcements/ta-pic/ta-pic.component';
 
 import { ArenaModule } from 'app/arenas/arenas.module';
 import { OrganizationModule } from 'app/organizations/organizations.module';
@@ -36,7 +37,8 @@ import { OrganizationModule } from 'app/organizations/organizations.module';
         TAAdminListComponent,
         TACreateComponent,
         TAEditComponent,
-        TALogoComponent
+        TALogoComponent,
+        TAPicComponent
       ],
       imports: [
         BrowserModule,
@@ -52,9 +54,11 @@ import { OrganizationModule } from 'app/organizations/organizations.module';
         ArenaModule,
         OrganizationModule
       ],
+      exports: [
+        TAPicComponent
+      ],
       providers: [
         TournamentAnnouncementsService
-        // TAOrganizatorService
       ]
     })
     export class TournamentAnnouncementsModule { }

@@ -7,13 +7,13 @@
   <div class="logo-img-wrapper" >
     <div class="logo-img-bg-wrapper" >
       <img class="logo-img-bg"
-           [src]="getArenaLogo(arena)"
+           [src]="getArenaLogo()"
            alt="{{arena.name}}"
            onerror = "this.style.display = 'none'">
     </div>
     <a [routerLink]="['/arena',arena.id]" routerLinkActive="active">
       <img class="logo-img-main"
-           [src]="getArenaLogo(arena)"
+           [src]="getArenaLogo()"
            alt="{{arena.name}}"
            onerror = "this.style.display = 'none'" >
     </a>
@@ -24,13 +24,13 @@
   <div class="logo-img-wrapper" >
     <div class="logo-img-bg-wrapper" >
       <img class="logo-img-bg"
-           *ngIf="arena" [src]="getArenaLogo(arena)"
+           *ngIf="arena" [src]="getArenaLogo()"
            alt="{{arena.name}}"
            onerror = "this.style.display = 'none'">
     </div>
     <a *ngIf="arena" [routerLink]="['/arena',arena.id]" routerLinkActive="active">
       <img class="logo-img-main"
-           [src]="getArenaLogo(arena)"
+           [src]="getArenaLogo()"
            alt="{{arena.name}}"
            onerror = "this.style.display = 'none'" >
     </a>

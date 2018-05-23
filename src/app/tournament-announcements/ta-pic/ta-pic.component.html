@@ -1,0 +1,38 @@
+<div class="ta-pic" *ngIf=" ( position == null ) || ( position != 'horizontal' )" >
+  <p>
+    <a [routerLink]="['/tournament-announcement',ta.id]" routerLinkActive="active">
+      {{ta.name}}
+    </a>
+  </p>
+  <div class="logo-img-wrapper" >
+    <div class="logo-img-bg-wrapper" >
+      <img class="logo-img-bg"
+           [src]="getTournamentAnnouncementLogo(ta)"
+           alt="{{ta.name}}"
+           onerror = "this.style.display = 'none'">
+    </div>
+    <a [routerLink]="['/tournament-announcement',ta.id]" routerLinkActive="active">
+      <img class="logo-img-main"
+           [src]="getTournamentAnnouncementLogo(ta)"
+           alt="{{ta.name}}"
+           onerror = "this.style.display = 'none'" >
+    </a>
+  </div>
+</div>
+
+<div class="ta-pic" *ngIf="position=='horizontal'">
+  <div class="logo-img-wrapper" >
+    <div class="logo-img-bg-wrapper" >
+      <img class="logo-img-bg"
+           *ngIf="ta" [src]="getTournamentAnnouncementLogo(ta)"
+           alt="{{ta.name}}"
+           onerror = "this.style.display = 'none'">
+    </div>
+    <a *ngIf="ta" [routerLink]="['/tournament-announcement',ta.id]" routerLinkActive="active">
+      <img class="logo-img-main"
+           [src]="getTournamentAnnouncementLogo(ta)"
+           alt="{{ta.name}}"
+           onerror = "this.style.display = 'none'" >
+    </a>
+  </div>
+</div>

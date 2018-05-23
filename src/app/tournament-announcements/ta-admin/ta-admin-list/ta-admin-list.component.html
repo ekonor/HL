@@ -69,20 +69,7 @@
     <tr *ngFor="let tournamentAnnouncement of content" [class]="getStateClass(tournamentAnnouncement)" [title]="getStateTitle(tournamentAnnouncement)">
       <th class="td-small" scope="row">{{content?.indexOf(tournamentAnnouncement)+1}}</th>
       <td>
-        <div class="logo-img-wrapper" >
-          <div class="logo-img-bg-wrapper" >
-            <img class="logo-img-bg"
-                 [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)"
-                 alt="{{tournamentAnnouncement.name}}"
-                 onerror = "this.style.display = 'none'">
-          </div>
-          <a [routerLink]="['/tournament-announcement',tournamentAnnouncement.id]" routerLinkActive="active">
-            <img class="logo-img-main"
-                 [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)"
-                 alt="{{tournamentAnnouncement.name}}"
-                 onerror = "this.style.display = 'none'" >
-          </a>
-        </div>
+        <ta-pic *ngIf="tournamentAnnouncement" [ta]="tournamentAnnouncement" [position]="'horizontal'"></ta-pic>
       </td>
       <td>
         <a *ngIf="tournamentAnnouncement" [routerLink]="['/tournament-announcement',tournamentAnnouncement.id]" routerLinkActive="active">
