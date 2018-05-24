@@ -210,9 +210,14 @@
     //  -moz-column-count: 2;
     //  column-count: 2;
     //}
-  .blog-item {
+  .blog-item[_ngcontent-c3],
+  .blog-item[_ngcontent-c4],
+  .blog-item[_ngcontent-c5],
+  .blog-item[_ngcontent-c6]{
+    margin-bottom: 10px;
     display: flex;
   }
+
   .h-100 {
     height: auto!important;
   }
