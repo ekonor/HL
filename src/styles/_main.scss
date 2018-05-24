@@ -72,8 +72,15 @@ user-pic img {
   width: calc(100% + 100px);
 }
 
+.logo-text {
+  padding: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .nowrap .logo-text {
-  padding-left: 5px;
+
 }
 /* END OF Arena Pic, TA Pic, Organization Pic  */
 

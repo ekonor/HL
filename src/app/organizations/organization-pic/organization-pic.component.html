@@ -1,9 +1,9 @@
 <div class="organization-pic" *ngIf=" ( position == null ) || ( position != 'horizontal' )" >
-  <p>
+  <div class="logo-text">
     <a [routerLink]="['/organization',org.id]" routerLinkActive="active"  title="{{org.name}}">
       {{org.name}}
     </a>
-  </p>
+  </div>
   <div class="logo-img-wrapper" >
     <div class="logo-img-bg-wrapper" >
       <img class="logo-img-bg"

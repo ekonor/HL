@@ -1,9 +1,9 @@
 <div class="ta-pic" *ngIf=" ( position == null ) || ( position != 'horizontal' )">
-  <p>
+  <div class="logo-text">
     <a [routerLink]="['/tournament-announcement',ta.id]" routerLinkActive="active"  title="{{ta.name}}">
       {{ta.name}}
     </a>
-  </p>
+  </div>
   <div class="logo-img-wrapper" >
     <div class="logo-img-bg-wrapper" >
       <img class="logo-img-bg"
