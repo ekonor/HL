@@ -1,6 +1,6 @@
-<div class="ta-pic" *ngIf=" ( position == null ) || ( position != 'horizontal' )" >
+<div class="ta-pic" *ngIf=" ( position == null ) || ( position != 'horizontal' )">
   <p>
-    <a [routerLink]="['/tournament-announcement',ta.id]" routerLinkActive="active">
+    <a [routerLink]="['/tournament-announcement',ta.id]" routerLinkActive="active"  title="{{ta.name}}">
       {{ta.name}}
     </a>
   </p>
@@ -9,30 +9,39 @@
       <img class="logo-img-bg"
            [src]="getTournamentAnnouncementLogo(ta)"
            alt="{{ta.name}}"
-           onerror = "this.style.display = 'none'">
+           onerror = "this.style.display = 'none'"
+           title="{{ta.name}}">
     </div>
-    <a [routerLink]="['/tournament-announcement',ta.id]" routerLinkActive="active">
+    <a [routerLink]="['/tournament-announcement',ta.id]" routerLinkActive="active"  title="{{ta.name}}">
       <img class="logo-img-main"
            [src]="getTournamentAnnouncementLogo(ta)"
            alt="{{ta.name}}"
-           onerror = "this.style.display = 'none'" >
+           onerror = "this.style.display = 'none'"
+           title="{{ta.name}}">
     </a>
   </div>
 </div>
 
-<div class="ta-pic" *ngIf="position=='horizontal'">
+<div class="ta-pic nowrap" *ngIf="position=='horizontal'">
   <div class="logo-img-wrapper" >
     <div class="logo-img-bg-wrapper" >
       <img class="logo-img-bg"
            *ngIf="ta" [src]="getTournamentAnnouncementLogo(ta)"
            alt="{{ta.name}}"
-           onerror = "this.style.display = 'none'">
+           onerror = "this.style.display = 'none'"
+           title="{{ta.name}}">
     </div>
-    <a *ngIf="ta" [routerLink]="['/tournament-announcement',ta.id]" routerLinkActive="active">
+    <a *ngIf="ta" [routerLink]="['/tournament-announcement',ta.id]" routerLinkActive="active"  title="{{ta.name}}">
       <img class="logo-img-main"
            [src]="getTournamentAnnouncementLogo(ta)"
            alt="{{ta.name}}"
-           onerror = "this.style.display = 'none'" >
+           onerror = "this.style.display = 'none'"
+           title="{{ta.name}}">
+    </a>
+  </div>
+  <div class="inline-block logo-text">
+    <a [routerLink]="['/tournament-announcement',ta.id]" routerLinkActive="active"  title="{{ta.name}}">
+      {{ta.name}}
     </a>
   </div>
 </div>

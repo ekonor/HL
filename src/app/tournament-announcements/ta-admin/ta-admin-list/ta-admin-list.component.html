@@ -1,5 +1,5 @@
-<div class="ta-admin-list section">
-  <div class="row admin-panel" [hasPermission]="['tournamentadministrator']">
+<!--div class="ta-admin-list container"-->
+  <!--div class="row admin-panel" [hasPermission]="['tournamentadministrator']">
     <a class="visible-btn"
        title="Добавить анонс"
        (click)="addTournamentAnnouncement()">
@@ -10,15 +10,223 @@
        (click)="listTournaments()">
       <i class="fa fa-align-justify"></i>
     </a>
-  </div>
-  <div class="row admin-panel" [hasPermission]="['tournamentannouncementmoderator']">
+  </div-->
+  <!--div class="row admin-panel" [hasPermission]="['tournamentannouncementmoderator']">
     <a class="visible-btn"
        title="Полный список"
        (click)="listTournaments()">
       <i class="fa fa-align-justify"></i>
     </a>
+  </div-->
+
+  <!--div class="container" *ngIf="content && content.length>0"-->
+    <!--div class="row" *ngIf="content && content.length>0">
+      <div class="col-md-1">
+        #
+      </div>
+      <div class="col-md-2">
+        Название
+      </div>
+      <div class="col-md-1">
+        Начало
+      </div>
+      <div class="col-md-1">
+        Окончание
+      </div>
+      <div class="col-md-1">
+        <p class="icon-wrap">
+          <i class="fa fa-map-marker"></i>
+        </p>
+      </div>
+      <div class="col-md-2">
+        <p class="icon-wrap">
+          <i class="fa fa-street-view"></i>
+        </p>
+      </div>
+      <div class="col-md-1">
+        <p class="icon-wrap td-middle">
+          <i class="fa fa-users"></i>
+        </p>
+      </div>
+      <div class="col-md-1">
+        <p class="icon-wrap">
+          <i class="fa fa-male"></i>/<i class="fa fa-child"></i>
+        </p>
+      </div>
+      <div class="col-md-1">
+        <p class="icon-wrap">
+          <i class="fa fa-bell"></i>
+        </p>
+      </div>
+      <div class="col-md-1">
+        <p class="icon-wrap">
+          <i class="fa fa-rouble"></i>
+        </p>
+      </div>
+    </div-->
+  <div class="ta-admin-list div-table" *ngFor="let tournamentAnnouncement of content">
+    <div class="div-table-row" *ngIf="content?.indexOf(tournamentAnnouncement) == 0">
+      <div class="inline-block div-table-col div-table-col-fixed div-table-col-fixed-supersmall">
+        #
+      </div>
+      <div class="inline-block div-table-col div-table-col-flex div-table-col-ellipsis">
+        Турнир
+      </div>
+      <div class="inline-block div-table-col div-table-col-fixed div-table-col-fixed-large">
+        Даты
+      </div>
+      <div class="inline-block div-table-col div-table-col-flex div-table-col-ellipsis">
+        <p class="icon-wrap">
+          <i class="fa fa-map-marker"></i>
+        </p>
+      </div>
+      <div class="inline-block div-table-col div-table-col-flex div-table-col-ellipsis">
+        <p class="icon-wrap">
+          <i class="fa fa-street-view"></i>
+        </p>
+      </div>
+      <div class="inline-block div-table-col div-table-col-fixed div-table-col-fixed-small">
+        <p class="icon-wrap">
+          <i class="fa fa-users"></i>
+        </p>
+      </div>
+      <div class="inline-block div-table-col div-table-col-fixed div-table-col-fixed-small">
+        <p class="icon-wrap">
+          <i class="fa fa-male"></i>/<i class="fa fa-child"></i>
+        </p>
+      </div>
+      <div class="inline-block div-table-col div-table-col-fixed div-table-col-fixed-small">
+        <p class="icon-wrap">
+          <i class="fa fa-male"></i>/<i class="fa fa-female"></i>
+        </p>
+      </div>
+      <div class="inline-block div-table-col div-table-col-fixed-middle div-table-col-ellipsis">
+        <p class="icon-wrap">
+          <i class="fa fa-bell"></i>
+        </p>
+      </div>
+      <div class="inline-block div-table-col div-table-col-fixed div-table-col-fixed-middle">
+        <p class="icon-wrap">
+          <i class="fa fa-rouble"></i>
+        </p>
+      </div>
+
+    </div>
+    <div class="div-table-row">
+    <!--div class="row" [class]="getStateClass(tournamentAnnouncement)" [title]="getStateTitle(tournamentAnnouncement)"-->
+      <!--div class="col-md-6 red"></div>
+      <div class="col-md-6 blue"></div-->
+      <div class="inline-block div-table-col div-table-col-fixed div-table-col-fixed-supersmall {{getStateClass(tournamentAnnouncement)}}">
+        {{content?.indexOf(tournamentAnnouncement)+1}}
+      </div>
+      <div class="inline-block div-table-col div-table-col-flex div-table-col-ellipsis div-table-col-left {{getStateClass(tournamentAnnouncement)}}">
+        <ta-pic *ngIf="tournamentAnnouncement" [ta]="tournamentAnnouncement" [position]="'horizontal'"></ta-pic>
+      </div>
+      <!--div class="inline-block {{getStateClass(tournamentAnnouncement)}}" style="max-width: 100px; vertical-align: middle;">
+        <a *ngIf="tournamentAnnouncement" [routerLink]="['/tournament-announcement',tournamentAnnouncement.id]" routerLinkActive="active">
+          {{tournamentAnnouncement.name}}
+        </a>
+      </div-->
+      <div class="inline-block div-table-col div-table-col-fixed div-table-col-fixed-large {{getStateClass(tournamentAnnouncement)}}">
+        {{tournamentAnnouncement.startDate | date :  "dd.MM.y"}}&mdash;{{tournamentAnnouncement.endDate | date :  "dd.MM.y"}}
+      </div>
+      <div class="inline-block div-table-col div-table-col-flex div-table-col-ellipsis {{getStateClass(tournamentAnnouncement)}}">
+        {{tournamentAnnouncement.cityName ? tournamentAnnouncement.cityName: ''}}
+      </div>
+      <div class="inline-block div-table-col div-table-col-flex div-table-col-ellipsis div-table-col-left {{getStateClass(tournamentAnnouncement)}}">
+        <arena-pic *ngIf="tournamentAnnouncement.arena" [arena]="tournamentAnnouncement.arena" [position]="'horizontal'"></arena-pic>
+      </div>
+      <!--div class="col-md-1 {{getStateClass(tournamentAnnouncement)}}">
+        <a *ngIf="tournamentAnnouncement && tournamentAnnouncement.arena" [routerLink]="['/arena',tournamentAnnouncement.arena.id]" routerLinkActive="active">
+          {{tournamentAnnouncement.arena.name}}
+        </a>
+      </div-->
+      <div class="inline-block div-table-col div-table-col-fixed div-table-col-fixed-small {{getStateClass(tournamentAnnouncement)}}">
+        {{getRequiredResponseCount(tournamentAnnouncement)}}
+      </div>
+      <div class="inline-block div-table-col div-table-col-fixed div-table-col-fixed-small {{getStateClass(tournamentAnnouncement)}}">
+        <p class="icon-wrap">
+          <i [class]="getAgeGroupIconClass(tournamentAnnouncement)"></i>
+        </p>
+      </div>
+      <div class="inline-block div-table-col div-table-col-fixed div-table-col-fixed-small {{getStateClass(tournamentAnnouncement)}}">
+        <p class="icon-wrap">
+          <i [class]="getGenderIconClass(tournamentAnnouncement)"></i>
+        </p>
+      </div>
+      <div class="inline-block div-table-col div-table-col-fixed-middle div-table-col-ellipsis {{getStateClass(tournamentAnnouncement)}}">
+        {{tournamentAnnouncement.endRegistrationDate? (tournamentAnnouncement.endRegistrationDate | date :  "dd.MM.y") : getNoData()}}
+      </div>
+      <div class="inline-block div-table-col div-table-col-fixed div-table-col-fixed-middle div-table-col-left {{getStateClass(tournamentAnnouncement)}}">
+        {{getCostText(tournamentAnnouncement)}}
+      </div>
+    </div>
   </div>
-  <table class="table" *ngIf="content && content.length>0">
+      <!--div class="col-md-1 admin-panel">
+        <span [hasPermission]="['tournamentadministrator']">
+          <a *ngIf="tournamentAnnouncement.state == 'Draft'" class="visible-btn"
+             title="Редактировать анонс"
+             (click)="editTournamentAnnouncement(tournamentAnnouncement)"
+             [hasPermission]="['tournamentadministrator']"
+             onAuthorizedPermission="show"
+             onUnauthorizedPermission="hide">
+            <i [class]="getEditIconClass()"></i>
+          </a>
+          <a *ngIf="tournamentAnnouncement.state == 'Draft'" class="visible-btn"
+             title="Отправить на модерацию"
+             (click)="sendOnModeration(tournamentAnnouncement)"
+             [hasPermission]="['tournamentadministrator']"
+             onAuthorizedPermission="show"
+             onUnauthorizedPermission="hide">
+            <i [class]="getSendOnModerationIconClass()"></i>
+          </a>
+          <a *ngIf="tournamentAnnouncement.state == 'Draft' || tournamentAnnouncement.state == 'RejectedByModerator'" class="visible-btn"
+             title="Удалить анонс"
+             (click)="deleteTournamentAnnouncement(tournamentAnnouncement)"
+             [hasPermission]="['tournamentadministrator']"
+             onAuthorizedPermission="show"
+             onUnauthorizedPermission="hide">
+            <i [class]="getDeleteIconClass()"></i>
+          </a>
+          <a *ngIf="tournamentAnnouncement.state == 'ApprovedByModerator'" class="visible-btn"
+             title="Завершить прием заявок"
+             (click)="finishTournamentAnnouncement(tournamentAnnouncement)"
+             [hasPermission]="['tournamentadministrator']"
+             onAuthorizedPermission="show"
+             onUnauthorizedPermission="hide">
+            <i [class]="getFinishIconClass()"></i>
+          </a>
+          <a *ngIf="tournamentAnnouncement.state == 'ApprovedByModerator'" class="visible-btn"
+             title="Отменить турнир"
+             (click)="cancelTournamentAnnouncement(tournamentAnnouncement)"
+             [hasPermission]="['tournamentadministrator']"
+             onAuthorizedPermission="show"
+             onUnauthorizedPermission="hide">
+            <i [class]="getCancelIconClass()"></i>
+          </a>
+        </span>
+        <span [hasPermission]="['tournamentannouncementmoderator']">
+          <a *ngIf="tournamentAnnouncement.state == 'WaitModeration'" class="visible-btn"
+             title="Одобрить"
+             (click)="moderate(tournamentAnnouncement, true)"
+             [hasPermission]="['tournamentannouncementmoderator']"
+             onAuthorizedPermission="show"
+             onUnauthorizedPermission="hide">
+            <i [class]="getModerationIconClass(true)"></i>
+          </a>
+          <a *ngIf="tournamentAnnouncement.state == 'WaitModeration'" class="visible-btn"
+             title="Отклонить"
+             (click)="moderate(tournamentAnnouncement, false)"
+             [hasPermission]="['tournamentannouncementmoderator']"
+             onAuthorizedPermission="show"
+             onUnauthorizedPermission="hide">
+            <i [class]="getModerationIconClass(false)"></i>
+          </a>
+        </span>
+      </div-->
+
+
+  <!--table class="table" *ngIf="content && content.length>0">
     <thead>
     <tr>
       <th class="td-small">#</th>
@@ -57,7 +265,7 @@
       </th>
       <th>
         <p class="icon-wrap">
-        <i class="fa fa-rouble"></i>
+          <i class="fa fa-rouble"></i>
         </p>
       </th>
       <th>
@@ -168,5 +376,5 @@
       </td>
     </tr>
     </tbody>
-  </table>
-</div>
+  </table-->
+

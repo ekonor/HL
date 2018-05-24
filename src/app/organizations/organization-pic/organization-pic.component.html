@@ -1,6 +1,6 @@
 <div class="organization-pic" *ngIf=" ( position == null ) || ( position != 'horizontal' )" >
   <p>
-    <a [routerLink]="['/organization',org.id]" routerLinkActive="active">
+    <a [routerLink]="['/organization',org.id]" routerLinkActive="active"  title="{{org.name}}">
       {{org.name}}
     </a>
   </p>
@@ -9,30 +9,39 @@
       <img class="logo-img-bg"
            [src]="getOrganizationLogo()"
            alt="{{org.name}}"
-           onerror = "this.style.display = 'none'">
+           onerror = "this.style.display = 'none'"
+           title="{{org.name}}">
     </div>
-    <a [routerLink]="['/organization',org.id]" routerLinkActive="active">
+    <a [routerLink]="['/organization',org.id]" routerLinkActive="active" title="{{org.name}}">
       <img class="logo-img-main"
            [src]="getOrganizationLogo()"
            alt="{{org.name}}"
-           onerror = "this.style.display = 'none'" >
+           onerror = "this.style.display = 'none'"
+           title="{{org.name}}">
     </a>
   </div>
 </div>
 
-<div class="organization-pic" *ngIf="position=='horizontal'">
-  <div class="logo-img-wrapper" >
+<div class="organization-pic nowrap" *ngIf="position=='horizontal'">
+  <div class="logo-img-wrapper">
     <div class="logo-img-bg-wrapper" >
       <img class="logo-img-bg"
            *ngIf="org" [src]="getOrganizationLogo()"
            alt="{{org.name}}"
-           onerror = "this.style.display = 'none'">
+           onerror = "this.style.display = 'none'"
+           title="{{org.name}}">
     </div>
-    <a *ngIf="org" [routerLink]="['/organization',org.id]" routerLinkActive="active">
+    <a *ngIf="org" [routerLink]="['/organization',org.id]" routerLinkActive="active" title="{{org.name}}">
       <img class="logo-img-main"
            [src]="getOrganizationLogo()"
            alt="{{org.name}}"
-           onerror = "this.style.display = 'none'" >
+           onerror = "this.style.display = 'none'"
+           title="{{org.name}}">
+    </a>
+  </div>
+  <div class="inline-block logo-text">
+    <a *ngIf="org" [routerLink]="['/organization',org.id]" routerLinkActive="active">
+      {{org.name}}
     </a>
   </div>
 </div>

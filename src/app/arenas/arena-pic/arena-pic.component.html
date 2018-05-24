@@ -1,6 +1,6 @@
 <div class="arena-pic" *ngIf=" ( position == null ) || ( position != 'horizontal' )" >
   <p>
-    <a [routerLink]="['/arena',arena.id]" routerLinkActive="active">
+    <a [routerLink]="['/arena',arena.id]" routerLinkActive="active" title="{{arena.name}}">
       {{arena.name}}
     </a>
   </p>
@@ -9,30 +9,44 @@
       <img class="logo-img-bg"
            [src]="getArenaLogo()"
            alt="{{arena.name}}"
-           onerror = "this.style.display = 'none'">
+           onerror = "this.style.display = 'none'"
+           title="{{arena.name}}">
     </div>
-    <a [routerLink]="['/arena',arena.id]" routerLinkActive="active">
+    <a [routerLink]="['/arena',arena.id]" routerLinkActive="active" title="{{arena.name}}">
       <img class="logo-img-main"
            [src]="getArenaLogo()"
            alt="{{arena.name}}"
-           onerror = "this.style.display = 'none'" >
+           onerror = "this.style.display = 'none'"
+           title="{{arena.name}}">
     </a>
   </div>
 </div>
 
-<div class="arena-pic" *ngIf="position=='horizontal'">
-  <div class="logo-img-wrapper" >
-    <div class="logo-img-bg-wrapper" >
+<div class="arena-pic nowrap" *ngIf="position=='horizontal'">
+  <div class="logo-img-wrapper">
+    <div class="logo-img-bg-wrapper">
       <img class="logo-img-bg"
            *ngIf="arena" [src]="getArenaLogo()"
            alt="{{arena.name}}"
-           onerror = "this.style.display = 'none'">
+           onerror = "this.style.display = 'none'"
+           title="{{arena.name}}">
     </div>
-    <a *ngIf="arena" [routerLink]="['/arena',arena.id]" routerLinkActive="active">
+    <a *ngIf="arena" [routerLink]="['/arena',arena.id]" routerLinkActive="active" title="{{arena.name}}">
       <img class="logo-img-main"
            [src]="getArenaLogo()"
            alt="{{arena.name}}"
-           onerror = "this.style.display = 'none'" >
+           onerror = "this.style.display = 'none'"
+           title="{{arena.name}}">
     </a>
   </div>
+  <div class="inline-block logo-text">
+    <a *ngIf="arena" [routerLink]="['/arena',arena.id]" routerLinkActive="active" title="{{arena.name}}">
+    {{arena.name}}
+    </a>
+  </div>
+  <!--div style="white-space: nowrap;">
+    <div class="red" style="width: 100px; height: 100px;"></div>
+    <div class="blue" style="width: 100px; height: 100px;"></div>
+  </div-->
+
 </div>

@@ -17,7 +17,13 @@ user-pic img {
   height: 35px;
 }
 
-/* Arena Pic, Organization Pic */
+/* Arena Pic, TA Pic, , Organization Pic */
+
+.ta-pic, organization-pic, arena-pic {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .logo-img-main {
   height: 50px;
   max-width: 50px;
@@ -30,9 +36,18 @@ user-pic img {
   width: 50px;
   text-align: center;
   position: relative;
-  margin: 0 auto 5px auto;
+  // margin: 0 auto 5px auto;
+  display: inline-block;
+  margin: 0 auto;
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
+.inline-block {
+  display: inline-block;
+}
 .logo-img-bg-wrapper {
   height: 50px;
   width: 50px;
@@ -56,4 +71,81 @@ user-pic img {
   width: -o-calc(100% + 100px);
   width: calc(100% + 100px);
 }
-/* END OF Arena Pic, Organization Pic  */
+
+.nowrap .logo-text {
+  padding-left: 5px;
+}
+/* END OF Arena Pic, TA Pic, Organization Pic  */
+
+
+/* TABLE DIV */
+.div-table {
+  width:100%;
+
+  .div-table-row {
+    width: 100%;
+    display: flex;
+  }
+
+  .div-table-col {
+    vertical-align: middle;
+    text-align: center;
+    padding: 5px;
+  }
+
+  .div-table-col-left {
+    text-align: left;
+  }
+
+  .div-table-col-fixed {
+
+  }
+
+  .div-table-col-fixed-middle {
+    width: 90px;
+    line-height: 50px;
+  }
+
+  .div-table-col-fixed-large {
+    width: 180px;
+    line-height: 50px;
+  }
+
+  .div-table-col-fixed-supersmall {
+    width: 25px;
+    line-height: 50px;
+  }
+
+  .div-table-col-fixed-small {
+    width: 35px;
+    line-height: 50px;
+  }
+
+  .div-table-col-flex {
+    flex: 1;
+  }
+
+  .div-table-col-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+    line-height: 50px;
+  }
+
+  .icon-wrap {
+    height: 50px; line-height: 50px; margin: 0;
+  }
+
+  .icon-wrap i {
+    margin: 0 auto;
+    line-height: normal;
+    vertical-align: middle;
+    display: inline-block;
+  }
+}
+/* END OF TABLE DIV */
+
+
+
+
