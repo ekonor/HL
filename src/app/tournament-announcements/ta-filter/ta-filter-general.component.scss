@@ -1,16 +1,11 @@
-.ta-filter {
-  .fixed-size-button-lg {
-      min-width: 200px;
-  }
-  .fixed-size-button-md {
-    min-width: 150px;
-  }
-  .fixed-size-button-s {
-    min-width: 100px;
-  }
+.ta-filter-wrap {
+
+  font-size: 1rem;
+  max-width: 250px;
+
   .label-button {
     font-size: 0.8rem;
-    padding: 0.85rem 2.13rem;
+    //padding: 0.85rem 2.13rem;
     margin: 6px;
     border-radius: 2px;
     border: 0;
@@ -22,33 +17,15 @@
   }
   label.btn-primary.active {
     background-color: red!important;
+  }
+
+  input {
+    font-size: 1rem;
   }
 }
 
-.ta-admin-filter {
-  .fixed-size-button-lg {
-    min-width: 200px;
-  }
-  .fixed-size-button-md {
-    min-width: 150px;
-  }
-  .fixed-size-button-s {
-    min-width: 100px;
-  }
-  .label-button {
-    font-size: 0.8rem;
-    padding: 0.85rem 2.13rem;
-    margin: 6px;
-    border-radius: 2px;
-    border: 0;
-    transition: .2s ease-out;
-    text-transform: uppercase;
-    white-space: normal !important;
-    word-wrap: break-word;
-    cursor: pointer;
-  }
-  label.btn-primary.active {
-    background-color: red!important;
-  }
+.ta-filter {
+}
 
+.ta-admin-filter {
 }

@@ -1,157 +1,71 @@
-<div class="ta-admin-filter container">
-  <div class="row">
-    <div class="col-md-12 col-lg-12 col-xs-12 admin-panel">
+<div class="ta-admin-filter ta-filter-wrap">
+    <div class="admin-panel">
       <span class="toggle" (click)="toggle()" style="margin-left: 5px;"><i [class]="getToggleIcon()"></i></span>
     </div>
-    <div class="jumbotron col-md-12 col-lg-12 col-xs-12" [hidden]="toggled">
+    <div class="jumbotron" [hidden]="toggled">
         <form>
-          <div class="row">
-            <div class="col-md-8">
-                <app-city-filter *ngIf="city" [city]="city" (onChanged)="setCity($event)"></app-city-filter>
-            </div>
-          </div>
-          <div class="row">
-              <div class="col-md-12">
-                  <input type="text" name="searchText" [(ngModel)]="filter.searchText" placeholder="Название или строка поиска" class="form-control">
-              </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label for="startDateFrom">Дата проведения c</label>
-              <input id="startDateFrom"
+          <app-city-filter *ngIf="city" [city]="city" (onChanged)="setCity($event)"></app-city-filter>
+          <input type="text" name="searchText" [(ngModel)]="filter.searchText" placeholder="Название или строка поиска" class="form-control">
+          <label class="">Дата проведения</label>
+          <label for="startDateFrom">c</label>
+          <input id="startDateFrom"
                      type="date"
                      name="startDateFrom"
                      [(ngModel)]="filter.startDateFrom"
                      placeholder="Дата проведения, от"
                      class="form-control">
-            </div>
-            <div class="col-md-6">
-              <label for="startDateTo">до</label>
-              <input id="startDateTo"
+          <label for="startDateTo">до</label>
+          <input id="startDateTo"
                      type="date"
                      name="startDateTo"
                      [(ngModel)]="filter.startDateTo"
                      placeholder="Дата проведения, до"
                      class="form-control">
-            </div>
-          </div>
-          <!--div class="row"
-               [hasPermission]="['tournamentadministrator']"
-               onAuthorizedPermission="hide"
-               onUnauthorizedPermission="show">
-            <div class="col-md-4">
-              <div class="btn-group btn-group-toggle" ngbRadioGroup name="gender" [(ngModel)]="filter.gender">
-                <label class="btn-primary label-button fixed-size-button-s" ngbButtonLabel>
-                  <input type="radio" name="Male" ngbButton value="Male"><i class="fa fa-male"></i>
-                </label>
-                <label class="btn-primary label-button fixed-size-button-s" ngbButtonLabel>
-                  <input type="radio" name="Female" ngbButton value="Female"><i class="fa fa-female"></i>
-                </label>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="btn-group btn-group-toggle" ngbRadioGroup name="state" [(ngModel)]="filter.state">
-                <label class="btn-primary fixed-size-button-lg label-button" ngbButtonLabel>
-                  <input type="radio" name="isRegistration" ngbButton value="ApprovedByModerator">Идет регистрация
-                </label>
-                <label class="btn-primary fixed-size-button-lg label-button" ngbButtonLabel>
-                  <input type="radio" name="isFinished" ngbButton value="Finished">Завершенные
-                </label>
-              </div>
-            </div>
-          </div-->
-          <div class="row"
+          <div class=""
                [hasPermission]="['tournamentadministrator']"
                onAuthorizedPermission="show"
                onUnauthorizedPermission="hide">
-            <div class="col-md-12">
-              <div class="btn-group btn-group-toggle" ngbRadioGroup name="state" [(ngModel)]="filter.state">
-                <label class="btn-primary fixed-size-button-md label-button" ngbButtonLabel>
+              <div class="btn-group-vertical btn-group-toggle" ngbRadioGroup name="state" [(ngModel)]="filter.state">
+                <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
                   <input type="radio" name="isRegistration" ngbButton value="ApprovedByModerator">Идет регистрация
                 </label>
-                <label class="btn-primary fixed-size-button-md label-button" ngbButtonLabel>
+                <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
                   <input type="radio" name="isDraft" ngbButton value="Draft">Черновики
                 </label>
-                <label class="btn-primary fixed-size-button-md label-button" ngbButtonLabel>
+                <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
                   <input type="radio" name="isWait" ngbButton value="WaitModeration">На модерации
                 </label>
-                <label class="btn-primary fixed-size-button-md label-button" ngbButtonLabel>
+                <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
                   <input type="radio" name="isReject" ngbButton value="RejectedByModerator">Отклонены
                 </label>
-                <!--label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
-                  <input type="radio" name="isFinished" ngbButton value="Finished">Завершенные
-                </label-->
               </div>
-            </div>
           </div>
-          <div class="row"
+          <div class=""
                [hasPermission]="['tournamentannouncementmoderator']"
                onAuthorizedPermission="show"
                onUnauthorizedPermission="hide">
-            <div class="col-md-12">
-              <div class="btn-group btn-group-toggle" ngbRadioGroup name="state" [(ngModel)]="filter.state">
-                <label class="btn-primary fixed-size-button-md label-button" ngbButtonLabel>
+              <div class="btn-group-vertical btn-group-toggle" ngbRadioGroup name="state" [(ngModel)]="filter.state">
+                <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
                   <input type="radio" name="isRegistration" ngbButton value="ApprovedByModerator">Одобрены
                 </label>
-                <label class="btn-primary fixed-size-button-md label-button" ngbButtonLabel>
+                <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
                   <input type="radio" name="isWait" ngbButton value="WaitModeration">Ожидают модерации
                 </label>
-                <label class="btn-primary fixed-size-button-md label-button" ngbButtonLabel>
+                <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
                   <input type="radio" name="isReject" ngbButton value="RejectedByModerator">Отклонены
                 </label>
-                <!--label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
-                  <input type="radio" name="isFinished" ngbButton value="Finished">Завершенные
-                </label-->
               </div>
-            </div>
           </div>
-          <!--div class="row" [hasPermission]="['tournamentadministrator']"
-               onAuthorizedPermission="hide"
-               onUnauthorizedPermission="show">
-            <div class="col-md-12">
-              <div class="btn-group btn-group-toggle" ngbRadioGroup name="age" [(ngModel)]="filter.ageGroup">
-                <label class="btn-primary label-button fixed-size-button-md" ngbButtonLabel>
-                  <input type="radio" name="Adults" ngbButton value="Adults">Взрослые
-                </label>
-                <label class="btn-primary label-button fixed-size-button-md" ngbButtonLabel>
-                  <input type="radio" name="Youth" ngbButton value="Youth">Молодежь
-                </label>
-                <label class="btn-primary label-button fixed-size-button-md" ngbButtonLabel>
-                  <input type="radio" name="Juniors" ngbButton value="Juniors">Юниоры
-                </label>
-                <label class="btn-primary label-button fixed-size-button-md" ngbButtonLabel>
-                  <input type="radio" name="Kids" ngbButton value="Kids">Дети
-                </label>
-              </div>
-              <div class="row" [hasPermission]="['tournamentadministrator']"
-                   onAuthorizedPermission="hide"
-                   onUnauthorizedPermission="show">
-                <div class="col-md-12">
-                  <div class="btn-group btn-group-toggle" ngbRadioGroup name="isCommercial" [(ngModel)]="filter.isCommercial">
-                    <label class="btn-primary fixed-size-button-lg label-button" ngbButtonLabel>
-                      <input type="radio" name="Commercial" ngbButton value="true">Коммерческий
-                    </label>
-                    <label class="btn-primary fixed-size-button-lg label-button" ngbButtonLabel>
-                      <input type="radio" name="NoCommercial" ngbButton value="false">Некоммерческий
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div-->
-          <div class="row">
-            <div class="col-md-4">
+          <div class="">
               <button type="button" class="btn btn-primary" (click)="search()">
                 <i class="fa fa-search"></i>
               </button>
               <button type="reset" class="btn btn-default">
                 <i class="fa fa-close"></i>
               </button>
-            </div>
           </div>
         </form>
     </div>
-  </div>
 </div>
 
 

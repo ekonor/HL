@@ -1,5 +1,5 @@
 <loader [hidden]="!dataIsLoading"></loader>
-<div class="profile-organizator container" *ngIf="tournamentAnnouncementList">
+<div class="ta-admin" *ngIf="tournamentAnnouncementList">
   <div class="row">
     <div class="col-md-12">
       <div class="heading heading-12 margin-top-bottom-30">
@@ -11,28 +11,32 @@
         <hr>
       </div>
     </div>
-
-      <ta-admin-filter [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList"
-        [filter]="filter"
-        (onFiltered)="onFiltered($event)">
-      </ta-admin-filter>
-    <sorting [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList" class="pull-right"
-             [orderBy]="listInfo.orderBy"
-             [orderDir]="listInfo.orderDir"
-             [options]="sortOptions"
-             (onSorted)="onSorted($event)">
-    </sorting>
-    <div class="col-md-12">
-      <ta-admin-list [hidden]="dataIsLoading"
-                *ngIf="tournamentAnnouncementList"
-                [content]="tournamentAnnouncementList.listItems"
-                (onChanged)="getTournamentAnnouncements()"
-                class="row">
-      </ta-admin-list>
+  </div>
+  <div class="div-table">
+    <div class="div-table-row">
+      <div class="div-table-col div-table-col-fixed div-table-col-left">
+        <ta-admin-filter [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList"
+                         [filter]="filter"
+                         (onFiltered)="onFiltered($event)">
+        </ta-admin-filter>
+      </div>
+      <div class="div-table-col div-table-col-flex">
+        <!--sorting [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList" class="pull-right"
+                 [orderBy]="listInfo.orderBy"
+                 [orderDir]="listInfo.orderDir"
+                 [options]="sortOptions"
+                 (onSorted)="onSorted($event)">
+        </sorting-->
+        <ta-admin-list [hidden]="dataIsLoading"
+                       *ngIf="tournamentAnnouncementList"
+                       [content]="tournamentAnnouncementList.listItems"
+                       (onChanged)="getTournamentAnnouncements()">
+        </ta-admin-list>
+      </div>
+      <!--pagination [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList" [page]="listInfo.page"
+                  [collectionSize]="tournamentAnnouncementList.count"
+                  [pageSize]="listInfo.take">
+      </pagination-->
     </div>
-    <pagination [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList" [page]="listInfo.page"
-                [collectionSize]="tournamentAnnouncementList.count"
-                [pageSize]="listInfo.take">
-    </pagination>
   </div>
 </div>

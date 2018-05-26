@@ -15,7 +15,8 @@ import {Country} from "./country";
 
 @Component({
   selector: 'app-city-filter',
-  templateUrl: 'city.component.html'
+  templateUrl: 'city.component.html',
+  styleUrls: ['city.component.scss']
 })
 
 @Injectable()

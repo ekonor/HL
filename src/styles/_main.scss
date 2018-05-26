@@ -1,5 +1,7 @@
 html, body {
     height: 100%;
+    margin: 0 auto;
+    font-size: 14px;
   }
 
 app-root {
@@ -97,7 +99,7 @@ user-pic img {
   .div-table-col {
     vertical-align: middle;
     text-align: center;
-    padding: 5px;
+    //padding: 5px;
   }
 
   .div-table-col-left {
@@ -109,26 +111,35 @@ user-pic img {
   }
 
   .div-table-col-fixed-middle {
-    width: 90px;
+    width: 70px;
     line-height: 50px;
   }
 
   .div-table-col-fixed-large {
-    width: 180px;
+    width: 160px;
     line-height: 50px;
   }
 
+  .div-table-col-fixed-superlarge {
+    width: 250px;
+  }
+
   .div-table-col-fixed-supersmall {
-    width: 25px;
+    width: 15px;
     line-height: 50px;
   }
 
   .div-table-col-fixed-small {
-    width: 35px;
+    width: 25px;
     line-height: 50px;
   }
 
   .div-table-col-flex {
+    flex: 1;
+  }
+
+
+  .div-table-col-stretch {
     flex: 1;
   }
 
