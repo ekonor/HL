@@ -1,6 +1,6 @@
 <div class="ta-admin-filter ta-filter-wrap">
     <div class="admin-panel">
-      <span class="toggle" (click)="toggle()" style="margin-left: 5px;"><i [class]="getToggleIcon()"></i></span>
+      <span class="toggle" title="{{getToggleTitle(toggled)}}" (click)="toggle()" style="margin-left: 5px;"><i [class]="getToggleIcon()"></i></span>
     </div>
     <div class="jumbotron" [hidden]="toggled">
         <form>
@@ -67,5 +67,3 @@
         </form>
     </div>
 </div>
-
-

@@ -62,11 +62,19 @@ export class TAAdminFilterComponent implements OnInit {
     this.onFiltered.emit();
   }
 
-  public getToggleIcon() {
+  public getToggleIcon(): string {
     if (this.toggled) {
       return 'fa fa-angle-down';
     } else {
       return 'fa fa-angle-up';
+    }
+  }
+
+  public getToggleTitle(toggled: boolean): string {
+    if (toggled) {
+      return 'Развернуть';
+    } else {
+      return 'Свернуть';
     }
   }
 }
