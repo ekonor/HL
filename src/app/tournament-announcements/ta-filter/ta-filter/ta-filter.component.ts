@@ -69,4 +69,13 @@ export class TournamentAnnouncementFilterComponent implements OnInit {
       this.city = city;
     }
   }
+
+  /* TODO перенести в общий сервис отсюда и из остальных фильтров */
+  public getToggleTitle(toggled: boolean): string {
+    if (toggled) {
+      return 'Развернуть';
+    } else {
+      return 'Свернуть';
+    }
+  }
 }

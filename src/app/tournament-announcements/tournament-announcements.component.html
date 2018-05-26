@@ -1,5 +1,5 @@
 <loader [hidden]="!dataIsLoading"></loader>
-<div class="tournament-announcements container" *ngIf="tournamentAnnouncementList">
+<div class="tournament-announcements" *ngIf="tournamentAnnouncementList">
   <div class="row">
     <div class="col-md-12">
       <div class="heading heading-12 margin-top-bottom-30">
@@ -11,21 +11,27 @@
         <hr>
       </div>
     </div>
-    <ta-filter [filter]="filter"
-                  (onFiltered)="onFiltered($event)">
-    </ta-filter>
-    <sorting class="pull-right"
-             [orderBy]="listInfo.orderBy"
-             [orderDir]="listInfo.orderDir"
-             [options]="sortOptions"
-             (onSorted)="onSorted($event)">
-    </sorting>
-    <tournament-announcement-list [content]="tournamentAnnouncementList.listItems"
-                class="row">
-    </tournament-announcement-list>
-    <pagination [page]="listInfo.page"
-                [collectionSize]="tournamentAnnouncementList.count"
-                [pageSize]="listInfo.take">
-    </pagination>
   </div>
+  <div class="div-table">
+    <div class="div-table-row">
+      <div class="div-table-col div-table-col-fixed div-table-col-left">
+        <ta-filter [filter]="filter"
+                      (onFiltered)="onFiltered($event)">
+        </ta-filter>
+      </div>
+      <div class="div-table-col div-table-col-flex">
+        <sorting class="pull-right"
+                 [orderBy]="listInfo.orderBy"
+                 [orderDir]="listInfo.orderDir"
+                 [options]="sortOptions"
+                 (onSorted)="onSorted($event)">
+        </sorting>
+        <tournament-announcement-list [content]="tournamentAnnouncementList.listItems"
+                    class="row">
+        </tournament-announcement-list>
+        <pagination [page]="listInfo.page"
+                    [collectionSize]="tournamentAnnouncementList.count"
+                    [pageSize]="listInfo.take">
+        </pagination>
+      </div>
 </div>

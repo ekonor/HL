@@ -25,7 +25,7 @@
                [hasPermission]="['tournamentadministrator']"
                onAuthorizedPermission="show"
                onUnauthorizedPermission="hide">
-              <div class="btn-group-vertical btn-group-toggle" ngbRadioGroup name="state" [(ngModel)]="filter.state">
+              <div class="btn-group-vertical btn-group-toggle elements-group-border" ngbRadioGroup name="state" [(ngModel)]="filter.state">
                 <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
                   <input type="radio" name="isRegistration" ngbButton value="ApprovedByModerator">Идет регистрация
                 </label>
@@ -56,7 +56,7 @@
                 </label>
               </div>
           </div>
-          <div class="">
+          <div class="buttons-wrapper">
               <button type="button" class="btn btn-primary" (click)="search()">
                 <i class="fa fa-search"></i>
               </button>

@@ -1,131 +1,71 @@
-<div class="ta-filter ta-filter-wrap container">
-  <div class="row">
-    <div class="col-md-12 col-lg-12 col-xs-12 admin-panel">
-      <span class="toggle" (click)="toggle()" style="margin-left: 5px;"><i [class]="getToggleIcon()"></i></span>
+<div class="ta-filter ta-filter-wrap">
+    <div class="admin-panel">
+      <span class="toggle" title="{{getToggleTitle(toggled)}}" (click)="toggle()" style="margin-left: 5px;"><i [class]="getToggleIcon()"></i></span>
     </div>
-    <div class="jumbotron col-md-12 col-lg-12 col-xs-12" [hidden]="toggled">
+    <div class="jumbotron" [hidden]="toggled">
         <form>
-          <div class="row">
-            <!--div class="col-md-4">
-              <label for="arenaTypeId">Тип арены</label>
-              <select id="arenaTypeId"[(ngModel)]="filter.arenaTypeId" name="arenaTypeId" class="form-control">
-                <option *ngFor="let arenaType of arenaTypes"  [ngValue]="arenaType.id">{{arenaType.name}}</option>
-              </select>
-            </div-->
-            <div class="col-md-8">
-                <app-city-filter *ngIf="city" [city]="city" (onChanged)="setCity($event)"></app-city-filter>
-            </div>
+          <app-city-filter *ngIf="city" [city]="city" (onChanged)="setCity($event)"></app-city-filter>
+          <input type="text" name="searchText" [(ngModel)]="filter.searchText" placeholder="Название или строка поиска" class="form-control">
+          <label for="startDateFrom">Дата проведения c</label>
+          <input id="startDateFrom"
+                 type="date"
+                 name="startDateFrom"
+                 [(ngModel)]="filter.startDateFrom"
+                 placeholder="Дата проведения, от"
+                 class="form-control">
+          <label for="startDateTo">до</label>
+          <input id="startDateTo"
+                 type="date"
+                 name="startDateTo"
+                 [(ngModel)]="filter.startDateTo"
+                 placeholder="Дата проведения, до"
+                 class="form-control">
+          <div class="btn-group-vertical btn-group-toggle elements-group-border" ngbRadioGroup name="gender" [(ngModel)]="filter.gender">
+            <label class="btn-primary label-button fixed-size-button-s" ngbButtonLabel>
+              <input type="radio" name="Male" ngbButton value="Male"><i class="fa fa-male"></i>
+            </label>
+            <label class="btn-primary label-button fixed-size-button-s" ngbButtonLabel>
+              <input type="radio" name="Female" ngbButton value="Female"><i class="fa fa-female"></i>
+            </label>
           </div>
-          <div class="row">
-              <div class="col-md-12">
-                  <input type="text" name="searchText" [(ngModel)]="filter.searchText" placeholder="Название или строка поиска" class="form-control">
-              </div>
+          <div class="btn-group-vertical btn-group-toggle elements-group-border" ngbRadioGroup name="state" [(ngModel)]="filter.state">
+            <label class="btn-primary fixed-size-button-lg label-button" ngbButtonLabel>
+              <input type="radio" name="isRegistration" ngbButton value="ApprovedByModerator">Идет регистрация
+            </label>
+            <label class="btn-primary fixed-size-button-lg label-button" ngbButtonLabel>
+              <input type="radio" name="isFinished" ngbButton value="Finished">Завершенные
+            </label>
           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label for="startDateFrom">Дата проведения c</label>
-              <input id="startDateFrom"
-                     type="date"
-                     name="startDateFrom"
-                     [(ngModel)]="filter.startDateFrom"
-                     placeholder="Дата проведения, от"
-                     class="form-control">
-            </div>
-            <div class="col-md-6">
-              <label for="startDateTo">до</label>
-              <input id="startDateTo"
-                     type="date"
-                     name="startDateTo"
-                     [(ngModel)]="filter.startDateTo"
-                     placeholder="Дата проведения, до"
-                     class="form-control">
-            </div>
+          <div class="btn-group-vertical btn-group-toggle elements-group-border" ngbRadioGroup name="age" [(ngModel)]="filter.ageGroup">
+            <label class="btn-primary label-button fixed-size-button-md" ngbButtonLabel>
+              <input type="radio" name="Adults" ngbButton value="Adults">Взрослые
+            </label>
+            <label class="btn-primary label-button fixed-size-button-md" ngbButtonLabel>
+              <input type="radio" name="Youth" ngbButton value="Youth">Молодежь
+            </label>
+            <label class="btn-primary label-button fixed-size-button-md" ngbButtonLabel>
+              <input type="radio" name="Juniors" ngbButton value="Juniors">Юниоры
+            </label>
+            <label class="btn-primary label-button fixed-size-button-md" ngbButtonLabel>
+              <input type="radio" name="Kids" ngbButton value="Kids">Дети
+            </label>
           </div>
-          <div class="row">
-            <div class="col-md-4">
-              <div class="btn-group btn-group-toggle" ngbRadioGroup name="gender" [(ngModel)]="filter.gender">
-                <label class="btn-primary label-button fixed-size-button-s" ngbButtonLabel>
-                  <input type="radio" name="Male" ngbButton value="Male"><i class="fa fa-male"></i>
-                </label>
-                <label class="btn-primary label-button fixed-size-button-s" ngbButtonLabel>
-                  <input type="radio" name="Female" ngbButton value="Female"><i class="fa fa-female"></i>
-                </label>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="btn-group btn-group-toggle" ngbRadioGroup name="state" [(ngModel)]="filter.state">
-                <label class="btn-primary fixed-size-button-lg label-button" ngbButtonLabel>
-                  <input type="radio" name="isRegistration" ngbButton value="ApprovedByModerator">Идет регистрация
-                </label>
-                <label class="btn-primary fixed-size-button-lg label-button" ngbButtonLabel>
-                  <input type="radio" name="isFinished" ngbButton value="Finished">Завершенные
-                </label>
-              </div>
-            </div>
+          <div class="btn-group-vertical btn-group-toggle elements-group-border" ngbRadioGroup name="isCommercial" [(ngModel)]="filter.isCommercial">
+            <label class="btn-primary fixed-size-button-lg label-button" ngbButtonLabel>
+              <input type="radio" name="Commercial" ngbButton value="true">Коммерческий
+            </label>
+            <label class="btn-primary fixed-size-button-lg label-button" ngbButtonLabel>
+              <input type="radio" name="NoCommercial" ngbButton value="false">Некоммерческий
+            </label>
           </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="btn-group btn-group-toggle" ngbRadioGroup name="age" [(ngModel)]="filter.ageGroup">
-                <label class="btn-primary label-button fixed-size-button-md" ngbButtonLabel>
-                  <input type="radio" name="Adults" ngbButton value="Adults">Взрослые
-                </label>
-                <label class="btn-primary label-button fixed-size-button-md" ngbButtonLabel>
-                  <input type="radio" name="Youth" ngbButton value="Youth">Молодежь
-                </label>
-                <label class="btn-primary label-button fixed-size-button-md" ngbButtonLabel>
-                  <input type="radio" name="Juniors" ngbButton value="Juniors">Юниоры
-                </label>
-                <label class="btn-primary label-button fixed-size-button-md" ngbButtonLabel>
-                  <input type="radio" name="Kids" ngbButton value="Kids">Дети
-                </label>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="btn-group btn-group-toggle" ngbRadioGroup name="isCommercial" [(ngModel)]="filter.isCommercial">
-                    <label class="btn-primary fixed-size-button-lg label-button" ngbButtonLabel>
-                      <input type="radio" name="Commercial" ngbButton value="true">Коммерческий
-                    </label>
-                    <label class="btn-primary fixed-size-button-lg label-button" ngbButtonLabel>
-                      <input type="radio" name="NoCommercial" ngbButton value="false">Некоммерческий
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--div class="row">
-            <div class="col-md-6">
-              <label for="startDateFrom">Год рождения, от</label>
-              <input id="startDateFrom"
-                     type="date"
-                     name="startDateFrom"
-                     [(ngModel)]="filter.startDateFrom"
-                     placeholder="Год рождения, от"
-                     class="form-control">
-            </div>
-            <div class="col-md-6">
-              <label for="startDateTo">до</label>
-              <input id="startDateTo"
-                     type="date"
-                     name="startDateTo"
-                     [(ngModel)]="filter."
-                     placeholder="Год рождения, до"
-                     class="form-control">
-            </div>
-          </div-->
-          <div class="row">
-            <div class="col-md-4">
+          <div class="buttons-wrapper">
               <button type="button" class="btn btn-primary" (click)="search()">
                 <i class="fa fa-search"></i>
               </button>
               <button type="reset" class="btn btn-default">
                 <i class="fa fa-close"></i>
               </button>
-            </div>
           </div>
         </form>
     </div>
-  </div>
 </div>
-
-
