@@ -50,6 +50,11 @@ user-pic img {
 .inline-block {
   display: inline-block;
 }
+
+.inline {
+  display: inline;
+}
+
 .logo-img-bg-wrapper {
   height: 50px;
   width: 50px;
@@ -76,7 +81,7 @@ user-pic img {
 
 .logo-text {
   padding: 5px;
-  overflow: hidden;
+  // overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -100,6 +105,7 @@ user-pic img {
     vertical-align: middle;
     text-align: center;
     padding: 5px;
+    // line-height: 50px;
   }
 
   .div-table-col-left {
@@ -111,7 +117,7 @@ user-pic img {
   }
 
   .div-table-col-fixed-middle {
-    width: 70px;
+    width: 80px;
     line-height: 50px;
   }
 
@@ -164,22 +170,8 @@ user-pic img {
 }
 /* END OF TABLE DIV */
 
-/* mini admin panel */
-/* END of mini admin panel */
-/* .admin-panel {
-  padding-left: 34px;
-  padding-bottom: 5px;
+pagination, ngb-pagination {
+  padding: 10px 0 0 0;
+  margin: 0 auto;
+  display: inline-block;
 }
-.admin-panel .btn-floating {
-  height: 20px;
-  width: 20px;
-  vertical-align: middle;
-  text-align: center;
-}
-
-.admin-panel .btn-floating i {
-  line-height: 20px;
-  min-width: 20px;
-  font-size: 14px;
-  text-align: center;
-} */

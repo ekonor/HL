@@ -21,22 +21,27 @@
         </ta-admin-filter>
       </div>
       <div class="div-table-col div-table-col-flex">
-        <!--sorting [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList" class="pull-right"
+        <sorting [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList" class="pull-right"
                  [orderBy]="listInfo.orderBy"
                  [orderDir]="listInfo.orderDir"
                  [options]="sortOptions"
                  (onSorted)="onSorted($event)">
-        </sorting-->
+        </sorting>
         <ta-admin-list [hidden]="dataIsLoading"
                        *ngIf="tournamentAnnouncementList"
                        [content]="tournamentAnnouncementList.listItems"
                        (onChanged)="getTournamentAnnouncements()">
         </ta-admin-list>
+        <pagination [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList" [page]="listInfo.page"
+                    [collectionSize]="tournamentAnnouncementList.count"
+                    [pageSize]="listInfo.take">
+        </pagination>
       </div>
-      <!--pagination [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList" [page]="listInfo.page"
-                  [collectionSize]="tournamentAnnouncementList.count"
-                  [pageSize]="listInfo.take">
-      </pagination-->
     </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+
+      </div>
   </div>
 </div>
