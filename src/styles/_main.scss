@@ -169,26 +169,11 @@ user-pic img {
 }
 /* END OF TABLE DIV */
 
-/* mini admin panel */
-/* END of mini admin panel */
-/* .admin-panel {
-  padding-left: 34px;
-  padding-bottom: 5px;
+pagination, ngb-pagination {
+  padding: 10px 0 0 0;
+  margin: 0 auto;
+  display: inline-block;
 }
-.admin-panel .btn-floating {
-  height: 20px;
-  width: 20px;
-  vertical-align: middle;
-  text-align: center;
-}
-
-.admin-panel .btn-floating i {
-  line-height: 20px;
-  min-width: 20px;
-  font-size: 14px;
-  text-align: center;
-} */
-
 /* filters */
 .elements-group-border {
   border: 1px solid lightgrey;
@@ -199,3 +184,43 @@ user-pic img {
   margin: 3px auto;
 }
 
+/* filters */
+.ta-filter-wrap, .arena-filter-wrap {
+
+  font-size: 1rem;
+  max-width: 250px;
+
+  .label-button {
+    font-size: 0.8rem;
+    margin: 6px auto;
+    border-radius: 2px;
+    border: 0;
+    transition: .2s ease-out;
+    text-transform: uppercase;
+    white-space: normal !important;
+    word-wrap: break-word;
+    cursor: pointer;
+  }
+  label.btn-primary.active {
+    background-color: red!important;
+  }
+
+  input {
+    font-size: 1rem;
+  }
+
+  .buttons-wrapper {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .buttons-wrapper button {
+    width: 40%;
+  }
+
+  form {
+    margin: 0;
+  }
+}
+
+/* end of filters */

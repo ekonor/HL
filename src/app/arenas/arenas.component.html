@@ -1,5 +1,5 @@
 <loader [hidden]="!dataIsLoading"></loader>
-<div class="arenas container" *ngIf="arenaList">
+<div class="arenas" *ngIf="arenaList">
   <div class="row">
     <div class="col-md-12">
       <div class="heading heading-12 margin-top-bottom-30">
@@ -12,21 +12,26 @@
         <hr>
       </div>
     </div>
-    <arena-filter [filter]="filter"
-                  (onFiltered)="onFiltered($event)">
-    </arena-filter>
-    <sorting class="pull-right"
-             [orderBy]="listInfo.orderBy"
-             [orderDir]="listInfo.orderDir"
-             [options]="sortOptions"
-             (onSorted)="onSorted($event)">
-    </sorting>
-    <arena-list [content]="arenaList.listItems"
-                class="row">
-    </arena-list>
-    <pagination [page]="listInfo.page"
-                [collectionSize]="arenaList.count"
-                [pageSize]="listInfo.take">
-    </pagination>
   </div>
+  <div class="div-table">
+    <div class="div-table-row">
+      <div class="div-table-col div-table-col-fixed div-table-col-left">
+          <arena-filter [filter]="filter"
+                        (onFiltered)="onFiltered($event)">
+          </arena-filter>
+      </div>
+      <div class="div-table-col div-table-col-flex">
+        <sorting class="pull-right"
+                 [orderBy]="listInfo.orderBy"
+                 [orderDir]="listInfo.orderDir"
+                 [options]="sortOptions"
+                 (onSorted)="onSorted($event)">
+        </sorting>
+        <arena-list [content]="arenaList.listItems">
+        </arena-list>
+        <pagination [page]="listInfo.page"
+                    [collectionSize]="arenaList.count"
+                    [pageSize]="listInfo.take">
+        </pagination>
+      </div>
 </div>

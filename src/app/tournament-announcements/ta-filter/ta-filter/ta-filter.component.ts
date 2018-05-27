@@ -15,8 +15,7 @@ import {TournamentAnnouncementFilter} from 'app/tournament-announcements/shared/
 @Component({
   //moduleId: module.id,
   selector: 'ta-filter',
-  templateUrl: 'ta-filter.component.html',
-  styleUrls: ['../ta-filter-general.component.scss']
+  templateUrl: 'ta-filter.component.html'
 })
 
 @Injectable()

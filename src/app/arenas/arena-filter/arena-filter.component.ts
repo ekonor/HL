@@ -87,4 +87,12 @@ export class ArenaFilterComponent implements OnInit {
       return 'fa fa-angle-up';
     }
   }
+
+  public getToggleTitle(toggled: boolean): string {
+    if (toggled) {
+      return 'Развернуть';
+    } else {
+      return 'Свернуть';
+    }
+  }
 }
