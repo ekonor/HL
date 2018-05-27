@@ -20,14 +20,14 @@
         </ta-filter>
       </div>
       <div class="div-table-col div-table-col-flex">
-        <sorting class="pull-right"
+        <sorting
                  [orderBy]="listInfo.orderBy"
                  [orderDir]="listInfo.orderDir"
                  [options]="sortOptions"
-                 (onSorted)="onSorted($event)">
+                 (onSorted)="onSorted($event)"
+                  class="pull-right">
         </sorting>
-        <tournament-announcement-list [content]="tournamentAnnouncementList.listItems"
-                    class="row">
+        <tournament-announcement-list [content]="tournamentAnnouncementList.listItems">
         </tournament-announcement-list>
         <pagination [page]="listInfo.page"
                     [collectionSize]="tournamentAnnouncementList.count"
@@ -35,3 +35,48 @@
         </pagination>
       </div>
 </div>
+
+
+<!--loader [hidden]="!dataIsLoading"></loader>
+<div class="tournament-announcements" *ngIf="tournamentAnnouncementList">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="heading heading-12 margin-top-bottom-30">
+        <h1>
+          <span class="left"></span>
+          Анонсы хоккейных турниров
+          <span class="right"></span>
+        </h1>
+        <hr>
+      </div>
+    </div>
+  </div>
+  <div class="div-table">
+    <div class="div-table-row">
+      <div class="div-table-col div-table-col-fixed div-table-col-left">
+        <ta-filter [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList"
+                         [filter]="filter"
+                         (onFiltered)="onFiltered($event)">
+        </ta-filter>
+      </div>
+      <div class="div-table-col div-table-col-flex">
+        <sorting [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList" class="pull-right"
+                 [orderBy]="listInfo.orderBy"
+                 [orderDir]="listInfo.orderDir"
+                 [options]="sortOptions"
+                 (onSorted)="onSorted($event)">
+        </sorting>
+        <tournament-announcement-list [hidden]="dataIsLoading"
+                       *ngIf="tournamentAnnouncementList"
+                       [content]="tournamentAnnouncementList.listItems"
+                       (onChanged)="getTournamentAnnouncements()">
+        </tournament-announcement-list>
+        <pagination [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList" [page]="listInfo.page"
+                    [collectionSize]="tournamentAnnouncementList.count"
+                    [pageSize]="listInfo.take">
+        </pagination>
+      </div>
+    </div>
+  </div>
+</div-->
+

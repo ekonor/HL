@@ -1,36 +1,37 @@
-<div class="tournament-announcement-list container">
+<div class="tournament-announcement-list">
   <div class="row">
-    <div class="col-lg-6 col-sm-6 blog-item" *ngFor="let tournamentAnnouncement of content">
-      <div class="item h-100">
-        <div class="item-img-wrapper" >
-          <div class="item-img-bg-wrapper" >
-            <img class="item-img-bg"
-                 [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)"
-                 alt=""
-                 onerror = "this.style.display = 'none'">
-          </div>
-          <a [routerLink]="['/tournament-announcement',tournamentAnnouncement.id]" routerLinkActive="active">
-            <img class="item-img-main"
-                 [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)"
-                 alt=""
-                 onerror = "this.style.display = 'none'" >
-          </a>
-        </div>
-        <div class="item-body">
-          <div class="item-title-main">
-            <p>
-              {{tournamentAnnouncement.cityName ? tournamentAnnouncement.cityName+', ': ''}}
-              {{tournamentAnnouncement.startDate | date :  "dd.MM.y"}}
-              &nbsp;&mdash;&nbsp;
-              {{tournamentAnnouncement.endDate | date :  "dd.MM.y"}}
-            </p>
-          </div>
-          <h5 class="item-title admin-panel">
-            <a class="title-text" (click)="viewTournamentAnnouncement(tournamentAnnouncement)" alt="Подробнее...">
-              {{tournamentAnnouncement.name}}
+    <ng-template ngFor let-i [ngForOf]="[0,1]">
+      <div class="col-lg-6 col-sm-6 blog-item" *ngFor="let tournamentAnnouncement of content">
+        <div class="item h-100">
+          <div class="item-img-wrapper" >
+            <div class="item-img-bg-wrapper" >
+              <img class="item-img-bg"
+                   [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)"
+                   alt=""
+                   onerror = "this.style.display = 'none'">
+            </div>
+            <a [routerLink]="['/tournament-announcement',tournamentAnnouncement.id]" routerLinkActive="active">
+              <img class="item-img-main"
+                   [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)"
+                   alt=""
+                   onerror = "this.style.display = 'none'" >
             </a>
-          </h5>
-          <span class="item-text">
+          </div>
+          <div class="item-body">
+            <div class="item-title-main">
+              <p>
+                {{tournamentAnnouncement.cityName ? tournamentAnnouncement.cityName+', ': ''}}
+                {{tournamentAnnouncement.startDate | date :  "dd.MM.y"}}
+                &nbsp;&mdash;&nbsp;
+                {{tournamentAnnouncement.endDate | date :  "dd.MM.y"}}
+              </p>
+            </div>
+            <h5 class="item-title admin-panel">
+              <a class="title-text" (click)="viewTournamentAnnouncement(tournamentAnnouncement)" alt="Подробнее...">
+                {{tournamentAnnouncement.name}}
+              </a>
+            </h5>
+            <span class="item-text">
               <div class="row block-with-logo">
                 <div class="col-md-6">
                   <p>Арена:</p>
@@ -81,14 +82,15 @@
               </span>
           </span>
 
-          <span class="bottom-btn">
+            <span class="bottom-btn">
             <button (click)="viewTournamentAnnouncement(tournamentAnnouncement)"
                     class="btn btn-deep-orange waves-effect waves-light">
               Подробнее...
             </button>
           </span>
+          </div>
         </div>
       </div>
-    </div>
+    </ng-template>
   </div>
 </div>

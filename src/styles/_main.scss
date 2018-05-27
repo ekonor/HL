@@ -80,7 +80,7 @@ user-pic img {
 
 .logo-text {
   padding: 5px;
-  overflow: hidden;
+  // overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -185,9 +185,14 @@ pagination, ngb-pagination {
 }
 
 /* filters */
+
+.arena-filter-wrap {
+  width: 250px;
+}
+
 .ta-filter-wrap, .arena-filter-wrap {
 
-  font-size: 1rem;
+  //font-size: 1rem;
   max-width: 250px;
 
   select {
@@ -234,11 +239,25 @@ pagination, ngb-pagination {
 
 /* end of filters */
 
-.ta-admin, .arenas {
+sorting {
+  display: block;
+}
+.ta-admin, .arenas, .tournament-announcements {
   font-size: 1rem;
   margin: 0 auto;
   padding: 5px 15px;
-  button {
+  /*button {
     font-size: 1rem;
-  }
+  }*/
+}
+
+.arena-list {
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  padding: 50px;
+}
+
+.tournament-announcement-list {
+  margin-top: 60px;
 }
