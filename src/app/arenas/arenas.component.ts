@@ -13,7 +13,6 @@ import { SortOption } from "app/shared/sorting/sort-option";
   moduleId: module.id,
   selector: "arenas",
   templateUrl: "arenas.component.html"
-  // styleUrls: ["arenas.component.scss"]
 })
 
 @Injectable()

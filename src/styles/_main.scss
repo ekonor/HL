@@ -38,7 +38,6 @@ user-pic img {
   width: 50px;
   text-align: center;
   position: relative;
-  // margin: 0 auto 5px auto;
   display: inline-block;
   margin: 0 auto;
 }
@@ -174,6 +173,7 @@ pagination, ngb-pagination {
   margin: 0 auto;
   display: inline-block;
 }
+
 /* filters */
 .elements-group-border {
   border: 1px solid lightgrey;
@@ -189,6 +189,14 @@ pagination, ngb-pagination {
 
   font-size: 1rem;
   max-width: 250px;
+
+  select {
+    width: 200px;
+  }
+
+  .jumbotron {
+    padding: 1.5rem 1rem;
+  }
 
   .label-button {
     font-size: 0.8rem;
@@ -216,6 +224,7 @@ pagination, ngb-pagination {
 
   .buttons-wrapper button {
     width: 40%;
+    text-align: center;
   }
 
   form {
@@ -224,3 +233,12 @@ pagination, ngb-pagination {
 }
 
 /* end of filters */
+
+.ta-admin, .arenas {
+  font-size: 1rem;
+  margin: 0 auto;
+  padding: 5px 15px;
+  button {
+    font-size: 1rem;
+  }
+}
