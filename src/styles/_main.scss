@@ -81,7 +81,7 @@ user-pic img {
 
 .logo-text {
   padding: 5px;
-  // overflow: hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -105,7 +105,6 @@ user-pic img {
     vertical-align: middle;
     text-align: center;
     padding: 5px;
-    // line-height: 50px;
   }
 
   .div-table-col-left {
@@ -117,7 +116,7 @@ user-pic img {
   }
 
   .div-table-col-fixed-middle {
-    width: 80px;
+    width: 70px;
     line-height: 50px;
   }
 
@@ -170,11 +169,25 @@ user-pic img {
 }
 /* END OF TABLE DIV */
 
-pagination, ngb-pagination {
-  padding: 10px 0 0 0;
-  margin: 0 auto;
-  display: inline-block;
+/* mini admin panel */
+/* END of mini admin panel */
+/* .admin-panel {
+  padding-left: 34px;
+  padding-bottom: 5px;
 }
+.admin-panel .btn-floating {
+  height: 20px;
+  width: 20px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.admin-panel .btn-floating i {
+  line-height: 20px;
+  min-width: 20px;
+  font-size: 14px;
+  text-align: center;
+} */
 
 /* filters */
 .elements-group-border {
@@ -185,8 +198,3 @@ pagination, ngb-pagination {
   border-radius: 5px;
   margin: 3px auto;
 }
-
-.ta-filter-wrap .jumbotron {
-  padding: 1.5rem 1rem;
-}
-/* end of filters */
