@@ -10,8 +10,8 @@
         <i class="fa fa-plus"></i>
       </a>
     </div>
-
-    <div class="col-lg-5 col-sm-5 blog-item" *ngFor="let arena of content">
+    <ng-template ngFor let-i [ngForOf]="[0,1]">
+      <div class="col-lg-6 col-sm-6 blog-item block-item" *ngFor="let arena of content">
           <div class="card h-100">
             <div class="item-img-wrapper" >
               <div class="item-img-bg-wrapper" >
@@ -28,15 +28,7 @@
               <h5 class="item-title admin-panel">
                 <a class="title-text" (click)="viewArena(arena)" alt="Подробнее...">
                   {{arena.name}}
-                    </a>
-                <!--button class="btn-floating deep-orange waves-light waves-effect"
-                   title="Редактировать арену"
-                   (click)="editArena(arena)"
-                   [hasPermission]="['SuperAdministrator']"
-                   onAuthorizedPermission="enable"
-                   onUnauthorizedPermission="disable">
-                  <i class="fa fa-pencil"></i>
-                </button-->
+                </a>
                 <a class="btn-floating deep-orange waves-light waves-effect visible-btn"
                    title="Редактировать арену"
                    (click)="editArena(arena)"
@@ -60,6 +52,7 @@
               </span>
             </div>
           </div>
-    </div>
+      </div>
+    </ng-template>
   </div>
 </div>

@@ -21,17 +21,18 @@
           </arena-filter>
       </div>
       <div class="div-table-col div-table-col-flex">
-        <!--sorting
+        <sorting
                  [orderBy]="listInfo.orderBy"
                  [orderDir]="listInfo.orderDir"
                  [options]="sortOptions"
-                 (onSorted)="onSorted($event)">
-        </sorting-->
+                 (onSorted)="onSorted($event)"
+                  class="pull-right">
+        </sorting>
         <arena-list [content]="arenaList.listItems">
         </arena-list>
-        <!--pagination [page]="listInfo.page"
+        <pagination [page]="listInfo.page"
                     [collectionSize]="arenaList.count"
                     [pageSize]="listInfo.take">
-        </pagination-->
+        </pagination>
       </div>
 </div>

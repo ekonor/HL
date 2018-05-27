@@ -12,8 +12,7 @@ import { ArenaListItem } from "app/arenas/shared/arena-list-item";
   selector: "arena-list",
   inputs: ['content'],
   //changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: "arena-list.component.html",
-  styleUrls: ["arena-list.component.scss"]
+  templateUrl: "arena-list.component.html"
 })
 
 @Injectable()

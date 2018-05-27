@@ -12,8 +12,7 @@ import { Arena} from 'app/arenas/shared/arena';
   moduleId: module.id,
   selector: 'tournament-announcement-list',
   inputs: ['content'],
-  templateUrl: 'tournament-announcement-list.component.html',
-  styleUrls: ['tournament-announcement-list.component.scss']
+  templateUrl: 'tournament-announcement-list.component.html'
 })
 
 @Injectable()
