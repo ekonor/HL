@@ -115,7 +115,7 @@ user-pic img {
   }
 
   .div-table-col-fixed-middle {
-    width: 70px;
+    width: 80px;
     line-height: 50px;
   }
 
@@ -251,6 +251,18 @@ sorting {
 /* ta-list, arena-list */
 .tournament-announcement-list, .arena-list {
   margin-top: 60px;
+
+  .label-button input {
+    display: none !important;
+  }
+
+  .btn span.glyphicon {
+    opacity: 0;
+  }
+  .btn.active span.glyphicon {
+    opacity: 1;
+  }
+
 
   .icon-wrap i {
     margin: 0;
@@ -664,3 +676,5 @@ sorting {
 }
 
 /* END OF arena-list, ta-list */
+
+

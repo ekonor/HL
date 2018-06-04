@@ -35,8 +35,14 @@ export class TournamentAnnouncementsService {
       params = params.append('startDateFrom', filter.startDateFrom);
     if (filter.startDateTo)
       params = params.append('startDateTo', filter.startDateTo);
-    if (filter.state)
-      params = params.append('state', filter.state);
+    if (filter.state) {
+      if (filter.state.isRegistration === true) {
+        params = params.append('state', 'ApprovedByModerator');
+      }
+      if (filter.state.isDraft === true) {
+        params = params.append('state', 'Draft');
+      }
+    }
     if (filter.ageGroup)
       params = params.append('ageGroup', filter.ageGroup);
     if (filter.gender)
@@ -60,8 +66,16 @@ export class TournamentAnnouncementsService {
       params = params.append('startDateFrom', filter.startDateFrom);
     if (filter.startDateTo)
       params = params.append('startDateTo', filter.startDateTo);
-    if (filter.state)
-      params = params.append('state', filter.state);
+    /*if (filter.state) {
+      if (filter.state.isRegistration === true) {
+        params = params.append('state', 'ApprovedByModerator');
+      }
+      if (filter.state.isDraft === true) {
+        params = params.append('state', 'Draft');
+      }
+    }*/
+    params = params.append('state', 'ApprovedByModerator,Draft');
+
     if (filter.ageGroup)
       params = params.append('ageGroup', filter.ageGroup);
     if (filter.gender)

@@ -40,8 +40,7 @@ export class TournamentAnnouncementsComponent implements OnInit {
       { title: 'Дата создания анонса', value: 'CreateDate' },
       { title: 'Дата начала турнира', value: 'StartDate' }
     ];
-    //this.filter = new TournamentAnnouncementFilter();
-    this.filter.state = 'ApprovedByModerator';
+    this.filter.state.isRegistration = true;
   }
 
   ngOnInit() {

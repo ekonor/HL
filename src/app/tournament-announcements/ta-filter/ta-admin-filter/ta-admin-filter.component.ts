@@ -11,6 +11,7 @@ import 'rxjs/add/operator/merge';
 import { TournamentAnnouncementsService } from 'app/tournament-announcements/shared/tournament-announcements.service';
 import { City } from 'app/core/geo/city';
 import {TournamentAnnouncementFilter} from 'app/tournament-announcements/shared/tournament-announcement-filter';
+import {TournamentAnnouncementFilterState} from 'app/tournament-announcements/shared/tournament-announcement-filter-state';
 
 @Component({
   //moduleId: module.id,
@@ -37,6 +38,7 @@ export class TAAdminFilterComponent implements OnInit {
     const filterState = JSON.parse(localStorage.getItem('tournamentAnnouncementFilterFilterState'));
     // TODO проверка существования поля toggled
     this.toggled = filterState && filterState.toggled;
+    this.filter = new TournamentAnnouncementFilter();
   }
 
   ngOnInit() {
@@ -58,6 +60,7 @@ export class TAAdminFilterComponent implements OnInit {
     if (this.city && this.city.id) {
       this.filter.cityId = this.city.id;
     }
+    console.log(this.filter.state);
     this.onFiltered.emit();
   }
 
