@@ -27,6 +27,16 @@
                  (onSorted)="onSorted($event)"
                   class="pull-right">
         </sorting>
+        <span [hasPermission]="['tournamentadministrator']" class="pull-right navbar admin-panel-operations">
+          <a class="visible-btn"
+             title="Добавить новый анонс"
+             (click)="addTournamentAnnouncement()"
+             [hasPermission]="['tournamentadministrator']"
+             onAuthorizedPermission="show"
+             onUnauthorizedPermission="hide">
+            <i [class]="getAddIconClass()"></i>
+          </a>
+        </span>
         <tournament-announcement-list [content]="tournamentAnnouncementList.listItems">
         </tournament-announcement-list>
         <pagination [page]="listInfo.page"

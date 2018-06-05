@@ -3,7 +3,7 @@
 </ng-template>
 <div class="row city-filter">
   <div class="col-md-6">
-    <label for="country">Страна</label>
+    <label for="country">{{ getCountryTitle() }}</label>
     <input id="country"
            name="country"
            type="text"
@@ -15,7 +15,7 @@
            (ngModelChange)="updateCountry()"/>
   </div>
   <div class="col-md-6">
-    <label for="city">Город</label>
+    <label for="city">{{ getCityTitle() }}</label>
     <input [readonly]="!country" id="city"
            name="city"
            type="text"

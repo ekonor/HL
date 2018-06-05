@@ -23,6 +23,7 @@ import {Country} from "./country";
 export class CityComponent implements OnInit {
 
   @Input() city: City;
+  @Input() isRequired: boolean = false;
   @Output() onChanged = new EventEmitter<City>();
 
   country: Country;
@@ -99,5 +100,13 @@ export class CityComponent implements OnInit {
       this.city = new City;
       // this.country = new Country;
     }
+  }
+
+  getCountryTitle() {
+    return this.isRequired ? 'Страна *' : 'Страна';
+  }
+
+  getCityTitle() {
+    return this.isRequired ? 'Город *' : 'Город';
   }
 }

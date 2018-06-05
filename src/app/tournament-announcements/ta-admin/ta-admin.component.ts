@@ -1,5 +1,5 @@
 import { Component, Injectable, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ListResponse } from 'app/shared/list/list-response';
 import { ListInfo } from 'app/shared/list/list-info';
@@ -13,8 +13,7 @@ import { TournamentAnnouncementFilter } from 'app/tournament-announcements/share
 @Component({
   moduleId: module.id,
   selector: 'ta-admin',
-  templateUrl: 'ta-admin.component.html',
-  styleUrls: ['ta-admin.component.scss']
+  templateUrl: 'ta-admin.component.html'
 })
 
 @Injectable()
@@ -33,7 +32,8 @@ export class TAAdminComponent implements OnInit {
   constructor(
     private readonly tournamentService: TournamentAnnouncementsService,
     private readonly paginationService: PaginationService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private router: Router) {
     this.pageSize = this.paginationService.pageSize;
 
     this.sortOptions = [
@@ -80,5 +80,13 @@ export class TAAdminComponent implements OnInit {
         },
         () => this.dataIsLoading = false
       );
+  }
+
+  public addTournamentAnnouncement(): void {
+    this.router.navigate([ 'tournament-announcements/create']);
+  }
+
+  getAddIconClass() {
+    return this.tournamentService.getAddIconClass();
   }
 }

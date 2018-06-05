@@ -66,15 +66,15 @@ export class TournamentAnnouncementsService {
       params = params.append('startDateFrom', filter.startDateFrom);
     if (filter.startDateTo)
       params = params.append('startDateTo', filter.startDateTo);
-    /*if (filter.state) {
+    if (filter.state) {
       if (filter.state.isRegistration === true) {
         params = params.append('state', 'ApprovedByModerator');
       }
       if (filter.state.isDraft === true) {
         params = params.append('state', 'Draft');
       }
-    }*/
-    params = params.append('state', 'ApprovedByModerator,Draft');
+    }
+    //params = params.append('state', 'ApprovedByModerator,Draft');
 
     if (filter.ageGroup)
       params = params.append('ageGroup', filter.ageGroup);
@@ -158,6 +158,10 @@ export class TournamentAnnouncementsService {
 
   public getEditIconClass(): string {
     return 'fa fa-pencil';
+  }
+
+  public getAddIconClass(): string {
+    return 'fa fa-plus';
   }
 
   public getModerationIconClass(flag: boolean): string {

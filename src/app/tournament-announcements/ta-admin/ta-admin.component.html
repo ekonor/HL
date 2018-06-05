@@ -20,13 +20,25 @@
                          (onFiltered)="onFiltered($event)">
         </ta-admin-filter>
       </div>
+
       <div class="div-table-col div-table-col-flex">
+
         <sorting [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList" class="pull-right"
                  [orderBy]="listInfo.orderBy"
                  [orderDir]="listInfo.orderDir"
                  [options]="sortOptions"
                  (onSorted)="onSorted($event)">
         </sorting>
+        <span [hasPermission]="['tournamentadministrator']" class="pull-right navbar admin-panel-operations">
+          <a class="visible-btn"
+             title="Добавить новый анонс"
+             (click)="addTournamentAnnouncement()"
+             [hasPermission]="['tournamentadministrator']"
+             onAuthorizedPermission="show"
+             onUnauthorizedPermission="hide">
+            <i [class]="getAddIconClass()"></i>
+          </a>
+        </span>
         <ta-admin-list [hidden]="dataIsLoading"
                        *ngIf="tournamentAnnouncementList"
                        [content]="tournamentAnnouncementList.listItems"
@@ -38,10 +50,5 @@
         </pagination>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-
-      </div>
   </div>
 </div>
