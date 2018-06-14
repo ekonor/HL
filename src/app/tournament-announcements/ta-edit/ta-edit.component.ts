@@ -32,8 +32,7 @@ import { Arena } from 'app/arenas/shared/arena';
 @Component({
   moduleId: module.id,
   selector: 'ta-edit',
-  templateUrl: 'ta-edit.component.html',
-  styleUrls: ['ta-edit.component.scss']
+  templateUrl: 'ta-edit.component.html'
 })
 
 export class TAEditComponent implements OnInit {

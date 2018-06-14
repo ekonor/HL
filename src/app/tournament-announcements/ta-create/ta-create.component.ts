@@ -25,8 +25,7 @@ import { Arena } from 'app/arenas/shared/arena';
 @Component({
   moduleId: module.id,
   selector: 'ta-create',
-  templateUrl: 'ta-create.component.html',
-  styleUrls: ['ta-create.component.scss']
+  templateUrl: 'ta-create.component.html'
 })
 export class TACreateComponent implements OnInit {
   ta: TournamentAnnouncement;
