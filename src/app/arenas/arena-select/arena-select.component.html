@@ -2,8 +2,8 @@
   {{ r.name}}
 </ng-template>
 <div class="row">
-  <div class="col-md-6">
-    <label for="arenaFilter">Арена</label>
+  <div class="col-md-6 form-group {{ ( isRequired === true ) ? 'required' : '' }}">
+    <label for="arenaFilter">{{ getArenaTitle() }}</label>
     <input id="arenaFilter"
            name="arenaFilter"
            type="text"
@@ -12,7 +12,8 @@
            [ngbTypeahead]="searchArena"
            [resultTemplate]="rt"
            [inputFormatter]="formatter"
-           (ngModelChange)="returnArena()"/>
+           (ngModelChange)="returnArena()"
+           required="{{ ( isRequired === true ) ? 'required' : '' }}"/>
     <span *ngIf="searching">Поиск...</span>
     <div class="invalid-feedback" *ngIf="searchFailed">Извините, арен с заданными параметрами не найдено</div>
   </div>

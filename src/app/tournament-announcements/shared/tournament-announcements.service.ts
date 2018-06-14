@@ -35,16 +35,49 @@ export class TournamentAnnouncementsService {
       params = params.append('startDateFrom', filter.startDateFrom);
     if (filter.startDateTo)
       params = params.append('startDateTo', filter.startDateTo);
-    if (filter.state) {
+    /*if (filter.state) {
       if (filter.state.isRegistration === true) {
         params = params.append('state', 'ApprovedByModerator');
       }
       if (filter.state.isDraft === true) {
         params = params.append('state', 'Draft');
       }
+    }*/
+    if (filter.state) {
+      let arr = [];
+
+      if (filter.state.isFinished === true) {
+        arr.push('Finished');
+      }
+      if (filter.state.isRegistration === true) {
+        arr.push('ApprovedByModerator');
+      }
+      if (arr.length > 0) {
+        params = params.append('states',arr.toString());
+      }
     }
-    if (filter.ageGroup)
-      params = params.append('ageGroup', filter.ageGroup);
+    /*if (filter.ageGroup)
+      params = params.append('ageGroup', filter.ageGroup); */
+    if (filter.ageGroup) {
+      let arr = [];
+
+      if (filter.ageGroup.isAdults === true) {
+        arr.push('Adults');
+      }
+      if (filter.ageGroup.isYouth === true) {
+        arr.push('Youth');
+      }
+      if (filter.ageGroup.isJuniors === true) {
+        arr.push('Juniors');
+      }
+      if (filter.ageGroup.isKids === true) {
+        arr.push('Kids');
+      }
+      if (arr.length > 0) {
+        params = params.append('ageGroup',arr.toString());
+      }
+    }
+
     if (filter.gender)
       params = params.append('gender', filter.gender);
     if (filter.isCommercial)
@@ -58,6 +91,7 @@ export class TournamentAnnouncementsService {
   }
 
   public getTournamentAnnouncementsAdmin(filter: TournamentAnnouncementFilter, listInfo: ListInfo): Observable<ListResponse<TournamentAnnouncementListItem>> {
+
     let params = listInfo.toParams();
 
     if (filter.cityId)
@@ -67,17 +101,49 @@ export class TournamentAnnouncementsService {
     if (filter.startDateTo)
       params = params.append('startDateTo', filter.startDateTo);
     if (filter.state) {
-      if (filter.state.isRegistration === true) {
-        params = params.append('state', 'ApprovedByModerator');
-      }
+      let arr = [];
+
       if (filter.state.isDraft === true) {
-        params = params.append('state', 'Draft');
+        arr.push('Draft');
+      }
+      if (filter.state.isRegistration === true) {
+        arr.push('ApprovedByModerator');
+      }
+      if (filter.state.isReject === true) {
+        arr.push('RejectedByModerator');
+      }
+      if (filter.state.isWait === true) {
+        arr.push('WaitModeration');
+      }
+      if (arr.length > 0) {
+        params = params.append('states',arr.toString());
       }
     }
     //params = params.append('state', 'ApprovedByModerator,Draft');
 
-    if (filter.ageGroup)
-      params = params.append('ageGroup', filter.ageGroup);
+    /*if (filter.ageGroup)
+      params = params.append('ageGroup', filter.ageGroup);*/
+
+    if (filter.ageGroup) {
+      let arr = [];
+
+      if (filter.ageGroup.isAdults === true) {
+        arr.push('Adults');
+      }
+      if (filter.ageGroup.isYouth === true) {
+        arr.push('Youth');
+      }
+      if (filter.ageGroup.isJuniors === true) {
+        arr.push('Juniors');
+      }
+      if (filter.ageGroup.isKids === true) {
+        arr.push('Kids');
+      }
+      if (arr.length > 0) {
+        params = params.append('ageGroup',arr.toString());
+      }
+    }
+
     if (filter.gender)
       params = params.append('gender', filter.gender);
     if (filter.isCommercial)

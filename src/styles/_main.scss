@@ -194,6 +194,7 @@ pagination, ngb-pagination {
 
   //font-size: 1rem;
   max-width: 250px;
+  min-width: 220px;
 
   select {
     width: 200px;
@@ -495,8 +496,6 @@ sorting {
     border: 1px solid #ddd;
   }
 
-
-
   form.filter {
 
   }
@@ -628,9 +627,6 @@ sorting {
     text-align: center;
   }
 
-
-
-
   .h-100 {
     height: auto!important;
   }
@@ -681,4 +677,8 @@ sorting {
 
 /* END OF arena-list, ta-list */
 
+.form-group.required label:after {
+  content:" *";
+  color:red;
+}
 

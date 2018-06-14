@@ -9,6 +9,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/merge';
 
+import { NgForm} from '@angular/forms';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { TournamentAnnouncementsService } from 'app/tournament-announcements/shared/tournament-announcements.service';
@@ -66,7 +67,8 @@ export class TACreateComponent implements OnInit {
   }
 
   // сохранение как черновик
-  public addTournamentAnnouncement(ta: TournamentAnnouncement) {
+  public addTournamentAnnouncement(ta: TournamentAnnouncement, form: NgForm) {
+    //if (form.) console.log("ok") else console.log("bad");
     if (confirm('Вы действительно хотите сохранить анонс?')) {
       // TODO проверка существования города и арены
       this.getDt();
@@ -94,24 +96,6 @@ export class TACreateComponent implements OnInit {
       }
     this.dataIsLoading = false;
     }
-
-  /*public saveAndSendOnModeration(ta: TournamentAnnouncement) {
-    if (confirm('Вы действительно хотите сохранить изменения и отправить анонс на модерацию?')) {
-      ta.state = 'WaitModeration';
-      // TODO проверка существования города и арены
-      this.getDt();
-      this.dataIsLoading = true;
-      this.service.addTournamentAnnouncement(this.ta).subscribe(
-        data => {
-          this.router.navigate(['/profile']);
-        },
-        error => {
-          this.alertService.error(error);
-          this.alertService.error("Не удалось добавить анонс турнира");
-        },
-        () => this.dataIsLoading = false);
-    }
-  }*/
 
   public viewList() {
     if (confirm('Вы действительно хотите отменить изменения и вернуться в профиль?')) {
@@ -212,5 +196,9 @@ export class TACreateComponent implements OnInit {
 
   private onChangedEndRegDt(dt: Date) {
     this.ta.endRegistrationDate = dt;
+  }
+
+  onSubmit(form: NgForm){
+    console.log(form);
   }
 }

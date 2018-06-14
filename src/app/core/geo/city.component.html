@@ -2,8 +2,8 @@
   {{ r.name}}
 </ng-template>
 <div class="row city-filter">
-  <div class="col-md-6">
-    <label for="country">{{ getCountryTitle() }}</label>
+  <div class="col-md-6 form-group {{ ( isRequired === true ) ? 'required' : '' }}">
+    <label for="country">Страна</label>
     <input id="country"
            name="country"
            type="text"
@@ -12,10 +12,11 @@
            [ngbTypeahead]="searchCountry"
            [resultTemplate]="rt"
            [inputFormatter]="formatter"
-           (ngModelChange)="updateCountry()"/>
+           (ngModelChange)="updateCountry()"
+           required="{{ ( isRequired === true ) ? 'required' : '' }}"/>
   </div>
-  <div class="col-md-6">
-    <label for="city">{{ getCityTitle() }}</label>
+  <div class="col-md-6 form-group {{ ( isRequired === true ) ? 'required' : '' }}">
+    <label for="city">Город</label>
     <input [readonly]="!country" id="city"
            name="city"
            type="text"
@@ -24,7 +25,8 @@
            [ngbTypeahead]="searchCity"
            [resultTemplate]="rt"
            [inputFormatter]="formatter"
-           (ngModelChange)="returnCity()"/>
+           (ngModelChange)="returnCity()"
+           required="{{ ( isRequired === true ) ? 'required' : '' }}"/>
     <span *ngIf="searching">Поиск...</span>
     <div class="invalid-feedback" *ngIf="searchFailed">Извините, городов с заданными параметрами не найдено</div>
   </div>

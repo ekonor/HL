@@ -1,19 +1,16 @@
 <loader [hidden]="!dataIsLoading"></loader>
 <div class="ta-create col-md-6 col-md-offset-3" *ngIf="ta">
   <h2>Добавление анонса турнира</h2>
-  <form  #f="ngForm">
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !taname.valid }">
-      <label for="taname">Название анонса*</label>
-      <input type="text" class="form-control" name="taname" [(ngModel)]="ta.name" (ngModelChange)="ta.name = $event" #taname="ngModel" id="taname" required/>
-      <div *ngIf="f.submitted && taname != null && !taname.valid" class="help-block">taname is required</div>
+  <form #myForm="ngForm" (ngSubmit)="addTournamentAnnouncement(ta, myForm)">
+    <div class="form-group required">
+      <label for="taname">Название анонса</label>
+      <input type="text" class="form-control" name="taname" [(ngModel)]="ta.name" (ngModelChange)="ta.name = $event" #taname="ngModel" id="taname" title="Введите название анонса" required="required"/>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && city==null}">
+    <div class="form-group required">
       <app-city-filter [city]="city" [isRequired]="true" (onChanged)="setCity($event)"></app-city-filter>
-      <div *ngIf="f.submitted && city == null" class="help-block">Укажите город</div>
     </div>
-    <div class="form-group" *ngIf="city" [ngClass]="{ 'has-error': f.submitted && city==null}">
-      <arena-select  [cityId]="city.id" [arena]="arena" (onChanged)="setArena($event)"></arena-select>
-      <div *ngIf="f.submitted && arena == null" class="help-block">Укажите арену</div>
+    <div class="form-group required">
+      <arena-select *ngIf="city" [cityId]="city.id" [arena]="arena" [isRequired]="true" (onChanged)="setArena($event)"></arena-select>
     </div>
     <div class="form-group">
       <label>Дата проведения, c</label>
@@ -23,10 +20,9 @@
       <label>Дата проведения, до</label>
       <app-datepicker [dt]="ta.endDate" (onChanged)="onChangedEndDt($event)"></app-datepicker>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !ta.requiredResponseCount.valid }">
+    <div class="form-group">
       <label for="requiredResponseCount">Максимальное количество участников</label>
       <input type="number" min="0" max="2000" step="1" class="form-control" name="requiredResponseCount" [(ngModel)]="ta.requiredResponseCount" (ngModelChange)="ta.requiredResponseCount = $event" #requiredResponseCount="ngModel" ngModel number="true" id="requiredResponseCount"/>
-      <div *ngIf="f.submitted && requiredResponseCount != null && !requiredResponseCount.valid" class="help-block">requiredResponseCount is invalid</div>
     </div>
     <div class="form-group">
       <label for="ageGroup">Возрастная группа</label>
@@ -52,10 +48,9 @@
         <option *ngFor="let costType of costTypes"  [ngValue]="costType.value" >{{costType.name}}</option>
       </select>
     </div>
-    <div *ngIf="ta.isCommercial" class="form-group" [ngClass]="{ 'has-error': f.submitted && !ta.cost.valid }">
+    <div *ngIf="ta.isCommercial" class="form-group">
       <label for="cost">Стоимость участия</label>
       <input type="number" min="0" max="2000" step="1" class="form-control" name="cost" [(ngModel)]="ta.cost" (ngModelChange)="ta.cost = $event" #cost="ngModel" ngModel number="true" id="cost"/>
-      <div *ngIf="f.submitted && cost != null && !cost.valid" class="help-block">cost is invalid</div>
     </div>
     <div class="form-group">
       <label for="isCommercial">Закрытие турнира</label>
@@ -67,22 +62,15 @@
       <label>Окончание регистрации</label>
       <app-datepicker [dt]="ta.endRegistrationDate" (onChanged)="onChangedEndRegDt($event)"></app-datepicker>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !content.valid }">
+    <div class="form-group required">
       <label for="content">Текст анонса</label>
-      <app-ngx-editor [placeholder]="'Текст анонса'" [height]="200" class="form-control" name="content" [(ngModel)]="ta.content" (ngModelChange)="ta.content = $event" #content="ngModel" id="content"></app-ngx-editor>
-      <div *ngIf="f.submitted && content != null && !content.valid" class="help-block">content is invalid</div>
-      </div>
+      <app-ngx-editor [placeholder]="'Текст анонса'" [height]="200" class="form-control" name="content" [(ngModel)]="ta.content" (ngModelChange)="ta.content = $event" #content="ngModel" id="content" required="required"></app-ngx-editor>
+    </div>
     <div class="form-group">
-      <button class="btn btn-primary" (click)="addTournamentAnnouncement(ta)" [disabled]="dataIsLoading">Сохранить как черновик</button>
+      <button type="submit" class="btn btn-primary"  [disabled]="dataIsLoading || myForm.invalid">Сохранить как черновик</button>
       <!--button class="btn btn-danger" (click)="saveAndSendOnModeration(ta)" [disabled]="dataIsLoading">Сохранить и отправить на модерацию</button-->
       <button class="btn btn-primary" (click)="viewList()" [disabled]="dataIsLoading">Отменить изменения и вернуться к списку</button>
       <img *ngIf="dataIsLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
     </div>
   </form>
 </div>
-
-<!--div class="col-md-6 col-md-offset-3">
-  <h2>Редактирование изображений</h2>
-  <img class="img-fluid rounded" [src]="getTournamentLogo(ta)" alt="">
-  <a class="btn-floating deep-orange waves-light waves-effect" title="Редактировать изображение" (click)="editLogo()"><i class="fa fa-pencil"></i></a>
-</div-->

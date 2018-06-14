@@ -46,32 +46,34 @@
                   <input type="checkbox" autocomplete="off" name="isDraft" ngbButton [(ngModel)]="filter.state.isDraft">
                   Черновики
                 </label>
-                <!--label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
-                  <input type="checkbox" autocomplete="off" name="isWait" ngbButton value="WaitModeration">
-                  На модерации
+                <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
+                  <input type="checkbox" autocomplete="off" name="isWait" ngbButton [(ngModel)]="filter.state.isWait">
+                  Ожидают модерации
                 </label>
                 <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
-                  <input type="checkbox" autocomplete="off" name="isReject" ngbButton value="RejectedByModerator">
+                  <input type="checkbox" autocomplete="off" name="isReject" ngbButton [(ngModel)]="filter.state.isReject">
                   Отклонены
-                </label-->
+                </label>
             </div>
-            {{ filter.state | json }}
           </div>
           <div class=""
                [hasPermission]="['tournamentannouncementmoderator']"
                onAuthorizedPermission="show"
                onUnauthorizedPermission="hide">
-              <div class="btn-group-vertical btn-group-toggle" ngbRadioGroup name="state" [(ngModel)]="filter.state">
-                <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
-                  <input type="checkbox" name="isRegistration" ngbButton value="ApprovedByModerator">Одобрены
-                </label>
-                <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
-                  <input type="checkbox" name="isWait" ngbButton value="WaitModeration">Ожидают модерации
-                </label>
-                <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
-                  <input type="checkbox" name="isReject" ngbButton value="RejectedByModerator">Отклонены
-                </label>
-              </div>
+            <div class="btn-group btn-group-vertical btn-group-toggle elements-group-border" data-toggle="buttons" >
+              <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
+                <input type="checkbox" autocomplete="off" name="isRegistration" ngbButton [(ngModel)]="filter.state.isRegistration">
+                Идет регистрация
+              </label>
+              <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
+                <input type="checkbox" autocomplete="off" name="isWait" ngbButton [(ngModel)]="filter.state.isWait">
+                Ожидают модерации
+              </label>
+              <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
+                <input type="checkbox" autocomplete="off" name="isReject" ngbButton [(ngModel)]="filter.state.isReject">
+                Отклонены
+              </label>
+            </div>
           </div>
           <div class="buttons-wrapper">
               <button type="button" class="btn btn-primary" (click)="search()">

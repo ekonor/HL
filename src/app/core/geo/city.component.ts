@@ -102,11 +102,11 @@ export class CityComponent implements OnInit {
     }
   }
 
-  getCountryTitle() {
+  /*getCountryTitle() {
     return this.isRequired ? 'Страна *' : 'Страна';
   }
 
   getCityTitle() {
     return this.isRequired ? 'Город *' : 'Город';
-  }
+  }*/
 }
