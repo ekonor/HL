@@ -3,18 +3,16 @@
   <div class="ta-edit col-md-6 col-md-offset-3" *ngIf="ta">
     <h2>Редактирование анонса турнира</h2>
     <form #f="ngForm">
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !taname.valid }">
+      <div class="form-group">
         <label for="taname">Название анонса</label>
         <input type="text" class="form-control" name="taname" [(ngModel)]="ta.name" (ngModelChange)="ta.name = $event" #taname="ngModel" id="taname"/>
         <div *ngIf="f.submitted && taname != null && !taname.valid" class="help-block">taname is required</div>
       </div>
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && city==null}">
+      <div class="form-group">
         <app-city-filter [city]="city" (onChanged)="setCity($event)"></app-city-filter>
-        <div *ngIf="f.submitted && city == null" class="help-block">Укажите город</div>
       </div>
-      <div class="form-group" *ngIf="city" [ngClass]="{ 'has-error': f.submitted && city==null}">
+      <div class="form-group" *ngIf="city">
         <arena-select  [cityId]="city.id" [arena]="arena" (onChanged)="setArena($event)"></arena-select>
-        <div *ngIf="f.submitted && arena == null" class="help-block">Укажите арену</div>
       </div>
       <div class="form-group">
         <label>Дата проведения, c</label>
@@ -24,11 +22,10 @@
         <label>Дата проведения, до</label>
         <app-datepicker [dt]="ta.endDate" (onChanged)="onChangedEndDt($event)"></app-datepicker>
       </div>
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !ta.requiredResponseCount.valid }">
+      <div class="form-group">
         <label for="requiredResponseCount">Максимальное количество участников</label>
         <input type="number" min="0" max="2000" step="1" class="form-control" name="requiredResponseCount" [(ngModel)]="ta.requiredResponseCount" (ngModelChange)="ta.requiredResponseCount = $event" #requiredResponseCount="ngModel" ngModel number="true" id="requiredResponseCount"/>
-        <div *ngIf="f.submitted && requiredResponseCount != null && !requiredResponseCount.valid" class="help-block">requiredResponseCount is invalid</div>
-      </div>
+       </div>
       <div class="form-group">
         <label for="ageGroup">Возрастная группа</label>
         <select class="form-group" [(ngModel)]="ta.ageGroup" name="ageGroup" class="form-control" #ageGroup="ngModel" id="ageGroup" (ngModelChange)="ta.ageGroup = $event">
@@ -53,20 +50,18 @@
           <option *ngFor="let costType of costTypes"  [ngValue]="costType.value" >{{costType.name}}</option>
         </select>
       </div>
-      <div *ngIf="ta.isCommercial" class="form-group" [ngClass]="{ 'has-error': f.submitted && ta.cost && !ta.cost.valid }">
+      <div *ngIf="ta.isCommercial" class="form-group">
         <label for="cost">Стоимость участия</label>
         <input type="number" min="0" max="2000" step="1" class="form-control" name="cost" [(ngModel)]="ta.cost" (ngModelChange)="ta.cost = $event" #cost="ngModel" ngModel number="true" id="cost"/>
-        <div *ngIf="f.submitted && cost != null && !cost.valid" class="help-block">cost is invalid</div>
       </div>
       <div class="form-group">
         <label>Окончание регистрации</label>
         <app-datepicker [dt]="ta.endRegistrationDate" (onChanged)="onChangedEndRegDt($event)"></app-datepicker>
       </div>
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && content && !content.valid }">
+      <div class="form-group">
         <label for="content">Текст анонса</label>
         <app-ngx-editor [placeholder]="'Текст анонса'" [height]="200" class="form-control" name="about" [(ngModel)]="ta.content" (ngModelChange)="ta.content = $event" #about="ngModel" id="content"></app-ngx-editor>
-        <div *ngIf="f.submitted && content != null && !content.valid" class="help-block">content is invalid</div>
-        </div>
+      </div>
       <div class="form-group">
         <input [(ngModel)]="deleteFlag" (change)="setDeleteFlag()" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked /><span class="checkbox-title">Удалить?</span>
       </div>
