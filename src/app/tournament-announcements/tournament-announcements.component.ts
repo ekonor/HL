@@ -37,9 +37,9 @@ export class TournamentAnnouncementsComponent implements OnInit {
     this.pageSize = this.paginationService.pageSize;
 
     this.sortOptions = [
+      { title: 'Дата начала турнира', value: 'StartDate' },
       { title: 'Название', value: 'Name' },
-      { title: 'Дата создания анонса', value: 'CreateDate' },
-      { title: 'Дата начала турнира', value: 'StartDate' }
+      { title: 'Дата создания анонса', value: 'CreateDate' }
     ];
     this.filter.state.isRegistration = true;
   }
