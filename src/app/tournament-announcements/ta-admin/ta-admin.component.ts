@@ -40,7 +40,6 @@ export class TAAdminComponent implements OnInit {
       { title: 'Дата начала турнира', value: 'StartDate' },
       { title: 'Название', value: 'Name' },
       { title: 'Дата создания анонса', value: 'CreateDate' }
-
     ];
   }
 
