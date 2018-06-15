@@ -41,7 +41,7 @@
       <div class="form-group">
         <label for="isCommercial">Коммерческий?</label>
         <select class="form-group" [(ngModel)]="ta.isCommercial" name="isCommercial" class="form-control" #isCommercial="ngModel" id="isCommercial" (ngModelChange)="ta.isCommercial = $event">
-          <option *ngFor="let isCommercialType of isCommercialTypes"  [ngValue]="isCommercialType.value" >{{isCommercialType.name}}</option>
+          <option *ngFor="let isCommercialType of isCommercialTypes" [ngValue]="isCommercialType.value" >{{isCommercialType.name}}</option>
         </select>
       </div>
       <div *ngIf="ta.isCommercial" class="form-group">

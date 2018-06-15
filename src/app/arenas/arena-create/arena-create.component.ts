@@ -29,7 +29,7 @@ import { Point } from 'app/shared/map/point';
 export class ArenaCreateComponent implements OnInit {
   arena: ArenaViewItem;
   returnUrl: string;
-  loading = false;
+  dataIsLoading: boolean;
   id: number;
   mapPoint: Point;
   // private sub: any;
@@ -42,11 +42,11 @@ export class ArenaCreateComponent implements OnInit {
                private activatedRoute: ActivatedRoute,
                private alertService: AlertService ) {
     this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
-    this.loading = true;
+    this.dataIsLoading = true;
     this.arena = new ArenaViewItem;
     this.city = new City;
     this.mapPoint = this.getMapPoint(this.arena);
-    this.loading = false;
+    this.dataIsLoading = false;
     this.getArenaTypes();
   }
 
@@ -59,24 +59,6 @@ export class ArenaCreateComponent implements OnInit {
     }
   }
 
-  private getArenaTypes() {
-    this.loading = true;
-    this.service.getArenaTypes()
-      .subscribe(
-        arenaTypes => {
-          let emptyValue: ArenaType = {id: null, name: "Тип арены не задан"};
-          this.arenaTypes = new Array<ArenaType>();
-          this.arenaTypes.push(emptyValue);
-          this.arenaTypes = this.arenaTypes.concat(arenaTypes);
-          this.loading = false;
-        },
-        error => {
-          this.errorMessage = error;
-          this.loading = false;
-        }
-      );
-  }
-
   public addArena(arena: ArenaViewItem) {
     if (!this.city && !this.city.id) {
       this.alertService.error("Не удалось сохранить изменения");
@@ -85,6 +67,7 @@ export class ArenaCreateComponent implements OnInit {
     this.arena.city = this.city;
     console.log(this.arena);
     console.log(this.id);
+    this.dataIsLoading = true;
     this.service.addArena(this.arena).subscribe(
       data => {
         this.router.navigate(['/arenas']);
@@ -92,8 +75,26 @@ export class ArenaCreateComponent implements OnInit {
       error => {
         this.alertService.error(error);
         this.alertService.error("Не удалось добавить арену");
-        this.loading = false;
+        this.dataIsLoading = false;
       });
+  }
+
+  private getArenaTypes() {
+    this.dataIsLoading = true;
+    this.service.getArenaTypes()
+      .subscribe(
+        arenaTypes => {
+          let emptyValue: ArenaType = {id: null, name: "Тип арены не задан"};
+          this.arenaTypes = new Array<ArenaType>();
+          this.arenaTypes.push(emptyValue);
+          this.arenaTypes = this.arenaTypes.concat(arenaTypes);
+          this.dataIsLoading = false;
+        },
+        error => {
+          this.errorMessage = error;
+          this.dataIsLoading = false;
+        }
+      );
   }
 
   private setCity(city: City) {

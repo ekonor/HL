@@ -2,35 +2,29 @@
 <div *ngIf="arena" class="arena-edit row">
 <div class="col-md-6 col-md-offset-3">
   <h2>Редактирование арены</h2>
-  <form (ngSubmit)="editArena(arena)" #f="ngForm">
-     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !arenaname.valid }">
+  <form (ngSubmit)="editArena(arena)" #myForm="ngForm">
+     <div class="form-group">
       <label for="arenaname">Сокращенное название арены</label>
-      <input type="text" class="form-control" name="arenaname" [(ngModel)]="arena.name" (ngModelChange)="arena.name = $event" #arenaname="ngModel" id="arenaname"/>
-      <div *ngIf="f.submitted && arenaname != null && !arenaname.valid" class="help-block">arenaname is required</div>
+      <input type="text" class="form-control" name="arenaname" [(ngModel)]="arena.name" (ngModelChange)="arena.name = $event" #arenaname="ngModel" id="arenaname" required="required"/>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !fullName.valid }">
+    <div class="form-group">
       <label for="fullName">Полное название арены</label>
       <input type="text" class="form-control" name="fullName" [(ngModel)]="arena.fullName" (ngModelChange)="arena.fullName = $event" #fullName="ngModel" id="fullName"/>
-      <div *ngIf="f.submitted && fullName != null && !fullName.valid" class="help-block">fullname is required</div>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !startYear.valid }">
+    <div class="form-group">
       <label for="startYear">Год открытия арены</label>
       <input type="number" min="1900" max="2050" step="1" number="true" class="form-control" name="startYear" [(ngModel)]="arena.startYear" (ngModelChange)="arena.startYear = $event" #startYear="ngModel" ngModel id="startYear"/>
-      <div *ngIf="f.submitted && startYear != null && !startYear.valid" class="help-block">startYear is required</div>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && city==null}">
-      <app-city-filter *ngIf="city" [city]="city" (onChanged)="setCity($event)"></app-city-filter>
-      <div *ngIf="f.submitted && city == null" class="help-block">Укажите город</div>
+    <div class="form-group required">
+      <app-city-filter *ngIf="city" [city]="city" [isRequired]="true" (onChanged)="setCity($event)"></app-city-filter>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !address.valid }">
+    <div class="form-group">
       <label for="address">Адрес</label>
       <input type="text" class="form-control" name="address" [(ngModel)]="arena.address" (ngModelChange)="arena.address = $event" #address="ngModel" id="address"/>
-      <div *ngIf="f.submitted && address != null && !address.valid" class="help-block">address is invalid</div>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !capacity.valid }">
+    <div class="form-group">
       <label for="capacity">Вместимость</label>
       <input type="number" class="form-control" name="capacity" [(ngModel)]="arena.capacity" (ngModelChange)="arena.capacity = $event" #capacity="ngModel" ngModel number="true" id="capacity"/>
-      <div *ngIf="f.submitted && capacity != null && !capacity.valid" class="help-block">capacity is invalid</div>
     </div>
     <div class="form-group">
       <label for="arenaTypeId">Тип арены</label>
@@ -38,32 +32,28 @@
         <option *ngFor="let arenaType of arenaTypes"  [ngValue]="arenaType.id" >{{arenaType.name}}</option>
       </select>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !contacts.valid }">
+    <div class="form-group">
       <label for="contacts">Контакты</label>
       <input type="text" class="form-control" name="contacts" [(ngModel)]="arena.contacts" (ngModelChange)="arena.contacts = $event" #contacts="ngModel" id="contacts" />
-      <div *ngIf="f.submitted && contacts != null && !contacts.valid" class="help-block">contacts is invalid</div>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+    <div class="form-group">
       <label for="email">E-mail</label>
-      <input type="email" class="form-control" name="email" [(ngModel)]="arena.email" (ngModelChange)="arena.email = $event" #email="ngModel" ngModel email="true" id="email"/>
-      <div *ngIf="f.submitted && email != null && !email.valid" class="help-block">email is invalid</div>
+      <input type="email" class="form-control" name="email" [(ngModel)]="arena.email" (ngModelChange)="arena.email = $event" #email="ngModel" ngModel id="email"/>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !webSite.valid }">
+    <div class="form-group">
       <label for="webSite">Сайт</label>
       <input type="text" class="form-control" name="webSite" [(ngModel)]="arena.webSite" (ngModelChange)="arena.webSite = $event" #webSite="ngModel" id="webSite"/>
-      <div *ngIf="f.submitted && webSite != null && !webSite.valid" class="help-block">webSite is invalid</div>
-    </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !about.valid }">
+     </div>
+    <div class="form-group">
       <label for="about">Описание</label>
       <app-ngx-editor [placeholder]="'Описание арены'" [height]="200" class="form-control" name="about" [(ngModel)]="arena.about" (ngModelChange)="arena.about = $event" #about="ngModel" id="about"></app-ngx-editor>
-      <div *ngIf="f.submitted && about != null && !about.valid" class="help-block">about is invalid</div>
-    </div>
+     </div>
     <div class="form-group">
       <input [(ngModel)]="deleteFlag" (change)="setDeleteFlag()" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked /><span class="checkbox-title">Удалить?</span>
     </div>
     <div class="form-group">
-      <button class="btn btn-primary" type="submit" [disabled]="loading">Применить</button>
-      <button class="btn btn-danger" (click)="deleteArena()" [disabled]="loading || !deleteFlag">Удалить</button>
+      <button class="btn btn-primary" type="submit" [disabled]="dataIsLoading || myForm.invalid">Применить</button>
+      <button class="btn btn-danger" (click)="deleteArena()" [disabled]="dataIsLoading || !deleteFlag">Удалить</button>
       <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
     </div>
   </form>

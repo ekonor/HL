@@ -20,7 +20,6 @@ import { Point } from "app/shared/map/point";
 export class ArenaEditComponent implements OnInit {
   arena: ArenaViewItem;
   returnUrl: string;
-  loading = false;
   id: number;
   deleteFlag: boolean;
   mapPoint: Point;
@@ -36,9 +35,10 @@ export class ArenaEditComponent implements OnInit {
               private alertService: AlertService ) {
     //this.arena = new ArenaViewItem;
     this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
-    this.loading = true;
+    this.dataIsLoading = true;
     this.id = this.activatedRoute.snapshot.params['id'];
     this.getArena(this.id);
+    this.dataIsLoading = false;
     this.getArenaTypes();
     this.deleteFlag = false;
   }
@@ -62,6 +62,7 @@ export class ArenaEditComponent implements OnInit {
     console.log(this.arena);
     console.log(this.id);
     console.log('ok');
+    this.dataIsLoading = true;
     this.service.updateArena(this.id, this.arena).subscribe(
       data => {
         this.router.navigate(['/arenas']);
@@ -69,13 +70,14 @@ export class ArenaEditComponent implements OnInit {
       error => {
         this.alertService.error(error);
         this.alertService.error("Не удалось сохранить изменения");
-        this.loading = false;
+        this.dataIsLoading = false;
       });
     this.updateLogo();
   }
 
   public updateLogo() {
     if (this.files) {
+      this.dataIsLoading = true;
       const formData = new FormData();
       formData.append('image', this.files[0]);
       if (this.arena.logo != null) {
@@ -84,35 +86,36 @@ export class ArenaEditComponent implements OnInit {
         },
         error => {
           this.alertService.error(error);
-          this.loading = false;
-        });
+          this.dataIsLoading = false;
+        },
+        () => { this.dataIsLoading = false; } );
       }
       this.service.addLogo(this.id, formData).subscribe(
         data => {
         },
         error => {
           this.alertService.error(error);
-          this.loading = false;
-        });
+          this.dataIsLoading = false;
+        },
+        () => { this.dataIsLoading = false; } );
     }
   }
 
-  private getArenaTypes() {
-    this.loading = true;
-    this.service.getArenaTypes()
-      .subscribe(
-        arenaTypes => {
-          let emptyValue: ArenaType = {id: null, name: "Тип арены не задан"};
-          this.arenaTypes = new Array<ArenaType>();
-          this.arenaTypes.push(emptyValue);
-          this.arenaTypes = this.arenaTypes.concat(arenaTypes);
-          this.loading = false;
-        },
-        error => {
-          this.errorMessage = error;
-          this.loading = false;
-        }
-      );
+  public deleteArena() {
+    console.log(this.arena);
+    console.log(this.id);
+    console.log('delete');
+    this.dataIsLoading = true;
+    this.service.deleteArena(this.id).subscribe(
+      data => {
+        this.router.navigate(['/arenas']);
+      },
+      error => {
+        this.alertService.error(error);
+        this.alertService.error("Не удалось удалить арену");
+        this.dataIsLoading = false;
+      },
+      () => { this.dataIsLoading = false; });
   }
 
   public setDeleteFlag() {
@@ -133,19 +136,22 @@ export class ArenaEditComponent implements OnInit {
     this.router.navigate([ "arena", "logo", this.arena.id ]);
   }
 
-  public deleteArena() {
-    console.log(this.arena);
-    console.log(this.id);
-    console.log('delete');
-    this.service.deleteArena(this.id).subscribe(
-      data => {
-        this.router.navigate(['/arenas']);
-      },
-      error => {
-        this.alertService.error(error);
-        this.alertService.error("Не удалось удалить арену");
-        this.loading = false;
-      });
+  private getArenaTypes() {
+    this.dataIsLoading = true;
+    this.service.getArenaTypes()
+      .subscribe(
+        arenaTypes => {
+          let emptyValue: ArenaType = {id: null, name: "Тип арены не задан"};
+          this.arenaTypes = new Array<ArenaType>();
+          this.arenaTypes.push(emptyValue);
+          this.arenaTypes = this.arenaTypes.concat(arenaTypes);
+          this.dataIsLoading = false;
+        },
+        error => {
+          this.errorMessage = error;
+          this.dataIsLoading = false;
+        }
+      );
   }
 
   private getArena(id: number) {
