@@ -2,7 +2,7 @@
 <div *ngIf="ta" class="ta-edit row">
   <div class="ta-edit col-md-6 col-md-offset-3" *ngIf="ta">
     <h2>Редактирование анонса турнира</h2>
-    <form #f="ngForm">
+    <form #myForm="ngForm">
       <div class="form-group">
         <label for="taname">Название анонса</label>
         <input type="text" class="form-control" name="taname" [(ngModel)]="ta.name" (ngModelChange)="ta.name = $event" #taname="ngModel" id="taname"/>
@@ -66,8 +66,8 @@
         <input [(ngModel)]="deleteFlag" (change)="setDeleteFlag()" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked /><span class="checkbox-title">Удалить?</span>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary" (click)="updateTournamentAnnouncement()" [disabled]="dataIsLoading">Сохранить как черновик</button>
-        <button class="btn btn-danger" (click)="saveAndSendOnModeration()" [disabled]="dataIsLoading">Сохранить и отправить на модерацию</button>
+        <button class="btn btn-primary" (click)="updateTournamentAnnouncement()" [disabled]="dataIsLoading || myForm.invalid">Сохранить как черновик</button>
+        <button class="btn btn-danger" (click)="saveAndSendOnModeration()" [disabled]="dataIsLoading || myForm.invalid">Сохранить и отправить на модерацию</button>
         <button class="btn btn-danger" (click)="deleteTA()" [disabled]="dataIsLoading || !deleteFlag">Удалить</button>
         <button class="btn btn-primary" (click)="viewList()" [disabled]="dataIsLoading">Отменить изменения и вернуться к списку</button>
 
