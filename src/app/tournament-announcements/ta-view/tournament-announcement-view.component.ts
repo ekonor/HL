@@ -11,6 +11,7 @@ import { Arena} from 'app/arenas/shared/arena';
 import { Point } from 'app/shared/map/point';
 import { debounce } from 'rxjs/operator/debounce';
 import {Organization} from 'app/organizations/shared/organization';
+import { Team } from 'app/teams/shared/team';
 
 @Component({
   moduleId: module.id,
@@ -23,20 +24,15 @@ export class TournamentAnnouncementViewComponent {
   id: number;
   mapPoint: Point;
   zoom: number;
-
   dataIsLoading: boolean;
-
   errorMessage: string;
   private sub: any;
-
-  //returnUrl: string;
 
   constructor( private service: TournamentAnnouncementsService,
                private arenaService: ArenaService,
                private activatedRoute: ActivatedRoute,
                private alertService: AlertService,
                private router: Router) {
-    //this.tournamentAnnouncement = new TournamentAnnouncementViewItem();
   }
 
   ngOnInit() {
@@ -206,13 +202,20 @@ export class TournamentAnnouncementViewComponent {
         this.tournamentAnnouncement = tournamentAnnouncement;
         this.mapPoint = this.getMapPoint(tournamentAnnouncement);
         this.zoom = 8;
+        if (this.tournamentAnnouncement.teams.length === 0) {
+          this.tournamentAnnouncement.teams.push(new Team({id: 1, name: 'Команда 1', fullname: 'Полное название'}));
+          this.tournamentAnnouncement.teams.push(new Team({id: 2, name: 'Команда 2', fullname: 'Полное название'}));
+          this.tournamentAnnouncement.teams.push(new Team({id: 3, name: 'Команда 3', fullname: 'Полное название'}));
+        }
       },
       error => {
         this.errorMessage = error;
         alert('Не удалось загрузить анонс. Вы будете перенаправлены на страницу профиля.');
         this.router.navigate(['/profile']);
       },
-      () => this.dataIsLoading = false
+      () => {
+        this.dataIsLoading = false;
+      }
     );
   }
 }

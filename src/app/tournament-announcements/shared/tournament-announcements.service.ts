@@ -53,7 +53,10 @@ export class TournamentAnnouncementsService {
         arr.push('ApprovedByModerator');
       }
       if (arr.length > 0) {
-        params = params.append('states',arr.toString());
+        //params = params.append('states',arr.toString());
+        Object.keys(arr).forEach(function (key) {
+          params = params.append('states', arr[key]);
+        });
       }
     }
     /*if (filter.ageGroup)
@@ -74,7 +77,10 @@ export class TournamentAnnouncementsService {
         arr.push('Kids');
       }
       if (arr.length > 0) {
-        params = params.append('ageGroup',arr.toString());
+        //params = params.append('ageGroup',arr.toString());
+        Object.keys(arr).forEach(function (key) {
+          params = params.append('ageGroups', arr[key]);
+        });
       }
     }
 
@@ -116,7 +122,9 @@ export class TournamentAnnouncementsService {
         arr.push('WaitModeration');
       }
       if (arr.length > 0) {
-        params = params.append('states',arr.toString());
+        Object.keys(arr).forEach(function (key) {
+          params = params.append('states', arr[key]);
+        });
       }
     }
     //params = params.append('state', 'ApprovedByModerator,Draft');
@@ -140,7 +148,10 @@ export class TournamentAnnouncementsService {
         arr.push('Kids');
       }
       if (arr.length > 0) {
-        params = params.append('ageGroup',arr.toString());
+        //params = params.append('ageGroup',arr.toString());
+        Object.keys(arr).forEach(function (key) {
+          params = params.append('ageGroups', arr[key]);
+        });
       }
     }
 
