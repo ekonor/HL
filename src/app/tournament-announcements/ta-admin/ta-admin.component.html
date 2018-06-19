@@ -23,6 +23,12 @@
 
       <div class="div-table-col div-table-col-flex">
 
+        <!--div class="admin-panel">
+          <span class="toggle" (click)="toggle()" style="margin-left: 5px;"><i [class]="getToggleIcon()"></i></span>
+        </div>
+        <div class="jumbotron" [hidden]="toggled">
+          ssssss
+        </div-->
         <sorting [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList" class="pull-right"
                  [orderBy]="listInfo.orderBy"
                  [orderDir]="listInfo.orderDir"
