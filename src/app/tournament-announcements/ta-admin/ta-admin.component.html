@@ -22,29 +22,40 @@
       </div>
 
       <div class="div-table-col div-table-col-flex">
+        <div class="operations-panel navbar navbar-right pull-right">
+          <button [hasPermission]="['tournamentadministrator']"
+                  class="btn btn-primary waves-light"
+                  title="Добавить новый анонс"
+                  (click)="addTournamentAnnouncement()"
+                  [hasPermission]="['tournamentadministrator']"
+                  onAuthorizedPermission="show"
+                  onUnauthorizedPermission="hide">
+              <i [class]="getAddIconClass()"></i>
+          </button>
+          <sorting [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList"
+                   [orderBy]="listInfo.orderBy"
+                   [orderDir]="listInfo.orderDir"
+                   [options]="sortOptions"
+                   (onSorted)="onSorted($event)">
+          </sorting>
+          <button type="button" class="toggle btn btn-primary waves-light" (click)="togglePartInfo()">Как я могу участвовать ?</button>
+          <button type="button" class="toggle btn btn-primary waves-light" (click)="toggleAddInfo()">Как я могу добавить анонс турнира ?</button>
 
-        <!--div class="admin-panel">
-          <span class="toggle" (click)="toggle()" style="margin-left: 5px;"><i [class]="getToggleIcon()"></i></span>
+
         </div>
-        <div class="jumbotron" [hidden]="toggled">
-          ssssss
-        </div-->
-        <sorting [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList" class="pull-right"
-                 [orderBy]="listInfo.orderBy"
-                 [orderDir]="listInfo.orderDir"
-                 [options]="sortOptions"
-                 (onSorted)="onSorted($event)">
-        </sorting>
-        <span [hasPermission]="['tournamentadministrator']" class="pull-right navbar admin-panel-operations">
-          <a class="visible-btn"
-             title="Добавить новый анонс"
-             (click)="addTournamentAnnouncement()"
-             [hasPermission]="['tournamentadministrator']"
-             onAuthorizedPermission="show"
-             onUnauthorizedPermission="hide">
-            <i [class]="getAddIconClass()"></i>
-          </a>
-        </span>
+        <div class="info-block">
+          <div class="jumbotron info" [hidden]="toggledPartInfo">
+            Как я могу участвовать Как я могу участвовать
+            Как я могу участвовать Как я могу участвовать
+            Как я могу участвовать Как я могу участвовать
+            <a [routerLink]="['/']" routerLinkActive="active">Оставить заявку</a>
+          </div>
+          <div class="jumbotron info" [hidden]="toggledAddInfo">
+            Как я могу добавить анонс турнира Как я могу добавить анонс турнира
+            <a [routerLink]="['/']" routerLinkActive="active">Как я могу добавить анонс турнира</a> Как я могу добавить анонс турнира
+            Как я могу добавить анонс турнира Как я могу добавить анонс турнира
+          </div>
+        </div>
         <ta-admin-list [hidden]="dataIsLoading"
                        *ngIf="tournamentAnnouncementList"
                        [content]="tournamentAnnouncementList.listItems"

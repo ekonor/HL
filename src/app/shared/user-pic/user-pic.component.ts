@@ -27,4 +27,8 @@ export class UserPicComponent {
         let placeholder = "assets/img/users/no-logo.png";
         return this.user.logo ? logoSrc + this.user.logo: placeholder;
     }
+
+    public viewArena() {
+
+    }
 }

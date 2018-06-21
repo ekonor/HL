@@ -474,6 +474,10 @@ export class TournamentAnnouncementsService {
     }
   }
 
+  public getInfoIconClass(): string {
+    return 'fa fa-question info-icon';
+  }
+
  // TODO NEED FIX - убрать костыль!!!
  /*  public getYYYYMMDD(dt_value: Date): string {
     const dt = new Date(dt_value);

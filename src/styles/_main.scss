@@ -194,7 +194,7 @@ pagination, ngb-pagination {
 
   //font-size: 1rem;
   max-width: 250px;
-  min-width: 220px;
+  // min-width: 220px;
 
   select {
     width: 200px;
@@ -685,4 +685,72 @@ sorting {
 
 .ta-edit.row, .ta-create.row {
   margin: 0 20px;
+}
+
+.info-icon {
+  margin: 0 5px;
+}
+
+.toggle:hover {
+   color: #0275d8;
+}
+
+.jumbotron.info {
+  margin: 5px 0;
+}
+
+/* Tooltip */
+
+
+.htooltip span { /* Внешний вид нашего тултипа */
+  background-color: rgba(0,0,0, 0.8);
+  border-radius: 15px 15px 15px 0px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  margin-left: 2px;
+  margin-top: -75px;
+  opacity: 0; /* Делаем его прозрачным */
+  padding: 10px 10px 10px 40px;
+  position: absolute;
+  text-decoration: none;
+  visibility: hidden; /* И прячем */
+  width: 350px;
+  z-index: 10;
+}
+
+.htooltip:hover span { /* По hover отображаем тултип */
+  opacity: 1;
+  visibility: visible;
+}
+
+.htooltip span img { /* Изображение для примера */
+  border: 0 none;
+  float: left;
+  margin: -71px 0 0 -234px;
+  opacity: 0;
+  position: absolute;
+  visibility: hidden;
+  z-index: -1;
+}
+
+.htooltip:hover span img { /* Показываем изображение */
+  opacity: 1;
+  visibility: visible;
+}
+
+.htooltip.vertical {
+  display: block;
+}
+
+.operations-panel.navbar {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border-width: 0;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.info-block {
+  margin-top: 62px;
 }
