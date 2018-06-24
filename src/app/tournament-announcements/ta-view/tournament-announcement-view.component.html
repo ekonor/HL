@@ -1,167 +1,192 @@
 <loader [hidden]="!dataIsLoading"></loader>
-<section class="tournament-announcement-view section pb-5" *ngIf="tournamentAnnouncement">
-  <div class="row">
-    <div class="col-md-6 blog-item">
-      <div class="card h-100">
-        <div class="card-body" *ngIf="tournamentAnnouncement">
-          <div class="item-title-main">
-            <p>{{tournamentAnnouncement.city && tournamentAnnouncement.city.name ? tournamentAnnouncement.city.name+', ': ''}}{{tournamentAnnouncement.startDate | date :  "dd.MM.y"}}&nbsp;&mdash;&nbsp;{{tournamentAnnouncement.endDate | date :  "dd.MM.y"}}</p>
+<div class="tournament-announcement-view" *ngIf="tournamentAnnouncement">
+  <div class="div-table">
+    <div class="div-table-row">
+      <div class="div-table-col div-table-col-flex">
+        <div class="operations-panel navbar navbar-right pull-right">
+          <button *ngIf="tournamentAnnouncement.state == 'Draft'"
+                  class="btn btn-primary waves-light"
+                  title="Редактировать анонс"
+                  (click)="editTournamentAnnouncement(tournamentAnnouncement)"
+                  [hasPermission]="['tournamentadministrator']"
+                  onAuthorizedPermission="show"
+                  onUnauthorizedPermission="hide">
+            <i [class]="getEditIconClass()"></i>
+          </button>
+          <button *ngIf="tournamentAnnouncement.state == 'Draft'"
+                  class="btn btn-primary waves-light"
+                  title="Отправить на модерацию"
+                  (click)="sendOnModeration(tournamentAnnouncement)"
+                  [hasPermission]="['tournamentadministrator']"
+                  onAuthorizedPermission="show"
+                  onUnauthorizedPermission="hide">
+            <i [class]="getSendOnModerationIconClass()"></i>
+          </button>
+          <button *ngIf="tournamentAnnouncement.state == 'Draft' || tournamentAnnouncement.state == 'RejectedByModerator'"
+                  class="btn btn-primary waves-light"
+                  title="Удалить анонс"
+                  (click)="deleteTournamentAnnouncement(tournamentAnnouncement)"
+                  [hasPermission]="['tournamentadministrator']"
+                  onAuthorizedPermission="show"
+                  onUnauthorizedPermission="hide">
+            <i [class]="getDeleteIconClass()"></i>
+          </button>
+          <button *ngIf="tournamentAnnouncement.state == 'ApprovedByModerator'"
+                  class="btn btn-primary waves-light"
+                  title="Завершить прием заявок"
+                  (click)="finishTournamentAnnouncement(tournamentAnnouncement)"
+                  [hasPermission]="['tournamentadministrator']"
+                  onAuthorizedPermission="show"
+                  onUnauthorizedPermission="hide">
+            <i [class]="getFinishIconClass()"></i>
+          </button>
+          <button *ngIf="tournamentAnnouncement.state == 'ApprovedByModerator'"
+                  class="btn btn-primary waves-light"
+                  title="Отменить турнир"
+                  (click)="cancelTournamentAnnouncement(tournamentAnnouncement)"
+                  [hasPermission]="['tournamentadministrator']"
+                  onAuthorizedPermission="show"
+                  onUnauthorizedPermission="hide">
+            <i [class]="getCancelIconClass()"></i>
+          </button>
+          <button type="button" class="toggle btn btn-primary waves-light" (click)="togglePartInfo()">Как я могу участвовать ?</button>
+          <button type="button" class="toggle btn btn-primary waves-light" (click)="toggleAddInfo()">Как я могу добавить анонс турнира ?</button>
+        </div>
+      </div>
+    </div>
+    <div class="div-table-row">
+      <div class="div-table-col div-table-col-flex">
+        <div class="info-block">
+          <div class="jumbotron info" [hidden]="toggledPartInfo">
+            Как я могу участвовать Как я могу участвовать
+            Как я могу участвовать Как я могу участвовать
+            Как я могу участвовать Как я могу участвовать
+            <a [routerLink]="['/']" routerLinkActive="active">Оставить заявку</a>
           </div>
-          <h5 class="item-title">
-             {{tournamentAnnouncement.name ? tournamentAnnouncement.name : ''}}
-          </h5>
-          <hr>
+          <div class="jumbotron info" [hidden]="toggledAddInfo">
+            Как я могу добавить анонс турнира Как я могу добавить анонс турнира
+            <a [routerLink]="['/']" routerLinkActive="active">Как я могу добавить анонс турнира</a> Как я могу добавить анонс турнира
+            Как я могу добавить анонс турнира Как я могу добавить анонс турнира
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="div-table-row">
+      <!--div class="div-table-col div-table-col-flex"-->
+        <div class="row">
+        <div class="col-lg-6 col-sm-6 blog-item block-item">
+        <div class="item h-100">
           <div class="item-img-wrapper" >
             <div class="item-img-bg-wrapper" >
-              <img class="item-img-bg" *ngIf="tournamentAnnouncement"
+              <img class="item-img-bg"
                    [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)"
-                   alt="{{tournamentAnnouncement.name}}"
+                   alt=""
                    onerror = "this.style.display = 'none'">
             </div>
-            <div>
-              <img class="item-img-main" *ngIf="tournamentAnnouncement"
+            <a [routerLink]="['/tournament-announcement',tournamentAnnouncement.id]" routerLinkActive="active">
+              <img class="item-img-main"
                    [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)"
-                   alt="{{tournamentAnnouncement.name}}"
+                   alt=""
                    onerror = "this.style.display = 'none'" >
-            </div>
+            </a>
           </div>
-          <span class="item-text">
-            <!--p class="icon-wrap" *ngIf="tournamentAnnouncement && tournamentAnnouncement.arena">
-              <i class="fa fa-street-view"></i>
-              &nbsp;Арена:&nbsp;
-              <a [routerLink]="['/arena',tournamentAnnouncement.arena.id]" routerLinkActive="active">
-                {{tournamentAnnouncement.arena.name}}
-              </a>
-            </p-->
-            <div class="row block-with-logo">
-              <div class="col-md-6">
-                <p>Арена:</p>
-                <arena-pic *ngIf="tournamentAnnouncement.arena" [arena]="tournamentAnnouncement.arena"></arena-pic>
-              </div>
-              <div class="col-md-6">
-                <p>
-                  Организатор:
-                </p>
-                 <organization-pic *ngIf="tournamentAnnouncement.organization" [org]="tournamentAnnouncement.organization"></organization-pic>
-              </div>
-            </div>
-            <p class="icon-wrap">
-              <i class="fa fa-users"></i>
-              Макс. количество команд-участников:
-              {{getRequiredResponseCount(tournamentAnnouncement)}}
-            </p>
-            <p class="icon-wrap">
-              <i [class]="getAgeGroupIconClass(tournamentAnnouncement)"></i>
-              Возрастная группа
-            </p>
-            <p class="icon-wrap"
-               *ngIf="tournamentAnnouncement.ageGroup == 'Подростки'">
-              <i class="material-icons">&#xe7fb;</i>
-              Возраст:
-              {{tournamentAnnouncement.minAge}}-{{tournamentAnnouncement.maxAge}}
-            </p>
-            <p class="icon-wrap">
-              <i [class]="getGenderIconClass(tournamentAnnouncement)"></i>
-              Пол участников
-            </p>
-            <p class="icon-wrap">
-              <i class="fa fa-bell"></i>
-              Окончание регистрации:
-              {{tournamentAnnouncement.endRegistrationDate | date :  "dd.MM.y" }}
-            </p>
-            <span *ngIf="tournamentAnnouncement.isCommercial && tournamentAnnouncement.isCommercial == true">
-              <p class="icon-wrap" *ngIf="tournamentAnnouncement.cost">
-                <i class="fa fa-rouble"></i>
-                Цена участия: {{getCostText(tournamentAnnouncement)}}
+          <div class="item-body">
+            <div class="item-title-main">
+              <p>
+                {{tournamentAnnouncement.cityName ? tournamentAnnouncement.cityName+', ': ''}}
+                {{tournamentAnnouncement.startDate | date :  "dd.MM.y"}}
+                &nbsp;&mdash;&nbsp;
+                {{tournamentAnnouncement.endDate | date :  "dd.MM.y"}}
               </p>
-            </span>
-            <span class="admin-panel">
-              <a *ngIf="tournamentAnnouncement.state == 'Draft'" class="visible-btn"
-                 title="Редактировать анонс"
-                 (click)="editTournamentAnnouncement(tournamentAnnouncement)"
-                 [hasPermission]="['tournamentadministrator']"
-                 onAuthorizedPermission="show"
-                 onUnauthorizedPermission="hide">
-                 <i [class]="getEditIconClass()"></i>
+            </div>
+            <h5 class="item-title admin-panel">
+              <a class="title-text" (click)="viewTournamentAnnouncement(tournamentAnnouncement)" alt="Подробнее...">
+                {{tournamentAnnouncement.name}}
               </a>
-              <a *ngIf="tournamentAnnouncement.state == 'Draft'" class="visible-btn"
-                 title="Отправить на модерацию"
-                 (click)="sendOnModeration(tournamentAnnouncement)"
-                 [hasPermission]="['tournamentadministrator']"
-                 onAuthorizedPermission="show"
-                 onUnauthorizedPermission="hide">
-                 <i [class]="getSendOnModerationIconClass()"></i>
-              </a>
-              <a *ngIf="tournamentAnnouncement.state == 'Draft' || tournamentAnnouncement.state == 'RejectedByModerator'" class="visible-btn"
-                 title="Удалить анонс"
-                 (click)="deleteTournamentAnnouncement(tournamentAnnouncement)"
-                 [hasPermission]="['tournamentadministrator']"
-                 onAuthorizedPermission="show"
-                 onUnauthorizedPermission="hide">
-                 <i [class]="getDeleteIconClass()"></i>
-              </a>
-              <a *ngIf="tournamentAnnouncement.state == 'ApprovedByModerator'" class="visible-btn"
-                 title="Завершить прием заявок"
-                 (click)="finishTournamentAnnouncement(tournamentAnnouncement)"
-                 [hasPermission]="['tournamentadministrator']"
-                 onAuthorizedPermission="show"
-                 onUnauthorizedPermission="hide">
-                 <i [class]="getFinishIconClass()"></i>
-              </a>
-              <a *ngIf="tournamentAnnouncement.state == 'ApprovedByModerator'" class="visible-btn"
-                 title="Отменить турнир"
-                 (click)="cancelTournamentAnnouncement(tournamentAnnouncement)"
-                 [hasPermission]="['tournamentadministrator']"
-                 onAuthorizedPermission="show"
-                 onUnauthorizedPermission="hide">
-                 <i [class]="getCancelIconClass()"></i>
-              </a>
-            </span>
+            </h5>
+            <span class="item-text">
+              <div class="row block-with-logo">
+                <div class="col-md-6">
+                  <p>Арена:</p>
+                  <arena-pic *ngIf="tournamentAnnouncement.arena" [arena]="tournamentAnnouncement.arena"></arena-pic>
+                </div>
+                <div class="col-md-6" *ngIf="!tournamentAnnouncement.organization">&nbsp;</div>
+                <div class="col-md-6" *ngIf="tournamentAnnouncement.organization">
+                  <p>
+                    Организатор:
+                  </p>
+                  <organization-pic *ngIf="tournamentAnnouncement.organization" [org]="tournamentAnnouncement.organization"></organization-pic>
+                </div>
+              </div>
+
+              <p class="icon-wrap">
+                <i class="fa fa-users"></i>
+                Макс. количество команд:
+                {{getRequiredResponseCount(tournamentAnnouncement)}}
+              </p>
+              <p class="icon-wrap">
+                <i [class]="getAgeGroupIconClass(tournamentAnnouncement)"></i>
+                Возрастная группа: {{ getAgeGroupDescription(tournamentAnnouncement) }}
+              </p>
+              <p class="icon-wrap"
+                 *ngIf="tournamentAnnouncement.ageGroup == 'Подростки'">
+                <i class="material-icons">&#xe7fb;</i>
+                Возраст:
+                {{tournamentAnnouncement.minAge}}-{{tournamentAnnouncement.maxAge}}
+              </p>
+              <p class="icon-wrap">
+                <i [class]="getGenderIconClass(tournamentAnnouncement)"></i>
+                Пол участников: {{ getGenderDescription(tournamentAnnouncement) }}
+              </p>
+              <p class="icon-wrap" *ngIf="tournamentAnnouncement.state==='ApprovedByModerator'">
+                <i class="fa fa-bell"></i>
+                Окончание регистрации:
+                {{tournamentAnnouncement.endRegistrationDate? (tournamentAnnouncement.endRegistrationDate | date :  "dd.MM.y") : getNoData()}}
+              </p>
+               <p class="icon-wrap" *ngIf="tournamentAnnouncement.state==='Finished'">
+                <i class="fa fa-bell"></i>
+                Статус: завершен
+              </p>
+              <span *ngIf="tournamentAnnouncement.isCommercial && tournamentAnnouncement.isCommercial == true">
+                <p class="icon-wrap">
+                  <i class="fa fa-rouble"></i>
+                  Цена участия: {{getCostText(tournamentAnnouncement)}}
+                </p>
+              </span>
           </span>
-
+          </div>
+        </div>
+      </div>
+      <!--div class="div-table-col div-table-col-flex"-->
+        <div class="col-lg-6 col-sm-6 blog-item block-item">
+        <div class="item h-100" *ngIf="tournamentAnnouncement">
+          <div class="item-body">
+            <div class="item-title-main">
+              <p>Команды-участники</p>
+            </div>
+            <hr>
+            <span class="item-text">
+              <div *ngFor="let team of tournamentAnnouncement.teams">
+                <p class="icon-wrap"><i class="fa fa-info-circle"></i><a [routerLink]="['/team',team.id]" routerLinkActive="active">{{team.name}}</a></p>
+              </div>
+              <div class="text-center" *ngIf="tournamentAnnouncement.teams.length == 0">Пока никто не откликнулся</div>
+            </span>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-6 blog-item" *ngIf="tournamentAnnouncement">
-      <div class="card h-100 wrapper">
-        <div class="card-body wrapper">
-          <div class="item-title-main">
-            <p>Команды-участники</p>
-          </div>
-          <hr>
-          <div *ngFor="let team of tournamentAnnouncement.teams">
-            <p class="icon-wrap"><i class="fa fa-info-circle"></i><a [routerLink]="['/team',team.id]" routerLinkActive="active">{{team.name}}</a></p>
-          </div>
-          <div class="text-center" *ngIf="tournamentAnnouncement.teams.length == 0">Пока никто не откликнулся</div>
-        </div>
+      <!--/div-->
+    <!--div class="div-table-row">
+      <div class="div-table-col div-table-col-flex">
+        <pre>
+          <p class="section-description pb-4" [innerHTML]="tournamentAnnouncement.content"></p>
+        </pre>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <pre>
-      <p class="section-description pb-4" [innerHTML]="tournamentAnnouncement.content"></p>
-      </pre>
+    <div class="div-table-row">
+      <div class="div-table-col div-table-col-flex">
+        <map *ngIf="mapPoint" [points]="[mapPoint]"></map>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <map *ngIf="mapPoint" [points]="[mapPoint]"></map>
-    </div>
-  </div>
-
-</section>
-
-<!--
-state?: string; // Статус анонса (State)
-createDate?: string; // Дата создания (CreateDate)
-isCommercial: boolean = true; // Признак коммерческий или нет (IsCommercial) – иконка
-cost?: number; // Если коммерческий, указать цену участия (Cost)
-costType?: string; // Тип оплаты (CostType) - c человека или с команды
-ageGroup?: string; // Возрастная группа (AgeGroup
-minAge?: number; // Если Возрастная группа дети или подростки, то можно указать еще год рождения участников от – до
-maxAge?: number;
-gender?: string; // Пол участников (Gender) – иконкой
-teams?: Team[]; // Показаны   команды,   участие   которых   в   турнире   подтверждено   организатором
-currentResponseCount?: number; // сколько заявок утверждено
-closeCondition?: string;-->
+  </div-->
+</div>

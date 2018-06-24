@@ -213,8 +213,16 @@ export class TournamentAnnouncementsService {
     return tournamentAnnouncement.ageGroup === 'Children' ? 'fa fa-child' : 'fa fa-male';
   }
 
+  public getAgeGroupDescription(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem | TournamentAnnouncement ) {
+    return tournamentAnnouncement.ageGroup === 'Children' ? 'Дети' : 'Взрослые';
+  }
+
   public getGenderIconClass(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem | TournamentAnnouncement ) {
     return tournamentAnnouncement.gender === 'Female' ? 'fa fa-female' : 'fa fa-male';
+  }
+
+  public getGenderDescription(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem | TournamentAnnouncement ) {
+    return tournamentAnnouncement.gender === 'Female' ? 'Женский' : 'Мужской';
   }
 // TODO вынести в общий класс
   public getFinishIconClass(): string {

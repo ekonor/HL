@@ -27,6 +27,9 @@ export class TournamentAnnouncementsComponent implements OnInit {
   pageSize: number;
   dataIsLoading: boolean;
 
+  toggledPartInfo: boolean;
+  toggledAddInfo: boolean;
+
   private sub: any;
 
   constructor(
@@ -42,6 +45,9 @@ export class TournamentAnnouncementsComponent implements OnInit {
       { title: 'Дата создания анонса', value: 'CreateDate' }
     ];
     this.filter.state.isRegistration = true;
+
+    this.toggledAddInfo = true;
+    this.toggledPartInfo = true;
   }
 
   ngOnInit() {
@@ -88,5 +94,19 @@ export class TournamentAnnouncementsComponent implements OnInit {
 
   getAddIconClass() {
     return this.tournamentService.getAddIconClass();
+  }
+
+  togglePartInfo() {
+    this.toggledPartInfo = !this.toggledPartInfo;
+    console.log(this.toggledPartInfo);
+  }
+
+  toggleAddInfo() {
+    this.toggledAddInfo = !this.toggledAddInfo;
+    console.log(this.toggledAddInfo);
+  }
+
+  getToggleInfoIcon(): string {
+    return this.tournamentService.getInfoIconClass();
   }
 }

@@ -16,8 +16,7 @@ import { Team } from 'app/teams/shared/team';
 @Component({
   moduleId: module.id,
   selector: "tournament-announcement-view",
-  templateUrl: "tournament-announcement-view.component.html",
-  styleUrls: ["tournament-announcement-view.component.scss"]
+  templateUrl: "tournament-announcement-view.component.html"
 })
 export class TournamentAnnouncementViewComponent {
   tournamentAnnouncement: TournamentAnnouncementViewItem;
@@ -28,11 +27,17 @@ export class TournamentAnnouncementViewComponent {
   errorMessage: string;
   private sub: any;
 
+  toggledPartInfo: boolean;
+  toggledAddInfo: boolean;
+
   constructor( private service: TournamentAnnouncementsService,
                private arenaService: ArenaService,
                private activatedRoute: ActivatedRoute,
                private alertService: AlertService,
                private router: Router) {
+
+    this.toggledAddInfo = true;
+    this.toggledPartInfo = true;
   }
 
   ngOnInit() {
@@ -66,9 +71,23 @@ export class TournamentAnnouncementViewComponent {
     return this.getNoData();
   }
 
+  public getAgeGroupDescription(tournamentAnnouncement: TournamentAnnouncementViewItem): string {
+    if (tournamentAnnouncement) {
+      return this.service.getAgeGroupDescription(tournamentAnnouncement);
+    }
+    return this.getNoData();
+  }
+
   public getGenderIconClass(tournamentAnnouncement: TournamentAnnouncementViewItem): string {
     if (tournamentAnnouncement) {
       return this.service.getGenderIconClass(tournamentAnnouncement);
+    }
+    return this.getNoData();
+  }
+
+  public getGenderDescription(tournamentAnnouncement: TournamentAnnouncementViewItem): string {
+    if (tournamentAnnouncement) {
+      return this.service.getGenderDescription(tournamentAnnouncement);
     }
     return this.getNoData();
   }
@@ -217,5 +236,19 @@ export class TournamentAnnouncementViewComponent {
         this.dataIsLoading = false;
       }
     );
+  }
+
+  togglePartInfo() {
+    this.toggledPartInfo = !this.toggledPartInfo;
+    console.log(this.toggledPartInfo);
+  }
+
+  toggleAddInfo() {
+    this.toggledAddInfo = !this.toggledAddInfo;
+    console.log(this.toggledAddInfo);
+  }
+
+  getToggleInfoIcon(): string {
+    return this.service.getInfoIconClass();
   }
 }

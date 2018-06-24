@@ -43,28 +43,30 @@
 
 
         </div>
-        <div class="info-block">
-          <div class="jumbotron info" [hidden]="toggledPartInfo">
-            Как я могу участвовать Как я могу участвовать
-            Как я могу участвовать Как я могу участвовать
-            Как я могу участвовать Как я могу участвовать
-            <a [routerLink]="['/']" routerLinkActive="active">Оставить заявку</a>
+        <div class="content-wrapper">
+          <div class="info-block">
+            <div class="jumbotron info" [hidden]="toggledPartInfo">
+              Как я могу участвовать Как я могу участвовать
+              Как я могу участвовать Как я могу участвовать
+              Как я могу участвовать Как я могу участвовать
+              <a [routerLink]="['/']" routerLinkActive="active">Оставить заявку</a>
+            </div>
+            <div class="jumbotron info" [hidden]="toggledAddInfo">
+              Как я могу добавить анонс турнира Как я могу добавить анонс турнира
+              <a [routerLink]="['/']" routerLinkActive="active">Как я могу добавить анонс турнира</a> Как я могу добавить анонс турнира
+              Как я могу добавить анонс турнира Как я могу добавить анонс турнира
+            </div>
           </div>
-          <div class="jumbotron info" [hidden]="toggledAddInfo">
-            Как я могу добавить анонс турнира Как я могу добавить анонс турнира
-            <a [routerLink]="['/']" routerLinkActive="active">Как я могу добавить анонс турнира</a> Как я могу добавить анонс турнира
-            Как я могу добавить анонс турнира Как я могу добавить анонс турнира
-          </div>
+          <ta-admin-list [hidden]="dataIsLoading"
+                         *ngIf="tournamentAnnouncementList"
+                         [content]="tournamentAnnouncementList.listItems"
+                         (onChanged)="getTournamentAnnouncements()">
+          </ta-admin-list>
+          <pagination [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList" [page]="listInfo.page"
+                      [collectionSize]="tournamentAnnouncementList.count"
+                      [pageSize]="listInfo.take">
+          </pagination>
         </div>
-        <ta-admin-list [hidden]="dataIsLoading"
-                       *ngIf="tournamentAnnouncementList"
-                       [content]="tournamentAnnouncementList.listItems"
-                       (onChanged)="getTournamentAnnouncements()">
-        </ta-admin-list>
-        <pagination [hidden]="dataIsLoading" *ngIf="tournamentAnnouncementList" [page]="listInfo.page"
-                    [collectionSize]="tournamentAnnouncementList.count"
-                    [pageSize]="listInfo.take">
-        </pagination>
       </div>
     </div>
   </div>
