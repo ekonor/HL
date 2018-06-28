@@ -74,4 +74,9 @@ export class ArenasComponent implements OnInit {
       () => this.dataIsLoading = false
     );
   }
+
+  getAddIconClass() {
+    return this.arenaService.getAddIconClass();
+  }
+
 }

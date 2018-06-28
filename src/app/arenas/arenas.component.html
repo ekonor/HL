@@ -16,6 +16,38 @@
   <div class="div-table">
     <div class="div-table-row">
       <div class="div-table-col div-table-col-fixed div-table-col-left">
+        <arena-filter [filter]="filter"
+                   (onFiltered)="onFiltered($event)">
+        </arena-filter>
+      </div>
+      <div class="div-table-col div-table-col-flex">
+        <div class="operations-panel navbar navbar-right pull-right">
+          <button [hasPermission]="['superadministrator']"
+                  class="btn btn-primary waves-light"
+                  title="Добавить новую арену"
+                  (click)="addTournamentAnnouncement()"
+                  onAuthorizedPermission="show"
+                  onUnauthorizedPermission="hide">
+            <i [class]="getAddIconClass()"></i>
+          </button>
+          <sorting [hidden]="dataIsLoading" *ngIf="arenaList"
+                   [orderBy]="listInfo.orderBy"
+                   [orderDir]="listInfo.orderDir"
+                   [options]="sortOptions"
+                   (onSorted)="onSorted($event)">
+          </sorting>
+        </div>
+        <div class="content-wrapper">
+          <div class="info-block">
+          </div>
+          <arena-list [content]="arenaList.listItems">
+          </arena-list>
+          <pagination [page]="listInfo.page"
+                      [collectionSize]="arenaList.count"
+                      [pageSize]="listInfo.take">
+          </pagination>
+        </div>
+      <!--div class="div-table-col div-table-col-fixed div-table-col-left">
           <arena-filter [filter]="filter"
                         (onFiltered)="onFiltered($event)">
           </arena-filter>
@@ -34,5 +66,8 @@
                     [collectionSize]="arenaList.count"
                     [pageSize]="listInfo.take">
         </pagination>
+      </div-->
       </div>
+    </div>
+  </div>
 </div>

@@ -1,8 +1,8 @@
 <div class="tournament-announcement-list">
   <div class="row">
     <ng-template ngFor let-i [ngForOf]="[0]">
-      <div class="col-lg-6 col-sm-6 blog-item block-item" *ngFor="let tournamentAnnouncement of content">
-        <div class="item h-100">
+      <div class="col-lg-6 col-sm-6 h-100 blog-item block-item" *ngFor="let tournamentAnnouncement of content">
+        <div class="card h-100">
           <div class="item-img-wrapper" >
             <div class="item-img-bg-wrapper" >
               <img class="item-img-bg"
@@ -46,14 +46,19 @@
                 </div>
               </div>
 
-              <p class="icon-wrap">
+              <p class="icon-wrap" *ngIf="tournamentAnnouncement.requiredResponseCount">
                 <i class="fa fa-users"></i>
                 Макс. количество участников:
                 {{getRequiredResponseCount(tournamentAnnouncement)}}
               </p>
-              <p class="icon-wrap">
+              <p class="icon-wrap" *ngIf="tournamentAnnouncement.requiredResponseCount">
+                <i class="fa fa-users"></i>
+                На данный момент заявлено:
+                {{getRequiredResponseCount(tournamentAnnouncement)}}
+              </p>
+              <p class="icon-wrap" *ngIf="tournamentAnnouncement.ageGroup">
                 <i [class]="getAgeGroupIconClass(tournamentAnnouncement)"></i>
-                Возрастная группа
+                 Возрастная группа: {{ getAgeGroupDescription(tournamentAnnouncement) }}
               </p>
               <p class="icon-wrap"
                  *ngIf="tournamentAnnouncement.ageGroup == 'Подростки'">
@@ -61,11 +66,11 @@
                 Возраст:
                 {{tournamentAnnouncement.minAge}}-{{tournamentAnnouncement.maxAge}}
               </p>
-              <p class="icon-wrap">
+              <p class="icon-wrap" *ngIf="tournamentAnnouncement.gender">
                 <i [class]="getGenderIconClass(tournamentAnnouncement)"></i>
-                Пол участников
+                 Пол участников: {{ getGenderDescription(tournamentAnnouncement) }}
               </p>
-              <p class="icon-wrap" *ngIf="tournamentAnnouncement.state==='ApprovedByModerator'">
+              <p class="icon-wrap" *ngIf="tournamentAnnouncement.state==='ApprovedByModerator' && tournamentAnnouncement.endRegistrationDate">
                 <i class="fa fa-bell"></i>
                 Окончание регистрации:
                 {{tournamentAnnouncement.endRegistrationDate? (tournamentAnnouncement.endRegistrationDate | date :  "dd.MM.y") : getNoData()}}
@@ -74,7 +79,7 @@
                 <i class="fa fa-bell"></i>
                 Статус: завершен
               </p>
-              <span *ngIf="tournamentAnnouncement.isCommercial && tournamentAnnouncement.isCommercial == true">
+              <span *ngIf="tournamentAnnouncement.isCommercial && tournamentAnnouncement.isCommercial == true && tournamentAnnouncement.cost">
                 <p class="icon-wrap">
                   <i class="fa fa-rouble"></i>
                   Цена участия: {{getCostText(tournamentAnnouncement)}}

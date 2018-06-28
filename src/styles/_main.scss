@@ -243,10 +243,38 @@ pagination, ngb-pagination {
 sorting {
   display: block;
 }
+
+.tournament-announcements {
+  .icon-wrap {
+    height: 35px;
+    display: inline-block;
+    text-align: left;
+  }
+  .item-body {
+    height: 550px;
+  }
+}
+
+.arenas {
+  .icon-wrap {
+    height: 35px;
+    display: inline-block;
+    text-align: left;
+  }
+  .item-body {
+    height: 380px;
+  }
+}
 .ta-admin, .arenas, .tournament-announcements {
   font-size: 1rem;
   margin: 0 auto;
   padding: 5px 15px;
+
+  .ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
   .admin-panel-operations {
     margin: 11px;
@@ -256,6 +284,8 @@ sorting {
 .content-wrapper {
   margin-top: 63px;
 }
+
+
 /* ta-list, arena-list */
 .tournament-announcement-list, .arena-list, .tournament-announcement-view {
   //margin-top: 63px;
@@ -272,6 +302,9 @@ sorting {
     opacity: 1;
   }
 
+  .item-text {
+
+  }
 
   .icon-wrap i {
     margin: 0;
@@ -308,13 +341,13 @@ sorting {
   .h-100[_ngcontent-c4], .h-100[_ngcontent-c3], .h-100[_ngcontent-c5] {
     height: auto !important;
   }
-  .container[_ngcontent-c3] .card[_ngcontent-c3] {
+  .card[_ngcontent-c3] {
     height: auto !important;
   }
-  .container[_ngcontent-c4] .card[_ngcontent-c4] {
+  .card[_ngcontent-c4] {
     height: auto !important;
   }
-  .container[_ngcontent-c5] .card[_ngcontent-c5] {
+  .card[_ngcontent-c5] {
     height: auto !important;
   }
 
@@ -531,7 +564,7 @@ sorting {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 5px;
+    //padding: 5px;
   }
 
   .material-icons {
@@ -618,7 +651,7 @@ sorting {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 5px;
+    //padding: 5px;
   }
 
   .item-title {

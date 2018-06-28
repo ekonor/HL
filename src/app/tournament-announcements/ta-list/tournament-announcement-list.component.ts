@@ -71,4 +71,18 @@ export class TournamentAnnouncementListComponent implements OnInit {
   public getOrganizationLogo(/*organization: Organization*/ tournamentAnnouncement: TournamentAnnouncementListItem): string {
     return this.service.getTournamentAnnouncementLogo(tournamentAnnouncement);
   }
+
+  public getAgeGroupDescription(tournamentAnnouncement: TournamentAnnouncementListItem): string {
+    if (tournamentAnnouncement) {
+      return this.service.getAgeGroupDescription(tournamentAnnouncement);
+    }
+    return this.getNoData();
+  }
+
+  public getGenderDescription(tournamentAnnouncement: TournamentAnnouncementListItem): string {
+    if (tournamentAnnouncement) {
+      return this.service.getGenderDescription(tournamentAnnouncement);
+    }
+    return this.getNoData();
+  }
 }

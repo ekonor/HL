@@ -155,4 +155,8 @@ export class ArenaService {
   private getMethodUrl(methodUrlPrefix: string): string {
     return this.apiConfig.apiPath + methodUrlPrefix;
   }
+
+  public getAddIconClass(): string {
+    return 'fa fa-plus';
+  }
 }

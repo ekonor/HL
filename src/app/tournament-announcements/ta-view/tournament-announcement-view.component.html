@@ -147,7 +147,7 @@
                 <i class="fa fa-bell"></i>
                 Статус: завершен
               </p>
-              <span *ngIf="tournamentAnnouncement.isCommercial && tournamentAnnouncement.isCommercial == true">
+              <span *ngIf="tournamentAnnouncement.isCommercial && tournamentAnnouncement.isCommercial == true && tournamentAnnouncement.cost">
                 <p class="icon-wrap">
                   <i class="fa fa-rouble"></i>
                   Цена участия: {{getCostText(tournamentAnnouncement)}}
@@ -157,7 +157,6 @@
           </div>
         </div>
       </div>
-      <!--div class="div-table-col div-table-col-flex"-->
         <div class="col-lg-6 col-sm-6 blog-item block-item">
         <div class="item h-100" *ngIf="tournamentAnnouncement">
           <div class="item-body">
@@ -175,8 +174,8 @@
         </div>
       </div>
     </div>
-      <!--/div-->
-    <!--div class="div-table-row">
+    </div>
+    <div class="div-table-row">
       <div class="div-table-col div-table-col-flex">
         <pre>
           <p class="section-description pb-4" [innerHTML]="tournamentAnnouncement.content"></p>
@@ -188,5 +187,5 @@
         <map *ngIf="mapPoint" [points]="[mapPoint]"></map>
       </div>
     </div>
-  </div-->
+  </div>
 </div>
