@@ -29,21 +29,21 @@
                 </a>
               </h5>
               <span class="item-text">
-                <p class="icon-wrap">
+                <p class="icon-wrap" *ngIf="arena.capacity">
                   <i class="fa fa-users"></i>
                   Вместимость: {{arena.capacity}} {{ arena.capacity ? "чел." :"" }}
                 </p>
-                <p class="icon-wrap">
+                <p class="icon-wrap ellipsis" *ngIf="arena.email">
                   <i class="fa fa-envelope"></i>
-                  Электронная почта:&nbsp;<a class="short-link" href="mailto:{{arena.email}}">{{arena.email}}</a>
+                  Электронная почта:&nbsp;<a class="short-link" href="mailto:{{arena.email}}" title="{{arena.email}}">{{arena.email}}</a>
                 </p>
-                <p class="icon-wrap ellipsis">
+                <p class="icon-wrap ellipsis" *ngIf="arena.address" title="{{arena.address}}">
                   <i class="fa fa-map-marker"></i>
                   Адрес: {{arena.address}}
                 </p>
-                <p class="icon-wrap">
+                <p class="icon-wrap ellipsis" *ngIf="arena.webSite">
                   <i class="fa fa-info-circle"></i>
-                  &nbsp;Сайт: <a class="short-link" target="_blank" [href]="arena.webSite">{{arena.webSite}}</a>
+                  &nbsp;Сайт: <a class="short-link" target="_blank" [href]="arena.webSite" title="{{arena.webSite}}">{{arena.webSite}}</a>
                 </p>
               </span>
               <span class="bottom-btn">
