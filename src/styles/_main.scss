@@ -244,6 +244,17 @@ sorting {
   display: block;
 }
 
+pre {
+  font-family: 'Roboto Slab', sans-serif;
+  font-weight: 300;
+  font-size: 100%;
+  color: #212529;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow: hidden;
+  text-align: justify;
+}
+
 .tournament-announcements {
   .icon-wrap {
     height: 35px;
@@ -790,4 +801,7 @@ sorting {
     -webkit-box-shadow: none;
 }
 
-
+.arena-view .card {
+  text-align: center;
+  height: 504px;
+}

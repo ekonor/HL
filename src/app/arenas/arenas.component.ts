@@ -1,5 +1,5 @@
 import { Component, Injectable, OnInit, OnDestroy } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 import { ArenaFilter } from "app/arenas/shared/arena-filter";
 import { ArenaService } from "app/arenas/shared/arena.service";
@@ -8,6 +8,7 @@ import { ListResponse } from "app/shared/list/list-response";
 import { ListInfo } from "app/shared/list/list-info";
 import { PaginationService } from "app/shared/pagination.service";
 import { SortOption } from "app/shared/sorting/sort-option";
+
 
 @Component({
   moduleId: module.id,
@@ -31,7 +32,8 @@ export class ArenasComponent implements OnInit {
   constructor(
     private readonly arenaService: ArenaService,
     private readonly paginationService: PaginationService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private router: Router) {
       this.pageSize = this.paginationService.pageSize;
 
       this.sortOptions = [
@@ -77,6 +79,10 @@ export class ArenasComponent implements OnInit {
 
   getAddIconClass() {
     return this.arenaService.getAddIconClass();
+  }
+
+  public addArena(): void {
+    this.router.navigate([ "arenas/create"]);
   }
 
 }

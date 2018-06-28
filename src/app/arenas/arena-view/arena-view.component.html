@@ -15,11 +15,12 @@
           </div>
           <h5 class="item-title">
              {{arena.fullName ? arena.fullName : arena.name}}
-             <small>{{arena.arenaTypeId}}</small>
           </h5>
           <hr>
 
-          <p class="icon-wrap"><i class="material-icons">&#xe7fb;</i>&nbsp;Вместимость: {{arena.capacity}} чел.</p>
+          <p class="icon-wrap" *ngIf="arena.capacity">
+            <i class="fa fa-users"></i>
+            Вместимость: {{arena.capacity}} чел.</p>
           <br>
 
           <!--Body-->
@@ -52,12 +53,12 @@
 
         <div class="col-md-3">
           <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-envelope"></i></a>
-          <p>{{arena.email}}</p>
+          <p><a class="short-link" href="mailto:{{arena.email}}" title="{{arena.email}}">{{arena.email}}</a></p>
         </div>
 
         <div class="col-md-3">
           <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-envelope"></i></a>
-          <p>{{arena.webSite}}</p>
+          <p><a class="short-link" target="_blank" [href]="arena.webSite" title="{{arena.webSite}}">{{arena.webSite}}</a></p>
         </div>
       </div>
       <div class=row>
