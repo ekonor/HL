@@ -37,4 +37,8 @@ export class ArenaListComponent implements OnInit {
   public getArenaLogo(arena: ArenaListItem): string {
     return this.service.getArenaLogo(arena);
   }
+
+  public getEditIconClass(): string {
+    return this.service.getEditIconClass();
+  }
 }

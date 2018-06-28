@@ -159,4 +159,8 @@ export class ArenaService {
   public getAddIconClass(): string {
     return 'fa fa-plus';
   }
+
+  public getEditIconClass(): string {
+    return 'fa fa-pencil';
+  }
 }

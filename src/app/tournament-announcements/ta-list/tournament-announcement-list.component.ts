@@ -85,4 +85,8 @@ export class TournamentAnnouncementListComponent implements OnInit {
     }
     return this.getNoData();
   }
+
+  public getEditIconClass(): string {
+    return this.service.getEditIconClass();
+  }
 }

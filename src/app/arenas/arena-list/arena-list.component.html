@@ -15,19 +15,21 @@
               <div class="item-title-main">
                 <p>{{arena.cityName}}</p>
               </div>
-              <h5 class="item-title admin-panel">
+
+              <h5 class="item-title">
+
                 <a class="title-text" (click)="viewArena(arena)" alt="Подробнее...">
                   {{arena.name}}
                 </a>
-                <a class="btn-floating deep-orange waves-light waves-effect visible-btn"
-                   title="Редактировать арену"
-                   (click)="editArena(arena)"
-                   [hasPermission]="['superadministrator']"
-                   onAuthorizedPermission="show"
-                   onUnauthorizedPermission="hide">
-                  <i class="fa fa-pencil"></i>
-                </a>
               </h5>
+              <button [hasPermission]="['superadministrator']"
+                      class="btn btn-primary waves-light btn-rounded pull-left"
+                      title="Редактировать арену"
+                      (click)="editArena(arena)"
+                      onAuthorizedPermission="show"
+                      onUnauthorizedPermission="hide">
+                <i [class]="getEditIconClass()"></i>
+              </button>
               <span class="item-text">
                 <p class="icon-wrap" *ngIf="arena.capacity">
                   <i class="fa fa-users"></i>
@@ -46,9 +48,11 @@
                   Сайт: <a class="short-link" target="_blank" [href]="arena.webSite" title="{{arena.webSite}}">{{arena.webSite}}</a>
                 </p>
               </span>
+
               <span class="bottom-btn">
                 <button (click)="viewArena(arena)" class="btn btn-deep-orange waves-effect waves-light">Подробнее...</button>
               </span>
+
             </div>
           </div>
       </div>

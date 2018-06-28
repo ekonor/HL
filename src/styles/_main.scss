@@ -262,7 +262,7 @@ pre {
     text-align: left;
   }
   .item-body {
-    height: 550px;
+    height: 560px;
   }
 }
 
@@ -419,7 +419,7 @@ pre {
     color: white;
     padding: 0 2px;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 15px;
     text-align: center;
     text-transform: uppercase;
     -webkit-transition: all 0.4s ease-in-out;
@@ -804,4 +804,34 @@ pre {
 .arena-view .card {
   text-align: center;
   height: 504px;
+}
+
+.btn-rounded.btn-primary {
+    font-family: Raleway-SemiBold;
+    font-size: 13px;
+    color: rgba(58, 133, 191, 0.75);
+    letter-spacing: 1px;
+    line-height: 15px;
+    border: 2px solid rgba(58, 133, 191, 0.75);
+    border-radius: 40px;
+    background: transparent;
+    transition: all 0.3s ease 0s;
+    padding: 5px;
+}
+
+.btn-rounded.btn-primary i {
+  color: rgba(58, 133, 191, 0.75);
+}
+
+.btn-rounded.btn-primary:hover {
+  color: #FFF;
+  background: rgba(58, 133, 191, 0.75);
+  border: 2px solid rgba(58, 133, 191, 0.75);
+}
+.btn-rounded.btn-primary:hover i {
+  color: #FFF;
+}
+
+.admin-block {
+  height: 45px;
 }

@@ -26,11 +26,21 @@
                 {{tournamentAnnouncement.endDate | date :  "dd.MM.y"}}
               </p>
             </div>
-            <h5 class="item-title admin-panel">
+            <h5 class="item-title">
               <a class="title-text" (click)="viewTournamentAnnouncement(tournamentAnnouncement)" alt="Подробнее...">
                 {{tournamentAnnouncement.name}}
               </a>
             </h5>
+            <div class="admin-block">
+              <button [hasPermission]="['tournamentadministrator']"
+                      class="btn btn-primary waves-light btn-rounded pull-left"
+                      title="Редактировать анонс"
+                      (click)="editTournamentAnnouncement(tournamentAnnouncement)"
+                      onAuthorizedPermission="show"
+                      onUnauthorizedPermission="hide">
+                <i [class]="getEditIconClass()"></i>
+              </button>
+            </div>
             <span class="item-text">
               <div class="row block-with-logo">
                 <div class="col-md-6">
@@ -86,8 +96,7 @@
                 </p>
               </span>
           </span>
-
-            <span class="bottom-btn">
+          <span class="bottom-btn">
             <button (click)="viewTournamentAnnouncement(tournamentAnnouncement)"
                     class="btn btn-deep-orange waves-effect waves-light">
               Подробнее...
