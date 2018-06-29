@@ -31,14 +31,36 @@
                 {{tournamentAnnouncement.name}}
               </a>
             </h5>
-            <div class="admin-block">
-              <button [hasPermission]="['tournamentadministrator']"
+            <div class="admin-block bordered"
+                 [hasPermission]="['tournamentadministrator']"
+                 onAuthorizedPermission="show"
+                 onUnauthorizedPermission="hide">
+              <button *ngIf="tournamentAnnouncement.state == 'Draft'"
+                      [hasPermission]="['tournamentadministrator']"
                       class="btn btn-primary waves-light btn-rounded pull-left"
                       title="Редактировать анонс"
                       (click)="editTournamentAnnouncement(tournamentAnnouncement)"
                       onAuthorizedPermission="show"
                       onUnauthorizedPermission="hide">
                 <i [class]="getEditIconClass()"></i>
+              </button>
+              <button *ngIf="tournamentAnnouncement.state == 'ApprovedByModerator'"
+                      class="btn btn-primary waves-light btn-rounded pull-left"
+                      title="Завершить прием заявок"
+                      (click)="finishTournamentAnnouncement(tournamentAnnouncement)"
+                      [hasPermission]="['tournamentadministrator']"
+                      onAuthorizedPermission="show"
+                      onUnauthorizedPermission="hide">
+                <i [class]="getFinishIconClass()"></i>
+              </button>
+              <button *ngIf="tournamentAnnouncement.state == 'ApprovedByModerator'"
+                      class="btn btn-primary waves-light btn-rounded pull-left"
+                      title="Отменить турнир"
+                      (click)="cancelTournamentAnnouncement(tournamentAnnouncement)"
+                      [hasPermission]="['tournamentadministrator']"
+                      onAuthorizedPermission="show"
+                      onUnauthorizedPermission="hide">
+                <i [class]="getCancelIconClass()"></i>
               </button>
             </div>
             <span class="item-text">

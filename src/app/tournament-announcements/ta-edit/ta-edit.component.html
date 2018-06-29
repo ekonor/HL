@@ -6,7 +6,6 @@
       <div class="form-group">
         <label for="taname">Название анонса</label>
         <input type="text" class="form-control" name="taname" [(ngModel)]="ta.name" (ngModelChange)="ta.name = $event" #taname="ngModel" id="taname"/>
-        <div *ngIf="f.submitted && taname != null && !taname.valid" class="help-block">taname is required</div>
       </div>
       <div class="form-group">
         <app-city-filter [city]="city" (onChanged)="setCity($event)"></app-city-filter>

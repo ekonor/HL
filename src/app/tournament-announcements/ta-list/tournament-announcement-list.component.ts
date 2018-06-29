@@ -89,4 +89,65 @@ export class TournamentAnnouncementListComponent implements OnInit {
   public getEditIconClass(): string {
     return this.service.getEditIconClass();
   }
+
+  public getDeleteIconClass(): string {
+    return this.service.getDeleteIconClass();
+  }
+
+  public getFinishIconClass(): string {
+    return this.service.getFinishIconClass();
+  }
+
+  public getCancelIconClass(): string {
+    return this.service.getCancelIconClass();
+  }
+
+  public cancelTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementViewItem) {
+    if (confirm('Вы действительно хотите отменить турнир?')) {
+      this.service.cancelTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
+        data => {
+        },
+        error => {
+          this.alertService.error(error);
+          this.alertService.error('Не удалось отменить турнир');
+          alert('Не удалось отменить турнир');
+        },
+        () => {
+          alert('Турнир успешно отменен');
+        });
+    }
+  }
+
+  public finishTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementViewItem) {
+    if (confirm('Вы действительно хотите завершить прием заявок?')) {
+      this.service.finishTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
+        data => {
+        },
+        error => {
+          this.alertService.error(error);
+          this.alertService.error('Не удалось завершить прием заявок');
+          alert('Не удалось завершить прием заявок');
+        },
+        () => {
+          alert('Прием заявок успешно завершен');
+        });
+    }
+  }
+
+  public deleteTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementViewItem) {
+    if (confirm('Вы действительно хотите удалить анонс?')) {
+      this.service.deleteTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
+        data => {
+        },
+        error => {
+          this.alertService.error(error);
+          this.alertService.error("Не удалось удалить анонс турнира");
+        },
+        () => {
+          alert('Анонс успешно удален. Вы будете перенаправлены на страницу профиля.');
+          this.router.navigate(['/profile']);
+        }
+      );
+    }
+  }
 }

@@ -22,14 +22,19 @@
                   {{arena.name}}
                 </a>
               </h5>
-              <button [hasPermission]="['superadministrator']"
-                      class="btn btn-primary waves-light btn-rounded pull-left"
-                      title="Редактировать арену"
-                      (click)="editArena(arena)"
-                      onAuthorizedPermission="show"
-                      onUnauthorizedPermission="hide">
-                <i [class]="getEditIconClass()"></i>
-              </button>
+              <div class="admin-block bordered"
+                   [hasPermission]="['superadministrator']"
+                   onAuthorizedPermission="show"
+                   onUnauthorizedPermission="hide">
+                <button [hasPermission]="['superadministrator']"
+                        class="btn btn-primary waves-light btn-rounded pull-left"
+                        title="Редактировать арену"
+                        (click)="editArena(arena)"
+                        onAuthorizedPermission="show"
+                        onUnauthorizedPermission="hide">
+                  <i [class]="getEditIconClass()"></i>
+                </button>
+              </div>
               <span class="item-text">
                 <p class="icon-wrap" *ngIf="arena.capacity">
                   <i class="fa fa-users"></i>
