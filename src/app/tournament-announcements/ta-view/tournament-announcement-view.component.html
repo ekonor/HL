@@ -74,92 +74,97 @@
     <div class="div-table-row">
       <!--div class="div-table-col div-table-col-flex"-->
         <div class="row">
-        <div class="col-lg-6 col-sm-6 blog-item block-item">
-        <div class="item h-100">
-          <div class="item-img-wrapper" >
-            <div class="item-img-bg-wrapper" >
-              <img class="item-img-bg"
-                   [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)"
-                   alt=""
-                   onerror = "this.style.display = 'none'">
-            </div>
-            <a [routerLink]="['/tournament-announcement',tournamentAnnouncement.id]" routerLinkActive="active">
-              <img class="item-img-main"
-                   [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)"
-                   alt=""
-                   onerror = "this.style.display = 'none'" >
-            </a>
-          </div>
-          <div class="item-body">
-            <div class="item-title-main">
-              <p>
-                {{tournamentAnnouncement.cityName ? tournamentAnnouncement.cityName+', ': ''}}
-                {{tournamentAnnouncement.startDate | date :  "dd.MM.y"}}
-                &nbsp;&mdash;&nbsp;
-                {{tournamentAnnouncement.endDate | date :  "dd.MM.y"}}
-              </p>
-            </div>
-            <h5 class="item-title admin-panel">
-              <a class="title-text" (click)="viewTournamentAnnouncement(tournamentAnnouncement)" alt="Подробнее...">
-                {{tournamentAnnouncement.name}}
-              </a>
-            </h5>
-            <span class="item-text">
-              <div class="row block-with-logo">
-                <div class="col-md-6">
-                  <p>Арена:</p>
-                  <arena-pic *ngIf="tournamentAnnouncement.arena" [arena]="tournamentAnnouncement.arena"></arena-pic>
+          <div class="col-lg-6 col-sm-6 h-100 blog-item block-item">
+            <div class="card h-100">
+              <div class="item-img-wrapper" >
+                <div class="item-img-bg-wrapper" >
+                  <img class="item-img-bg"
+                     [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)"
+                     alt=""
+                     onerror = "this.style.display = 'none'">
                 </div>
-                <div class="col-md-6" *ngIf="!tournamentAnnouncement.organization">&nbsp;</div>
-                <div class="col-md-6" *ngIf="tournamentAnnouncement.organization">
-                  <p>
-                    Организатор:
-                  </p>
-                  <organization-pic *ngIf="tournamentAnnouncement.organization" [org]="tournamentAnnouncement.organization"></organization-pic>
-                </div>
+                <a [routerLink]="['/tournament-announcement',tournamentAnnouncement.id]" routerLinkActive="active">
+                   <img class="item-img-main"
+                     [src]="getTournamentAnnouncementLogo(tournamentAnnouncement)"
+                     alt=""
+                     onerror = "this.style.display = 'none'" >
+                </a>
               </div>
+              <div class="item-body">
+                <div class="item-title-main">
+                  <p>
+                    {{tournamentAnnouncement.cityName ? tournamentAnnouncement.cityName+', ': ''}}
+                    {{tournamentAnnouncement.startDate | date :  "dd.MM.y"}}
+                    &nbsp;&mdash;&nbsp;
+                    {{tournamentAnnouncement.endDate | date :  "dd.MM.y"}}
+                  </p>
+                </div>
+                <h5 class="item-title">
+                  <a class="title-text" (click)="viewTournamentAnnouncement(tournamentAnnouncement)" alt="Подробнее...">
+                    {{tournamentAnnouncement.name}}
+                  </a>
+                </h5>
+              <span class="item-text">
+                <div class="row block-with-logo">
+                  <div class="col-md-6">
+                    <p>Арена:</p>
+                    <arena-pic *ngIf="tournamentAnnouncement.arena" [arena]="tournamentAnnouncement.arena"></arena-pic>
+                  </div>
+                  <div class="col-md-6" *ngIf="!tournamentAnnouncement.organization">&nbsp;</div>
+                  <div class="col-md-6" *ngIf="tournamentAnnouncement.organization">
+                    <p>
+                      Организатор:
+                    </p>
+                    <organization-pic *ngIf="tournamentAnnouncement.organization" [org]="tournamentAnnouncement.organization"></organization-pic>
+                  </div>
+                </div>
 
-              <p class="icon-wrap">
-                <i class="fa fa-users"></i>
-                Макс. количество команд:
-                {{getRequiredResponseCount(tournamentAnnouncement)}}
-              </p>
-              <p class="icon-wrap">
-                <i [class]="getAgeGroupIconClass(tournamentAnnouncement)"></i>
-                Возрастная группа: {{ getAgeGroupDescription(tournamentAnnouncement) }}
-              </p>
-              <p class="icon-wrap"
-                 *ngIf="tournamentAnnouncement.ageGroup == 'Подростки'">
-                <i class="material-icons">&#xe7fb;</i>
-                Возраст:
-                {{tournamentAnnouncement.minAge}}-{{tournamentAnnouncement.maxAge}}
-              </p>
-              <p class="icon-wrap">
-                <i [class]="getGenderIconClass(tournamentAnnouncement)"></i>
-                Пол участников: {{ getGenderDescription(tournamentAnnouncement) }}
-              </p>
-              <p class="icon-wrap" *ngIf="tournamentAnnouncement.state==='ApprovedByModerator'">
-                <i class="fa fa-bell"></i>
-                Окончание регистрации:
-                {{tournamentAnnouncement.endRegistrationDate? (tournamentAnnouncement.endRegistrationDate | date :  "dd.MM.y") : getNoData()}}
-              </p>
-               <p class="icon-wrap" *ngIf="tournamentAnnouncement.state==='Finished'">
-                <i class="fa fa-bell"></i>
-                Статус: завершен
-              </p>
-              <span *ngIf="tournamentAnnouncement.isCommercial && tournamentAnnouncement.isCommercial == true && tournamentAnnouncement.cost">
-                <p class="icon-wrap">
-                  <i class="fa fa-rouble"></i>
-                  Цена участия: {{getCostText(tournamentAnnouncement)}}
+                <p class="icon-wrap" *ngIf="tournamentAnnouncement.requiredResponseCount">
+                  <i class="fa fa-users"></i>
+                  Макс. количество участников:
+                  {{getRequiredResponseCount(tournamentAnnouncement)}}
                 </p>
+                <p class="icon-wrap" *ngIf="tournamentAnnouncement.requiredResponseCount">
+                  <i class="fa fa-users"></i>
+                  На данный момент заявлено:
+                  {{getRequiredResponseCount(tournamentAnnouncement)}}
+                </p>
+                <p class="icon-wrap" *ngIf="tournamentAnnouncement.ageGroup">
+                  <i [class]="getAgeGroupIconClass(tournamentAnnouncement)"></i>
+                   Возрастная группа: {{ getAgeGroupDescription(tournamentAnnouncement) }}
+                </p>
+                <p class="icon-wrap"
+                   *ngIf="tournamentAnnouncement.ageGroup == 'Подростки'">
+                  <i class="material-icons">&#xe7fb;</i>
+                  Возраст:
+                  {{tournamentAnnouncement.minAge}}-{{tournamentAnnouncement.maxAge}}
+                </p>
+                <p class="icon-wrap" *ngIf="tournamentAnnouncement.gender">
+                  <i [class]="getGenderIconClass(tournamentAnnouncement)"></i>
+                   Пол участников: {{ getGenderDescription(tournamentAnnouncement) }}
+                </p>
+                <p class="icon-wrap" *ngIf="tournamentAnnouncement.state==='ApprovedByModerator' && tournamentAnnouncement.endRegistrationDate">
+                  <i class="fa fa-bell"></i>
+                  Окончание регистрации:
+                  {{tournamentAnnouncement.endRegistrationDate? (tournamentAnnouncement.endRegistrationDate | date :  "dd.MM.y") : getNoData()}}
+                </p>
+                 <p class="icon-wrap" *ngIf="tournamentAnnouncement.state==='Finished'">
+                  <i class="fa fa-bell"></i>
+                  Статус: завершен
+                </p>
+                <span *ngIf="tournamentAnnouncement.isCommercial && tournamentAnnouncement.isCommercial == true && tournamentAnnouncement.cost">
+                  <p class="icon-wrap">
+                    <i class="fa fa-rouble"></i>
+                    Цена участия: {{getCostText(tournamentAnnouncement)}}
+                  </p>
+                </span>
               </span>
-          </span>
+             </div>
           </div>
         </div>
-      </div>
-        <div class="col-lg-6 col-sm-6 blog-item block-item">
-        <div class="item h-100" *ngIf="tournamentAnnouncement">
-          <div class="item-body">
+        <div class="col-lg-6 col-sm-6 h-100 blog-item block-item">
+        <div class="card h-100" *ngIf="tournamentAnnouncement">
+          <div class="item-body teams">
             <div class="item-title-main">
               <p>Команды-участники</p>
             </div>

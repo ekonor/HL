@@ -298,7 +298,7 @@ pre {
 
 
 /* ta-list, arena-list */
-.tournament-announcement-list, .arena-list, .tournament-announcement-view {
+.tournament-announcement-list, .arena-list, .tournament-announcement-view, .arena-view {
   //margin-top: 63px;
   margin-top: 12px;
 
@@ -801,22 +801,65 @@ pre {
     -webkit-box-shadow: none;
 }
 
-.arena-view .card {
-  text-align: center;
-  height: 504px;
+.arena-view {
+
+  .row {
+    margin: 0 auto;
+  }
+
+  .card {
+    text-align: center;
+    height: 580px;
+  }
+
+  .icon-wrap {
+    height: 35px;
+    display: inline-block;
+    text-align: left;
+  }
+
+  .item-body {
+    height: 580px;
+  }
+}
+
+.tournament-announcement-view {
+
+  .row {
+    margin: 0 auto;
+  }
+
+  .card {
+    text-align: center;
+  }
+
+  .icon-wrap {
+    height: 35px;
+    display: inline-block;
+    text-align: left;
+  }
+
+  pre {
+    padding: 10px;
+  }
+
+  .teams {
+    height: 656px;
+    overflow-y: auto;
+  }
 }
 
 .btn-rounded.btn-primary {
-    font-family: Raleway-SemiBold;
-    font-size: 13px;
-    color: rgba(58, 133, 191, 0.75);
-    letter-spacing: 1px;
-    line-height: 15px;
-    border: 2px solid rgba(58, 133, 191, 0.75);
-    border-radius: 40px;
-    background: transparent;
-    transition: all 0.3s ease 0s;
-    padding: 5px;
+  font-family: Raleway-SemiBold;
+  font-size: 13px;
+  color: rgba(58, 133, 191, 0.75);
+  letter-spacing: 1px;
+  line-height: 15px;
+  border: 2px solid rgba(58, 133, 191, 0.75);
+  border-radius: 40px;
+  background: transparent;
+  transition: all 0.3s ease 0s;
+  padding: 5px;
 }
 
 .btn-rounded.btn-primary i {
@@ -841,3 +884,4 @@ pre {
   border-radius: 5px;
   margin: 10px auto;
 }
+

@@ -11,8 +11,7 @@ import { debounce } from "rxjs/operator/debounce";
 @Component({
   moduleId: module.id,
   selector: "arena-view",
-  templateUrl: "arena-view.component.html",
-  styleUrls: ["arena-view.component.scss"]
+  templateUrl: "arena-view.component.html"
 })
 export class ArenaViewComponent{
   arena: ArenaViewItem;
