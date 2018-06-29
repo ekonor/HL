@@ -1,80 +1,74 @@
-<section class="arena-view section pb-5">
-
-  <div class="row">
-
-    <!--Grid column-->
-    <div class="col-lg-5 mb-4">
-
-      <!--Form with header-->
-      <div class="card">
-
-        <div class="card-body">
-          <!--Header-->
-          <div class="item-title-main">
-            <p>{{arena.city&&arena.city.name ? arena.city.name: '' }}</p>
+<div class="arena-view">
+  <div class="div-table">
+    <div class="div-table-row">
+      <div class="div-table-col div-table-col-flex">
+        <div class="operations-panel navbar navbar-right pull-right">
+        </div>
+      </div>
+    </div>
+    <div class="div-table-row">
+      <div class="div-table-col div-table-col-flex">
+        <div class="info-block">
+        </div>
+      </div>
+    </div>
+    <div class="div-table-row">
+      <div class="row">
+        <div class="col-lg-5 col-sm-5 h-100 blog-item block-item">
+          <div class="card h-100">
+            <div class="item-body">
+              <div class="item-title-main">
+                <p>{{arena.city&&arena.city.name ? arena.city.name: '' }}</p>
+              </div>
+              <h5 class="item-title">
+                {{arena.fullName ? arena.fullName : arena.name}}
+              </h5>
+              <hr>
+              <p class="icon-wrap" *ngIf="arena.capacity">
+                <i class="fa fa-users"></i>
+                Вместимость: {{arena.capacity}} чел.
+              </p>
+              <img class="img-fluid rounded" [src]="getArenaLogo(arena)" alt="">
+            </div>
           </div>
-          <h5 class="item-title">
-             {{arena.fullName ? arena.fullName : arena.name}}
-          </h5>
-          <hr>
+        </div>
 
-          <p class="icon-wrap" *ngIf="arena.capacity">
-            <i class="fa fa-users"></i>
-            Вместимость: {{arena.capacity}} чел.</p>
+        <div class="col-lg-7">
           <br>
-
-          <!--Body-->
-          <img class="img-fluid rounded" [src]="getArenaLogo(arena)" alt="">
-
+          <div class="row text-center">
+            <div class="col-md-3">
+              <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-map-marker"></i></a>
+              <p>{{arena.address}}</p>
+            </div>
+            <div class="col-md-3">
+              <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-phone"></i></a>
+              <p><a href="tel:{{arena.contacts}}">{{arena.contacts}}</a></p>
+            </div>
+            <div class="col-md-3">
+              <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-envelope"></i></a>
+              <p><a class="short-link" href="mailto:{{arena.email}}" title="{{arena.email}}">{{arena.email}}</a></p>
+            </div>
+            <div class="col-md-3">
+              <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-envelope"></i></a>
+              <p><a class="short-link" target="_blank" [href]="arena.webSite" title="{{arena.webSite}}">{{arena.webSite}}</a></p>
+            </div>
+          </div>
+          <div class=row>
+            <div class="col-md-12">
+              <map *ngIf="mapPoint" [points]="[mapPoint]"></map>
+            </div>
+          </div>
         </div>
 
-      </div>
-      <!--Form with header-->
-
-    </div>
-    <!--Grid column-->
-
-
-    <!--Grid column-->
-    <div class="col-lg-7">
-
-      <br>
-      <!--Buttons-->
-      <div class="row text-center">
-        <div class="col-md-3">
-          <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-map-marker"></i></a>
-          <p>{{arena.address}}</p>
-        </div>
-
-        <div class="col-md-3">
-          <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-phone"></i></a>
-          <p><a href="tel:{{arena.contacts}}">{{arena.contacts}}</a></p>
-        </div>
-
-        <div class="col-md-3">
-          <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-envelope"></i></a>
-          <p><a class="short-link" href="mailto:{{arena.email}}" title="{{arena.email}}">{{arena.email}}</a></p>
-        </div>
-
-        <div class="col-md-3">
-          <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-envelope"></i></a>
-          <p><a class="short-link" target="_blank" [href]="arena.webSite" title="{{arena.webSite}}">{{arena.webSite}}</a></p>
-        </div>
-      </div>
-      <div class=row>
-        <div class="col-md-12">
-            <map *ngIf="mapPoint" [points]="[mapPoint]"></map>
-        </div>
       </div>
     </div>
-    <!--Grid column-->
-
+    <div class="div-table-row">
+      <div class="div-table-col div-table-col-flex">
+        <pre>
+          <p class="section-description" [innerHTML]="arena.about"></p>
+        </pre>
+      </div>
+    </div>
   </div>
-
-  <div class="col-lg-12">
-    <pre>
-    <p class="section-description pb-4" [innerHTML]="arena.about"></p>
-    </pre>
-  </div>
-</section>
+</div>
 

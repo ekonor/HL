@@ -253,6 +253,8 @@ pre {
   white-space: pre-wrap;
   overflow: hidden;
   text-align: justify;
+  padding: 10px;
+  margin: 0;
 }
 
 .tournament-announcements {
@@ -809,17 +811,17 @@ pre {
 
   .card {
     text-align: center;
-    height: 580px;
   }
 
   .icon-wrap {
     height: 35px;
     display: inline-block;
     text-align: left;
+    margin-bottom: 10px;
   }
 
   .item-body {
-    height: 580px;
+    height: 526px;
   }
 }
 
@@ -839,15 +841,15 @@ pre {
     text-align: left;
   }
 
-  pre {
-    padding: 10px;
-  }
+
 
   .teams {
     height: 656px;
     overflow-y: auto;
   }
 }
+
+
 
 .btn-rounded.btn-primary {
   font-family: Raleway-SemiBold;
