@@ -333,7 +333,7 @@ export class TournamentAnnouncementsService {
   public getCostText(tournamentAnnouncement: TournamentAnnouncementListItem | TournamentAnnouncementViewItem | TournamentAnnouncement ) {
     if (tournamentAnnouncement.isCommercial) {
       if (tournamentAnnouncement.cost) {
-        return tournamentAnnouncement.costType === 'PerTeam' ? tournamentAnnouncement.cost + '/команда' : tournamentAnnouncement.cost + '/чел.';
+        return tournamentAnnouncement.costType === 'PerTeam' ? tournamentAnnouncement.cost + '/ком.' : tournamentAnnouncement.cost + '/чел.';
       } else {
         return this.getNoData();
       }
