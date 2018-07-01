@@ -5,10 +5,6 @@
   </div>
   <div class="jumbotron" [hidden]="toggled">
     <form>
-      <label for="schoolTypeId">Тип школы</label>
-      <select id="schoolTypeId"[(ngModel)]="filter.schoolTypeId" name="schoolTypeId" class="form-control">
-        <option *ngFor="let schoolType of schoolTypes"  [ngValue]="schoolType.id">{{schoolType.name}}</option>
-      </select>
       <app-city-filter *ngIf="city" [city]="city" (onChanged)="setCity($event)"></app-city-filter>
       <input type="text" name="name" [(ngModel)]="filter.searchText" placeholder="Название или адрес" class="form-control">
       <div class="buttons-wrapper">

@@ -30,7 +30,7 @@ export class ArenaCreateComponent implements OnInit {
   returnUrl: string;
   dataIsLoading: boolean;
   id: number;
-  mapPoint: Point;
+  // mapPoint: Point;
   // private sub: any;
   arenaTypes: ArenaType[];
   errorMessage: string;
@@ -44,7 +44,7 @@ export class ArenaCreateComponent implements OnInit {
     this.dataIsLoading = true;
     this.arena = new ArenaViewItem;
     this.city = new City;
-    this.mapPoint = this.getMapPoint(this.arena);
+    // this.mapPoint = this.getMapPoint(this.arena);
     this.dataIsLoading = false;
     this.getArenaTypes();
   }
@@ -52,11 +52,11 @@ export class ArenaCreateComponent implements OnInit {
   ngOnInit() {
   }
 
-  private getMapPoint(arena: ArenaViewItem): Point {
+  /* private getMapPoint(arena: ArenaViewItem): Point {
     if (this.arena && this.arena.coordinates.latitude && this.arena.coordinates.longitude) {
       return {latitude: this.arena.coordinates.latitude, longitude: this.arena.coordinates.longitude};
     }
-  }
+  }*/
 
   public addArena(arena: ArenaViewItem) {
     if (!this.city && !this.city.id) {

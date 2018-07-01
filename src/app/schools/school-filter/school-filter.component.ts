@@ -43,7 +43,6 @@ export class SchoolFilterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getSchoolTypes();
     this.city = new City;
   }
 
@@ -75,19 +74,6 @@ export class SchoolFilterComponent implements OnInit {
     } else {
       return 'Свернуть';
     }
-  }
-
-  private getSchoolTypes() {
-    this.service.getSchoolTypes()
-    .subscribe(
-      schoolTypes => {
-        let emptyValue : SchoolType = { id: null, name: "Выберите тип школы" };
-        this.schoolTypes = new Array<SchoolType>();
-        this.schoolTypes.push(emptyValue);
-        this.schoolTypes =  this.schoolTypes.concat(schoolTypes);
-      },
-      error => this.errorMessage = error
-    );
   }
 
   private setCity(city: City) {

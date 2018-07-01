@@ -46,11 +46,11 @@ export class ArenaEditComponent implements OnInit {
 
   }
 
-  private getMapPoint(arena: ArenaViewItem): Point {
+  /*private getMapPoint(arena: ArenaViewItem): Point {
     if (this.arena && this.arena.coordinates && this.arena.coordinates.latitude && this.arena.coordinates.longitude) {
       return {latitude: this.arena.coordinates.latitude, longitude: this.arena.coordinates.longitude};
     }
-  }
+  }*/
 
   public editArena(arena: ArenaViewItem) {
     if (!this.city && !this.city.id) {
@@ -159,7 +159,7 @@ export class ArenaEditComponent implements OnInit {
       .subscribe(
         arena => {
           this.arena = arena;
-          this.mapPoint = this.getMapPoint(arena);
+          //this.mapPoint = this.getMapPoint(arena);
           this.city = this.arena.city;
           if (this.city == null) { this.city = new City; }
           // this.dataIsLoading = false;

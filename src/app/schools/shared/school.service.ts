@@ -28,8 +28,6 @@ export class SchoolService {
     const methodUrlPrefix = '/schools' + '/list';
     let methodUrl = this.getMethodUrl(methodUrlPrefix);
     let params = new HttpParams();
-    if (filter.schoolTypeId)
-      params = params.append('arenaTypeId', filter.schoolTypeId.toString());
     if (filter.cityId)
       params = params.append('cityId', filter.cityId.toString());
     if (filter.searchText)
@@ -60,17 +58,15 @@ export class SchoolService {
   public updateSchool(id: number, school: SchoolViewItem): Observable<SchoolViewItem> {
     // TODO свернуть
     const body = JSON.stringify({
-      /*'name': arena.name,
-      'fullName': (arena.fullName ? arena.fullName : arena.name),
-      'cityId': arena.city.id,
-      'arenaTypeId': arena.arenaTypeId,
-      'startYear': arena.startYear,
-      'address': arena.address,
-      'email': arena.email,
-      'webSite': arena.webSite,
-      'contacts': arena.contacts,
-      'capacity': arena.capacity,
-      'about': arena.about*/
+      'name': school.name,
+      'fullName': (school.fullName ? school.fullName : school.name),
+      'cityId': school.city.id,
+      'arenaId': school.arena.id,
+      'address': school.address,
+      'email': school.email,
+      'webSite': school.webSite,
+      'phone': school.phone,
+      'about': school.about
     });
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
@@ -86,17 +82,15 @@ export class SchoolService {
   public addSchool(school: SchoolViewItem): Observable<number> {
     // TODO свернуть
     const body = JSON.stringify({
-      /*'name': arena.name,
-      'fullName': (arena.fullName ? arena.fullName : arena.name),
-      'cityId': arena.city.id,
-      'arenaTypeId': arena.arenaTypeId,
-      'startYear': arena.startYear,
-      'address': arena.address,
-      'email': arena.email,
-      'webSite': arena.webSite,
-      'contacts': arena.contacts,
-      'capacity': arena.capacity,
-      'about': arena.about*/
+      'name': school.name,
+      'fullName': (school.fullName ? school.fullName : school.name),
+      'cityId': school.city.id,
+      'arenaId': school.arena.id,
+      'address': school.address,
+      'email': school.email,
+      'webSite': school.webSite,
+      'phone': school.phone,
+      'about': school.about
     });
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
