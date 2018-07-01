@@ -21,7 +21,7 @@ user-pic img {
 
 /* Arena Pic, TA Pic, , Organization Pic */
 
-.ta-pic, organization-pic, arena-pic {
+.ta-pic, .organization-pic, .arena-pic, .school-pic {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -189,7 +189,7 @@ pagination, ngb-pagination {
   //width: 250px;
 }
 
-.ta-filter-wrap, .arena-filter-wrap {
+.ta-filter-wrap, .arena-filter-wrap, .school-filter-wrap {
 
   //font-size: 1rem;
   max-width: 250px;
@@ -277,7 +277,19 @@ pre {
     height: 380px;
   }
 }
-.ta-admin, .arenas, .tournament-announcements {
+
+.schools {
+  .icon-wrap {
+    height: 35px;
+    display: inline-block;
+    text-align: left;
+  }
+  .item-body {
+    height: 380px;
+  }
+}
+
+.ta-admin, .arenas, .tournament-announcements, .schools {
   font-size: 1rem;
   margin: 0 auto;
   padding: 5px 15px;
@@ -299,7 +311,8 @@ pre {
 
 
 /* ta-list, arena-list */
-.tournament-announcement-list, .arena-list, .tournament-announcement-view, .arena-view {
+.tournament-announcement-list, .arena-list, .tournament-announcement-view, .arena-view,
+.school-list, .school-view {
   //margin-top: 63px;
   margin-top: 12px;
 
@@ -824,6 +837,28 @@ pre {
   }
 }
 
+.school-view {
+
+  .row {
+    margin: 0 auto;
+  }
+
+  .card {
+    text-align: center;
+  }
+
+  .icon-wrap {
+    height: 35px;
+    display: inline-block;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+  .item-body {
+    height: 526px;
+  }
+}
+
 .tournament-announcement-view {
 
   .row {
@@ -910,7 +945,3 @@ pre {
 .school-create.row{
   margin: 0 20px;
 }
-
-/*.arena-edit .help-block, .school-edit .help-block {
-  color: red;
-}*/
