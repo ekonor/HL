@@ -1,22 +1,53 @@
-<div class="container" *ngIf="schoolList">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="heading heading-12 margin-top-bottom-30">
-          <p> Вся информация о школах хоккея</p>
-          <h1><span class="left"></span>Хоккейные школы<span class="right"></span></h1>
-          <hr>
-        </div>
+<loader [hidden]="!dataIsLoading"></loader>
+<div class="schools" *ngIf="schoolList">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="heading heading-12 margin-top-bottom-30">
+        <p> Вся информация о ледовых аренах, стадионах и площадках в одном месте</p>
+        <h1>
+          <span class="left"></span>
+          Хоккейные школы
+          <span class="right"></span>
+        </h1>
+        <hr>
       </div>
-  
-          <school-filter [filter]="filter" (onFiltered)="onFiltered($event)"></school-filter>
-  
-          <sorting class="pull-right" [orderBy]="listInfo.orderBy" [orderDir]="listInfo.orderDir"
-                    [options]="sortOptions" (onSorted)="onSorted($event)"></sorting>
-  
-      <school-list [content]="schoolList.listItems" class="row"></school-list>
-  
-      <pagination [page]="listInfo.page" [collectionSize]="schoolList.count" [pageSize]="listInfo.take"></pagination>
-  
     </div>
   </div>
-  
+  <div class="div-table">
+    <div class="div-table-row">
+      <div class="div-table-col div-table-col-fixed div-table-col-left">
+        <arena-filter [filter]="filter"
+                   (onFiltered)="onFiltered($event)">
+        </arena-filter>
+      </div>
+      <div class="div-table-col div-table-col-flex">
+        <div class="operations-panel navbar navbar-right pull-right">
+          <button [hasPermission]="['superadministrator']"
+                  class="btn btn-primary waves-light"
+                  title="Добавить новую школу"
+                  (click)="addSchool()"
+                  onAuthorizedPermission="show"
+                  onUnauthorizedPermission="hide">
+            <i [class]="getAddIconClass()"></i>
+          </button>
+          <sorting [hidden]="dataIsLoading" *ngIf="arenaList"
+                   [orderBy]="listInfo.orderBy"
+                   [orderDir]="listInfo.orderDir"
+                   [options]="sortOptions"
+                   (onSorted)="onSorted($event)">
+          </sorting>
+        </div>
+        <div class="content-wrapper">
+          <div class="info-block">
+          </div>
+          <school-list [content]="schoolList.listItems">
+          </school-list>
+          <pagination [page]="listInfo.page"
+                      [collectionSize]="schoolList.count"
+                      [pageSize]="listInfo.take">
+          </pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

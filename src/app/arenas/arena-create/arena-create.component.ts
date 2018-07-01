@@ -23,8 +23,7 @@ import { Point } from 'app/shared/map/point';
 @Component({
   moduleId: module.id,
   selector: 'arena-id',
-  templateUrl: 'arena-create.component.html',
-  styleUrls: ['arena-create.component.scss']
+  templateUrl: 'arena-create.component.html'
 })
 export class ArenaCreateComponent implements OnInit {
   arena: ArenaViewItem;

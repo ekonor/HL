@@ -893,3 +893,24 @@ pre {
 .toggle-search-icon {
   margin-left: 5px;
 }
+
+.arena-logo, .school-logo {
+  .row {
+    margin: 0 20px;
+  }
+
+  .help-block {
+    color: red;
+  }
+}
+
+.arena-edit.row,
+.school-edit.row,
+.arena-create.row,
+.school-create.row{
+  margin: 0 20px;
+}
+
+/*.arena-edit .help-block, .school-edit .help-block {
+  color: red;
+}*/

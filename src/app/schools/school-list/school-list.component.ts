@@ -1,22 +1,23 @@
-import { Component, Injectable, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, Injectable, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { SchoolService } from "./../shared/school.service";
-import { ListResponse } from "app/shared/list/list-response";
-import { SchoolListItem } from "app/schools/shared/school";
+import { SchoolService } from 'app/schools/shared/school.service';
+import { ListResponse } from 'app/shared/list/list-response';
+import { SchoolListItem } from 'app/schools/shared/school-list-item';
 
 @Component({
   moduleId: module.id,
-  selector: "school-list",
-  inputs: ['content'],
-  templateUrl: "school-list.component.html"
+  selector: 'school-list',
+  //inputs: ['content'],
+  templateUrl: 'school-list.component.html'
 })
 
 @Injectable()
 export class SchoolListComponent implements OnInit {
-  content: SchoolListItem[];
 
-  constructor( private schoolService: SchoolService,
+  @Input() content: SchoolListItem[];
+
+  constructor( private service: SchoolService,
                private router: Router) {
   }
 
@@ -24,18 +25,18 @@ export class SchoolListComponent implements OnInit {
   }
 
   public viewSchool(school: SchoolListItem): void {
-    this.router.navigate([ "school", school.id ]);
+    this.router.navigate([ 'school', school.id ]);
   }
 
   public editSchool(school: SchoolListItem): void {
-    this.router.navigate([ "school/edit", school.id ]);
-  }
-
-  public addSchool(): void {
-    this.router.navigate([ "school/create"]);
+    this.router.navigate([ 'school/edit', school.id ]);
   }
 
   public getSchoolLogo(school: SchoolListItem): string {
-    return this.schoolService.getSchoolLogo(school);
+    return this.service.getSchoolLogo(school);
+  }
+
+  public getEditIconClass(): string {
+    return this.service.getEditIconClass();
   }
 }

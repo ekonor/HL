@@ -7,6 +7,7 @@ import { TournamentAnnouncementListItem } from 'app/tournament-announcements/sha
 import {Organization} from 'app/organizations/shared/organization';
 import { ArenaService} from 'app/arenas/shared/arena.service';
 import { Arena} from 'app/arenas/shared/arena';
+import { AlertService } from 'app/components/alert/alert.service';
 
 @Component({
   moduleId: module.id,
@@ -21,7 +22,8 @@ export class TournamentAnnouncementListComponent implements OnInit {
 
   constructor( private service: TournamentAnnouncementsService,
                private arenaService: ArenaService,
-               private router: Router) {
+               private router: Router,
+               private alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -102,7 +104,7 @@ export class TournamentAnnouncementListComponent implements OnInit {
     return this.service.getCancelIconClass();
   }
 
-  public cancelTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementViewItem) {
+  public cancelTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementListItem) {
     if (confirm('Вы действительно хотите отменить турнир?')) {
       this.service.cancelTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
         data => {
@@ -118,7 +120,7 @@ export class TournamentAnnouncementListComponent implements OnInit {
     }
   }
 
-  public finishTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementViewItem) {
+  public finishTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementListItem) {
     if (confirm('Вы действительно хотите завершить прием заявок?')) {
       this.service.finishTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
         data => {
@@ -134,7 +136,7 @@ export class TournamentAnnouncementListComponent implements OnInit {
     }
   }
 
-  public deleteTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementViewItem) {
+  public deleteTournamentAnnouncement(tournamentAnnouncement: TournamentAnnouncementListItem) {
     if (confirm('Вы действительно хотите удалить анонс?')) {
       this.service.deleteTournamentAnnouncement(tournamentAnnouncement.id).subscribe(
         data => {

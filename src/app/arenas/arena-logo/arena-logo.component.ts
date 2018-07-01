@@ -8,9 +8,8 @@ import { debounce } from "rxjs/operator/debounce";
 
 @Component({
   moduleId: module.id,
-  selector: 'arena-id',
-  templateUrl: 'arena-logo.component.html',
-  styleUrls: ['arena-logo.component.scss']
+  selector: 'arena-logo',
+  templateUrl: 'arena-logo.component.html'
 })
 
 export class ArenaLogoComponent implements OnInit {

@@ -1,19 +1,19 @@
-import { Component, Injectable, OnInit, OnDestroy } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, Injectable, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { ArenaFilter } from "app/arenas/shared/arena-filter";
-import { ArenaService } from "app/arenas/shared/arena.service";
-import { ArenaListItem } from "app/arenas/shared/arena-list-item";
-import { ListResponse } from "app/shared/list/list-response";
-import { ListInfo } from "app/shared/list/list-info";
-import { PaginationService } from "app/shared/pagination.service";
-import { SortOption } from "app/shared/sorting/sort-option";
+import { ArenaFilter } from 'app/arenas/shared/arena-filter';
+import { ArenaService } from 'app/arenas/shared/arena.service';
+import { ArenaListItem } from 'app/arenas/shared/arena-list-item';
+import { ListResponse } from 'app/shared/list/list-response';
+import { ListInfo } from 'app/shared/list/list-info';
+import { PaginationService } from 'app/shared/pagination.service';
+import { SortOption } from 'app/shared/sorting/sort-option';
 
 
 @Component({
   moduleId: module.id,
-  selector: "arenas",
-  templateUrl: "arenas.component.html"
+  selector: 'arenas',
+  templateUrl: 'arenas.component.html'
 })
 
 @Injectable()

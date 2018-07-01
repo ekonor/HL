@@ -13,8 +13,7 @@ import { Point } from "app/shared/map/point";
 @Component({
   moduleId: module.id,
   selector: 'arena-id',
-  templateUrl: 'arena-edit.component.html',
-  styleUrls: ['arena-edit.component.scss']
+  templateUrl: 'arena-edit.component.html'
 })
 
 export class ArenaEditComponent implements OnInit {

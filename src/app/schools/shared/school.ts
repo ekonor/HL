@@ -1,44 +1,12 @@
-import { City } from "app/core/geo/city";
-import { Arena } from "app/arenas/shared/arena";
+/* Упрощенная школа */
 
-export class SchoolListItem
-{
-    id:number;
+export class School {
+    id: number;
     name: string;
-    linkName: string;
-    fullName: string;
-    arena?: Arena;
-    cityName?: string;
-
-    //public long? CountryId { get; set; }
-    //public virtual Country Country { get; set; }
-
+    linkName?: string;
     logo?: string;
 
-    webSite?: string;
-    phone?: string;
-    email?: string;
-    address?: string;
-}
-
-export class SchoolViewItem
-{
-    id:number;
-    name: string;
-    linkName: string;
-    fullName: string;
-    arena?: Arena;
-    city?: City;
-
-    //public long? CountryId { get; set; }
-    //public virtual Country Country { get; set; }
-
-    logo?: string;
-
-    webSite?: string;
-    phone?: string;
-    email?: string;
-    address?: string;
-
-    content: string;
+    constructor( values: Object = {} ) {
+      Object.assign( this, values );
+    }
 }
