@@ -77,4 +77,13 @@ export class TournamentAnnouncementFilterComponent implements OnInit {
       return 'Свернуть';
     }
   }
+
+  private onChangedStartDt(dt: Date) {
+    this.filter.startDateFrom = dt.toISOString();
+  }
+
+  private onChangedEndDt(dt: Date) {
+    this.filter.startDateTo = dt.toISOString();
+  }
+
 }

@@ -8,8 +8,11 @@
           <app-city-filter *ngIf="city" [city]="city" (onChanged)="setCity($event)"></app-city-filter>
           <input type="text" name="searchText" [(ngModel)]="filter.searchText" placeholder="Название или строка поиска" class="form-control">
           <label class="">Дата проведения</label>
-          <label for="startDateFrom">c</label>
-          <input id="startDateFrom"
+          <label>c</label>
+          <app-datepicker [dt]="filter.startDateFrom" (onChanged)="onChangedStartDt($event)"></app-datepicker>
+          <label>до</label>
+          <app-datepicker [dt]="filter.startDateTo" (onChanged)="onChangedEndDt($event)"></app-datepicker>
+          <!--input id="startDateFrom"
                      type="date"
                      name="startDateFrom"
                      [(ngModel)]="filter.startDateFrom"
@@ -21,24 +24,19 @@
                      name="startDateTo"
                      [(ngModel)]="filter.startDateTo"
                      placeholder="Дата проведения, до"
-                     class="form-control">
+                     class="form-control"-->
+          <!--div class="form-group">
+            <label>Дата проведения, c</label>
+                      </div>
+          <div class="form-group">
+            <label>Дата проведения, до</label>
+            <app-datepicker [dt]="filter.startDateTo" (onChanged)="onChangedEndDt($event)"></app-datepicker>
+          </div-->
           <div class=""
                [hasPermission]="['tournamentadministrator']"
                onAuthorizedPermission="show"
                onUnauthorizedPermission="hide">
-            <!--div class="btn-group btn-group-vertical btn-group-toggle elements-group-border" [(ngModel)]="filter.state" data-toggle="buttons">
-              <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
-                <input type="checkbox" autocomplete="off" name="isRegistration"  ngbButton  value="ApprovedByModerator">
-                Идет регистрация
-              </label>
-              <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
-                <input type="checkbox" autocomplete="off" name="isDraft" ngbButton   value="Draft" >
-                Черновики
-               ffff
-              </label>
-              </div-->
               <div class="btn-group btn-group-vertical btn-group-toggle elements-group-border" data-toggle="buttons" >
-                <!--button type="button" autocomplete="off" class="btn btn-primary fixed-size-button-s label-button" data-toggle="button">Идет регистрация</button-->
                 <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
                   <input type="checkbox" autocomplete="off" name="isRegistration" ngbButton  [(ngModel)]="filter.state.isRegistration">
                   Идет регистрация

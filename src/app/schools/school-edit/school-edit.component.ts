@@ -78,6 +78,7 @@ export class SchoolEditComponent implements OnInit {
         },
         () => { this.dataIsLoading = false; } );
       }
+      this.dataIsLoading = true;
       this.service.addLogo(this.id, formData).subscribe(
         data => {
         },
@@ -116,8 +117,8 @@ export class SchoolEditComponent implements OnInit {
     console.log(this.files);
   }
 
-  public getSchoolLogo(arena: SchoolViewItem): string {
-    return this.service.getSchoolLogo(arena);
+  public getSchoolLogo(school: SchoolViewItem): string {
+    return this.service.getSchoolLogo(school);
   }
 
   public editLogo() {

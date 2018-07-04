@@ -228,7 +228,7 @@ pagination, ngb-pagination {
   }
 
   .buttons-wrapper button {
-    width: 40%;
+    // width: 40%;
     text-align: center;
   }
 
@@ -944,4 +944,12 @@ pre {
 .arena-create.row,
 .school-create.row{
   margin: 0 20px;
+}
+.btn.btn-calendar {
+  background-image: none;
+  padding-left: 0.85rem;
+  padding-right: 0.85rem;
+  border: 1px solid lightgrey;
+  background-color: transparent;
+  color: #616161 !important;
 }

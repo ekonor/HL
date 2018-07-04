@@ -5,7 +5,7 @@
   <form (ngSubmit)="editSchool(school)" #myForm="ngForm">
      <div class="form-group">
       <label for="schoolname">Сокращенное название школы</label>
-      <input type="text" class="form-control" name="schoolname" [(ngModel)]="school.name" (ngModelChange)="school.name = $event" #arenaname="ngModel" id="schoolname" required="required"/>
+      <input type="text" class="form-control" name="schoolname" [(ngModel)]="school.name" (ngModelChange)="school.name = $event" #schoolname="ngModel" id="schoolname" required="required"/>
     </div>
     <div class="form-group">
       <label for="fullName">Полное название школы</label>
@@ -50,7 +50,7 @@
 
 <div class="col-md-6 col-md-offset-3">
   <h2>Редактирование изображений</h2>
-  <img class="img-fluid rounded" [src]="getSchoolLogo(arena)" alt="">
+  <img class="img-fluid rounded" [src]="getSchoolLogo(school)" alt="">
   <a class="btn-floating deep-orange waves-light waves-effect" title="Редактировать изображение" (click)="editLogo()"><i class="fa fa-pencil"></i></a>
 </div>
 </div>

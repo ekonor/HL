@@ -38,8 +38,7 @@ export class SchoolsComponent implements OnInit {
 
       this.sortOptions = [
         { title: "Название", value: "Name" },
-        { title: "Город", value: "CityName" },
-        { title: "Тип", value: "SchoolTypeName" }
+        { title: "Город", value: "CityName" }
       ];
   }
 
@@ -80,8 +79,13 @@ export class SchoolsComponent implements OnInit {
       schools => {
         this.schoolList = schools;
       },
-      error => this.errorMessage = error,
-      () => this.dataIsLoading = false
+      error => {
+        this.errorMessage = error;
+        this.dataIsLoading = false;
+      },
+      () => {
+        this.dataIsLoading = false;
+      }
     );
   }
 

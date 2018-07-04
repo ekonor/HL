@@ -7,20 +7,22 @@
         <form>
           <app-city-filter *ngIf="city" [city]="city" (onChanged)="setCity($event)"></app-city-filter>
           <input type="text" name="searchText" [(ngModel)]="filter.searchText" placeholder="Название или строка поиска" class="form-control">
-          <label for="startDateFrom">Дата проведения c</label>
-          <input id="startDateFrom"
+          <label>Дата проведения c</label>
+          <app-datepicker [dt]="filter.startDateFrom" (onChanged)="onChangedStartDt($event)"></app-datepicker>
+          <!--input id="startDateFrom"
                  type="date"
                  name="startDateFrom"
                  [(ngModel)]="filter.startDateFrom"
                  placeholder="Дата проведения, от"
-                 class="form-control">
-          <label for="startDateTo">до</label>
-          <input id="startDateTo"
+                 class="form-control"-->
+          <label>до</label>
+          <app-datepicker [dt]="filter.startDateTo" (onChanged)="onChangedEndDt($event)"></app-datepicker>
+          <!--input id="startDateTo"
                  type="date"
                  name="startDateTo"
                  [(ngModel)]="filter.startDateTo"
                  placeholder="Дата проведения, до"
-                 class="form-control">
+                 class="form-control"-->
           <div class="btn-group-vertical btn-group-toggle elements-group-border" ngbRadioGroup name="gender" [(ngModel)]="filter.gender">
             <label class="btn-primary label-button fixed-size-button-s" ngbButtonLabel>
               <input type="radio" name="Male" ngbButton value="Male"><i class="fa fa-male"></i>
