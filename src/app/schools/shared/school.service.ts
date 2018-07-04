@@ -43,12 +43,6 @@ export class SchoolService {
     return this.httpClient.get<SchoolViewItem>(methodUrl);
   }
 
-  public getSchoolTypes(): Observable<SchoolType[]> {
-    const methodUrlPrefix = '/schools' + '/types';
-    let methodUrl = this.getMethodUrl(methodUrlPrefix);
-    return this.httpClient.get<SchoolType[]>(methodUrl);
-  }
-
   public getSchoolLogo(school: SchoolListItem | SchoolViewItem | School ): string {
     let logoSrc = this.apiConfig.filesPath;
     let placeholder = 'assets/img/schools/no_logo.png';

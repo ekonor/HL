@@ -1,0 +1,47 @@
+<div class="school-pic" *ngIf=" ( position == null ) || ( position != 'horizontal' )" >
+  <div class="logo-text">
+    <a [routerLink]="['/school',school.id]" routerLinkActive="active" title="{{school.name}}">
+      {{school.name}}
+    </a>
+  </div>
+  <div class="logo-img-wrapper" >
+    <div class="logo-img-bg-wrapper" >
+      <img class="logo-img-bg"
+           [src]="getSchoolLogo()"
+           alt="{{school.name}}"
+           onerror = "this.style.display = 'none'"
+           title="{{school.name}}">
+    </div>
+    <a [routerLink]="['/school',school.id]" routerLinkActive="active" title="{{school.name}}">
+      <img class="logo-img-main"
+           [src]="getSchoolLogo()"
+           alt="{{school.name}}"
+           onerror = "this.style.display = 'none'"
+           title="{{school.name}}">
+    </a>
+  </div>
+</div>
+
+<div class="school-pic nowrap" *ngIf="position=='horizontal'">
+  <div class="logo-img-wrapper">
+    <div class="logo-img-bg-wrapper">
+      <img class="logo-img-bg"
+           *ngIf="school" [src]="getSchoolLogo()"
+           alt="{{school.name}}"
+           onerror = "this.style.display = 'none'"
+           title="{{school.name}}">
+    </div>
+    <a *ngIf="school" [routerLink]="['/school',school.id]" routerLinkActive="active" title="{{school.name}}">
+      <img class="logo-img-main"
+           [src]="getSchoolLogo()"
+           alt="{{school.name}}"
+           onerror = "this.style.display = 'none'"
+           title="{{school.name}}">
+    </a>
+  </div>
+  <div class="inline-block logo-text">
+    <a *ngIf="school" [routerLink]="['/school',school.id]" routerLinkActive="active" title="{{school.name}}">
+    {{school.name}}
+    </a>
+  </div>
+</div>

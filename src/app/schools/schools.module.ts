@@ -21,6 +21,8 @@ import { SharedModule } from 'app/shared/shared.module';
 import { SchoolSelectComponent } from 'app/schools/school-select/school-select.component';
 import { SchoolPicComponent } from 'app/schools/school-pic/school-pic.component';
 
+import { ArenaModule } from 'app/arenas/arenas.module';
+
 @NgModule({
       declarations: [
         SchoolsComponent,
@@ -42,7 +44,8 @@ import { SchoolPicComponent } from 'app/schools/school-pic/school-pic.component'
         NgxEditorModule,
         Ng2Permission,
         NgbModule,
-        CoreModule
+        CoreModule,
+        ArenaModule
       ],
       exports: [
         SchoolFilterComponent,

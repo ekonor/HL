@@ -1,0 +1,76 @@
+<loader [hidden]="!dataIsLoading"></loader>
+<div class="school-view" *ngIf="school">
+  <div class="div-table">
+    <div class="div-table-row">
+      <div class="div-table-col div-table-col-flex">
+        <div class="operations-panel navbar navbar-right pull-right">
+        </div>
+      </div>
+    </div>
+    <div class="div-table-row">
+      <div class="div-table-col div-table-col-flex">
+        <div class="info-block">
+        </div>
+      </div>
+    </div>
+    <div class="div-table-row">
+      <div class="row">
+        <div class="col-lg-5 col-sm-5 h-100 blog-item block-item">
+          <div class="card h-100">
+            <div class="item-body">
+              <div class="item-title-main">
+                <p>{{school.city&&school.city.name ? school.city.name: '' }}</p>
+              </div>
+              <h5 class="item-title">
+                {{school.fullName ? school.fullName : school.name}}
+              </h5>
+              <hr>
+              <p class="icon-wrap" *ngIf="school.capacity">
+                <i class="fa fa-users"></i>
+                Вместимость: {{school.capacity}} чел.
+              </p>
+              <img class="img-fluid rounded" [src]="getSchoolLogo(school)" alt="">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <br>
+          <div class="row text-center">
+            <div class="col-md-3">
+              <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-map-marker"></i></a>
+              <p>{{school.address}}</p>
+            </div>
+            <div class="col-md-3">
+              <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-phone"></i></a>
+              <p><a href="tel:{{school.phone}}">{{school.phone}}</a></p>
+            </div>
+            <div class="col-md-3">
+              <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-envelope"></i></a>
+              <p><a class="short-link" href="mailto:{{school.email}}" title="{{school.email}}">{{school.email}}</a></p>
+            </div>
+            <div class="col-md-3">
+              <a class="btn-floating blue accent-1 waves-light" mdbRippleRadius><i class="fa fa-globe"></i></a>
+              <p><a class="short-link" target="_blank" [href]="school.webSite" title="{{school.webSite}}">{{school.webSite}}</a></p>
+            </div>
+          </div>
+          <div class=row>
+            <div class=row>
+              <div class="col-md-12">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="div-table-row">
+      <div class="div-table-col div-table-col-flex">
+        <pre>
+          <p class="section-description" [innerHTML]="school.about"></p>
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -3,19 +3,19 @@
 </ng-template>
 <div class="row">
   <div class="col-md-6 form-group {{ ( isRequired === true ) ? 'required' : '' }}">
-    <label for="arenaFilter">Арена</label>
-    <input id="arenaFilter"
-           name="arenaFilter"
+    <label for="schoolFilter">{{ getSchoolTitle() }}</label>
+    <input id="schoolFilter"
+           name="schoolFilter"
            type="text"
            class="form-control"
-           [(ngModel)]="arena"
-           [ngbTypeahead]="searchArena"
+           [(ngModel)]="school"
+           [ngbTypeahead]="searchSchool"
            [resultTemplate]="rt"
            [inputFormatter]="formatter"
-           (ngModelChange)="returnArena()"
+           (ngModelChange)="returnSchool()"
            required="{{ ( isRequired === true ) ? 'required' : '' }}"/>
     <span *ngIf="searching">Поиск...</span>
-    <div class="invalid-feedback" *ngIf="searchFailed">Извините, арен с заданными параметрами не найдено</div>
+    <div class="invalid-feedback" *ngIf="searchFailed">Извините, школ с заданными параметрами не найдено</div>
   </div>
 </div>
 
