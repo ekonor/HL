@@ -80,11 +80,11 @@ export class TAAdminFilterComponent implements OnInit {
     }
   }
 
-  private onChangedStartDt(dt: Date) {
+  public onChangedStartDt(dt: Date) {
     this.filter.startDateFrom = dt.toISOString();
   }
 
-  private onChangedEndDt(dt: Date) {
+  public onChangedEndDt(dt: Date) {
     this.filter.startDateTo = dt.toISOString();
   }
 }

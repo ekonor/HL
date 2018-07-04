@@ -35,8 +35,22 @@
                    [options]="sortOptions"
                    (onSorted)="onSorted($event)">
           </sorting>
-          <button type="button" class="toggle btn btn-primary waves-light" (click)="togglePartInfo()">Как я могу участвовать ?</button>
-          <button type="button" class="toggle btn btn-primary waves-light" (click)="toggleAddInfo()">Как я могу добавить анонс турнира ?</button>
+          <button type="button"
+                  [hasPermission]="['tournamentadministrator','tournamentannouncementmoderator']"
+                  onAuthorizedPermission="hide"
+                  onUnauthorizedPermission="show"
+                  class="toggle btn btn-primary waves-light"
+                  (click)="togglePartInfo()">
+            Как я могу участвовать ?
+          </button>
+          <button type="button"
+                  [hasPermission]="['tournamentadministrator','tournamentannouncementmoderator']"
+                  onAuthorizedPermission="hide"
+                  onUnauthorizedPermission="show"
+                  class="toggle btn btn-primary waves-light"
+                  (click)="toggleAddInfo()">
+            Как я могу добавить анонс турнира ?
+          </button>
         </div>
         <div class="content-wrapper">
           <div class="info-block">

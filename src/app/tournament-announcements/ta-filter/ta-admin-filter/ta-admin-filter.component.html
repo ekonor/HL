@@ -12,26 +12,6 @@
           <app-datepicker [dt]="filter.startDateFrom" (onChanged)="onChangedStartDt($event)"></app-datepicker>
           <label>до</label>
           <app-datepicker [dt]="filter.startDateTo" (onChanged)="onChangedEndDt($event)"></app-datepicker>
-          <!--input id="startDateFrom"
-                     type="date"
-                     name="startDateFrom"
-                     [(ngModel)]="filter.startDateFrom"
-                     placeholder="Дата проведения, от"
-                     class="form-control">
-          <label for="startDateTo">до</label>
-          <input id="startDateTo"
-                     type="date"
-                     name="startDateTo"
-                     [(ngModel)]="filter.startDateTo"
-                     placeholder="Дата проведения, до"
-                     class="form-control"-->
-          <!--div class="form-group">
-            <label>Дата проведения, c</label>
-                      </div>
-          <div class="form-group">
-            <label>Дата проведения, до</label>
-            <app-datepicker [dt]="filter.startDateTo" (onChanged)="onChangedEndDt($event)"></app-datepicker>
-          </div-->
           <div class=""
                [hasPermission]="['tournamentadministrator']"
                onAuthorizedPermission="show"
