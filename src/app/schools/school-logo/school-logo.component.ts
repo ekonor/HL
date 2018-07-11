@@ -80,10 +80,6 @@ export class SchoolLogoComponent implements OnInit {
     //}
   }
 
-  public setDeleteFlag() {
-    console.log(this.deleteFlag);
-  }
-
   public addLogo(event) {
     const target = event.target || event.srcElement;
     this.files = target.files;
@@ -99,7 +95,6 @@ export class SchoolLogoComponent implements OnInit {
       .subscribe(
         school => {
           this.school = school;
-          console.log(this.school);
         },
         error => {
           this.errorMessage = error;

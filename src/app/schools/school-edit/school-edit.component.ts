@@ -47,9 +47,6 @@ export class SchoolEditComponent implements OnInit {
       return;
     }
     this.school.city = this.city;
-    console.log(this.school);
-    console.log(this.id);
-    console.log('ok');
     this.dataIsLoading = true;
     this.service.updateSchool(this.id, this.school).subscribe(
       data => {
@@ -91,9 +88,6 @@ export class SchoolEditComponent implements OnInit {
   }
 
   public deleteSchool() {
-    console.log(this.school);
-    console.log(this.id);
-    console.log('delete');
     this.dataIsLoading = true;
     this.service.deleteSchool(this.id).subscribe(
       data => {
@@ -107,14 +101,11 @@ export class SchoolEditComponent implements OnInit {
       () => { this.dataIsLoading = false; });
   }
 
-  public setDeleteFlag() {
-    console.log(this.deleteFlag);
-  }
+
 
   public addLogo(event) {
     const target = event.target || event.srcElement;
     this.files = target.files;
-    console.log(this.files);
   }
 
   public getSchoolLogo(school: SchoolViewItem): string {

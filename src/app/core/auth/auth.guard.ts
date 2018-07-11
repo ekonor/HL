@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
     const roles = route.data['roles'] as Array<string>;
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser) {
-            console.log(currentUser.roles);
+            // console.log(currentUser.roles);
             const myRoles = currentUser.roles; // current roles for user
             let isFound = false;
             for (let i = 0; i < myRoles.length; i++) {
@@ -22,9 +22,9 @@ export class AuthGuard implements CanActivate {
                 }
                 this.permissionService.add(myRoles[i]);
             }
-            console.log(this.permissionService.store);
+            // console.log(this.permissionService.store);
             if (!roles) { return true; }
-            console.log("isFound "+isFound);
+            // console.log("isFound "+isFound);
             return isFound;
             // this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
             //  return false;

@@ -39,7 +39,6 @@ export class SchoolFilterComponent implements OnInit {
     const filterState = JSON.parse(localStorage.getItem('schoolsFilterState'));
     // TODO проверка существования поля toggled
     this.toggled = filterState && filterState.toggled;
-    console.log(this.toggled);
   }
 
   ngOnInit() {
@@ -49,7 +48,6 @@ export class SchoolFilterComponent implements OnInit {
   public toggle() {
 
     this.toggled = !this.toggled;
-    console.log(this.toggled);
     localStorage.setItem('schoolsFilterState', JSON.stringify({toggled: this.toggled}));
   }
 

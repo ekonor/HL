@@ -46,7 +46,6 @@ export class TAAdminFilterComponent implements OnInit {
   }
   public toggle() {
     this.toggled = !this.toggled;
-    console.log(this.toggled);
     localStorage.setItem('tournamentAnnouncementFilterFilterState', JSON.stringify({toggled: this.toggled}));
   }
 
@@ -60,7 +59,6 @@ export class TAAdminFilterComponent implements OnInit {
     if (this.city && this.city.id) {
       this.filter.cityId = this.city.id;
     }
-    console.log(this.filter.state);
     this.onFiltered.emit();
   }
 

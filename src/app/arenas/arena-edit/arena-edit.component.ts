@@ -58,9 +58,6 @@ export class ArenaEditComponent implements OnInit {
       return;
     }
     this.arena.city = this.city;
-    console.log(this.arena);
-    console.log(this.id);
-    console.log('ok');
     this.dataIsLoading = true;
     this.service.updateArena(this.id, this.arena).subscribe(
       data => {
@@ -101,9 +98,6 @@ export class ArenaEditComponent implements OnInit {
   }
 
   public deleteArena() {
-    console.log(this.arena);
-    console.log(this.id);
-    console.log('delete');
     this.dataIsLoading = true;
     this.service.deleteArena(this.id).subscribe(
       data => {
@@ -118,13 +112,11 @@ export class ArenaEditComponent implements OnInit {
   }
 
   public setDeleteFlag() {
-    console.log(this.deleteFlag);
   }
 
   public addLogo(event) {
     const target = event.target || event.srcElement;
     this.files = target.files;
-    console.log(this.files);
   }
 
   public getArenaLogo(arena: ArenaViewItem): string {

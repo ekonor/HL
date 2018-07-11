@@ -67,7 +67,6 @@ export class TACreateComponent implements OnInit {
 
   // сохранение как черновик
   public addTournamentAnnouncement(ta: TournamentAnnouncement, form: NgForm) {
-    //if (form.) console.log("ok") else console.log("bad");
     if (confirm('Вы действительно хотите сохранить анонс?')) {
       // TODO проверка существования города и арены
       this.getDt();
@@ -198,6 +197,6 @@ export class TACreateComponent implements OnInit {
   }
 
   onSubmit(form: NgForm){
-    console.log(form);
+    //console.log(form);
   }
 }

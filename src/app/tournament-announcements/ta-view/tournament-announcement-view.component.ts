@@ -240,12 +240,10 @@ export class TournamentAnnouncementViewComponent {
 
   togglePartInfo() {
     this.toggledPartInfo = !this.toggledPartInfo;
-    console.log(this.toggledPartInfo);
   }
 
   toggleAddInfo() {
     this.toggledAddInfo = !this.toggledAddInfo;
-    console.log(this.toggledAddInfo);
   }
 
   getToggleInfoIcon(): string {

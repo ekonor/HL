@@ -28,17 +28,13 @@ export class ArenaService {
     const methodUrlPrefix = '/arenas' + '/list';
 // TODO исправить листинфо, сейчас не работает
     let methodUrl = this.getMethodUrl(methodUrlPrefix);
-    //let params = listInfo.toParams();
     let params = new HttpParams();
-    //console.log("eeeee",params.toString());
     if (filter.arenaTypeId)
       params = params.append('arenaTypeId', filter.arenaTypeId.toString());
     if (filter.cityId)
       params = params.append('cityId', filter.cityId.toString());
     if (filter.searchText)
       params = params.append('searchText', filter.searchText);
-    console.log(params);
-
     return this.httpClient.get<ListResponse<ArenaListItem>>(methodUrl, { params: params });
   }
 
@@ -55,15 +51,12 @@ export class ArenaService {
   }
 
   public getArenaLogo(arena: ArenaListItem | ArenaViewItem | Arena ): string {
-    // console.log(arena);
-    // console.log(arena.logo);
     let logoSrc = this.apiConfig.filesPath;
     let placeholder = "assets/img/arenas/no_logo.png";
     return arena.logo ? logoSrc + arena.logo : placeholder;
   }
 
   public updateArena(id: number, arena: ArenaViewItem): Observable<ArenaViewItem> {
-    // console.log(arena);
     // TODO свернуть
     const body = JSON.stringify({
       'name': arena.name,
@@ -78,7 +71,6 @@ export class ArenaService {
       'capacity': arena.capacity,
       'about': arena.about
     });
-    // console.log(body);
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
       const headers = new HttpHeaders({
@@ -91,7 +83,6 @@ export class ArenaService {
   }
 
   public addArena(arena: ArenaViewItem): Observable<number> {
-    // console.log(arena);
     // TODO свернуть
     const body = JSON.stringify({
       'name': arena.name,
@@ -106,7 +97,7 @@ export class ArenaService {
       'capacity': arena.capacity,
       'about': arena.about
     });
-    // console.log(body);
+
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
       const headers = new HttpHeaders({

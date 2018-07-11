@@ -32,8 +32,6 @@ export class SchoolService {
       params = params.append('cityId', filter.cityId.toString());
     if (filter.searchText)
       params = params.append('searchText', filter.searchText);
-    console.log(params);
-
     return this.httpClient.get<ListResponse<SchoolListItem>>(methodUrl, { params: params });
   }
 

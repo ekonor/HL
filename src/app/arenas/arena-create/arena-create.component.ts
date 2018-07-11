@@ -64,8 +64,6 @@ export class ArenaCreateComponent implements OnInit {
       return;
     }
     this.arena.city = this.city;
-    console.log(this.arena);
-    console.log(this.id);
     this.dataIsLoading = true;
     this.service.addArena(this.arena).subscribe(
       data => {

@@ -44,7 +44,6 @@ export class TournamentAnnouncementFilterComponent implements OnInit {
   }
   public toggle() {
     this.toggled = !this.toggled;
-    console.log(this.toggled);
     localStorage.setItem('tournamentAnnouncementFilterFilterState', JSON.stringify({toggled: this.toggled}));
   }
 

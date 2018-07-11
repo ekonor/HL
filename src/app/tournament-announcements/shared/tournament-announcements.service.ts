@@ -24,8 +24,6 @@ export class TournamentAnnouncementsService {
 
   public getTournamentAnnouncements(filter: TournamentAnnouncementFilter, listInfo: ListInfo): Observable<ListResponse<TournamentAnnouncementListItem>> {
     const methodUrlPrefix = '/tournament-announcements' + '/list';
-
-    console.log(filter.cityId);
     const methodUrl = this.getMethodUrl(methodUrlPrefix);
     let params = listInfo.toParams();
 
@@ -90,9 +88,6 @@ export class TournamentAnnouncementsService {
       params = params.append('isCommercial', filter.isCommercial.toString());
     if (filter.searchText)
       params = params.append('searchText', filter.searchText);
-
-    console.log(filter);
-
     return this.httpClient.get<ListResponse<TournamentAnnouncementListItem>>(methodUrl, { params: params });
   }
 
@@ -161,7 +156,6 @@ export class TournamentAnnouncementsService {
       params = params.append('isCommercial', filter.isCommercial.toString());
     if (filter.searchText)
       params = params.append('searchText', filter.searchText);
-    // console.log(filter);
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.token && currentUser.roles) {
       let methodUrlPrefix;

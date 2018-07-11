@@ -40,7 +40,6 @@ export class TALogoComponent implements OnInit {
     if (this.files) {
       const formData = new FormData();
       formData.append('image', this.files[0]);
-      console.log(this.files[0]);
       this.dataIsLoading = true;
       this.service.addLogo(this.id, formData).subscribe(
         data => {
@@ -59,7 +58,6 @@ export class TALogoComponent implements OnInit {
   }
 
   public deleteLogo() {
-    console.log('delete');
     this.dataIsLoading = true;
     this.service.deleteLogo(this.id).subscribe(
       data => {
@@ -74,7 +72,6 @@ export class TALogoComponent implements OnInit {
   }
 
   public setDeleteFlag() {
-    console.log(this.deleteFlag);
   }
 
   public addLogo(event) {
@@ -92,7 +89,6 @@ export class TALogoComponent implements OnInit {
       .subscribe(
         ta => {
           this.ta = ta;
-          console.log(this.ta);
         },
         error => {
           this.errorMessage = error;

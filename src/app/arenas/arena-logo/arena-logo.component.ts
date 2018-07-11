@@ -52,7 +52,6 @@ export class ArenaLogoComponent implements OnInit {
   }
 
   public deleteLogo() {
-    console.log('delete');
     this.dataIsLoading = true;
     this.service.deleteLogo(this.id).subscribe(
       data => {
@@ -72,17 +71,12 @@ export class ArenaLogoComponent implements OnInit {
       .subscribe(
         arena => {
           this.arena = arena;
-          console.log(this.arena);
         },
         error => {
           this.errorMessage = error;
         },
         () => this.dataIsLoading = false
       );
-  }
-
-  public setDeleteFlag() {
-    console.log(this.deleteFlag);
   }
 
   public addLogo(event) {

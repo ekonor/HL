@@ -87,9 +87,6 @@ export class TAEditComponent implements OnInit {
 
   public deleteTA() {
     if (confirm('Вы действительно хотите удалить анонс?')) {
-      console.log(this.ta);
-      console.log(this.id);
-      console.log('delete');
       this.dataIsLoading = true;
       this.service.deleteTournamentAnnouncement(this.id).subscribe(
         data => {
@@ -221,10 +218,6 @@ export class TAEditComponent implements OnInit {
       () => {
         alert('Анонс успешно отправлен на модерацию, ожидайте решения модератора');
       });
-  }
-
-  public setDeleteFlag() {
-    console.log(this.deleteFlag);
   }
 
   private getTA(id: number) {

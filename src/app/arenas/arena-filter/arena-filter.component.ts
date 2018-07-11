@@ -39,7 +39,6 @@ export class ArenaFilterComponent implements OnInit {
     const filterState = JSON.parse(localStorage.getItem('arenasFilterState'));
     // TODO проверка существования поля toggled
     this.toggled = filterState && filterState.toggled;
-    console.log(this.toggled);
   }
 
   ngOnInit() {
@@ -61,9 +60,7 @@ export class ArenaFilterComponent implements OnInit {
   }
 
   public toggle() {
-
     this.toggled = !this.toggled;
-    console.log(this.toggled);
     localStorage.setItem('arenasFilterState', JSON.stringify({toggled: this.toggled}));
   }
 

@@ -68,8 +68,6 @@ export class TournamentAnnouncementsComponent implements OnInit {
   public onSorted($event) {
     this.listInfo.orderBy = $event.orderBy;
     this.listInfo.orderDir = $event.orderDir;
-
-    console.log(this.listInfo);
     this.getTournamentAnnouncements();
   }
 
@@ -82,7 +80,6 @@ export class TournamentAnnouncementsComponent implements OnInit {
         },
         error => {
           this.errorMessage = error;
-        // console.log(this.errorMessage);
          },
         () => this.dataIsLoading = false
       );
@@ -98,12 +95,10 @@ export class TournamentAnnouncementsComponent implements OnInit {
 
   togglePartInfo() {
     this.toggledPartInfo = !this.toggledPartInfo;
-    console.log(this.toggledPartInfo);
   }
 
   toggleAddInfo() {
     this.toggledAddInfo = !this.toggledAddInfo;
-    console.log(this.toggledAddInfo);
   }
 
   getToggleInfoIcon(): string {

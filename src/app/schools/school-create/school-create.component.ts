@@ -55,8 +55,6 @@ export class SchoolCreateComponent implements OnInit {
       return;
     }
     this.school.city = this.city;
-    console.log(this.school);
-    console.log(this.id);
     this.dataIsLoading = true;
     this.service.addSchool(this.school).subscribe(
       data => {

@@ -48,9 +48,7 @@ export class DatepickerComponent implements OnInit {
   } */
 
   pickDt() {
-    //console.log(this.dtModel);
     this.dt = this.dtModel ? new Date(this.dtModel.year, this.dtModel.month - 1, this.dtModel.day) : null;
-    //console.log(this.dt);
     this.onChanged.emit(this.dt);
   }
 }

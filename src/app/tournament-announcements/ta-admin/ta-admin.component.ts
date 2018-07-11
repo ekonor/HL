@@ -82,7 +82,6 @@ export class TAAdminComponent implements OnInit {
           this.errorMessage = error;
           this.dataIsLoading = false;
           alert('Не удалось получить список анонсов');
-          // console.log(this.errorMessage);
         },
         () => this.dataIsLoading = false
       );
@@ -98,12 +97,10 @@ export class TAAdminComponent implements OnInit {
 
   togglePartInfo() {
     this.toggledPartInfo = !this.toggledPartInfo;
-    console.log(this.toggledPartInfo);
   }
 
   toggleAddInfo() {
     this.toggledAddInfo = !this.toggledAddInfo;
-    console.log(this.toggledAddInfo);
   }
 
   getToggleInfoIcon(): string {

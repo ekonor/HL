@@ -46,7 +46,7 @@ export class AuthenticationService {
              while (i--) {
                this.permissionService.add(response['roles'][i]);
              }
-            console.log(this.permissionService.store);
+            // console.log(this.permissionService.store);
             return true;
           } else {
             return false;
