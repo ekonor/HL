@@ -68,10 +68,20 @@
           </div>
           <tournament-announcement-list [content]="tournamentAnnouncementList.listItems">
           </tournament-announcement-list>
-          <pagination [page]="listInfo.page"
+          <!--pagination [page]="listInfo.page"
                       [collectionSize]="tournamentAnnouncementList.count"
                       [pageSize]="listInfo.take">
-          </pagination>
+          </pagination-->
         </div>
       </div>
+      <div class="div-table-col div-table-col-fixed marketing">
+      </div>
+    </div>
+    <div class="div-table-row">
+      <pagination [page]="listInfo.page"
+                  [collectionSize]="tournamentAnnouncementList.count"
+                  [pageSize]="listInfo.take">
+      </pagination>
+    </div>
+  </div>
 </div>

@@ -943,10 +943,7 @@ pre {
   background-color: lightgrey;
   width: 350px;
   text-align: center;
-  .marketing-block {
-    margin: 10px auto;
-    background: url("../assets/img/SNP_2954603_en_v0.png");
-    width: 300px;
-    height: 250px;
-  }
+  background: url("../assets/img/SNP_2954603_en_v0.png");
+  background-position: top center;
+  background-repeat: space;
 }
