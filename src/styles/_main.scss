@@ -475,21 +475,11 @@ pre {
     text-align: center;
   }
 
-  .pagination {
-    margin-bottom: 30px;
-  }
+
 
   .justify-content-center {
     -ms-flex-pack: center !important;
     justify-content: center !important;
-  }
-
-  .pagination {
-    display: -ms-flexbox;
-    display: flex;
-    padding-left: 0;
-    list-style: none;
-    border-radius: .25rem;
   }
 
   li {
@@ -497,30 +487,11 @@ pre {
     text-align: -webkit-match-parent;
   }
 
-  .pagination {
-    display: -ms-flexbox;
-    display: flex;
-    padding-left: 0;
-    list-style: none;
-    border-radius: .25rem;
-  }
-
-  .page-item:first-child .page-link {
+  /*.page-item:first-child .page-link {
     margin-left: 0;
     border-top-left-radius: .25rem;
     border-bottom-left-radius: .25rem;
   }
-  .page-link {
-    position: relative;
-    display: block;
-    padding: .5rem .75rem;
-    margin-left: -1px;
-    line-height: 1.25;
-    color: #007bff;
-    background-color: #fff;
-    border: 1px solid #ddd;
-  }
-
 
   .page-link {
     position: relative;
@@ -528,10 +499,10 @@ pre {
     padding: .5rem .75rem;
     margin-left: -1px;
     line-height: 1.25;
-    color: #007bff;
-    background-color: #fff;
+    //color: #007bff;
+    //background-color: #fff;
     border: 1px solid #ddd;
-  }
+  }*/
 
 
 
@@ -548,17 +519,17 @@ pre {
     border: 0;
   }
 
-  a.page-link
+  /*a.page-link
   .page-link {
     position: relative;
     display: block;
     padding: .5rem .75rem;
     margin-left: -1px;
     line-height: 1.25;
-    color: #007bff;
-    background-color: #fff;
+    //color: #007bff;
+    //background-color: #fff;
     border: 1px solid #ddd;
-  }
+  }*/
 
   form.filter {
 
@@ -952,4 +923,18 @@ pre {
   border: 1px solid lightgrey;
   background-color: transparent;
   color: #616161 !important;
+}
+
+
+.pagination {
+  margin-bottom: 30px;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: .25rem;
+
+  .page-link:active, .page-link:focus, .pagination .active .page-link {
+    background-color: #007bff;
+  }
 }

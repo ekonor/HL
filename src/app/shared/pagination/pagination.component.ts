@@ -18,6 +18,7 @@ export class PaginationComponent {
   }
 
   public setPage(page: number){
+    console.log("page="+page);
     this.paginationService.setPage(page);
   }
 }

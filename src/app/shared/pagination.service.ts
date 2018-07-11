@@ -20,6 +20,7 @@ export class PaginationService {
     private readonly activatedRoute: ActivatedRoute) {}
 
   public setPage(page: number) {
+    console.log("page="+page);
     const queryParams: Params = Object.assign({}, this.activatedRoute.snapshot.queryParams);
     queryParams["page"] = page;
     this.router.navigate([], { queryParams: queryParams});
