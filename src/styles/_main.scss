@@ -938,3 +938,15 @@ pre {
     background-color: #007bff;
   }
 }
+
+.marketing {
+  background-color: lightgrey;
+  width: 350px;
+  text-align: center;
+  .marketing-block {
+    margin: 10px auto;
+    background: url("../assets/img/SNP_2954603_en_v0.png");
+    width: 300px;
+    height: 250px;
+  }
+}
