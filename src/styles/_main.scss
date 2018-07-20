@@ -329,6 +329,11 @@ pre {
 
   .item-text {
 
+    .icon-wrap {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 
   .icon-wrap i {
@@ -651,7 +656,9 @@ pre {
   }
 
   .item-title {
-
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .item-title .title-text {

@@ -1,6 +1,6 @@
 export class SchoolFilter {
-    cityId?: number; //  Фильтр - город
-    searchText?: string;
+    cityId: number = null; //  Фильтр - город
+    searchText: string = null;
 
     constructor( values: Object = {} ) {
       Object.assign( this, values );

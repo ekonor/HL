@@ -28,10 +28,12 @@ export class SchoolService {
     const methodUrlPrefix = '/schools' + '/list';
     let methodUrl = this.getMethodUrl(methodUrlPrefix);
     let params = new HttpParams();
-    if (filter.cityId)
-      params = params.append('cityId', filter.cityId.toString());
-    if (filter.searchText)
-      params = params.append('searchText', filter.searchText);
+    if (filter) {
+      if (filter.cityId)
+        params = params.append('cityId', filter.cityId.toString());
+      if (filter.searchText)
+        params = params.append('searchText', filter.searchText);
+    }
     return this.httpClient.get<ListResponse<SchoolListItem>>(methodUrl, { params: params });
   }
 

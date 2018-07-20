@@ -1,9 +1,9 @@
 import { Country} from 'app/core/geo/country';
 
 export class City {
-  id: number;
+  id: number = null;
   name: string = '';
-  country?: Country;
+  country?: Country = null;
 
   constructor( values: Object = {} ) {
     Object.assign( this, values );

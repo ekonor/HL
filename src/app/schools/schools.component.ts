@@ -53,7 +53,10 @@ export class SchoolsComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  public onFiltered($event){
+  public onFiltered(filter: SchoolFilter) {
+    if (filter) {
+      this.filter = filter;
+    }
     this.getSchools();
   }
 

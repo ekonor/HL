@@ -24,7 +24,7 @@ import { City } from 'app/core/geo/city';
 export class SchoolFilterComponent implements OnInit {
 
   @Input() filter: SchoolFilter;
-  @Output() onFiltered = new EventEmitter<boolean>();
+  @Output() onFiltered = new EventEmitter<SchoolFilter>();
 
   schoolTypes: SchoolType[];
   errorMessage: string;
@@ -36,13 +36,29 @@ export class SchoolFilterComponent implements OnInit {
   city: City;
 
   constructor( private service: SchoolService) {
-    const filterState = JSON.parse(localStorage.getItem('schoolsFilterState'));
-    // TODO проверка существования поля toggled
-    this.toggled = filterState && filterState.toggled;
+
   }
 
   ngOnInit() {
-    this.city = new City;
+    const filterState = JSON.parse(localStorage.getItem('schoolsFilterState'));
+    // TODO проверка существования поля toggled
+    this.toggled = filterState && filterState.toggled;
+
+    const filter = JSON.parse(localStorage.getItem('schoolsFilter'));
+    const filterCity = JSON.parse(localStorage.getItem('schoolsFilterCity'));
+    if (filter) {
+      this.filter = filter;
+      if (filterCity) {
+        this.setCity(filterCity);
+        if (this.city && this.city.id) {
+          this.filter.cityId = this.city.id;
+        }
+      }
+      this.onFiltered.emit(this.filter);
+    } else {
+      this.filter = new SchoolFilter();
+      this.city = new City();
+    }
   }
 
   public toggle() {
@@ -55,7 +71,14 @@ export class SchoolFilterComponent implements OnInit {
     if (this.city && this.city.id) {
       this.filter.cityId = this.city.id;
     }
-    this.onFiltered.emit();
+    localStorage.setItem('schoolsFilter', JSON.stringify(this.filter));
+    localStorage.setItem('schoolsFilterCity', JSON.stringify(this.city));
+    this.onFiltered.emit(this.filter);
+  }
+
+  reset() {
+    this.filter = new SchoolFilter();
+    this.city = new City();
   }
 
   public getToggleIcon() {
@@ -75,7 +98,7 @@ export class SchoolFilterComponent implements OnInit {
   }
 
   private setCity(city: City) {
-    if (city && city.id) {
+    if (city) {
       this.city = city;
     }
   }
