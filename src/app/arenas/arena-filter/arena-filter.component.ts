@@ -24,7 +24,7 @@ import { City } from 'app/core/geo/city';
 export class ArenaFilterComponent implements OnInit {
 
   @Input() filter: ArenaFilter;
-  @Output() onFiltered = new EventEmitter<boolean>();
+  @Output() onFiltered = new EventEmitter<ArenaFilter>();
 
   arenaTypes: ArenaType[];
   errorMessage: string;
@@ -36,14 +36,30 @@ export class ArenaFilterComponent implements OnInit {
   city: City;
 
   constructor( private service: ArenaService) {
-    const filterState = JSON.parse(localStorage.getItem('arenasFilterState'));
-    // TODO проверка существования поля toggled
-    this.toggled = filterState && filterState.toggled;
+
   }
 
   ngOnInit() {
     this.getArenaTypes();
-    this.city = new City;
+    const filterState = JSON.parse(localStorage.getItem('arenaFilterState'));
+    // TODO проверка существования поля toggled
+    this.toggled = filterState && filterState.toggled;
+
+    const filter = JSON.parse(localStorage.getItem('arenaFilter'));
+    const filterCity = JSON.parse(localStorage.getItem('arenaFilterCity'));
+    if (filter) {
+      this.filter = filter;
+      if (filterCity) {
+        this.setCity(filterCity);
+        if (this.city && this.city.id) {
+          this.filter.cityId = this.city.id;
+        }
+      }
+      this.onFiltered.emit(this.filter);
+    } else {
+      this.filter = new ArenaFilter();
+      this.city = new City();
+    }
   }
 
   private getArenaTypes() {
@@ -61,20 +77,27 @@ export class ArenaFilterComponent implements OnInit {
 
   public toggle() {
     this.toggled = !this.toggled;
-    localStorage.setItem('arenasFilterState', JSON.stringify({toggled: this.toggled}));
-  }
-
-  private setCity(city: City) {
-    if (city && city.id) {
-      this.city = city;
-    }
+    localStorage.setItem('arenaFilterState', JSON.stringify({toggled: this.toggled}));
   }
 
   search() {
     if (this.city && this.city.id) {
       this.filter.cityId = this.city.id;
     }
-    this.onFiltered.emit();
+    localStorage.setItem('arenaFilter', JSON.stringify(this.filter));
+    localStorage.setItem('arenaFilterCity', JSON.stringify(this.city));
+    this.onFiltered.emit(this.filter);
+  }
+
+  reset() {
+    this.filter = new ArenaFilter();
+    this.city = new City();
+  }
+
+  private setCity(city: City) {
+    if (city) {
+      this.city = city;
+    }
   }
 
   public getToggleIcon() {

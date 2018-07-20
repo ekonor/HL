@@ -1,8 +1,8 @@
 export class ArenaFilter {
-    cityId?: number; //  Фильтр - город
-    arenaTypeId?: number; // Фильтр - тип арены
-    searchText? : string;
-  
+    cityId: number = null; //  Фильтр - город
+    arenaTypeId: number = null; // Фильтр - тип арены
+    searchText: string = null;
+
     constructor( values: Object = {} )
     {
       Object.assign( this, values );

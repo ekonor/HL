@@ -40,12 +40,12 @@ export class SchoolFilterComponent implements OnInit {
   }
 
   ngOnInit() {
-    const filterState = JSON.parse(localStorage.getItem('schoolsFilterState'));
+    const filterState = JSON.parse(localStorage.getItem('schoolFilterState'));
     // TODO проверка существования поля toggled
     this.toggled = filterState && filterState.toggled;
 
-    const filter = JSON.parse(localStorage.getItem('schoolsFilter'));
-    const filterCity = JSON.parse(localStorage.getItem('schoolsFilterCity'));
+    const filter = JSON.parse(localStorage.getItem('schoolFilter'));
+    const filterCity = JSON.parse(localStorage.getItem('schoolFilterCity'));
     if (filter) {
       this.filter = filter;
       if (filterCity) {
@@ -64,15 +64,15 @@ export class SchoolFilterComponent implements OnInit {
   public toggle() {
 
     this.toggled = !this.toggled;
-    localStorage.setItem('schoolsFilterState', JSON.stringify({toggled: this.toggled}));
+    localStorage.setItem('schoolFilterState', JSON.stringify({toggled: this.toggled}));
   }
 
   search() {
     if (this.city && this.city.id) {
       this.filter.cityId = this.city.id;
     }
-    localStorage.setItem('schoolsFilter', JSON.stringify(this.filter));
-    localStorage.setItem('schoolsFilterCity', JSON.stringify(this.city));
+    localStorage.setItem('schoolFilter', JSON.stringify(this.filter));
+    localStorage.setItem('schoolFilterCity', JSON.stringify(this.city));
     this.onFiltered.emit(this.filter);
   }
 

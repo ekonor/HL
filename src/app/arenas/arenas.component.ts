@@ -54,7 +54,10 @@ export class ArenasComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  public onFiltered($event){
+  public onFiltered(filter: ArenaFilter){
+    if (filter) {
+      this.filter = filter;
+    }
     this.getArenas();
   }
 
