@@ -29,12 +29,14 @@ export class ArenaService {
 // TODO исправить листинфо, сейчас не работает
     let methodUrl = this.getMethodUrl(methodUrlPrefix);
     let params = new HttpParams();
-    if (filter.arenaTypeId)
-      params = params.append('arenaTypeId', filter.arenaTypeId.toString());
-    if (filter.cityId)
-      params = params.append('cityId', filter.cityId.toString());
-    if (filter.searchText)
-      params = params.append('searchText', filter.searchText);
+    if (filter) {
+      if (filter.arenaTypeId)
+        params = params.append('arenaTypeId', filter.arenaTypeId.toString());
+      if (filter.cityId)
+        params = params.append('cityId', filter.cityId.toString());
+      if (filter.searchText)
+        params = params.append('searchText', filter.searchText);
+    }
     return this.httpClient.get<ListResponse<ArenaListItem>>(methodUrl, { params: params });
   }
 
