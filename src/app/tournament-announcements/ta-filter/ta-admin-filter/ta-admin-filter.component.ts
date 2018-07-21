@@ -23,7 +23,7 @@ import {TournamentAnnouncementFilterState} from 'app/tournament-announcements/sh
 export class TAAdminFilterComponent implements OnInit {
 
   @Input() filter: TournamentAnnouncementFilter;
-  @Output() onFiltered = new EventEmitter<boolean>();
+  @Output() onFiltered = new EventEmitter<TournamentAnnouncementFilter>();
 
   errorMessage: string;
   toggled: boolean;
