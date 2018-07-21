@@ -61,7 +61,10 @@ export class TournamentAnnouncementsComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  public onFiltered($event) {
+  public onFiltered(filter: TournamentAnnouncementFilter) {
+    if (filter) {
+      this.filter = filter;
+    }
     this.getTournamentAnnouncements();
   }
 

@@ -35,31 +35,54 @@ export class TAAdminFilterComponent implements OnInit {
   city: City;
 
   constructor( private service: TournamentAnnouncementsService) {
-    const filterState = JSON.parse(localStorage.getItem('tournamentAnnouncementFilterFilterState'));
-    // TODO проверка существования поля toggled
-    this.toggled = filterState && filterState.toggled;
-    this.filter = new TournamentAnnouncementFilter();
+
   }
 
   ngOnInit() {
-     this.city = new City;
+    const filterState = JSON.parse(localStorage.getItem('tournamentAnnouncementAdminFilterFilterState'));
+    // TODO проверка существования поля toggled
+    this.toggled = filterState && filterState.toggled;
+
+    const filter = JSON.parse(localStorage.getItem('tournamentAnnouncementAdminFilter'));
+    const filterCity = JSON.parse(localStorage.getItem('tournamentAnnouncementAdminFilterCity'));
+    if (filter) {
+      this.filter = filter;
+      if (filterCity) {
+        this.setCity(filterCity);
+        if (this.city && this.city.id) {
+          this.filter.cityId = this.city.id;
+        }
+      }
+      this.onFiltered.emit(this.filter);
+    } else {
+      this.filter = new TournamentAnnouncementFilter();
+      this.city = new City();
+    }
+
   }
   public toggle() {
     this.toggled = !this.toggled;
-    localStorage.setItem('tournamentAnnouncementFilterFilterState', JSON.stringify({toggled: this.toggled}));
-  }
-
-  private setCity(city: City) {
-    if (city && city.id) {
-      this.city = city;
-    }
+    localStorage.setItem('tournamentAnnouncementAdminFilterState', JSON.stringify({toggled: this.toggled}));
   }
 
   search() {
     if (this.city && this.city.id) {
       this.filter.cityId = this.city.id;
     }
-    this.onFiltered.emit();
+    localStorage.setItem('tournamentAnnouncementAdminFilter', JSON.stringify(this.filter));
+    localStorage.setItem('tournamentAnnouncementAdminFilterCity', JSON.stringify(this.city));
+    this.onFiltered.emit(this.filter);
+  }
+
+  reset() {
+    this.filter = new TournamentAnnouncementFilter();
+    this.city = new City();
+  }
+
+  private setCity(city: City) {
+    if (city) {
+      this.city = city;
+    }
   }
 
   public getToggleIcon(): string {

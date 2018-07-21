@@ -22,7 +22,7 @@ import {TournamentAnnouncementFilter} from 'app/tournament-announcements/shared/
 export class TournamentAnnouncementFilterComponent implements OnInit {
 
   @Input() filter: TournamentAnnouncementFilter;
-  @Output() onFiltered = new EventEmitter<boolean>();
+  @Output() onFiltered = new EventEmitter<TournamentAnnouncementFilter>();
 
   errorMessage: string;
   toggled: boolean;
@@ -34,13 +34,29 @@ export class TournamentAnnouncementFilterComponent implements OnInit {
   city: City;
 
   constructor( private service: TournamentAnnouncementsService) {
-    const filterState = JSON.parse(localStorage.getItem('tournamentAnnouncementFilterFilterState'));
-    // TODO проверка существования поля toggled
-    this.toggled = filterState && filterState.toggled;
+
   }
 
   ngOnInit() {
-     this.city = new City;
+    const filterState = JSON.parse(localStorage.getItem('tournamentAnnouncementFilterFilterState'));
+    // TODO проверка существования поля toggled
+    this.toggled = filterState && filterState.toggled;
+
+    const filter = JSON.parse(localStorage.getItem('tournamentAnnouncementFilter'));
+    const filterCity = JSON.parse(localStorage.getItem('tournamentAnnouncementFilterCity'));
+    if (filter) {
+      this.filter = filter;
+      if (filterCity) {
+        this.setCity(filterCity);
+        if (this.city && this.city.id) {
+          this.filter.cityId = this.city.id;
+        }
+      }
+      this.onFiltered.emit(this.filter);
+    } else {
+      this.filter = new TournamentAnnouncementFilter();
+      this.city = new City();
+    }
   }
   public toggle() {
     this.toggled = !this.toggled;
@@ -51,7 +67,14 @@ export class TournamentAnnouncementFilterComponent implements OnInit {
     if (this.city && this.city.id) {
       this.filter.cityId = this.city.id;
     }
-    this.onFiltered.emit();
+    localStorage.setItem('tournamentAnnouncementFilter', JSON.stringify(this.filter));
+    localStorage.setItem('tournamentAnnouncementFilterCity', JSON.stringify(this.city));
+    this.onFiltered.emit(this.filter);
+  }
+
+  reset() {
+    this.filter = new TournamentAnnouncementFilter();
+    this.city = new City();
   }
 
   public getToggleIcon() {
@@ -63,7 +86,7 @@ export class TournamentAnnouncementFilterComponent implements OnInit {
   }
 
   private setCity(city: City) {
-    if (city && city.id) {
+    if (city) {
       this.city = city;
     }
   }
