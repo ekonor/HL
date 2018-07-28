@@ -1,0 +1,76 @@
+<loader [hidden]="!dataIsLoading"></loader>
+<div class="tournament-create col-md-6 col-md-offset-3" *ngIf="tournament">
+  <h2>Добавление турнира</h2>
+  <form #myForm="ngForm" (ngSubmit)="addTournament(tournament, myForm)">
+    <!--div class="form-group required">
+      <label for="taname">Название анонса</label>
+      <input type="text" class="form-control" name="tname" [(ngModel)]="ta.name" (ngModelChange)="ta.name = $event" #taname="ngModel" id="taname" title="Введите название анонса" required="required"/>
+    </div>
+    <div class="form-group required">
+      <app-city-filter [city]="city" [isRequired]="true" (onChanged)="setCity($event)"></app-city-filter>
+    </div>
+    <div class="form-group required">
+      <arena-select *ngIf="city" [cityId]="city.id" [arena]="arena" [isRequired]="true" (onChanged)="setArena($event)"></arena-select>
+    </div>
+    <div class="form-group">
+      <label>Дата проведения, c</label>
+      <app-datepicker [dt]="ta.startDate" (onChanged)="onChangedStartDt($event)"></app-datepicker>
+    </div>
+    <div class="form-group">
+      <label>Дата проведения, до</label>
+      <app-datepicker [dt]="ta.endDate" (onChanged)="onChangedEndDt($event)"></app-datepicker>
+    </div>
+    <div class="form-group">
+      <label for="requiredResponseCount">Максимальное количество участников</label>
+      <input type="number" min="0" max="2000" step="1" class="form-control" name="requiredResponseCount" [(ngModel)]="ta.requiredResponseCount" (ngModelChange)="ta.requiredResponseCount = $event" #requiredResponseCount="ngModel" ngModel number="true" id="requiredResponseCount"/>
+    </div>
+    <div class="form-group">
+      <label for="ageGroup">Возрастная группа</label>
+      <select class="form-group" [(ngModel)]="ta.ageGroup" name="ageGroup" class="form-control" #ageGroup="ngModel" id="ageGroup" (ngModelChange)="ta.ageGroup = $event">
+        <option *ngFor="let ageType of ageTypes"  [ngValue]="ageType.value" >{{ageType.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="ageGroup">Пол участников</label>
+      <select class="form-group" [(ngModel)]="ta.gender" name="gender" class="form-control" #gender="ngModel" id="gender" (ngModelChange)="ta.gender = $event">
+        <option *ngFor="let genderType of genderTypes"  [ngValue]="genderType.value" >{{genderType.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="isCommercial">Коммерческий?</label>
+      <select class="form-group" [(ngModel)]="ta.isCommercial" name="isCommercial" class="form-control" #isCommercial="ngModel" id="isCommercial" (ngModelChange)="ta.isCommercial = $event">
+        <option *ngFor="let isCommercialType of isCommercialTypes"  [ngValue]="isCommercialType.value" >{{isCommercialType.name}}</option>
+      </select>
+    </div>
+    <div *ngIf="ta.isCommercial" class="form-group">
+      <label for="costType">Тип оплаты</label>
+      <select class="form-group" [(ngModel)]="ta.costType" name="costType" class="form-control" #costType="ngModel" id="costType" (ngModelChange)="ta.costType = $event">
+        <option *ngFor="let costType of costTypes"  [ngValue]="costType.value" >{{costType.name}}</option>
+      </select>
+    </div>
+    <div *ngIf="ta.isCommercial" class="form-group">
+      <label for="cost">Стоимость участия</label>
+      <input type="number" min="0" max="2000" step="1" class="form-control" name="cost" [(ngModel)]="ta.cost" (ngModelChange)="ta.cost = $event" #cost="ngModel" ngModel number="true" id="cost"/>
+    </div>
+    <div class="form-group">
+      <label for="isCommercial">Закрытие турнира</label>
+      <select class="form-group" [(ngModel)]="ta.closeCondition" name="closeCondition" class="form-control" #closeCondition="ngModel" id="closeCondition" (ngModelChange)="ta.closeCondition = $event">
+        <option *ngFor="let closeType of closeTypes"  [ngValue]="closeType.value" >{{closeType.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Окончание регистрации</label>
+      <app-datepicker [dt]="ta.endRegistrationDate" (onChanged)="onChangedEndRegDt($event)"></app-datepicker>
+    </div>
+    <div class="form-group required">
+      <label for="content">Текст анонса</label>
+      <app-ngx-editor [placeholder]="'Текст анонса'" [height]="200" class="form-control" name="content" [(ngModel)]="ta.content" (ngModelChange)="ta.content = $event" #content="ngModel" id="content" required="required"></app-ngx-editor>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary"  [disabled]="dataIsLoading || myForm.invalid">Сохранить как черновик</button>
+          <button class="btn btn-primary" (click)="viewList()" [disabled]="dataIsLoading">Отменить изменения и вернуться к списку</button>
+      <img *ngIf="dataIsLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+    </div-->
+    <div>заполнение формы</div>
+  </form>
+</div>

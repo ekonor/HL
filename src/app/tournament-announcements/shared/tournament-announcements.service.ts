@@ -3,6 +3,7 @@ import { HttpParams, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 //import {of} from 'rxjs/observable/of';
 
+import { Item } from 'app/tournament-announcements/shared/item';
 import { TournamentAnnouncementListItem } from 'app/tournament-announcements/shared/tournament-announcement-list-item';
 import { TournamentAnnouncementFilter } from 'app/tournament-announcements/shared/tournament-announcement-filter';
 import { TournamentAnnouncementViewItem } from 'app/tournament-announcements/shared/tournament-announcement-view-item';
@@ -459,6 +460,45 @@ export class TournamentAnnouncementsService {
 
   public getInfoIconClass(): string {
     return 'fa fa-question info-icon';
+  }
+
+  public getAgeTypes(): Array<Item> {
+    let ageTypes = new Array<Item>();
+    ageTypes.push(new Item({value: 'Adults', name: 'Взрослые'}));
+    ageTypes.push(new Item({value: 'Youth', name: 'Молодежь'}));
+    ageTypes.push(new Item({value: 'Juniors', name: 'Юниоры'}));
+    ageTypes.push(new Item({value: 'Kids', name: 'Дети'}));
+    return ageTypes;
+  }
+
+  public getCloseTypes(): Array<Item> {
+    let closeTypes = new Array<Item>();
+    closeTypes.push(new Item({value: null, name: ''}));
+    closeTypes.push(new Item({value: 'ResponseCountAccomplished', name: 'Набор необходимого количества участников'}));
+    closeTypes.push(new Item({value: 'EndRegistrationDatePassed', name: 'Окончание срока регистрации'}));
+    closeTypes.push(new Item({value: 'ResponseCountAccomplishedAndEndRegistrationDatePassed', name: 'Набор участников и окончание срока регистрации'}));
+    return closeTypes;
+  }
+
+  public getGenderTypes(): Array<Item> {
+    let genderTypes =  new Array<Item>();
+    genderTypes.push(new Item({value: 'Male', name: 'Мужчины'}));
+    genderTypes.push(new Item({value: 'Female', name: 'Женщины'}));
+    return genderTypes;
+  }
+
+  public getCostTypes(): Array<Item> {
+    let costTypes = new Array<Item>();
+    costTypes.push(new Item({value: 'PerPerson', name: 'С человека'}));
+    costTypes.push(new Item({value: 'PerTeam', name: 'С команды'}));
+    return costTypes;
+  }
+
+  public getIsCommercialTypes(): Array<Item> {
+    let isCommercialTypes = new Array<Item>();
+    isCommercialTypes.push(new Item({value: true, name: 'Да'}));
+    isCommercialTypes.push(new Item({value: false, name: 'Нет'}));
+    return isCommercialTypes;
   }
 
  // TODO NEED FIX - убрать костыль!!!
