@@ -2,6 +2,19 @@
 <div class="tournament-create col-md-6 col-md-offset-3" *ngIf="tournament">
   <h2>Добавление турнира</h2>
   <form #myForm="ngForm" (ngSubmit)="addTournament(tournament, myForm)">
+    <div>
+      <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
+        <div class="steps">
+          <span class="btn {{ ( step == 1 ) ? 'btn-primary' : 'grey' }}" (click)="changeStep(1)" data-toggle="button" aria-pressed="false" data-placement="top" title="Общие данные">Общие данные</span>
+        </div>
+        <div class="steps">
+          <span class="btn {{ ( step == 2 ) ? 'btn-primary' : 'grey' }}" (click)="changeStep(2)" data-placement="top" title="Команды-участники">Команды-участники</span>
+        </div>
+        <div class="steps">
+          <span class="btn {{ ( step == 3 ) ? 'btn-primary' : 'grey' }}" (click)="changeStep(3)" data-placement="top" title="Система проведения">Система проведения</span>
+        </div>
+      </div>
+    </div>
     <!--div class="form-group required">
       <label for="taname">Название анонса</label>
       <input type="text" class="form-control" name="tname" [(ngModel)]="ta.name" (ngModelChange)="ta.name = $event" #taname="ngModel" id="taname" title="Введите название анонса" required="required"/>

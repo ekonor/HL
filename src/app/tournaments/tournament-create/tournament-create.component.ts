@@ -35,6 +35,8 @@ export class TournamentCreateComponent implements OnInit {
   dataIsLoading: boolean;
   errorMessage: string;
 
+  step: number;
+
   constructor( private tournamentService: TournamentService,
                private router: Router,
                private activatedRoute: ActivatedRoute,
@@ -43,9 +45,15 @@ export class TournamentCreateComponent implements OnInit {
     this.dataIsLoading = true;
     this.tournament = '123';
     this.dataIsLoading = false;
+    this.step = 1;
   }
 
   ngOnInit() {
   }
 
+  public changeStep(step: number) {
+    if (step > 0 && step < 4) {
+      this.step = step;
+    }
+  }
 }
