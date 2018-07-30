@@ -111,4 +111,9 @@ export class TournamentsComponent implements OnInit {
     this.tournamentList.count = 1;
     this.dataIsLoading = false;
   }
+
+  public addTournament(): void {
+    this.router.navigate([ 'tournaments/create']);
+  }
+
 }
