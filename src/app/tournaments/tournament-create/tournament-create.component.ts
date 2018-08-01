@@ -38,6 +38,7 @@ export class TournamentCreateComponent implements OnInit {
   step: number;
   oneDay: boolean;
   divisionTypes: Array<Item>;
+  ageTypes: Array<Item>;
 
   constructor( private tournamentService: TournamentService,
                private router: Router,
@@ -50,6 +51,7 @@ export class TournamentCreateComponent implements OnInit {
     this.step = 1;
     this.oneDay = false;
     this.getDivisionTypes();
+    this.getAgeTypes();
   }
 
   ngOnInit() {
@@ -73,4 +75,28 @@ export class TournamentCreateComponent implements OnInit {
     this.divisionTypes.push(new Item({value: '3', name: '3 этап'}));
     this.divisionTypes.push(new Item({value: '4', name: '4 этап'}));
   }
+
+  private getAgeTypes() {
+    this.ageTypes = new Array<Item>();
+    this.ageTypes.push(new Item({value: 'Juniors', name: 'Юниоры 14-16 лет'}));
+    this.ageTypes.push(new Item({value: 'Young', name: 'Молодежь 16-21 год'}));
+    this.ageTypes.push(new Item({value: 'Adults', name: 'Взрослые старше 21 лет'}));
+    this.ageTypes.push(new Item({value: '2011', name: '2011 г.р.'}));
+    this.ageTypes.push(new Item({value: '2010', name: '2010 г.р.'}));
+    this.ageTypes.push(new Item({value: '2009', name: '2009 г.р.'}));
+    this.ageTypes.push(new Item({value: '2008', name: '2008 г.р.'}));
+    this.ageTypes.push(new Item({value: '2007', name: '2007 г.р.'}));
+    this.ageTypes.push(new Item({value: '2006', name: '2006 г.р.'}));
+    this.ageTypes.push(new Item({value: '2005', name: '2005 г.р.'}));
+    this.ageTypes.push(new Item({value: '2004', name: '2004 г.р.'}));
+  }
+
+  private onChangedStartDt(dt: Date) {
+    this.tournament.startDate = dt;
+  }
+
+  private onChangedEndDt(dt: Date) {
+    this.tournament.endDate = dt;
+  }
+
 }

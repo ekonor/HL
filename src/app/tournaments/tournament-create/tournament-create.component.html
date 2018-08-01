@@ -27,8 +27,12 @@
           <input type="checkbox" name="oneDay" [(ngModel)]="oneDay">Турнир проходит в один день
         </div>
         <label for="division">Дивизион/группы/этапы</label>
-        <select class="form-group" [(ngModel)]="tournament.division" name="arenaTypeId" class="form-control" #arenaTypeId="ngModel" id="division" (ngModelChange)="tournament.division = $event">
+        <select class="form-group" [(ngModel)]="tournament.division" name="division" class="form-control" #division="ngModel" id="division" (ngModelChange)="tournament.division = $event">
           <option *ngFor="let division of divisionTypes" [ngValue]="division.value" >{{division.name}}</option>
+        </select>
+        <label for="age">Возрастная группа/Год рождения</label>
+        <select class="form-group" [(ngModel)]="tournament.ageGroup" name="age" class="form-control" #age="ngModel" id="age" (ngModelChange)="tournament.ageGroup = $event">
+          <option *ngFor="let age of ageTypes" [ngValue]="age.value" >{{age.name}}</option>
         </select>
       </div>
       <div id="step-2" *ngIf="step == 2">
