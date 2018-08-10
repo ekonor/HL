@@ -3,7 +3,7 @@
 export class ArenaListItem {
   id: number;
   name: string;
-  linkName?: string;
+  linkName: string;
   address?: string;
   email?: string;
   webSite?: string;

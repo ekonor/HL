@@ -124,6 +124,11 @@ export class SchoolEditComponent implements OnInit {
           this.school = school;
           this.city = school.city;
           this.arena = school.arena;
+          /*new ArenaListItem({id: school.arena.id,
+            name: school.arena.name,
+            linkName: school.arena.linkName,
+            logo: school.arena.logo
+          });*/
           if (this.city == null) { this.city = new City; }
           // this.dataIsLoading = false;
         },

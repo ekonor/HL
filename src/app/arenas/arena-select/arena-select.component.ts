@@ -59,5 +59,8 @@ export class ArenaSelectComponent implements OnInit {
     if (this.arena && this.arena.id) {
       this.onChanged.emit(this.arena);
     }
+    else {
+      this.onChanged.emit(null);
+    }
   }
 }

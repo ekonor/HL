@@ -31,7 +31,7 @@
       </select>
     </div>
     <div class="form-group">
-      <label for="ageGroup">Пол участников</label>
+      <label for="gender">Пол участников</label>
       <select class="form-group" [(ngModel)]="ta.gender" name="gender" class="form-control" #gender="ngModel" id="gender" (ngModelChange)="ta.gender = $event">
         <option *ngFor="let genderType of genderTypes"  [ngValue]="genderType.value" >{{genderType.name}}</option>
       </select>

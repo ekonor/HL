@@ -18,11 +18,7 @@ import { TournamentService } from 'app/tournaments/shared/tournament.service';
 import { Tournament } from 'app/tournaments/shared/tournament';
 import { Item } from 'app/tournament-announcements/shared/item';
 import { City } from 'app/core/geo/city';
-
-/* import { ArenaListItem } from 'app/arenas/shared/arena-list-item';
-import { Arena } from 'app/arenas/shared/arena';*/
-
-
+import { ArenaListItem } from 'app/arenas/shared/arena-list-item';
 
 @Component({
   moduleId: module.id,
@@ -39,6 +35,11 @@ export class TournamentCreateComponent implements OnInit {
   oneDay: boolean;
   divisionTypes: Array<Item>;
   ageTypes: Array<Item>;
+  seasonTypes: Array<Item>;
+  genderTypes: Array<Item>;
+
+  city: City; // текущий город арены в поле ввода
+  arena: ArenaListItem; // текущая арена в поле ввода
 
   constructor( private tournamentService: TournamentService,
                private router: Router,
@@ -48,17 +49,19 @@ export class TournamentCreateComponent implements OnInit {
     this.dataIsLoading = true;
     this.tournament = new Tournament();
     this.dataIsLoading = false;
-    this.step = 1;
+    this.step = 2;
     this.oneDay = false;
     this.getDivisionTypes();
     this.getAgeTypes();
+    this.getSeasonTypes();
+    this.getGenderTypes();
   }
 
   ngOnInit() {
   }
 
   public changeStep(step: number) {
-    if (step > 0 && step < 4) {
+    if (step > 0 && step < 7) {
       this.step = step;
     }
   }
@@ -91,6 +94,22 @@ export class TournamentCreateComponent implements OnInit {
     this.ageTypes.push(new Item({value: '2004', name: '2004 г.р.'}));
   }
 
+  public addArena(arena: ArenaListItem) {
+    console.log("add arena");
+    if (arena) {
+      this.tournament.arenas.push(arena);
+      this.arena = null;
+    }
+  }
+
+  public removeArena(arena: ArenaListItem) {
+    console.log("remove arena");
+    if (arena) {
+      this.tournament.arenas = this.tournament.arenas.filter(obj => obj !== arena);
+      console.log(this.tournament.arenas.length);
+    }
+  }
+
   private onChangedStartDt(dt: Date) {
     this.tournament.startDate = dt;
   }
@@ -99,4 +118,40 @@ export class TournamentCreateComponent implements OnInit {
     this.tournament.endDate = dt;
   }
 
+  public getAddIconClass() {
+    return this.tournamentService.getAddIconClass();
+  }
+
+  public getDeleteIconClass() {
+    return this.tournamentService.getDeleteIconClass();
+  }
+
+  private getSeasonTypes() {
+    this.seasonTypes = new Array<Item>();
+    this.seasonTypes.push(new Item({value: '2015-2016', name: '2015-2016'}));
+    this.seasonTypes.push(new Item({value: '2016-2017', name: '2016-2017'}));
+    this.seasonTypes.push(new Item({value: '2017-2018', name: '2017-2018'}));
+    this.seasonTypes.push(new Item({value: '2018-2019', name: '2018-2019'}));
+  }
+
+  private getGenderTypes() {
+    this.genderTypes =  new Array<Item>();
+    this.genderTypes.push(new Item({value: 'Male', name: 'Мужчины'}));
+    this.genderTypes.push(new Item({value: 'Female', name: 'Женщины'}));
+  }
+
+  private setCity(city: City) {
+    if (city) {
+      this.city = city;
+    }
+  }
+
+  private setArena(arena: ArenaListItem) {
+    if (arena) {
+      this.arena = arena;
+    }
+    else {
+      this.arena = null;
+    }
+  }
 }

@@ -89,4 +89,9 @@ export class TournamentService {
     return 'fa fa-plus';
   }
 
+  public getDeleteIconClass(): string {
+    return 'fa fa-close';
+  }
+
+
 }

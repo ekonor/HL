@@ -58,7 +58,6 @@ export class SchoolLogoComponent implements OnInit {
   }
 
   public deleteLogo() {
-    //if (confirm('Вы действительно хотите удалить текущий логотип?')) {
     if (this.school.logo != null) {
       this.dataIsLoading = true;
       this.service.deleteLogo(this.id).subscribe(
@@ -68,16 +67,15 @@ export class SchoolLogoComponent implements OnInit {
         error => {
           this.alertService.error(error);
           this.alertService.error('Не удалось удалить logo');
-          // alert('Не удалось удалить logo');
+          alert('Не удалось удалить logo');
           this.dataIsLoading = false;
         },
         () => {
           this.dataIsLoading = false;
-          // alert('Логотип успешно удален');
+          alert('Логотип успешно удален');
         }
       );
     }
-    //}
   }
 
   public addLogo(event) {

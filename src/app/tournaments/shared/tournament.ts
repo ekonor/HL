@@ -8,14 +8,15 @@ export class Tournament {
   name: string; // Название турнира
   startDate?: Date; // Дата начала турнира
   endDate?: Date; // Дата окончания турнира
-  ageGroup?: string; // Возрастная группа/год рождения
+  ageGroup: string = null; // Возрастная группа/год рождения
+  gender: string = 'Male'; // Пол м/ж
   division: string = null; // Дивизион/группы/этапы;
+  season: string = null; // Сезон
   requiredResponseCount?: number; // Кол-во участников
   city: City = null; // Город проведения
-  arena: Arena = null; // Арена
+  arenas: Array<Arena> = new Array<Arena>(); // Арены
   logo?: string;
-
-  teams?: Team[];
+  teams: Array<Team> = new Array<Team>(); // Команды-участники
   //minAge?: number; // Если Возрастная группа дети или подростки, то можно указать еще год рождения участников от – до
   //maxAge?: number;
   /*
