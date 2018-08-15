@@ -26,6 +26,7 @@ export class ArenaSelectComponent implements OnInit {
   @Input() arena: ArenaListItem;
   @Input() cityId: number;
   @Input() isRequired: boolean = false;
+  @Input() showArenaTitle: boolean = true;
   @Output() onChanged = new EventEmitter<ArenaListItem>();
 
   searching = false;

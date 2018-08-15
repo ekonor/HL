@@ -3,8 +3,9 @@
 </ng-template>
 <div class="">
   <div class="form-group {{ ( isRequired === true ) ? 'required' : '' }}">
-    <label for="arenaFilter">Арена</label>
+    <label *ngIf="showArenaTitle === true" for="arenaFilter">Арена</label>
     <input id="arenaFilter"
+           placeholder="Начните вводить название арены"
            name="arenaFilter"
            type="text"
            class="form-control"

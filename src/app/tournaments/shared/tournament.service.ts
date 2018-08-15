@@ -93,5 +93,12 @@ export class TournamentService {
     return 'fa fa-close';
   }
 
+  public getMoveUpIconClass(): string {
+    return 'fa fa-arrow-up';
+  }
+
+  public getMoveDownIconClass(): string {
+    return 'fa fa-arrow-down';
+  }
 
 }

@@ -51,6 +51,7 @@ export class TournamentCreateComponent implements OnInit {
     this.dataIsLoading = false;
     this.step = 2;
     this.oneDay = false;
+    this.arena = null;
     this.getDivisionTypes();
     this.getAgeTypes();
     this.getSeasonTypes();
@@ -126,6 +127,14 @@ export class TournamentCreateComponent implements OnInit {
     return this.tournamentService.getDeleteIconClass();
   }
 
+  public getMoveUpIconClass() {
+    return this.tournamentService.getMoveUpIconClass();
+  }
+
+  public getMoveDownIconClass() {
+    return this.tournamentService.getMoveDownIconClass();
+  }
+
   private getSeasonTypes() {
     this.seasonTypes = new Array<Item>();
     this.seasonTypes.push(new Item({value: '2015-2016', name: '2015-2016'}));
@@ -152,6 +161,31 @@ export class TournamentCreateComponent implements OnInit {
     }
     else {
       this.arena = null;
+    }
+  }
+
+  createArena() {
+    // TODO разворачивание блока для добавления новой арены
+  }
+
+  moveArenaUp(arena: ArenaListItem) {
+    console.log("UP");
+    let num = this.tournament.arenas.indexOf(arena);
+    if (num!=-1 && num!= 0) {
+      let moveArena: ArenaListItem = this.tournament.arenas[num-1];
+      this.tournament.arenas[num-1] = arena;
+      this.tournament.arenas[num] = moveArena;
+    }
+  }
+
+  moveArenaDown(arena: ArenaListItem) {
+    console.log("DOWN");
+    let num = this.tournament.arenas.indexOf(arena);
+    let sz = this.tournament.arenas.length;
+    if (num!=-1 && num!=(sz-1)) {
+      let moveArena: ArenaListItem = this.tournament.arenas[num+1];
+      this.tournament.arenas[num+1] = arena;
+      this.tournament.arenas[num] = moveArena;
     }
   }
 }
