@@ -19,6 +19,7 @@ import { Tournament } from 'app/tournaments/shared/tournament';
 import { Item } from 'app/tournament-announcements/shared/item';
 import { City } from 'app/core/geo/city';
 import { ArenaListItem } from 'app/arenas/shared/arena-list-item';
+import { Team } from 'app/teams/shared/team';
 
 @Component({
   moduleId: module.id,
@@ -40,6 +41,7 @@ export class TournamentCreateComponent implements OnInit {
 
   city: City; // текущий город арены в поле ввода
   arena: ArenaListItem; // текущая арена в поле ввода
+  team: Team; // текущая команда в поле ввода
 
   constructor( private tournamentService: TournamentService,
                private router: Router,
@@ -52,6 +54,7 @@ export class TournamentCreateComponent implements OnInit {
     this.step = 2;
     this.oneDay = false;
     this.arena = null;
+    this.team = null;
     this.getDivisionTypes();
     this.getAgeTypes();
     this.getSeasonTypes();
@@ -103,11 +106,27 @@ export class TournamentCreateComponent implements OnInit {
     }
   }
 
+  public addTeam(team: Team) {
+    console.log("add team");
+    if (team) {
+      this.tournament.teams.push(team);
+      this.team = null;
+    }
+  }
+
   public removeArena(arena: ArenaListItem) {
     console.log("remove arena");
     if (arena) {
       this.tournament.arenas = this.tournament.arenas.filter(obj => obj !== arena);
       console.log(this.tournament.arenas.length);
+    }
+  }
+
+  public removeTeam(team: Team) {
+    console.log("remove team");
+    if (team) {
+      this.tournament.teams = this.tournament.teams.filter(obj => obj !== team);
+      console.log(this.tournament.teams.length);
     }
   }
 
@@ -164,8 +183,22 @@ export class TournamentCreateComponent implements OnInit {
     }
   }
 
+  createTeam() {
+    // TODO разворачивание блока для добавления новой команды
+  }
+
   createArena() {
     // TODO разворачивание блока для добавления новой арены
+  }
+
+  moveTeamUp(team: Team) {
+    console.log("UP");
+    let num = this.tournament.teams.indexOf(team);
+    if (num!=-1 && num!= 0) {
+      let moveTeam: Team = this.tournament.teams[num-1];
+      this.tournament.teams[num-1] = team;
+      this.tournament.teams[num] = moveTeam;
+    }
   }
 
   moveArenaUp(arena: ArenaListItem) {
@@ -178,6 +211,17 @@ export class TournamentCreateComponent implements OnInit {
     }
   }
 
+  moveTeamDown(team: Team) {
+    console.log("DOWN");
+    let num = this.tournament.teams.indexOf(team);
+    let sz = this.tournament.teams.length;
+    if (num!=-1 && num!=(sz-1)) {
+      let moveTeam: Team = this.tournament.teams[num+1];
+      this.tournament.teams[num+1] = team;
+      this.tournament.teams[num] = moveTeam;
+    }
+  }
+
   moveArenaDown(arena: ArenaListItem) {
     console.log("DOWN");
     let num = this.tournament.arenas.indexOf(arena);
@@ -186,6 +230,15 @@ export class TournamentCreateComponent implements OnInit {
       let moveArena: ArenaListItem = this.tournament.arenas[num+1];
       this.tournament.arenas[num+1] = arena;
       this.tournament.arenas[num] = moveArena;
+    }
+  }
+
+  private setTeam(team: Team) {
+    if (team) {
+      this.team = team;
+    }
+    else {
+      this.team = null;
     }
   }
 }

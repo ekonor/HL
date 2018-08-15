@@ -1,0 +1,22 @@
+<ng-template #rt let-r="result" let-t="term">
+  {{ r.name}}
+</ng-template>
+<div class="">
+  <div class="form-group {{ ( isRequired === true ) ? 'required' : '' }}">
+    <label *ngIf="showTeamTitle === true" for="teamFilter">Команда</label>
+    <input id="teamFilter"
+           placeholder="Начните вводить название команды"
+           name="teamFilter"
+           type="text"
+           class="form-control"
+           [(ngModel)]="team"
+           [ngbTypeahead]="searchTeam"
+           [resultTemplate]="rt"
+           [inputFormatter]="formatter"
+           (ngModelChange)="returnTeam()"
+           required="{{ ( isRequired === true ) ? 'required' : '' }}"/>
+    <span *ngIf="searching">Поиск...</span>
+    <div class="invalid-feedback" *ngIf="searchFailed">Извините, команд с заданными параметрами не найдено</div>
+  </div>
+</div>
+

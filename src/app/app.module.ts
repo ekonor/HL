@@ -44,6 +44,7 @@ import { SharedModule } from 'app/shared/shared.module';
 import { SchoolModule } from 'app/schools/schools.module';
 import { TournamentAnnouncementsModule } from 'app/tournament-announcements/tournament-announcements.module';
 import { TournamentsModule } from 'app/tournaments/tournaments.module';
+import { TeamModule } from 'app/teams/teams.module';
 
 import { NgxEditorModule } from 'ngx-editor'; // https://github.com/Sibiraj-S/ngx-editor/wiki/ngxEditor
 
@@ -83,6 +84,7 @@ import { NgxEditorModule } from 'ngx-editor'; // https://github.com/Sibiraj-S/ng
     CoreModule,
     SharedModule,
     ArenaModule,
+    TeamModule,
     NewsModule,
     SchoolModule,
     TournamentAnnouncementsModule,

@@ -1,0 +1,24 @@
+<div class="team-filter team-filter-wrap">
+  <div class="admin-panel">
+    <span class="toggle toggle-search-icon" title="{{getToggleTitle(toggled)}}" (click)="toggle()"><i [class]="getToggleIcon()"></i></span>
+    <i class="fa fa-search search-icon"></i>
+  </div>
+  <div class="jumbotron" [hidden]="toggled">
+    <form>
+      <!--label for="teamTypeId">Тип команды</label>
+      <select id="arenaTypeId"[(ngModel)]="filter.teamTypeId" name="teamTypeId" class="form-control">
+        <option *ngFor="let teamType of teamTypes"  [ngValue]="teamType.id">{{teamType.name}}</option>
+      </select-->
+      <app-city-filter *ngIf="city" [city]="city" (onChanged)="setCity($event)"></app-city-filter>
+      <input type="text" name="name" [(ngModel)]="filter.searchText" placeholder="Название или адрес" class="form-control">
+      <div class="buttons-wrapper">
+        <button type="button" class="btn btn-primary" (click)="search()">
+          <i class="fa fa-search"></i>
+        </button>
+        <button type="reset" class="btn btn-default" (click)="reset()">
+          <i class="fa fa-close"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

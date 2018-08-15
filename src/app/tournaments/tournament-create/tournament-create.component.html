@@ -189,11 +189,11 @@
         <div class="col-md-2 vertical-align">
           <button [hasPermission]="['tournamentadministrator']"
                   class="btn btn-primary waves-light"
-                  title="Добавить арену"
-                  (click)="addArena(arena)"
+                  title="Добавить команду"
+                  (click)="addTeam(team)"
                   onAuthorizedPermission="show"
                   onUnauthorizedPermission="hide"
-                  [disabled]="dataIsLoading || !arena">
+                  [disabled]="dataIsLoading || !team">
             <i [class]="getAddIconClass()"></i>
           </button>
         </div>
@@ -202,24 +202,24 @@
         <div class="col-md-5 vertical-align">
           <button [hasPermission]="['tournamentadministrator']"
                   class="btn btn-primary waves-light"
-                  title="Создать новую арену"
-                  (click)="createArena()"
+                  title="Создать новую команду"
+                  (click)="createTeam()"
                   onAuthorizedPermission="show"
                   onUnauthorizedPermission="hide"
                   [disabled]="dataIsLoading">
-            <i [class]="getAddIconClass()"></i>&nbsp;&nbsp;Создать арену
+            <i [class]="getAddIconClass()"></i>&nbsp;&nbsp;Создать команду
           </button>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12">
-          После выбора арены нажмите + <br/>и арена автоматически добавится в список
+          После выбора команды нажмите + <br/>и команды автоматически добавится в список
         </div>
       </div>
       <div class="row">
         <div class="col-md-7">
-          <div *ngFor="let arenaItem of tournament.arenas">
-            <div class="row" *ngIf="tournament.arenas?.indexOf(arenaItem) == 0">
+          <div *ngFor="let teamItem of tournament.teams">
+            <div class="row" *ngIf="tournament.teams?.indexOf(teamItem) == 0">
               <div class="col-md-1"></div>
               <div class="col-md-3 text-center">Название</div>
               <div class="col-md-2 text-center">Удалить</div>
@@ -227,38 +227,38 @@
             </div>
             <div class="row vertical-align">
               <div class="col-md-1">
-                {{tournament.arenas?.indexOf(arenaItem)+1}}
+                {{tournament.teams?.indexOf(teamItem)+1}}
               </div>
               <div class="col-md-3">
-                {{arenaItem.name }} ({{arenaItem.cityName}})
+                {{teamItem.name }} ({{teamItem.city ? teamItem.city.name : ''}})
               </div>
               <div class="col-md-6">
                 <div class="operations-panel navbar navbar-left pull-left">
                   <button [hasPermission]="['tournamentadministrator']"
                           class="btn btn-danger waves-light"
-                          title="Удалить арену из списка"
-                          (click)="removeArena(arenaItem)"
+                          title="Удалить команду из списка"
+                          (click)="removeTeam(teamItem)"
                           onAuthorizedPermission="show"
                           onUnauthorizedPermission="hide"
-                          [disabled]="dataIsLoading || !arenaItem">
+                          [disabled]="dataIsLoading || !teamItem">
                     <i [class]="getDeleteIconClass()"></i>
                   </button>
                   <button [hasPermission]="['tournamentadministrator']"
                           class="btn btn-primary waves-light"
                           title="Переместить ниже в списке"
-                          (click)="moveArenaDown(arenaItem)"
+                          (click)="moveTeamDown(arenaItem)"
                           onAuthorizedPermission="show"
                           onUnauthorizedPermission="hide"
-                          [disabled]="dataIsLoading || !arenaItem || tournament.arenas?.indexOf(arenaItem) == tournament.arenas.length-1 || tournament.arenas.length < 2">
+                          [disabled]="dataIsLoading || !teamItem || tournament.teams?.indexOf(teamItem) == tournament.teams.length-1 || tournament.teams.length < 2">
                     <i [class]="getMoveDownIconClass()"></i>
                   </button>
                   <button [hasPermission]="['tournamentadministrator']"
                           class="btn btn-primary waves-light"
                           title="Переместить выше в списке"
-                          (click)="moveArenaUp(arenaItem)"
+                          (click)="moveArenaUp(teamItem)"
                           onAuthorizedPermission="show"
                           onUnauthorizedPermission="hide"
-                          [disabled]="dataIsLoading || !arenaItem || tournament.arenas.length < 2 || tournament.arenas?.indexOf(arenaItem) == 0">
+                          [disabled]="dataIsLoading || !teamItem || tournament.teams.length < 2 || tournament.teams?.indexOf(teamItem) == 0">
                     <i [class]="getMoveUpIconClass()"></i>
                   </button>
                 </div>
@@ -267,44 +267,47 @@
           </div>
         </div>
         <div class="col-md-5">
-          <div class="row" *ngIf="arena">
+          <div class="row" *ngIf="team">
             <div class="col-md-12 text-center">
-              Информация об арене
+              Проверить список добавленных игроков
+            </div>
+            <div class="col-md-12 text-center">
+              {{team.name }}({{team.city? team.city.name: ''}})
             </div>
           </div>
-          <div class="row" *ngIf="arena">
+          <div class="row" *ngIf="team">
             <div class="col-md-1">
               № п/п
             </div>
             <div class="col-md-4">
-              Название арены
+              ФИО игрока
             </div>
             <div class="col-md-3">
-              Город
+             Номер
             </div>
             <div class="col-md-4">
-              Адрес
+              Дата рождения
             </div>
           </div>
-          <div class="row" *ngIf="arena">
+          <div class="row" *ngFor="let player of team?.players">
             <div class="col-md-1">
-              1
+              {{team.players?.indexOf(player)+1}}
             </div>
             <div class="col-md-4">
-              {{arena.name}}
+              {{player.name}}
             </div>
             <div class="col-md-3">
-              {{arena.cityName}}
+              {{player.id}}
             </div>
             <div class="col-md-4">
-              {{arena.address}}
+              {{player.birthdate}}
             </div>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12">
-          <span>Если Вашей арены/площадки не в списке, необходимо <br/>добавить или убрать строку.<br/>Выставьте необходимое число команд на ШАГЕ 1</span>
+          <span>Если Вашей команды нет в списке, необходимо <br/>добавить или убрать строку.<br/>Выставьте необходимое число команд на ШАГЕ 1</span>
         </div>
       </div>
     </div>

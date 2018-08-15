@@ -26,6 +26,7 @@ import { TournamentCreateComponent } from 'app/tournaments/tournament-create/tou
 
 import { ArenaModule } from 'app/arenas/arenas.module';
 import { OrganizationModule } from 'app/organizations/organizations.module';
+import {TeamModule} from "../teams/teams.module";
 @NgModule({
       declarations: [
         TournamentsComponent,
@@ -52,6 +53,7 @@ import { OrganizationModule } from 'app/organizations/organizations.module';
         CoreModule,
         MDBBootstrapModule,
         ArenaModule,
+        TeamModule,
         OrganizationModule
       ],
       exports: [
