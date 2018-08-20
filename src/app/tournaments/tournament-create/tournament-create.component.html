@@ -102,7 +102,7 @@
                     {{tournament.arenas?.indexOf(arenaItem)+1}}
                   </div>
                   <div class="col-md-3">
-                    {{arenaItem.name }} ({{arenaItem.cityName}})
+                    {{arenaItem.name }} {{arenaItem.cityName ? '(' + arenaItem.cityName + ')' : ''}}
                   </div>
                   <div class="col-md-6">
                     <div class="operations-panel navbar navbar-left pull-left">
@@ -230,7 +230,7 @@
                 {{tournament.teams?.indexOf(teamItem)+1}}
               </div>
               <div class="col-md-3">
-                {{teamItem.name }} ({{teamItem.city ? teamItem.city.name : ''}})
+                {{teamItem.name }} {{teamItem.city ? '('+teamItem.city.name+')' : ''}}
               </div>
               <div class="col-md-6">
                 <div class="operations-panel navbar navbar-left pull-left">
