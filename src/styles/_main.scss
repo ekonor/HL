@@ -977,3 +977,33 @@ pre {
   display: flex;
   align-items: center;
 }
+
+.table-row-selection {
+  cursor: default;
+}
+
+.table-row-selection:focus {
+  background: #4285F4;
+}
+
+.tournament-create {
+  .btn {
+    padding: 0.5rem 0.75rem;
+    word-break: break-word;
+  }
+
+  .list-table {
+    margin: 5px 0;
+    .row {
+      margin-top: 5px;
+    }
+  }
+
+  .toggled-form {
+    margin-top: 5px;
+  }
+
+  .form-group {
+    margin-bottom: 0;
+  }
+}

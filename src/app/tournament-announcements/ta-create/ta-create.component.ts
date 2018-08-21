@@ -19,6 +19,7 @@ import { City } from 'app/core/geo/city';
 import { AlertService } from 'app/components/alert/alert.service';
 import { ArenaListItem } from 'app/arenas/shared/arena-list-item';
 import { Arena } from 'app/arenas/shared/arena';
+import { ArenaService } from 'app/arenas/shared/arena.service';
 
 
 

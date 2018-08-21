@@ -14,12 +14,14 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { AlertService } from 'app/components/alert/alert.service';
 import { TournamentService } from 'app/tournaments/shared/tournament.service';
+import { ArenaService } from 'app/arenas/shared/arena.service';
 
 import { Tournament } from 'app/tournaments/shared/tournament';
 import { Item } from 'app/tournament-announcements/shared/item';
 import { City } from 'app/core/geo/city';
 import { ArenaListItem } from 'app/arenas/shared/arena-list-item';
 import { Team } from 'app/teams/shared/team';
+import { ArenaFastCreation } from 'app/arenas/shared/arena-fast-creation';
 
 @Component({
   moduleId: module.id,
@@ -41,9 +43,15 @@ export class TournamentCreateComponent implements OnInit {
 
   city: City; // текущий город арены в поле ввода
   arena: ArenaListItem; // текущая арена в поле ввода
+  newarena: ArenaFastCreation; // новая арена
   team: Team; // текущая команда в поле ввода
 
+  toggled: boolean = false;
+
+  activeArena: ArenaListItem; // выделенная строка в таблице
+
   constructor( private tournamentService: TournamentService,
+               private arenaService: ArenaService,
                private router: Router,
                private activatedRoute: ActivatedRoute,
                private alertService: AlertService ) {
@@ -54,7 +62,9 @@ export class TournamentCreateComponent implements OnInit {
     this.step = 2;
     this.oneDay = false;
     this.arena = null;
+    this.newarena = new ArenaFastCreation();
     this.team = null;
+    this.activeArena = null;
     this.getDivisionTypes();
     this.getAgeTypes();
     this.getSeasonTypes();
@@ -187,8 +197,28 @@ export class TournamentCreateComponent implements OnInit {
     // TODO разворачивание блока для добавления новой команды
   }
 
-  createArena() {
-    // TODO разворачивание блока для добавления новой арены
+  createArena(arena: ArenaFastCreation, form: NgForm) {
+    if (!this.newarena || this.newarena == null ) { return; }
+      if (confirm('Вы действительно хотите добавить новую арену?')) {
+        // TODO проверка существования города
+        this.dataIsLoading = true;
+        this.arenaService.addArenaFast(this.newarena).subscribe(
+          data => {
+          },
+          error => {
+            this.alertService.error(error);
+            this.alertService.error('Не удалось добавить арену');
+            this.dataIsLoading = false;
+            alert('Не удалось добавить арену');
+          },
+          () => {
+            this.dataIsLoading = false;
+            alert('Арена добавлена успешно. Теперь Вы можете добавить ее через поиск арен');
+            this.newarena = null;
+          });
+        this.dataIsLoading = false;
+      }
+      this.dataIsLoading = false;
   }
 
   moveTeamUp(team: Team) {
@@ -233,12 +263,23 @@ export class TournamentCreateComponent implements OnInit {
     }
   }
 
+  setSelection(arena: ArenaListItem) {
+    if (arena) {
+      this.activeArena = arena;
+    }
+  }
+
   private setTeam(team: Team) {
     if (team) {
       this.team = team;
-    }
-    else {
+    } else {
       this.team = null;
+    }
+  }
+
+  private setNewArenaCity(city: City) {
+    if (city) {
+      this.newarena.city = city;
     }
   }
 }

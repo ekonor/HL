@@ -2,7 +2,7 @@
 <div class="tournament-create col-md-offset-12 col-md-12" *ngIf="tournament">
   <h2>Конструктор турнира</h2>
   <div>Конструктор хоккейных турниров поможет Вам внести данные о прошедшем турнире в базу данных портала. Просто следуйте инструкциям на сайте. Более подробную информацию и видео-инструкции Вы найдете в разделе FAQ.</div>
-  <form #myForm="ngForm">
+  <!--form #myForm="ngForm"-->
       <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
         <div class="steps">
           <span class="btn {{ ( step == 1 ) ? 'btn-primary' : 'grey' }}" (click)="changeStep(1)" data-placement="top" title="Общие данные">Общие данные</span>
@@ -58,7 +58,7 @@
             <div class="col-md-4 form-group required">
               <arena-select [arena]="arena" [isRequired]="true" [showArenaTitle]="false" (onChanged)="setArena($event)"></arena-select>
             </div>
-            <div class="col-md-2 vertical-align">
+            <div class="col-md-1 vertical-align">
               <button [hasPermission]="['tournamentadministrator']"
                       class="btn btn-primary waves-light"
                       title="Добавить арену"
@@ -69,13 +69,21 @@
                 <i [class]="getAddIconClass()"></i>
               </button>
             </div>
+            <div class="col-md-7">
+              После выбора арены нажмите + <br/>и арена автоматически добавится в список
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <span>Если Вашей арены/площадки не в списке, необходимо <br/>создать арену самостоятельно ("Создать арену").</span>
+            </div>
           </div>
           <div class="row vertical-align">
             <div class="col-md-5 vertical-align">
               <button [hasPermission]="['tournamentadministrator']"
                       class="btn btn-primary waves-light"
                       title="Создать новую арену"
-                      (click)="createArena()"
+                      (click)="toggled=true"
                       onAuthorizedPermission="show"
                       onUnauthorizedPermission="hide"
                       [disabled]="dataIsLoading">
@@ -83,72 +91,94 @@
               </button>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-12">
-              После выбора арены нажмите + <br/>и арена автоматически добавится в список
+        <form #newarenaForm="ngForm" class="row toggled-form" [hidden]="!toggled">
+            <div class="col-md-2 form-group required">
+              <label for="newarenaname">Название арены</label>
+              <input type="text" class="form-control" name="newarenaname" [(ngModel)]="newarena.name" (ngModelChange)="newarena.name = $event" #newarenaname="ngModel" id="newarenaname" title="Введите название арены" required="required"/>
             </div>
-          </div>
+            <div class="col-md-4 form-group required vertical-align">
+              <app-city-filter [city]="newarena.city" [isRequired]="true" (onChanged)="setNewArenaCity($event)"></app-city-filter>
+            </div>
+            <div class="col-md-6 vertical-align">
+              <button [hasPermission]="['tournamentadministrator']"
+                      class="btn btn-primary waves-light"
+                      title="Добавить новую арену"
+                      (click)="createArena()"
+                      onAuthorizedPermission="show"
+                      onUnauthorizedPermission="hide"
+                      [disabled]="dataIsLoading || newarenaForm.invalid || newarena.city == null">
+                <i [class]="getAddIconClass()"></i>&nbsp;&nbsp;Добавить
+              </button>
+            </div>
+        </form>
         <div class="row">
-            <div class="col-md-7">
-              <div *ngFor="let arenaItem of tournament.arenas">
-                <div class="row" *ngIf="tournament.arenas?.indexOf(arenaItem) == 0">
-                  <div class="col-md-1"></div>
-                  <div class="col-md-3 text-center">Название</div>
-                  <div class="col-md-2 text-center">Удалить</div>
-                  <div class="col-md-2 text-center">Вниз/Вверх</div>
+          <div class="col-md-6" *ngIf="tournament.arenas.length == 0">
+            <br/>
+            Список арен пуст.
+            <br/>
+            <br/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-7">
+            <div class="list-table" *ngFor="let arenaItem of tournament.arenas">
+              <div class="row" *ngIf="tournament.arenas?.indexOf(arenaItem) == 0">
+                <div class="col-md-1"></div>
+                <div class="col-md-5 text-center">Название</div>
+                <div class="col-md-6">&nbsp;Удалить&nbsp;&nbsp;&nbsp;Вниз&nbsp;&nbsp;&nbsp;Вверх</div>
+              </div>
+              <div class="row vertical-align">
+                <div class="col-md-1">
+                  {{tournament.arenas?.indexOf(arenaItem)+1}}.
                 </div>
-                <div class="row vertical-align">
-                  <div class="col-md-1">
-                    {{tournament.arenas?.indexOf(arenaItem)+1}}
-                  </div>
-                  <div class="col-md-3">
-                    {{arenaItem.name }} {{arenaItem.cityName ? '(' + arenaItem.cityName + ')' : ''}}
-                  </div>
-                  <div class="col-md-6">
-                    <div class="operations-panel navbar navbar-left pull-left">
-                      <button [hasPermission]="['tournamentadministrator']"
-                              class="btn btn-danger waves-light"
-                              title="Удалить арену из списка"
-                              (click)="removeArena(arenaItem)"
-                              onAuthorizedPermission="show"
-                              onUnauthorizedPermission="hide"
-                              [disabled]="dataIsLoading || !arenaItem">
-                        <i [class]="getDeleteIconClass()"></i>
-                      </button>
-                      <button [hasPermission]="['tournamentadministrator']"
-                              class="btn btn-primary waves-light"
-                              title="Переместить ниже в списке"
-                              (click)="moveArenaDown(arenaItem)"
-                              onAuthorizedPermission="show"
-                              onUnauthorizedPermission="hide"
-                              [disabled]="dataIsLoading || !arenaItem || tournament.arenas?.indexOf(arenaItem) == tournament.arenas.length-1 || tournament.arenas.length < 2">
-                        <i [class]="getMoveDownIconClass()"></i>
-                      </button>
-                      <button [hasPermission]="['tournamentadministrator']"
-                              class="btn btn-primary waves-light"
-                              title="Переместить выше в списке"
-                              (click)="moveArenaUp(arenaItem)"
-                              onAuthorizedPermission="show"
-                              onUnauthorizedPermission="hide"
-                              [disabled]="dataIsLoading || !arenaItem || tournament.arenas.length < 2 || tournament.arenas?.indexOf(arenaItem) == 0">
-                        <i [class]="getMoveUpIconClass()"></i>
-                      </button>
-                    </div>
+                <div class="col-md-5 table-row-selection" (click)="setSelection(arenaItem)" tabindex="{{tournament.arenas?.indexOf(arenaItem)+1}}">
+                  {{arenaItem.name }} {{arenaItem.cityName ? '(' + arenaItem.cityName + ')' : ''}}
+                </div>
+                <div class="col-md-6">
+                  <div class="operations-panel navbar navbar-left pull-left">
+                    <button [hasPermission]="['tournamentadministrator']"
+                            class="btn btn-danger waves-light"
+                            title="Удалить арену из списка"
+                            (click)="removeArena(arenaItem)"
+                            onAuthorizedPermission="show"
+                            onUnauthorizedPermission="hide"
+                            [disabled]="dataIsLoading || !arenaItem">
+                      <i [class]="getDeleteIconClass()"></i>
+                    </button>
+                    <button [hasPermission]="['tournamentadministrator']"
+                            class="btn btn-primary waves-light"
+                            title="Переместить ниже в списке"
+                            (click)="moveArenaDown(arenaItem)"
+                            onAuthorizedPermission="show"
+                            onUnauthorizedPermission="hide"
+                            [disabled]="dataIsLoading || !arenaItem || tournament.arenas?.indexOf(arenaItem) == tournament.arenas.length-1 || tournament.arenas.length < 2">
+                      <i [class]="getMoveDownIconClass()"></i>
+                    </button>
+                    <button [hasPermission]="['tournamentadministrator']"
+                            class="btn btn-primary waves-light"
+                            title="Переместить выше в списке"
+                            (click)="moveArenaUp(arenaItem)"
+                            onAuthorizedPermission="show"
+                            onUnauthorizedPermission="hide"
+                            [disabled]="dataIsLoading || !arenaItem || tournament.arenas.length < 2 || tournament.arenas?.indexOf(arenaItem) == 0">
+                      <i [class]="getMoveUpIconClass()"></i>
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
           <div class="col-md-5">
-            <div class="row" *ngIf="arena">
+            <div class="row" *ngIf="activeArena">
               <div class="col-md-12 text-center">
                 Информация об арене
               </div>
             </div>
-            <div class="row" *ngIf="arena">
-              <div class="col-md-1">
+            <div class="row" *ngIf="activeArena">
+              <div class="col-md-2">
                   № п/п
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                   Название арены
               </div>
               <div class="col-md-3">
@@ -158,25 +188,20 @@
                   Адрес
               </div>
             </div>
-            <div class="row" *ngIf="arena">
-              <div class="col-md-1">
+            <div class="row" *ngIf="activeArena">
+              <div class="col-md-2">
                   1
               </div>
-              <div class="col-md-4">
-                 {{arena.name}}
+              <div class="col-md-3">
+                {{activeArena.name}}
               </div>
               <div class="col-md-3">
-                {{arena.cityName}}
+                {{activeArena.cityName}}
               </div>
               <div class="col-md-4">
-                 {{arena.address}}
+                {{activeArena.address}}
               </div>
             </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <span>Если Вашей арены/площадки не в списке, необходимо <br/>добавить или убрать строку.<br/>Выставьте необходимое число команд на ШАГЕ 1</span>
           </div>
         </div>
       </div>
@@ -392,5 +417,5 @@
     <span class="btn {{ ( step != 1  ) ? 'btn-primary' : 'grey disabled' }}" (click)="changeStep(step-1)" data-toggle="button" aria-pressed="false" data-placement="top" title="На предыдущий шаг">На предыдущий шаг</span>
     <span class="btn {{ ( step != 6  ) ? 'btn-primary' : 'grey disabled' }}" (click)="changeStep(step+1)" data-toggle="button" aria-pressed="false" data-placement="top" title="На следующий шаг">На следующий шаг</span>
 
-  </form>
+  <!--/form-->
 </div>

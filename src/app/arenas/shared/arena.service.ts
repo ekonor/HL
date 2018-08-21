@@ -14,6 +14,7 @@ import { ListResponse } from 'app/shared/list/list-response';
 import {ListInfo, SortDir} from 'app/shared/list/list-info';
 import { ApiConfig } from 'app/core/api-config';
 import { HttpHeaders } from '@angular/common/http';
+import {ArenaFastCreation} from "./arena-fast-creation";
 
 
 @Injectable()
@@ -98,6 +99,24 @@ export class ArenaService {
       'contacts': arena.contacts,
       'capacity': arena.capacity,
       'about': arena.about
+    });
+
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': 'Bearer ' + currentUser.token
+      });
+      return this.httpClient.post<number>(this.getMethodUrl('/arenas/'), body, { headers: headers });
+    }
+  }
+
+  public addArenaFast(arena: ArenaFastCreation): Observable<number> {
+    // TODO свернуть
+    const body = JSON.stringify({
+      'name': arena.name,
+      'cityId': arena.city.id
     });
 
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
