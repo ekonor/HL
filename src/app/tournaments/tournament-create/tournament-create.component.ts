@@ -15,6 +15,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AlertService } from 'app/components/alert/alert.service';
 import { TournamentService } from 'app/tournaments/shared/tournament.service';
 import { ArenaService } from 'app/arenas/shared/arena.service';
+import { TeamService } from 'app/teams/shared/team.service';
 
 import { Tournament } from 'app/tournaments/shared/tournament';
 import { Item } from 'app/tournament-announcements/shared/item';
@@ -46,12 +47,15 @@ export class TournamentCreateComponent implements OnInit {
   newarena: ArenaFastCreation; // новая арена
   team: Team; // текущая команда в поле ввода
 
-  toggled: boolean = false;
+  toggledNewArena: boolean = false;
+  toggledNewTeam: boolean = false;
 
   activeArena: ArenaListItem; // выделенная строка в таблице
+  activeTeam: Team; // выделенная строка в таблице
 
   constructor( private tournamentService: TournamentService,
                private arenaService: ArenaService,
+               private teamService: TeamService,
                private router: Router,
                private activatedRoute: ActivatedRoute,
                private alertService: AlertService ) {
@@ -59,12 +63,14 @@ export class TournamentCreateComponent implements OnInit {
     this.dataIsLoading = true;
     this.tournament = new Tournament();
     this.dataIsLoading = false;
-    this.step = 2;
+    this.step = 3;
     this.oneDay = false;
     this.arena = null;
     this.newarena = new ArenaFastCreation();
     this.team = null;
+    this.newteam = new Team();
     this.activeArena = null;
+    this.activeTeam = null;
     this.getDivisionTypes();
     this.getAgeTypes();
     this.getSeasonTypes();
@@ -184,22 +190,9 @@ export class TournamentCreateComponent implements OnInit {
     }
   }
 
-  private setArena(arena: ArenaListItem) {
-    if (arena) {
-      this.arena = arena;
-    }
-    else {
-      this.arena = null;
-    }
-  }
-
-  createTeam() {
-    // TODO разворачивание блока для добавления новой команды
-  }
-
   createArena(arena: ArenaFastCreation, form: NgForm) {
     if (!this.newarena || this.newarena == null ) { return; }
-      if (confirm('Вы действительно хотите добавить новую арену?')) {
+      if (confirm('Вы действительно хотите создать новую арену?')) {
         // TODO проверка существования города
         this.dataIsLoading = true;
         this.arenaService.addArenaFast(this.newarena).subscribe(
@@ -207,19 +200,56 @@ export class TournamentCreateComponent implements OnInit {
           },
           error => {
             this.alertService.error(error);
-            this.alertService.error('Не удалось добавить арену');
+            this.alertService.error('Не удалось создать арену');
             this.dataIsLoading = false;
-            alert('Не удалось добавить арену');
+            alert('Не удалось создать арену');
           },
           () => {
             this.dataIsLoading = false;
-            alert('Арена добавлена успешно. Теперь Вы можете добавить ее через поиск арен');
+            alert('Арена создана успешно. Теперь Вы можете добавить ее в список через поиск арен');
             this.newarena = null;
+            this.toggledNewArena = false;
           });
         this.dataIsLoading = false;
       }
       this.dataIsLoading = false;
   }
+
+  createTeam() {
+    // TODO разворачивание блока для добавления новой команды
+  }
+
+  createTeam(team: Team, form: NgForm) {
+    if (!this.newteam || this.newteam == null ) { return; }
+    if (confirm('Вы действительно хотите создать  новую команду?')) {
+      // TODO проверка существования города
+      this.dataIsLoading = true;
+      this.teamService.addTeamFast(this.newteam).subscribe(
+        data => {
+        },
+        error => {
+          this.alertService.error(error);
+          this.alertService.error('Не удалось создать команду');
+          this.dataIsLoading = false;
+          alert('Не удалось создать команду');
+        },
+        () => {
+          this.dataIsLoading = false;
+          alert('Команда создана успешно. Теперь Вы можете добавить ее в список через поиск команд');
+          this.newteam = null;
+          this.toggledNewTeam = false;
+        });
+      this.dataIsLoading = false;
+    }
+    this.dataIsLoading = false;
+  }
+
+  setSelectionArena(arena: ArenaListItem) {
+    if (arena) {
+      this.activeArena = arena;
+    }
+  }
+
 
   moveTeamUp(team: Team) {
     console.log("UP");
@@ -263,10 +293,14 @@ export class TournamentCreateComponent implements OnInit {
     }
   }
 
-  setSelection(arena: ArenaListItem) {
-    if (arena) {
-      this.activeArena = arena;
+  setSelectionTeam(team: Team) {
+    if (team) {
+      this.activeTeam = team;
     }
+  }
+
+  changePlayers(team: Team) {
+    // форма всплывающая для изменения заявленного состава команды
   }
 
   private setTeam(team: Team) {
@@ -280,6 +314,20 @@ export class TournamentCreateComponent implements OnInit {
   private setNewArenaCity(city: City) {
     if (city) {
       this.newarena.city = city;
+    }
+  }
+
+  private setArena(arena: ArenaListItem) {
+    if (arena) {
+      this.arena = arena;
+    } else {
+      this.arena = null;
+    }
+  }
+
+  private setNewTeamCity(city: City) {
+    if (city) {
+      this.newteam.city = city;
     }
   }
 }

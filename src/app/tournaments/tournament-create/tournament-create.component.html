@@ -83,7 +83,7 @@
               <button [hasPermission]="['tournamentadministrator']"
                       class="btn btn-primary waves-light"
                       title="Создать новую арену"
-                      (click)="toggled=true"
+                      (click)="toggledNewArena=true"
                       onAuthorizedPermission="show"
                       onUnauthorizedPermission="hide"
                       [disabled]="dataIsLoading">
@@ -91,7 +91,7 @@
               </button>
             </div>
           </div>
-        <form #newarenaForm="ngForm" class="row toggled-form" [hidden]="!toggled">
+        <form #newarenaForm="ngForm" class="row toggled-form" [hidden]="!toggledNewArena">
             <div class="col-md-2 form-group required">
               <label for="newarenaname">Название арены</label>
               <input type="text" class="form-control" name="newarenaname" [(ngModel)]="newarena.name" (ngModelChange)="newarena.name = $event" #newarenaname="ngModel" id="newarenaname" title="Введите название арены" required="required"/>
@@ -131,7 +131,7 @@
                 <div class="col-md-1">
                   {{tournament.arenas?.indexOf(arenaItem)+1}}.
                 </div>
-                <div class="col-md-5 table-row-selection" (click)="setSelection(arenaItem)" tabindex="{{tournament.arenas?.indexOf(arenaItem)+1}}">
+                <div class="col-md-5 table-row-selection" (click)="setSelectionArena(arenaItem)" tabindex="{{tournament.arenas?.indexOf(arenaItem)+1}}">
                   {{arenaItem.name }} {{arenaItem.cityName ? '(' + arenaItem.cityName + ')' : ''}}
                 </div>
                 <div class="col-md-6">
@@ -207,7 +207,171 @@
       </div>
     <div id="step-3" *ngIf="step == 3">
       ШАГ 3. КОМАНДЫ
+
       <div class="row vertical-align">
+        <div class="col-md-4 form-group required">
+          <team-select [team]="team" [isRequired]="true" [showTeamTitle]="false" (onChanged)="setTeam($event)"></team-select>
+        </div>
+        <div class="col-md-1 vertical-align">
+          <button [hasPermission]="['tournamentadministrator']"
+                  class="btn btn-primary waves-light"
+                  title="Добавить команду"
+                  (click)="addTeam(team)"
+                  onAuthorizedPermission="show"
+                  onUnauthorizedPermission="hide"
+                  [disabled]="dataIsLoading || !team">
+            <i [class]="getAddIconClass()"></i>
+          </button>
+        </div>
+        <div class="col-md-7">
+          После выбора команды нажмите + <br/>и команда автоматически добавится в список
+        </div>
+      </div>
+      <!--div class="row">
+        <div class="col-md-12">
+          <span>Если нужной команды не в списке, необходимо <br/>создать команду самостоятельно ("Создать команду").</span>
+        </div>
+      </div-->
+      <!--div class="row vertical-align">
+        <div class="col-md-5 vertical-align">
+          <button [hasPermission]="['tournamentadministrator']"
+                  class="btn btn-primary waves-light"
+                  title="Создать новую команду"
+                  (click)="toggledNewTeam=true"
+                  onAuthorizedPermission="show"
+                  onUnauthorizedPermission="hide"
+                  [disabled]="dataIsLoading">
+            <i [class]="getAddIconClass()"></i>&nbsp;&nbsp;Создать команду
+          </button>
+        </div>
+      </div-->
+      <!--form #newteamForm="ngForm" class="row toggled-form" [hidden]="!toggledNewTeam">
+        <div class="col-md-2 form-group required">
+          <label for="newteamname">Название команды</label>
+          <input type="text" class="form-control" name="newteamname" [(ngModel)]="newteam.name" (ngModelChange)="newteam.name = $event" #newteamname="ngModel" id="newteamname" title="Введите название команды" required="required"/>
+        </div>
+        <div class="col-md-4 form-group required vertical-align">
+          <app-city-filter [city]="newteam.city" [isRequired]="true" (onChanged)="setNewTeamCity($event)"></app-city-filter>
+        </div>
+        <div class="col-md-6 vertical-align">
+          <button [hasPermission]="['tournamentadministrator']"
+                  class="btn btn-primary waves-light"
+                  title="Добавить новую команду"
+                  (click)="createTeam()"
+                  onAuthorizedPermission="show"
+                  onUnauthorizedPermission="hide"
+                  [disabled]="dataIsLoading || newteamForm.invalid || newteam.city == null">
+            <i [class]="getAddIconClass()"></i>&nbsp;&nbsp;Добавить
+          </button>
+        </div>
+      </form-->
+      <div class="row">
+        <div class="col-md-6" *ngIf="tournament.teams.length == 0">
+          <br/>
+          Список команд пуст.
+          <br/>
+          <br/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-7">
+          <div class="list-table" *ngFor="let teamItem of tournament.teams">
+            <div class="row" *ngIf="tournament.teams?.indexOf(teamItem) == 0">
+              <div class="col-md-1"></div>
+              <div class="col-md-5 text-center">Название</div>
+              <div class="col-md-6">&nbsp;Удалить&nbsp;&nbsp;&nbsp;Вниз&nbsp;&nbsp;&nbsp;Вверх</div>
+            </div>
+            <div class="row vertical-align">
+              <div class="col-md-1">
+                {{tournament.teams?.indexOf(teamItem)+1}}.
+              </div>
+              <div class="col-md-5 table-row-selection" (click)="setSelectionTeam(teamItem)" tabindex="{{tournament.teams?.indexOf(teamItem)+1}}">
+                {{teamItem.name }} {{teamItem.cityName ? '(' + teamItem.cityName + ')' : ''}}
+              </div>
+              <div class="col-md-6">
+                <div class="operations-panel navbar navbar-left pull-left">
+                  <button [hasPermission]="['tournamentadministrator']"
+                          class="btn btn-danger waves-light"
+                          title="Удалить команду из списка"
+                          (click)="removeTeam(teamItem)"
+                          onAuthorizedPermission="show"
+                          onUnauthorizedPermission="hide"
+                          [disabled]="dataIsLoading || !teamItem">
+                    <i [class]="getDeleteIconClass()"></i>
+                  </button>
+                  <button [hasPermission]="['tournamentadministrator']"
+                          class="btn btn-primary waves-light"
+                          title="Переместить ниже в списке"
+                          (click)="moveTeamDown(teamItem)"
+                          onAuthorizedPermission="show"
+                          onUnauthorizedPermission="hide"
+                          [disabled]="dataIsLoading || !teamItem || tournament.teams?.indexOf(teamItem) == tournament.teams.length-1 || tournament.teams.length < 2">
+                    <i [class]="getMoveDownIconClass()"></i>
+                  </button>
+                  <button [hasPermission]="['tournamentadministrator']"
+                          class="btn btn-primary waves-light"
+                          title="Переместить выше в списке"
+                          (click)="moveTeamUp(teamItem)"
+                          onAuthorizedPermission="show"
+                          onUnauthorizedPermission="hide"
+                          [disabled]="dataIsLoading || !teamItem || tournament.teams.length < 2 || tournament.teams?.indexOf(teamItem) == 0">
+                    <i [class]="getMoveUpIconClass()"></i>
+                  </button>
+                  <button [hasPermission]="['tournamentadministrator']"
+                          class="btn btn-primary waves-light"
+                          title="Изменить состав"
+                          (click)="changePlayers(teamItem)"
+                          onAuthorizedPermission="show"
+                          onUnauthorizedPermission="hide"
+                          [disabled]="dataIsLoading || !teamItem">
+                    <i [class]="getPlayersIconClass()"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="row" *ngIf="activeTeam">
+            <div class="col-md-12 text-center">
+              Проверить список добавленных игроков
+            </div>
+            <div class="col-md-12 text-center">
+              {{activeTeam.name }}{{activeTeam.city? '('+activeTeam.city.name+')': ''}}
+            </div>
+          </div>
+          <div class="row" *ngIf="activeTeam">
+            <div class="col-md-1">
+              № п/п
+            </div>
+            <div class="col-md-4">
+              ФИО игрока
+            </div>
+            <div class="col-md-3">
+              Номер
+            </div>
+            <div class="col-md-4">
+              Дата рождения
+            </div>
+          </div>
+          <div class="row" *ngFor="let player of activeTeam?.players">
+            <div class="col-md-1">
+              {{activeTeam.players?.indexOf(player)+1}}
+            </div>
+            <div class="col-md-4">
+              {{player.name}}
+            </div>
+            <div class="col-md-3">
+              {{player.id}}
+            </div>
+            <div class="col-md-4">
+              {{player.birthdate}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <!--div class="row vertical-align">
         <div class="col-md-4 form-group required">
           <team-select [team]="team" [isRequired]="true" [showTeamTitle]="false" (onChanged)="setTeam($event)"></team-select>
         </div>
@@ -222,8 +386,8 @@
             <i [class]="getAddIconClass()"></i>
           </button>
         </div>
-      </div>
-      <div class="row vertical-align">
+      </div-->
+      <!--div class="row vertical-align">
         <div class="col-md-5 vertical-align">
           <button [hasPermission]="['tournamentadministrator']"
                   class="btn btn-primary waves-light"
@@ -235,13 +399,13 @@
             <i [class]="getAddIconClass()"></i>&nbsp;&nbsp;Создать команду
           </button>
         </div>
-      </div>
-      <div class="row">
+      </div-->
+      <!--div class="row">
         <div class="col-md-12">
           После выбора команды нажмите + <br/>и команды автоматически добавится в список
         </div>
-      </div>
-      <div class="row">
+      </div-->
+      <!--div class="row">
         <div class="col-md-7">
           <div *ngFor="let teamItem of tournament.teams">
             <div class="row" *ngIf="tournament.teams?.indexOf(teamItem) == 0">
@@ -335,7 +499,7 @@
           <span>Если Вашей команды нет в списке, необходимо <br/>добавить или убрать строку.<br/>Выставьте необходимое число команд на ШАГЕ 1</span>
         </div>
       </div>
-    </div>
+    </div-->
       <div id="step-4" *ngIf="step == 4">
         step 4
       </div>

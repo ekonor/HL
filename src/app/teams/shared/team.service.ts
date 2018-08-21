@@ -39,6 +39,25 @@ export class TeamService {
     return this.httpClient.get<ListResponse<Team>>(methodUrl, { params: params });
   }
 
+
+  public addTeamFast(team: Team): Observable<number> {
+    // TODO свернуть
+    const body = JSON.stringify({
+      'name': team.name,
+      'cityId': team.city.id
+    });
+
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': 'Bearer ' + currentUser.token
+      });
+      return this.httpClient.post<number>(this.getMethodUrl('/teams/'), body, { headers: headers });
+    }
+  }
+
   public getTeamLogo(team: Team ): string {
     let logoSrc = this.apiConfig.filesPath;
     let placeholder = "assets/img/teams/no_logo.png";
