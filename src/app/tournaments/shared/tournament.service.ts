@@ -101,4 +101,8 @@ export class TournamentService {
     return 'fa fa-arrow-down';
   }
 
+  public getPlayersIconClass(): string {
+    return 'fa fa-users';
+  }
+
 }

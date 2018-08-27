@@ -68,7 +68,7 @@ export class TournamentCreateComponent implements OnInit {
     this.arena = null;
     this.newarena = new ArenaFastCreation();
     this.team = null;
-    this.newteam = new Team();
+    // this.newteam = new Team();
     this.activeArena = null;
     this.activeTeam = null;
     this.getDivisionTypes();
@@ -170,6 +170,10 @@ export class TournamentCreateComponent implements OnInit {
     return this.tournamentService.getMoveDownIconClass();
   }
 
+  public getPlayersIconClass() {
+    return this.tournamentService.getPlayersIconClass();
+  }
+
   private getSeasonTypes() {
     this.seasonTypes = new Array<Item>();
     this.seasonTypes.push(new Item({value: '2015-2016', name: '2015-2016'}));
@@ -215,11 +219,7 @@ export class TournamentCreateComponent implements OnInit {
       this.dataIsLoading = false;
   }
 
-  createTeam() {
-    // TODO разворачивание блока для добавления новой команды
-  }
-
-  createTeam(team: Team, form: NgForm) {
+  /* createTeam(team: Team, form: NgForm) {
     if (!this.newteam || this.newteam == null ) { return; }
     if (confirm('Вы действительно хотите создать  новую команду?')) {
       // TODO проверка существования города
@@ -242,7 +242,7 @@ export class TournamentCreateComponent implements OnInit {
       this.dataIsLoading = false;
     }
     this.dataIsLoading = false;
-  }
+  } */
 
   setSelectionArena(arena: ArenaListItem) {
     if (arena) {
@@ -325,9 +325,9 @@ export class TournamentCreateComponent implements OnInit {
     }
   }
 
-  private setNewTeamCity(city: City) {
+  /* private setNewTeamCity(city: City) {
     if (city) {
       this.newteam.city = city;
     }
-  }
+  } */
 }

@@ -279,7 +279,7 @@
             <div class="row" *ngIf="tournament.teams?.indexOf(teamItem) == 0">
               <div class="col-md-1"></div>
               <div class="col-md-5 text-center">Название</div>
-              <div class="col-md-6">&nbsp;Удалить&nbsp;&nbsp;&nbsp;Вниз&nbsp;&nbsp;&nbsp;Вверх</div>
+              <div class="col-md-6">&nbsp;Удалить&nbsp;&nbsp;&nbsp;Вниз&nbsp;&nbsp;&nbsp;Вверх&nbsp;&nbsp;&nbsp;Состав</div>
             </div>
             <div class="row vertical-align">
               <div class="col-md-1">
@@ -334,20 +334,20 @@
         <div class="col-md-5">
           <div class="row" *ngIf="activeTeam">
             <div class="col-md-12 text-center">
-              Проверить список добавленных игроков
+              Проверьте список добавленных игроков
             </div>
             <div class="col-md-12 text-center">
               {{activeTeam.name }}{{activeTeam.city? '('+activeTeam.city.name+')': ''}}
             </div>
           </div>
           <div class="row" *ngIf="activeTeam">
-            <div class="col-md-1">
+            <div class="col-md-2">
               № п/п
             </div>
             <div class="col-md-4">
               ФИО игрока
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               Номер
             </div>
             <div class="col-md-4">
