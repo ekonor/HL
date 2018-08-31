@@ -26,7 +26,8 @@ import { TournamentCreateComponent } from 'app/tournaments/tournament-create/tou
 
 import { ArenaModule } from 'app/arenas/arenas.module';
 import { OrganizationModule } from 'app/organizations/organizations.module';
-import {TeamModule} from "../teams/teams.module";
+import { TeamModule } from 'app/teams/teams.module';
+import { RefereesModule } from 'app/referees/referees.module';
 @NgModule({
       declarations: [
         TournamentsComponent,
@@ -54,7 +55,8 @@ import {TeamModule} from "../teams/teams.module";
         MDBBootstrapModule,
         ArenaModule,
         TeamModule,
-        OrganizationModule
+        OrganizationModule,
+        RefereesModule
       ],
       exports: [
         // TAPicComponent

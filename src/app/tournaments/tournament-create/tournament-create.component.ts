@@ -16,6 +16,7 @@ import { AlertService } from 'app/components/alert/alert.service';
 import { TournamentService } from 'app/tournaments/shared/tournament.service';
 import { ArenaService } from 'app/arenas/shared/arena.service';
 import { TeamService } from 'app/teams/shared/team.service';
+import { RefereeService } from 'app/referees/shared/referee.service';
 
 import { Tournament } from 'app/tournaments/shared/tournament';
 import { Item } from 'app/tournament-announcements/shared/item';
@@ -23,6 +24,9 @@ import { City } from 'app/core/geo/city';
 import { ArenaListItem } from 'app/arenas/shared/arena-list-item';
 import { Team } from 'app/teams/shared/team';
 import { ArenaFastCreation } from 'app/arenas/shared/arena-fast-creation';
+import { RefereeFastCreation } from 'app/referees/shared/referee-fast-creation';
+import { RefereeListItem } from 'app/referees/shared/referee-list-item';
+import { Referee } from 'app/referees/shared/referee';
 
 @Component({
   moduleId: module.id,
@@ -47,15 +51,21 @@ export class TournamentCreateComponent implements OnInit {
   newarena: ArenaFastCreation; // новая арена
   team: Team; // текущая команда в поле ввода
 
+  referee: RefereeListItem; // текущий судья в поле ввода
+  newreferee: RefereeFastCreation; // новый судья
+
   toggledNewArena: boolean = false;
-  toggledNewTeam: boolean = false;
+  // toggledNewTeam: boolean = false;
+  toggledNewReferee: boolean = false;
 
   activeArena: ArenaListItem; // выделенная строка в таблице
   activeTeam: Team; // выделенная строка в таблице
+  activeReferee: RefereeListItem; // выделенная строка в таблице
 
   constructor( private tournamentService: TournamentService,
                private arenaService: ArenaService,
                private teamService: TeamService,
+               private refereeService: RefereeService,
                private router: Router,
                private activatedRoute: ActivatedRoute,
                private alertService: AlertService ) {
@@ -63,11 +73,14 @@ export class TournamentCreateComponent implements OnInit {
     this.dataIsLoading = true;
     this.tournament = new Tournament();
     this.dataIsLoading = false;
-    this.step = 3;
+    this.step = 4;
     this.oneDay = false;
     this.arena = null;
     this.newarena = new ArenaFastCreation();
     this.team = null;
+    this.referee = null;
+    this.newreferee = new RefereeFastCreation();
+    this.activeReferee = null;
     // this.newteam = new Team();
     this.activeArena = null;
     this.activeTeam = null;
@@ -130,6 +143,14 @@ export class TournamentCreateComponent implements OnInit {
     }
   }
 
+  public addReferee(referee: RefereeListItem) {
+    console.log("add referee");
+    if (referee) {
+      this.tournament.referees.push(referee);
+      this.referee = null;
+    }
+  }
+
   public removeArena(arena: ArenaListItem) {
     console.log("remove arena");
     if (arena) {
@@ -143,6 +164,14 @@ export class TournamentCreateComponent implements OnInit {
     if (team) {
       this.tournament.teams = this.tournament.teams.filter(obj => obj !== team);
       console.log(this.tournament.teams.length);
+    }
+  }
+
+  public removeReferee(referee: Referee) {
+    console.log("remove referee");
+    if (referee) {
+      this.tournament.referees = this.tournament.referees.filter(obj => obj !== referee);
+      console.log(this.tournament.referees.length);
     }
   }
 
@@ -196,28 +225,55 @@ export class TournamentCreateComponent implements OnInit {
 
   createArena(arena: ArenaFastCreation, form: NgForm) {
     if (!this.newarena || this.newarena == null ) { return; }
-      if (confirm('Вы действительно хотите создать новую арену?')) {
-        // TODO проверка существования города
-        this.dataIsLoading = true;
-        this.arenaService.addArenaFast(this.newarena).subscribe(
-          data => {
-          },
-          error => {
-            this.alertService.error(error);
-            this.alertService.error('Не удалось создать арену');
-            this.dataIsLoading = false;
-            alert('Не удалось создать арену');
-          },
-          () => {
-            this.dataIsLoading = false;
-            alert('Арена создана успешно. Теперь Вы можете добавить ее в список через поиск арен');
-            this.newarena = null;
-            this.toggledNewArena = false;
-          });
-        this.dataIsLoading = false;
-      }
+    if (confirm('Вы действительно хотите создать новую арену?')) {
+      // TODO проверка существования города
+      this.dataIsLoading = true;
+      this.arenaService.addArenaFast(this.newarena).subscribe(
+        data => {
+        },
+        error => {
+          this.alertService.error(error);
+          this.alertService.error('Не удалось создать арену');
+          this.dataIsLoading = false;
+          alert('Не удалось создать арену');
+        },
+        () => {
+          this.dataIsLoading = false;
+          alert('Арена создана успешно. Теперь Вы можете добавить ее в список через поиск арен');
+          this.newarena = null;
+          this.toggledNewArena = false;
+        });
       this.dataIsLoading = false;
+    }
+    this.dataIsLoading = false;
   }
+
+  createReferee(referee: RefereeFastCreation, form: NgForm) {
+    if (!this.newreferee || this.newreferee == null ) { return; }
+    if (confirm('Вы действительно хотите создать нового судью?')) {
+      // TODO проверка существования города
+      this.dataIsLoading = true;
+      this.refereeService.addRefereeFast(this.newreferee).subscribe(
+        data => {
+        },
+        error => {
+          this.alertService.error(error);
+          this.alertService.error('Не удалось создать судью');
+          this.dataIsLoading = false;
+          alert('Не удалось создать судью');
+        },
+        () => {
+          this.dataIsLoading = false;
+          alert('Судья создан успешно. Теперь Вы можете добавить его в список через поиск судей');
+          this.newreferee = null;
+          this.toggledNewReferee = false;
+        });
+      this.dataIsLoading = false;
+    }
+    this.dataIsLoading = false;
+  }
+
+
 
   /* createTeam(team: Team, form: NgForm) {
     if (!this.newteam || this.newteam == null ) { return; }
@@ -250,6 +306,11 @@ export class TournamentCreateComponent implements OnInit {
     }
   }
 
+  setSelectionReferee(referee: RefereeListItem) {
+    if (referee) {
+      this.activeReferee = referee;
+    }
+  }
 
   moveTeamUp(team: Team) {
     console.log("UP");
@@ -268,6 +329,16 @@ export class TournamentCreateComponent implements OnInit {
       let moveArena: ArenaListItem = this.tournament.arenas[num-1];
       this.tournament.arenas[num-1] = arena;
       this.tournament.arenas[num] = moveArena;
+    }
+  }
+
+  moveRefereeUp(referee: Referee) {
+    console.log("UP");
+    let num = this.tournament.referees.indexOf(referee);
+    if (num!=-1 && num!= 0) {
+      let moveReferee: Referee = this.tournament.referees[num-1];
+      this.tournament.referees[num-1] = referee;
+      this.tournament.referees[num] = moveReferee;
     }
   }
 
@@ -290,6 +361,18 @@ export class TournamentCreateComponent implements OnInit {
       let moveArena: ArenaListItem = this.tournament.arenas[num+1];
       this.tournament.arenas[num+1] = arena;
       this.tournament.arenas[num] = moveArena;
+    }
+  }
+
+
+  moveRefereeDown(referee: RefereeListItem) {
+    console.log("DOWN");
+    let num = this.tournament.referees.indexOf(referee);
+    let sz = this.tournament.referees.length;
+    if (num!=-1 && num!=(sz-1)) {
+      let moveReferee: RefereeListItem = this.tournament.referees[num+1];
+      this.tournament.referees[num+1] = referee;
+      this.tournament.referees[num] = moveReferee;
     }
   }
 
@@ -322,6 +405,14 @@ export class TournamentCreateComponent implements OnInit {
       this.arena = arena;
     } else {
       this.arena = null;
+    }
+  }
+
+  private setReferee(referee: RefereeListItem) {
+    if (referee) {
+      this.referee = referee;
+    } else {
+      this.referee = null;
     }
   }
 

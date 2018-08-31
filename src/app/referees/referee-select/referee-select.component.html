@@ -1,0 +1,21 @@
+<ng-template #rt let-r="result" let-t="term">
+  {{ r.name}}
+</ng-template>
+<div class="">
+  <div class="form-group {{ ( isRequired === true ) ? 'required' : '' }}">
+    <label *ngIf="showRefereeTitle === true" for="refereeFilter">Судья</label>
+    <input id="refereeFilter"
+           name="refereeFilter"
+           type="text"
+           class="form-control"
+           [(ngModel)]="referee"
+           [ngbTypeahead]="searchReferee"
+           [resultTemplate]="rt"
+           [inputFormatter]="formatter"
+           (ngModelChange)="returnReferee()"
+           required="{{ ( isRequired === true ) ? 'required' : '' }}"/>
+    <span *ngIf="searching">Поиск...</span>
+    <div class="invalid-feedback" *ngIf="searchFailed">Извините, судей с заданными параметрами не найдено</div>
+  </div>
+</div>
+

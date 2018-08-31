@@ -2,6 +2,7 @@ import { Arena } from 'app/arenas/shared/arena';
 import { Organization } from 'app/organizations/shared/organization';
 import { City } from 'app/core/geo/city';
 import { Team } from 'app/teams/shared/team';
+import { Referee } from 'app/referees/shared/referee';
 
 export class Tournament {
   id: number;
@@ -17,15 +18,7 @@ export class Tournament {
   arenas: Array<Arena> = new Array<Arena>(); // Арены
   logo?: string;
   teams: Array<Team> = new Array<Team>(); // Команды-участники
-  //minAge?: number; // Если Возрастная группа дети или подростки, то можно указать еще год рождения участников от – до
-  //maxAge?: number;
-  /*
-  organization?: Organization; // Организатор турнира
-  arena?: Arena; // Арена
-  isCommercial: boolean = true; // Признак коммерческий или нет (IsCommercial) – иконка
-  cost?: number; // Если коммерческий, указать цену участия (Cost)
-  costType?: string; // Тип оплаты (CostType) - c человека или с команды
-  gender?: string = 'Male'; // Пол участников (Gender) – иконкой*/
+  referees: Array<Referee> = new Array<Referee>(); // Судьи
 
   constructor( values: Object = {} ) {
     Object.assign( this, values );
