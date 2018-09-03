@@ -27,6 +27,8 @@ import { ArenaFastCreation } from 'app/arenas/shared/arena-fast-creation';
 import { RefereeFastCreation } from 'app/referees/shared/referee-fast-creation';
 import { RefereeListItem } from 'app/referees/shared/referee-list-item';
 import { Referee } from 'app/referees/shared/referee';
+import { RefereeType} from 'app/referees/shared/referee-type';
+import { Game } from 'app/tournaments/shared/game';
 
 @Component({
   moduleId: module.id,
@@ -45,6 +47,7 @@ export class TournamentCreateComponent implements OnInit {
   ageTypes: Array<Item>;
   seasonTypes: Array<Item>;
   genderTypes: Array<Item>;
+  tournamentTypes: Array<Item>;
 
   city: City; // текущий город арены в поле ввода
   arena: ArenaListItem; // текущая арена в поле ввода
@@ -62,6 +65,9 @@ export class TournamentCreateComponent implements OnInit {
   activeTeam: Team; // выделенная строка в таблице
   activeReferee: RefereeListItem; // выделенная строка в таблице
 
+  gamesRound: Array<Game>;
+  gamesPlayOff: Array<Game>;
+
   constructor( private tournamentService: TournamentService,
                private arenaService: ArenaService,
                private teamService: TeamService,
@@ -73,7 +79,7 @@ export class TournamentCreateComponent implements OnInit {
     this.dataIsLoading = true;
     this.tournament = new Tournament();
     this.dataIsLoading = false;
-    this.step = 4;
+    this.step = 5;
     this.oneDay = false;
     this.arena = null;
     this.newarena = new ArenaFastCreation();
@@ -88,6 +94,28 @@ export class TournamentCreateComponent implements OnInit {
     this.getAgeTypes();
     this.getSeasonTypes();
     this.getGenderTypes();
+    this.getTournamentTypes();
+
+    this.tournament.tournamentType = 'Play-off';
+
+
+    this.gamesRound = new Array<Game>();
+    this.gamesPlayOff = new Array<Game>();
+
+    // FOR TEST
+    this.addReferee(new RefereeListItem({id: 0, name: 'Петров И.А.', fullName: 'Петров И.А.', linkName: 'test1', gender: 'муж', refereeAmplua: 'Линейный', number: 11, birthdate: new Date('1981-01-01'), city: new City({id: 0, name: 'city1'} )}));
+    this.addReferee(new RefereeListItem({id: 1, name: 'Иванов П.А.', fullName: 'Иванов П.А.', linkName: 'test2', gender: 'муж', refereeAmplua: 'Главный', number: 12, refereeType: new RefereeType({id: 0, name: 'Судья международной категории', description: 'Судья международной категории'}), birthdate: new Date('1985-01-01'), city: new City({id: 1, name: 'city2'} )}));
+
+    this.addTeam(new Team({id: 0, name: 'team1', cityName: 'city1'}));
+    this.addTeam(new Team({id: 1, name: 'team2', cityName: 'city2'}));
+    this.addTeam(new Team({id: 2, name: 'team3', cityName: 'city3'}));
+    this.addTeam(new Team({id: 3, name: 'team4', cityName: 'city4'}));
+
+    this.addArena(new ArenaListItem({id: 0, name: 'arena1', linkName: 'arena1'}));
+    this.addArena(new ArenaListItem({id: 0, name: 'arena2', linkName: 'arena2'}));
+    this.addArena(new ArenaListItem({id: 0, name: 'arena3', linkName: 'arena3'}));
+
+    this.generateGames();
   }
 
   ngOnInit() {
@@ -96,6 +124,9 @@ export class TournamentCreateComponent implements OnInit {
   public changeStep(step: number) {
     if (step > 0 && step < 7) {
       this.step = step;
+      if (step === 5) {
+       this.generateGames();
+      }
     }
   }
 
@@ -215,6 +246,16 @@ export class TournamentCreateComponent implements OnInit {
     this.genderTypes =  new Array<Item>();
     this.genderTypes.push(new Item({value: 'Male', name: 'Мужчины'}));
     this.genderTypes.push(new Item({value: 'Female', name: 'Женщины'}));
+  }
+
+  changeTournamentType() {
+    if (this.tournament.tournamentType == 'Round') {
+      // generate all-to-all games
+
+
+    } else {
+      // generate play-off games according to teams count
+    }
   }
 
   private setCity(city: City) {
@@ -416,9 +457,40 @@ export class TournamentCreateComponent implements OnInit {
     }
   }
 
+  generateGames() {
+    let teamsCount: number = this.tournament.teams.length;
+    if (teamsCount % 2 == 0) {
+      const gamesRoundCount: number = teamsCount * (teamsCount - 1) / 2;
+      this.gamesRound = new Array<Game>();
+      for (let i = 0; i < gamesRoundCount; i++) {
+        this.gamesRound.push(new Game());
+      }
+    }
+    let isExponentTwo = (num) => (num & (num - 1) && num !== 0) ? false : true;
+    if (isExponentTwo(teamsCount)) {
+      const gamesPlayOffCount = teamsCount - 1;
+      this.gamesPlayOff = new Array<Game>();
+      for (let i = 0; i < gamesPlayOffCount; i++) {
+        this.gamesPlayOff.push(new Game());
+      }
+    }
+  }
+
   /* private setNewTeamCity(city: City) {
     if (city) {
       this.newteam.city = city;
     }
   } */
+
+  generateGamesTable() {
+    if (this.tournament.tournamentType == 'Round' && this.gamesRound.length > 0){
+      this.tournament.games = this.gamesRound;
+    }
+  }
+
+  private getTournamentTypes() {
+    this.tournamentTypes =  new Array<Item>();
+    this.tournamentTypes.push(new Item({value: 'Play-off', name: 'Плейофф'}));
+    this.tournamentTypes.push(new Item({value: 'Round', name: 'Круговой'}));
+  }
 }

@@ -335,7 +335,7 @@
     <div id="step-4" *ngIf="step == 4">
       ШАГ 4. СУДЬИ
       <div class="row vertical-align">
-        <div class="col-md-6 form-group required">
+        <div class="col-md-4 form-group required">
           <referee-select [referee]="referee" [isRequired]="true" [showRefereeTitle]="false" (onChanged)="setReferee($event)"></referee-select>
         </div>
         <div class="col-md-1 vertical-align">
@@ -372,12 +372,9 @@
         </div>
       </div>
       <form #newrefereeForm="ngForm" class="row toggled-form" [hidden]="!toggledNewReferee">
-        <div class="col-md-2 form-group required">
+        <div class="col-md-4 form-group required">
           <label for="newrefereename">Имя судьи</label>
           <input type="text" class="form-control" name="newrefereename" [(ngModel)]="newreferee.name" (ngModelChange)="newreferee.name = $event" #newrefereename="ngModel" id="newrefereename" title="Введите имя судьи" required="required"/>
-        </div>
-        <div class="col-md-4 form-group required vertical-align">
-          <!--app-city-filter [city]="newarena.city" [isRequired]="true" (onChanged)="setNewArenaCity($event)"></app-city-filter-->
         </div>
         <div class="col-md-6 vertical-align">
           <button [hasPermission]="['tournamentadministrator']"
@@ -458,7 +455,7 @@
             <div class="col-md-2">
               № п/п
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               ФИО судьи
             </div>
             <div class="col-md-2">
@@ -473,12 +470,12 @@
             <div class="col-md-1">
               Номер
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2">
               Категория
             </div>
           </div>
           <div class="row" *ngIf="activeReferee">
-            <div class="col-md-2">
+            <div class="col-md-1">
               1
             </div>
             <div class="col-md-3">
@@ -488,7 +485,7 @@
               {{activeReferee.refereeAmplua}}
             </div>
             <div class="col-md-2">
-              {{activeReferee.birthdate}}
+              {{activeReferee.birthdate | date}}
             </div>
             <div class="col-md-1">
               {{activeReferee.gender}}
@@ -504,82 +501,134 @@
       </div>
     </div>
     <div id="step-5" *ngIf="step == 5">
-      step 5
+      ШАГ 5. РАСПИСАНИЕ ИГР
+      <div class="row vertical-align">
+        <div class="col-md-2 form-group required">
+          <label for="tournamentType">Тип турнира</label>
+          <select class="form-group" [(ngModel)]="tournament.tournamentType" name="tournamentType" class="form-control" #tournamentType="ngModel" id="tournamentType" (ngModelChange)="tournament.tournamentType = $event" (onChange)="changeTournamentType()">
+            <option *ngFor="let tournamentType of tournamentTypes"  [ngValue]="tournamentType.value" >{{tournamentType.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row vertical-align">
+        <div class="col-md-3">
+          <div class="list-table" *ngFor="let teamItem of tournament.teams">
+            <div class="row" *ngIf="tournament.teams?.indexOf(teamItem) == 0">
+              <div class="col-md-12">
+                Команды
+              </div>
+            </div>
+            <div class="row vertical-align">
+                <!--div class="col-md-1">
+                  {{tournament.teams?.indexOf(teamItem)+1}}.
+                </div-->
+                <div class="col-md-12">
+                  {{teamItem.name }} {{teamItem.cityName ? '(' + teamItem.cityName + ')' : ''}}
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9" *ngIf="this.tournament.tournamentType=='Round' && this.gamesRound.length == 0">
+          Для кругового турнира необходимо четное количество участников.
+          Внесите необходимые изменения на шаге "Команды".
+        </div>
+        <div class="col-md-9" *ngIf="this.tournament.tournamentType=='Play-off' && this.gamesPlayOff.length == 0">
+          Для плей-офф турнира количество участников должно быть степенью двойки (2/4/16/32 и т.д.).
+          Внесите необходимые изменения на шаге "Команды".
+        </div>
+        <div class="col-md-9">
+          <div class="list-table" *ngFor="let gameItem of (this.tournament.tournamentType=='Play-off' ? this.gamesPlayOff : this.gamesRound)">
+            <div class="row vertical-align" *ngIf="(this.tournament.tournamentType=='Play-off' ? this.gamesPlayOff : this.gamesRound)?.indexOf(gameItem) == 0">
+              <div class="col-md-1">
+                №
+              </div>
+              <div class="col-md-2">
+                Дата проведения игры
+              </div>
+              <div class="col-md-1">
+                Время проведения игры
+              </div>
+              <div class="col-md-2">
+                Команда 1
+              </div>
+              <div class="col-md-2">
+                Команда 2
+              </div>
+              <div class="col-md-2">
+                Арена
+              </div>
+              <div class="col-md-2">
+                Судья
+              </div>
+            </div>
+            <div class="row vertical-align">
+              <div class="col-md-1">
+                {{(this.tournament.tournamentType=='Play-off' ? this.gamesPlayOff : this.gamesRound)?.indexOf(gameItem)+1}}.
+              </div>
+              <div class="col-md-2">
+                <app-datepicker></app-datepicker>
+              </div>
+              <div class="col-md-1">
+                <input type="time">
+              </div>
+              <div class="col-md-2">
+                <select class="form-group" [(ngModel)]="gameItem.team1" name="team1" class="form-control" #team1="ngModel" id="team1" (ngModelChange)="gameItem.team1 = $event">
+                  <option *ngFor="let teamItem of tournament.teams" [ngValue]="teamItem.id" >{{teamItem.name + (teamItem.cityName ? ('(' + teamItem.cityName + ')') : '')}}</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <select class="form-group" [(ngModel)]="gameItem.team2" name="team2" class="form-control" #team2="ngModel" id="team2" (ngModelChange)="gameItem.team2 = $event">
+                  <option *ngFor="let teamItem of tournament.teams" [ngValue]="teamItem.id" >{{teamItem.name + (teamItem.cityName ? ('(' + teamItem.cityName + ')') : '')}}</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <select class="form-group" [(ngModel)]="gameItem.arena" name="arena" class="form-control" #arena="ngModel" id="arena" (ngModelChange)="gameItem.arena = $event">
+                  <option *ngFor="let arenaItem of tournament.arenas" [ngValue]="arenaItem.id" >{{arenaItem.name}}</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <select class="form-group" [(ngModel)]="gameItem.referees[0]" name="referee" class="form-control" #referee="ngModel" id="referee" (ngModelChange)="gameItem.referees[0] = $event">
+                  <option *ngFor="let refereeItem of tournament.referees" [ngValue]="refereeItem.id" >{{refereeItem.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row vertical-align">
+            <div class="col-md-6 vertical-align">
+              <button [hasPermission]="['tournamentadministrator']"
+                      class="btn btn-primary waves-light"
+                      title="Сформировать таблицу"
+                      (click)="generateGamesTable()"
+                      onAuthorizedPermission="show"
+                      onUnauthorizedPermission="hide"
+                      [disabled]="dataIsLoading">
+                Сформировать таблицу
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--div class="row" *ngIf="tournament.tournamentType=='Round' && tournament.games.length !=0"-->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="div-table">
+            <div class="div-table-row" *ngFor="let team1 of tournament.teams">
+              <div class="div-table-col div-table-col-flex" *ngFor="let team2 of tournament.teams">
+                {{tournament.teams?.indexOf(team1) == 0 && tournament.teams?.indexOf(team2) == 0 ? team2.name : ''}}
+                {{tournament.teams?.indexOf(team1) == 0 && tournament.teams?.indexOf(team2) != 0 ? team2.name : ''}}
+                {{tournament.teams?.indexOf(team1) != 0 && tournament.teams?.indexOf(team2) == 0 ? team1.name : ''}}
+                {{tournament.teams?.indexOf(team1) != 0 && tournament.teams?.indexOf(team2) != 0 ? 'res' : ''}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
     <div id="step-6" *ngIf="step == 6">
       step 6
     </div>
-    <!--div class="form-group required">
-      <label for="taname">Название анонса</label>
-      <input type="text" class="form-control" name="tname" [(ngModel)]="ta.name" (ngModelChange)="ta.name = $event" #taname="ngModel" id="taname" title="Введите название анонса" required="required"/>
-    </div>
-    <div class="form-group required">
-      <app-city-filter [city]="city" [isRequired]="true" (onChanged)="setCity($event)"></app-city-filter>
-    </div>
-    <div class="form-group required">
-      <arena-select *ngIf="city" [cityId]="city.id" [arena]="arena" [isRequired]="true" (onChanged)="setArena($event)"></arena-select>
-    </div>
-    <div class="form-group">
-      <label>Дата проведения, c</label>
-      <app-datepicker [dt]="ta.startDate" (onChanged)="onChangedStartDt($event)"></app-datepicker>
-    </div>
-    <div class="form-group">
-      <label>Дата проведения, до</label>
-      <app-datepicker [dt]="ta.endDate" (onChanged)="onChangedEndDt($event)"></app-datepicker>
-    </div>
-    <div class="form-group">
-      <label for="requiredResponseCount">Максимальное количество участников</label>
-      <input type="number" min="0" max="2000" step="1" class="form-control" name="requiredResponseCount" [(ngModel)]="ta.requiredResponseCount" (ngModelChange)="ta.requiredResponseCount = $event" #requiredResponseCount="ngModel" ngModel number="true" id="requiredResponseCount"/>
-    </div>
-    <div class="form-group">
-      <label for="ageGroup">Возрастная группа</label>
-      <select class="form-group" [(ngModel)]="ta.ageGroup" name="ageGroup" class="form-control" #ageGroup="ngModel" id="ageGroup" (ngModelChange)="ta.ageGroup = $event">
-        <option *ngFor="let ageType of ageTypes"  [ngValue]="ageType.value" >{{ageType.name}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="ageGroup">Пол участников</label>
-      <select class="form-group" [(ngModel)]="ta.gender" name="gender" class="form-control" #gender="ngModel" id="gender" (ngModelChange)="ta.gender = $event">
-        <option *ngFor="let genderType of genderTypes"  [ngValue]="genderType.value" >{{genderType.name}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="isCommercial">Коммерческий?</label>
-      <select class="form-group" [(ngModel)]="ta.isCommercial" name="isCommercial" class="form-control" #isCommercial="ngModel" id="isCommercial" (ngModelChange)="ta.isCommercial = $event">
-        <option *ngFor="let isCommercialType of isCommercialTypes"  [ngValue]="isCommercialType.value" >{{isCommercialType.name}}</option>
-      </select>
-    </div>
-    <div *ngIf="ta.isCommercial" class="form-group">
-      <label for="costType">Тип оплаты</label>
-      <select class="form-group" [(ngModel)]="ta.costType" name="costType" class="form-control" #costType="ngModel" id="costType" (ngModelChange)="ta.costType = $event">
-        <option *ngFor="let costType of costTypes"  [ngValue]="costType.value" >{{costType.name}}</option>
-      </select>
-    </div>
-    <div *ngIf="ta.isCommercial" class="form-group">
-      <label for="cost">Стоимость участия</label>
-      <input type="number" min="0" max="2000" step="1" class="form-control" name="cost" [(ngModel)]="ta.cost" (ngModelChange)="ta.cost = $event" #cost="ngModel" ngModel number="true" id="cost"/>
-    </div>
-    <div class="form-group">
-      <label for="isCommercial">Закрытие турнира</label>
-      <select class="form-group" [(ngModel)]="ta.closeCondition" name="closeCondition" class="form-control" #closeCondition="ngModel" id="closeCondition" (ngModelChange)="ta.closeCondition = $event">
-        <option *ngFor="let closeType of closeTypes"  [ngValue]="closeType.value" >{{closeType.name}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Окончание регистрации</label>
-      <app-datepicker [dt]="ta.endRegistrationDate" (onChanged)="onChangedEndRegDt($event)"></app-datepicker>
-    </div>
-    <div class="form-group required">
-      <label for="content">Текст анонса</label>
-      <app-ngx-editor [placeholder]="'Текст анонса'" [height]="200" class="form-control" name="content" [(ngModel)]="ta.content" (ngModelChange)="ta.content = $event" #content="ngModel" id="content" required="required"></app-ngx-editor>
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary"  [disabled]="dataIsLoading || myForm.invalid">Сохранить как черновик</button>
-          <button class="btn btn-primary" (click)="viewList()" [disabled]="dataIsLoading">Отменить изменения и вернуться к списку</button>
-      <img *ngIf="dataIsLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-    </div-->
+
     <span class="btn {{ ( step != 1  ) ? 'btn-primary' : 'grey disabled' }}" (click)="changeStep(step-1)" data-toggle="button" aria-pressed="false" data-placement="top" title="На предыдущий шаг">На предыдущий шаг</span>
     <span class="btn {{ ( step != 6  ) ? 'btn-primary' : 'grey disabled' }}" (click)="changeStep(step+1)" data-toggle="button" aria-pressed="false" data-placement="top" title="На следующий шаг">На следующий шаг</span>
-
-  <!--/form-->
 </div>

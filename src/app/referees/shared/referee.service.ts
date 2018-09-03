@@ -24,7 +24,8 @@ export class RefereeService {
     // TODO свернуть
     const body = JSON.stringify({
       'name': referee.name,
-      'cityId': referee.city.id
+      'fullName': referee.name
+      //'cityId': referee.city.id
     });
 
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));

@@ -3,6 +3,7 @@ import { Organization } from 'app/organizations/shared/organization';
 import { City } from 'app/core/geo/city';
 import { Team } from 'app/teams/shared/team';
 import { Referee } from 'app/referees/shared/referee';
+import { Game } from 'app/tournaments/shared/game';
 
 export class Tournament {
   id: number;
@@ -19,6 +20,10 @@ export class Tournament {
   logo?: string;
   teams: Array<Team> = new Array<Team>(); // Команды-участники
   referees: Array<Referee> = new Array<Referee>(); // Судьи
+  tournamentType: string = null; // Тип турнира
+  // gameCount: number = null; // Количество игр;
+  games: Array<Game> = new Array<Game>(); // Игры
+
 
   constructor( values: Object = {} ) {
     Object.assign( this, values );

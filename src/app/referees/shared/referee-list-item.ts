@@ -8,7 +8,7 @@ export class RefereeListItem {
   name: string;
   fullName: string;
   linkName: string;
-  birthdate?: Date = new Date;
+  birthdate?: Date = null;
   gender?: string = null;
   city?: City = null;
   logo?: string = null;
