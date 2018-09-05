@@ -483,13 +483,14 @@ export class TournamentCreateComponent implements OnInit {
   } */
 
   generateGamesTable() {
-
-    if (this.tournament.tournamentType == 'Round' && this.gamesRound.length > 0){
+    if ((this.tournament.tournamentType === 'Round') && (this.gamesRound.length > 0)){
+      console.log("generate");
       for (let i = 0; i < this.gamesRound.length; i++) {
 
       }
       this.tournament.games = this.gamesRound;
     }
+    console.log(this.tournament.games.length);
   }
 
   private getTournamentTypes() {
@@ -498,18 +499,20 @@ export class TournamentCreateComponent implements OnInit {
     this.tournamentTypes.push(new Item({value: 'Round', name: 'Круговой'}));
   }
 
-  dtForTeams(team1: Team, team2: Team): string {
-    let res = '';
+  dtForTeams(team1: Team, team2: Team) {
+    let res;
     for (let i = 0; i < this.tournament.games.length; i++) {
-      if (this.tournament.games[i].team1) { console.log(this.tournament.games[i].team1); }
-      if (this.tournament.games[i].team1 && this.tournament.games[i].team2) {
+      if (this.tournament.games[i].team1 != null && this.tournament.games[i].team2 != null) {
         if ((this.tournament.games[i].team1 === team1) && (this.tournament.games[i].team2 === team2)) {
-          console.log("1111");
-          res = this.tournament.games[i].dt.toISOString();
+          res = this.tournament.games[i].dt.toLocaleDateString();
         }
       }
-
     }
     return res;
+  }
+
+  changeTeamForGame(game: Game, team: Team) {
+    console.log(game);
+    console.log(team);
   }
 }

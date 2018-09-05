@@ -572,13 +572,13 @@
                 <input type="time">
               </div>
               <div class="col-md-2">
-                <select class="form-group" [(ngModel)]="gameItem.team1" name="team1" class="form-control" #team1="ngModel" id="team1" (ngModelChange)="gameItem.team1 = $event">
-                  <option *ngFor="let teamItem of tournament.teams" [ngValue]="teamItem.id" >{{teamItem.name + (teamItem.cityName ? ('(' + teamItem.cityName + ')') : '')}}</option>
+                <select class="form-group" [(ngModel)]="gameItem.team1" name="team1" class="form-control" #team1="ngModel" id="team1" (ngModelChange)="changeTeamForGame(gameItem,$event)">
+                  <option *ngFor="let teamItem of tournament.teams" [ngValue]="teamItem" >{{teamItem.name + (teamItem.cityName ? ('(' + teamItem.cityName + ')') : '')}}</option>
                 </select>
               </div>
               <div class="col-md-2">
                 <select class="form-group" [(ngModel)]="gameItem.team2" name="team2" class="form-control" #team2="ngModel" id="team2" (ngModelChange)="gameItem.team2 = $event">
-                  <option *ngFor="let teamItem of tournament.teams" [ngValue]="teamItem.id" >{{teamItem.name + (teamItem.cityName ? ('(' + teamItem.cityName + ')') : '')}}</option>
+                  <option *ngFor="let teamItem of tournament.teams" [ngValue]="teamItem" >{{teamItem.name + (teamItem.cityName ? ('(' + teamItem.cityName + ')') : '')}}</option>
                 </select>
               </div>
               <div class="col-md-2">
@@ -632,7 +632,7 @@
                 {{team1.name}}
               </div>
               <div class="div-table-col div-table-col-flex" *ngFor="let team2 of tournament.teams">
-                {{team1.name}}{{team2.name}}
+                {{team1.name}}{{team2.name}} {{dtForTeams(team1,team2)}}
               </div>
             </div>
           </div>

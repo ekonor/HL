@@ -5,7 +5,7 @@ import { Referee } from 'app/referees/shared/referee';
 
 export class Game {
   id: number;
-  dt: Date = new Date(); // Дата и время турнира
+  dt: Date = new Date(); // Дата турнира
   team1: Team = null; // Команда 1
   team2: Team = null; // Команда 2
   arena: Arena = null; // Арена
