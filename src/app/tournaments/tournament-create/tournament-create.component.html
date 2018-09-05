@@ -511,7 +511,7 @@
         </div>
       </div>
       <div class="row vertical-align">
-        <div class="col-md-3">
+        <div class="col-md-2">
           <div class="list-table" *ngFor="let teamItem of tournament.teams">
             <div class="row" *ngIf="tournament.teams?.indexOf(teamItem) == 0">
               <div class="col-md-12">
@@ -528,15 +528,15 @@
             </div>
           </div>
         </div>
-        <div class="col-md-9" *ngIf="this.tournament.tournamentType=='Round' && this.gamesRound.length == 0">
+        <div class="col-md-10" *ngIf="this.tournament.tournamentType=='Round' && this.gamesRound.length == 0">
           Для кругового турнира необходимо четное количество участников.
           Внесите необходимые изменения на шаге "Команды".
         </div>
-        <div class="col-md-9" *ngIf="this.tournament.tournamentType=='Play-off' && this.gamesPlayOff.length == 0">
+        <div class="col-md-10" *ngIf="this.tournament.tournamentType=='Play-off' && this.gamesPlayOff.length == 0">
           Для плей-офф турнира количество участников должно быть степенью двойки (2/4/16/32 и т.д.).
           Внесите необходимые изменения на шаге "Команды".
         </div>
-        <div class="col-md-9">
+        <div class="col-md-10">
           <div class="list-table" *ngFor="let gameItem of (this.tournament.tournamentType=='Play-off' ? this.gamesPlayOff : this.gamesRound)">
             <div class="row vertical-align" *ngIf="(this.tournament.tournamentType=='Play-off' ? this.gamesPlayOff : this.gamesRound)?.indexOf(gameItem) == 0">
               <div class="col-md-1">
@@ -546,7 +546,7 @@
                 Дата проведения игры
               </div>
               <div class="col-md-1">
-                Время проведения игры
+                Время
               </div>
               <div class="col-md-2">
                 Команда 1
@@ -566,7 +566,7 @@
                 {{(this.tournament.tournamentType=='Play-off' ? this.gamesPlayOff : this.gamesRound)?.indexOf(gameItem)+1}}.
               </div>
               <div class="col-md-2">
-                <app-datepicker></app-datepicker>
+                <app-datepicker [dt]="gameItem.dt" (onChanged)="gameItem.dt = $event"></app-datepicker>
               </div>
               <div class="col-md-1">
                 <input type="time">
@@ -608,16 +608,31 @@
           </div>
         </div>
       </div>
-      <!--div class="row" *ngIf="tournament.tournamentType=='Round' && tournament.games.length !=0"-->
+      <div>{{gamesRound | json}}</div>
+      <div>----------</div>
+      <div>{{tournament.games | json}}</div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h5>ИТОГ</h5>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-12">
-          <div class="div-table">
+          <div class="div-table div-table-border">
+            <div class="div-table-row">
+              <div class="div-table-col div-table-col-flex">
+                &nbsp;
+              </div>
+              <div class="div-table-col div-table-col-flex" *ngFor="let team_header of tournament.teams">
+                {{team_header.name}}
+              </div>
+            </div>
             <div class="div-table-row" *ngFor="let team1 of tournament.teams">
+              <div class="div-table-col div-table-col-flex">
+                {{team1.name}}
+              </div>
               <div class="div-table-col div-table-col-flex" *ngFor="let team2 of tournament.teams">
-                {{tournament.teams?.indexOf(team1) == 0 && tournament.teams?.indexOf(team2) == 0 ? team2.name : ''}}
-                {{tournament.teams?.indexOf(team1) == 0 && tournament.teams?.indexOf(team2) != 0 ? team2.name : ''}}
-                {{tournament.teams?.indexOf(team1) != 0 && tournament.teams?.indexOf(team2) == 0 ? team1.name : ''}}
-                {{tournament.teams?.indexOf(team1) != 0 && tournament.teams?.indexOf(team2) != 0 ? 'res' : ''}}
+                {{team1.name}}{{team2.name}}
               </div>
             </div>
           </div>

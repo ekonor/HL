@@ -96,7 +96,7 @@ export class TournamentCreateComponent implements OnInit {
     this.getGenderTypes();
     this.getTournamentTypes();
 
-    this.tournament.tournamentType = 'Play-off';
+    this.tournament.tournamentType = 'Round';
 
 
     this.gamesRound = new Array<Game>();
@@ -483,7 +483,11 @@ export class TournamentCreateComponent implements OnInit {
   } */
 
   generateGamesTable() {
+
     if (this.tournament.tournamentType == 'Round' && this.gamesRound.length > 0){
+      for (let i = 0; i < this.gamesRound.length; i++) {
+
+      }
       this.tournament.games = this.gamesRound;
     }
   }
@@ -492,5 +496,20 @@ export class TournamentCreateComponent implements OnInit {
     this.tournamentTypes =  new Array<Item>();
     this.tournamentTypes.push(new Item({value: 'Play-off', name: 'Плейофф'}));
     this.tournamentTypes.push(new Item({value: 'Round', name: 'Круговой'}));
+  }
+
+  dtForTeams(team1: Team, team2: Team): string {
+    let res = '';
+    for (let i = 0; i < this.tournament.games.length; i++) {
+      if (this.tournament.games[i].team1) { console.log(this.tournament.games[i].team1); }
+      if (this.tournament.games[i].team1 && this.tournament.games[i].team2) {
+        if ((this.tournament.games[i].team1 === team1) && (this.tournament.games[i].team2 === team2)) {
+          console.log("1111");
+          res = this.tournament.games[i].dt.toISOString();
+        }
+      }
+
+    }
+    return res;
   }
 }
