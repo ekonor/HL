@@ -9,6 +9,8 @@ import { Ng2Permission } from 'angular2-permission';
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 registerLocaleData(localeRu);
+// import { DlDateTimePickerDateModule } from 'angular-bootstrap-datetimepicker';
+// import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 // import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -90,7 +92,9 @@ import { NgxEditorModule } from 'ngx-editor'; // https://github.com/Sibiraj-S/ng
     TournamentAnnouncementsModule,
     TournamentsModule,
 
-    NgxEditorModule
+    NgxEditorModule,
+    // DlDateTimePickerDateModule,
+    // AngularDateTimePickerModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'ru' },

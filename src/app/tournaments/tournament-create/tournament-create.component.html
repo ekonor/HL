@@ -537,15 +537,15 @@
           Внесите необходимые изменения на шаге "Команды".
         </div>
         <div class="col-md-10">
-          <div class="list-table" *ngFor="let gameItem of (this.tournament.tournamentType=='Play-off' ? this.gamesPlayOff : this.gamesRound)">
-            <div class="row vertical-align" *ngIf="(this.tournament.tournamentType=='Play-off' ? this.gamesPlayOff : this.gamesRound)?.indexOf(gameItem) == 0">
+          <div class="list-table" *ngFor="let gameItem of (this.tournament.tournamentType ==' Play-off' ? this.gamesPlayOff : this.gamesRound)">
+            <div class="row vertical-align" *ngIf="(this.tournament.tournamentType == 'Play-off' ? this.gamesPlayOff : this.gamesRound)?.indexOf(gameItem) == 0">
               <div class="col-md-1">
                 №
               </div>
               <div class="col-md-2">
-                Дата проведения игры
+                Дата игры
               </div>
-              <div class="col-md-1">
+              <div class="col-md-2">
                 Время
               </div>
               <div class="col-md-2">
@@ -557,7 +557,7 @@
               <div class="col-md-2">
                 Арена
               </div>
-              <div class="col-md-2">
+              <div class="col-md-1">
                 Судья
               </div>
             </div>
@@ -566,10 +566,10 @@
                 {{(this.tournament.tournamentType=='Play-off' ? this.gamesPlayOff : this.gamesRound)?.indexOf(gameItem)+1}}.
               </div>
               <div class="col-md-2">
-                <app-datepicker [dt]="gameItem.dt" (onChanged)="gameItem.dt = $event"></app-datepicker>
+                <app-datepicker [dt]="gameItem.date" (onChanged)="gameItem.date = $event"></app-datepicker>
               </div>
-              <div class="col-md-1">
-                <input type="time">
+              <div class="col-md-2">
+                <ngb-timepicker [(ngModel)]="gameItem.time" spinners="true"></ngb-timepicker>
               </div>
               <div class="col-md-2">
                 <select class="form-group" [(ngModel)]="gameItem.team1" name="team1" class="form-control" #team1="ngModel" id="team1" (ngModelChange)="changeTeamForGame(gameItem,$event)">
@@ -586,7 +586,7 @@
                   <option *ngFor="let arenaItem of tournament.arenas" [ngValue]="arenaItem.id" >{{arenaItem.name}}</option>
                 </select>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-1">
                 <select class="form-group" [(ngModel)]="gameItem.referees[0]" name="referee" class="form-control" #referee="ngModel" id="referee" (ngModelChange)="gameItem.referees[0] = $event">
                   <option *ngFor="let refereeItem of tournament.referees" [ngValue]="refereeItem.id" >{{refereeItem.name}}</option>
                 </select>

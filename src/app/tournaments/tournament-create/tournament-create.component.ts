@@ -29,6 +29,7 @@ import { RefereeListItem } from 'app/referees/shared/referee-list-item';
 import { Referee } from 'app/referees/shared/referee';
 import { RefereeType} from 'app/referees/shared/referee-type';
 import { Game } from 'app/tournaments/shared/game';
+import { CustomTime } from 'app/tournaments/shared/customtime';
 
 @Component({
   moduleId: module.id,
@@ -68,6 +69,14 @@ export class TournamentCreateComponent implements OnInit {
   gamesRound: Array<Game>;
   gamesPlayOff: Array<Game>;
 
+
+  settings = {
+    bigBanner: true,
+    timePicker: false,
+    format: 'dd-MM-yyyy',
+    defaultOpen: true
+  };
+
   constructor( private tournamentService: TournamentService,
                private arenaService: ArenaService,
                private teamService: TeamService,
@@ -87,7 +96,6 @@ export class TournamentCreateComponent implements OnInit {
     this.referee = null;
     this.newreferee = new RefereeFastCreation();
     this.activeReferee = null;
-    // this.newteam = new Team();
     this.activeArena = null;
     this.activeTeam = null;
     this.getDivisionTypes();
@@ -108,8 +116,8 @@ export class TournamentCreateComponent implements OnInit {
 
     this.addTeam(new Team({id: 0, name: 'team1', cityName: 'city1'}));
     this.addTeam(new Team({id: 1, name: 'team2', cityName: 'city2'}));
-    this.addTeam(new Team({id: 2, name: 'team3', cityName: 'city3'}));
-    this.addTeam(new Team({id: 3, name: 'team4', cityName: 'city4'}));
+    //this.addTeam(new Team({id: 2, name: 'team3', cityName: 'city3'}));
+    //this.addTeam(new Team({id: 3, name: 'team4', cityName: 'city4'}));
 
     this.addArena(new ArenaListItem({id: 0, name: 'arena1', linkName: 'arena1'}));
     this.addArena(new ArenaListItem({id: 0, name: 'arena2', linkName: 'arena2'}));
@@ -119,6 +127,7 @@ export class TournamentCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   public changeStep(step: number) {
@@ -483,11 +492,12 @@ export class TournamentCreateComponent implements OnInit {
   } */
 
   generateGamesTable() {
-    if ((this.tournament.tournamentType === 'Round') && (this.gamesRound.length > 0)){
-      console.log("generate");
+    if ((this.tournament.tournamentType === 'Round') && (this.gamesRound.length > 0)) {
+      /*console.log("generate");
       for (let i = 0; i < this.gamesRound.length; i++) {
-
-      }
+          this.gamesRound[i].date.setHours(this.times[i].hour, this.times[i].minute);
+          console.log(this.gamesRound[i].date.toISOString());
+      }*/
       this.tournament.games = this.gamesRound;
     }
     console.log(this.tournament.games.length);
@@ -504,7 +514,7 @@ export class TournamentCreateComponent implements OnInit {
     for (let i = 0; i < this.tournament.games.length; i++) {
       if (this.tournament.games[i].team1 != null && this.tournament.games[i].team2 != null) {
         if ((this.tournament.games[i].team1 === team1) && (this.tournament.games[i].team2 === team2)) {
-          res = this.tournament.games[i].dt.toLocaleDateString();
+          res = this.tournament.games[i].date.toLocaleDateString() + ' ' + this.tournament.games[i].time.hour + ':' + this.tournament.games[i].time.minute;
         }
       }
     }
