@@ -69,6 +69,7 @@ export class TournamentCreateComponent implements OnInit {
   gamesRound: Array<Game>;
   gamesPlayOff: Array<Game>;
 
+  twoWays: number;
 
   settings = {
     bigBanner: true,
@@ -124,6 +125,12 @@ export class TournamentCreateComponent implements OnInit {
     this.addArena(new ArenaListItem({id: 0, name: 'arena3', linkName: 'arena3'}));
 
     this.generateGames();
+
+    if (this.tournament.twoWays === true) {
+      this.twoWays = 1;
+    } else {
+      this.twoWays = 0;
+    }
   }
 
   ngOnInit() {
@@ -524,5 +531,13 @@ export class TournamentCreateComponent implements OnInit {
   changeTeamForGame(game: Game, team: Team) {
     console.log(game);
     console.log(team);
+  }
+
+  changeTwoWays(val: number) {
+    if (val == 0) {
+      this.tournament.twoWays = false;
+    } else if (val == 1) {
+      this.tournament.twoWays = true;
+    }
   }
 }

@@ -509,6 +509,17 @@
             <option *ngFor="let tournamentType of tournamentTypes"  [ngValue]="tournamentType.value" >{{tournamentType.name}}</option>
           </select>
         </div>
+        <div class="col-md-2">
+          <label for="twoWays">Игра на своем и чужом поле?</label>
+          <div class="btn-group btn-group-toggle" ngbRadioGroup name="twoWays" [(ngModel)]="twoWays" (change)="changeTwoWays(twoWays)">
+            <label class="btn-primary label-button fixed-size-button-s" ngbButtonLabel>
+              <input type="radio" name="yesTwoWays" ngbButton [value]="1">Да
+            </label>
+            <label class="btn-primary label-button fixed-size-button-s" ngbButtonLabel>
+              <input type="radio" name="noTwoWays" ngbButton [value]="0">Нет
+            </label>
+          </div>
+        </div>
       </div>
       <div class="row vertical-align">
         <div class="col-md-2">
@@ -608,9 +619,6 @@
           </div>
         </div>
       </div>
-      <div>{{gamesRound | json}}</div>
-      <div>----------</div>
-      <div>{{tournament.games | json}}</div>
       <div class="row">
         <div class="col-md-12 text-center">
           <h5>ИТОГ</h5>

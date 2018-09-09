@@ -21,6 +21,7 @@ export class Tournament {
   teams: Array<Team> = new Array<Team>(); // Команды-участники
   referees: Array<Referee> = new Array<Referee>(); // Судьи
   tournamentType: string = null; // Тип турнира
+  twoWays: boolean = null; // Двухкруговой турнир
   // gameCount: number = null; // Количество игр;
   games: Array<Game> = new Array<Game>(); // Игры
 
