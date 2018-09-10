@@ -105,7 +105,7 @@ export class TournamentCreateComponent implements OnInit {
     this.getGenderTypes();
     this.getTournamentTypes();
 
-    this.tournament.tournamentType = 'Round';
+    this.tournament.tournamentType = 'Play-off';
 
 
     this.gamesRound = new Array<Game>();
@@ -488,11 +488,15 @@ export class TournamentCreateComponent implements OnInit {
     }
     let isExponentTwo = (num) => (num & (num - 1) && num !== 0) ? false : true;
     if (isExponentTwo(teamsCount)) {
-      const gamesPlayOffCount = (teamsCount - 1) * twoWays;
+      // const gamesPlayOffCount = (teamsCount - 1) * twoWays;
+      const gamesPlayOffCountFirstRound = (teamsCount / 2) * twoWays;
+      // т.к. это только расписание, известны участники только первого этапа,
+      // поэтому количество игр - заполняем только первый этап
       this.gamesPlayOff = new Array<Game>();
-      for (let i = 0; i < gamesPlayOffCount; i++) {
+      for (let i = 0; i < gamesPlayOffCountFirstRound; i++) {
         this.gamesPlayOff.push(new Game());
       }
+      console.log(gamesPlayOffCountFirstRound);
     }
   }
 
@@ -511,7 +515,7 @@ export class TournamentCreateComponent implements OnInit {
       }*/
       this.tournament.games = this.gamesRound;
     }
-    console.log(this.tournament.games.length);
+    //console.log(this.tournament.games.length);
   }
 
   private getTournamentTypes() {

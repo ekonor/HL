@@ -552,7 +552,12 @@
           Внесите необходимые изменения на шаге "Команды".
         </div>
         <div class="col-md-10">
-          <div class="list-table games-table" *ngFor="let gameItem of (this.tournament.tournamentType ==' Play-off' ? this.gamesPlayOff : this.gamesRound)">
+          <div class="row vertical-align" *ngIf="this.tournament.tournamentType == 'Play-off'">
+            <div class="col-md-12 text-center">
+              ПЕРВЫЙ ТУР
+            </div>
+          </div>
+          <div class="list-table games-table" *ngFor="let gameItem of (this.tournament.tournamentType =='Play-off' ? this.gamesPlayOff : this.gamesRound)">
             <div class="row vertical-align" *ngIf="(this.tournament.tournamentType == 'Play-off' ? this.gamesPlayOff : this.gamesRound)?.indexOf(gameItem) == 0">
               <div class="col-md-1">
                 №
@@ -649,6 +654,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="row" *ngIf="tournament.tournamentType == 'Play-off'">
+        <playoff-wgt *ngIf="tournament.tournamentType == 'Play-off'" [games]="tournament.games" [teams]="tournament.teams"></playoff-wgt>
       </div>
     </div>
 
