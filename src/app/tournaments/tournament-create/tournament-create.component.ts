@@ -117,8 +117,8 @@ export class TournamentCreateComponent implements OnInit {
 
     this.addTeam(new Team({id: 0, name: 'team1', cityName: 'city1'}));
     this.addTeam(new Team({id: 1, name: 'team2', cityName: 'city2'}));
-    //this.addTeam(new Team({id: 2, name: 'team3', cityName: 'city3'}));
-    //this.addTeam(new Team({id: 3, name: 'team4', cityName: 'city4'}));
+    this.addTeam(new Team({id: 2, name: 'team3', cityName: 'city3'}));
+    this.addTeam(new Team({id: 3, name: 'team4', cityName: 'city4'}));
 
     this.addArena(new ArenaListItem({id: 0, name: 'arena1', linkName: 'arena1'}));
     this.addArena(new ArenaListItem({id: 0, name: 'arena2', linkName: 'arena2'}));
@@ -475,8 +475,12 @@ export class TournamentCreateComponent implements OnInit {
 
   generateGames() {
     let teamsCount: number = this.tournament.teams.length;
+    let twoWays = 1;
+    if (this.tournament.twoWays) {
+      twoWays = 2;
+    }
     if (teamsCount % 2 == 0) {
-      const gamesRoundCount: number = teamsCount * (teamsCount - 1) / 2;
+      const gamesRoundCount: number = teamsCount * twoWays * (teamsCount - 1) / 2;
       this.gamesRound = new Array<Game>();
       for (let i = 0; i < gamesRoundCount; i++) {
         this.gamesRound.push(new Game());
@@ -484,7 +488,7 @@ export class TournamentCreateComponent implements OnInit {
     }
     let isExponentTwo = (num) => (num & (num - 1) && num !== 0) ? false : true;
     if (isExponentTwo(teamsCount)) {
-      const gamesPlayOffCount = teamsCount - 1;
+      const gamesPlayOffCount = (teamsCount - 1) * twoWays;
       this.gamesPlayOff = new Array<Game>();
       for (let i = 0; i < gamesPlayOffCount; i++) {
         this.gamesPlayOff.push(new Game());
@@ -518,6 +522,7 @@ export class TournamentCreateComponent implements OnInit {
 
   dtForTeams(team1: Team, team2: Team) {
     let res;
+    // if (team1 === team2) { res = '-'; }
     for (let i = 0; i < this.tournament.games.length; i++) {
       if (this.tournament.games[i].team1 != null && this.tournament.games[i].team2 != null) {
         if ((this.tournament.games[i].team1 === team1) && (this.tournament.games[i].team2 === team2)) {
@@ -539,5 +544,6 @@ export class TournamentCreateComponent implements OnInit {
     } else if (val == 1) {
       this.tournament.twoWays = true;
     }
+    this.generateGames();
   }
 }

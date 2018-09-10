@@ -509,8 +509,8 @@
             <option *ngFor="let tournamentType of tournamentTypes"  [ngValue]="tournamentType.value" >{{tournamentType.name}}</option>
           </select>
         </div>
-        <div class="col-md-2">
-          <label for="twoWays">Игра на своем и чужом поле?</label>
+        <div class="col-md-4">
+          <label for="twoWays">Игра на своем и чужом поле? &nbsp;</label>
           <div class="btn-group btn-group-toggle" ngbRadioGroup name="twoWays" [(ngModel)]="twoWays" (change)="changeTwoWays(twoWays)">
             <label class="btn-primary label-button fixed-size-button-s" ngbButtonLabel>
               <input type="radio" name="yesTwoWays" ngbButton [value]="1">Да
@@ -521,7 +521,7 @@
           </div>
         </div>
       </div>
-      <div class="row vertical-align">
+      <div class="row">
         <div class="col-md-2">
           <div class="list-table" *ngFor="let teamItem of tournament.teams">
             <div class="row" *ngIf="tournament.teams?.indexOf(teamItem) == 0">
@@ -529,11 +529,11 @@
                 Команды
               </div>
             </div>
-            <div class="row vertical-align">
-                <!--div class="col-md-1">
+            <div class="row">
+                <div class="col-md-3">
                   {{tournament.teams?.indexOf(teamItem)+1}}.
-                </div-->
-                <div class="col-md-12">
+                </div>
+                <div class="col-md-9">
                   {{teamItem.name }} {{teamItem.cityName ? '(' + teamItem.cityName + ')' : ''}}
                 </div>
             </div>
@@ -548,7 +548,7 @@
           Внесите необходимые изменения на шаге "Команды".
         </div>
         <div class="col-md-10">
-          <div class="list-table" *ngFor="let gameItem of (this.tournament.tournamentType ==' Play-off' ? this.gamesPlayOff : this.gamesRound)">
+          <div class="list-table games-table" *ngFor="let gameItem of (this.tournament.tournamentType ==' Play-off' ? this.gamesPlayOff : this.gamesRound)">
             <div class="row vertical-align" *ngIf="(this.tournament.tournamentType == 'Play-off' ? this.gamesPlayOff : this.gamesRound)?.indexOf(gameItem) == 0">
               <div class="col-md-1">
                 №
@@ -580,7 +580,7 @@
                 <app-datepicker [dt]="gameItem.date" (onChanged)="gameItem.date = $event"></app-datepicker>
               </div>
               <div class="col-md-2">
-                <ngb-timepicker [(ngModel)]="gameItem.time" spinners="true"></ngb-timepicker>
+                <ngb-timepicker [(ngModel)]="gameItem.time"></ngb-timepicker>
               </div>
               <div class="col-md-2">
                 <select class="form-group" [(ngModel)]="gameItem.team1" name="team1" class="form-control" #team1="ngModel" id="team1" (ngModelChange)="changeTeamForGame(gameItem,$event)">
@@ -639,8 +639,8 @@
               <div class="div-table-col div-table-col-flex">
                 {{team1.name}}
               </div>
-              <div class="div-table-col div-table-col-flex" *ngFor="let team2 of tournament.teams">
-                {{team1.name}}{{team2.name}} {{dtForTeams(team1,team2)}}
+              <div class="div-table-col div-table-col-flex {{team1==team2 ? 'grey' : ''}}" *ngFor="let team2 of tournament.teams">
+                {{dtForTeams(team1,team2)}}
               </div>
             </div>
           </div>
