@@ -25,32 +25,36 @@
       </div>
       <div id="step-1" *ngIf="step == 1">
         ШАГ 1. ОБЩИЕ ХАРАКТЕРИСТИКИ ТУРНИРА
-        <div class="form-group required">
-          <label for="tname">1. Название турнира</label>
-          <input type="text" class="form-control" name="tname" [(ngModel)]="tournament.name" (ngModelChange)="tournament.name = $event" #taname="ngModel" id="taname" title="Введите название турнира" required="required"/>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group required">
+              <label for="tname">1. Название турнира</label>
+              <input type="text" class="form-control" name="tname" [(ngModel)]="tournament.name" (ngModelChange)="tournament.name = $event" #taname="ngModel" id="taname" title="Введите название турнира" required="required"/>
+            </div>
+            <label for="season">Сезон</label>
+            <select class="form-group" [(ngModel)]="tournament.season" name="season" class="form-control" #season="ngModel" id="season" (ngModelChange)="tournament.season = $event">
+              <option *ngFor="let season of seasonTypes" [ngValue]="season.value" >{{season.name}}</option>
+            </select>
+            <div class="form-group">
+              <label>2.Даты проведения</label>
+              <app-datepicker [dt]="tournament.startDate" (onChanged)="onChangedStartDt($event); ( oneDay === true ) ? onChangedEndDt($event) : '';"></app-datepicker>
+              <app-datepicker [dt]="tournament.endDate" (onChanged)="onChangedEndDt($event)" class="{{ ( oneDay === true ) ? 'disabled' : '' }}"></app-datepicker>
+              <input type="checkbox" name="oneDay" [(ngModel)]="oneDay">Турнир проходит в один день
+            </div>
+            <label for="gender">Пол участников</label>
+            <select class="form-group" [(ngModel)]="tournament.gender" name="gender" class="form-control" #gender="ngModel" id="gender" (ngModelChange)="tournament.gender = $event">
+              <option *ngFor="let genderType of genderTypes"  [ngValue]="genderType.value" >{{genderType.name}}</option>
+            </select>
+            <label for="age">Возрастная группа/Год рождения</label>
+            <select class="form-group" [(ngModel)]="tournament.ageGroup" name="age" class="form-control" #age="ngModel" id="age" (ngModelChange)="tournament.ageGroup = $event">
+              <option *ngFor="let age of ageTypes" [ngValue]="age.value" >{{age.name}}</option>
+            </select>
+            <label for="division">Дивизион/группы/этапы</label>
+            <select class="form-group" [(ngModel)]="tournament.division" name="division" class="form-control" #division="ngModel" id="division" (ngModelChange)="tournament.division = $event">
+              <option *ngFor="let division of divisionTypes" [ngValue]="division.value" >{{division.name}}</option>
+            </select>
+          </div>
         </div>
-        <label for="season">Сезон</label>
-        <select class="form-group" [(ngModel)]="tournament.season" name="season" class="form-control" #season="ngModel" id="season" (ngModelChange)="tournament.season = $event">
-          <option *ngFor="let season of seasonTypes" [ngValue]="season.value" >{{season.name}}</option>
-        </select>
-        <div class="form-group">
-          <label>2.Даты проведения</label>
-          <app-datepicker [dt]="tournament.startDate" (onChanged)="onChangedStartDt($event); ( oneDay === true ) ? onChangedEndDt($event) : '';"></app-datepicker>
-          <app-datepicker [dt]="tournament.endDate" (onChanged)="onChangedEndDt($event)" class="{{ ( oneDay === true ) ? 'disabled' : '' }}"></app-datepicker>
-          <input type="checkbox" name="oneDay" [(ngModel)]="oneDay">Турнир проходит в один день
-        </div>
-        <label for="gender">Пол участников</label>
-        <select class="form-group" [(ngModel)]="tournament.gender" name="gender" class="form-control" #gender="ngModel" id="gender" (ngModelChange)="tournament.gender = $event">
-          <option *ngFor="let genderType of genderTypes"  [ngValue]="genderType.value" >{{genderType.name}}</option>
-        </select>
-        <label for="age">Возрастная группа/Год рождения</label>
-        <select class="form-group" [(ngModel)]="tournament.ageGroup" name="age" class="form-control" #age="ngModel" id="age" (ngModelChange)="tournament.ageGroup = $event">
-          <option *ngFor="let age of ageTypes" [ngValue]="age.value" >{{age.name}}</option>
-        </select>
-        <label for="division">Дивизион/группы/этапы</label>
-        <select class="form-group" [(ngModel)]="tournament.division" name="division" class="form-control" #division="ngModel" id="division" (ngModelChange)="tournament.division = $event">
-          <option *ngFor="let division of divisionTypes" [ngValue]="division.value" >{{division.name}}</option>
-        </select>
       </div>
       <div id="step-2" *ngIf="step == 2">
         ШАГ 2. АРЕНЫ
@@ -624,7 +628,7 @@
           <h5>ИТОГ</h5>
         </div>
       </div>
-      <div class="row">
+      <div class="row schedule-table" *ngIf="tournament.tournamentType == 'Round'">
         <div class="col-md-12">
           <div class="div-table div-table-border">
             <div class="div-table-row">
