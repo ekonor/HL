@@ -10,11 +10,9 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/merge';
 
 import { NgForm} from '@angular/forms';
-
 import { AlertService } from 'app/components/alert/alert.service';
 import { TournamentService } from 'app/tournaments/shared/tournament.service';
 import { TeamService } from 'app/teams/shared/team.service';
-
 import { Tournament } from 'app/tournaments/shared/tournament';
 import { Team } from 'app/teams/shared/team';
 import { Game } from 'app/tournaments/shared/game';
@@ -25,19 +23,16 @@ import { Game } from 'app/tournaments/shared/game';
   templateUrl: 'playoff-wgt.component.html'
 })
 export class PlayOffWgtComponent implements OnInit {
-  dataIsLoading: boolean;
-  errorMessage: string;
-
   @Input() games: Array<Game>;
   @Input() teams: Array<Team>;
+  dataIsLoading: boolean;
+  errorMessage: string;
   round_count: number = 0;
   teamsCount: number = 0;
   rounds: Array<number>;
   levels_counts: Array<number>;
   levels: Array<Array<number>>;
-
   round_names: Array<string>;
-
 
   constructor( private tournamentService: TournamentService,
                private alertService: AlertService ) {
@@ -79,7 +74,6 @@ export class PlayOffWgtComponent implements OnInit {
         }
         this.levels.push(arr);
       }
-
     }
     //}
   }

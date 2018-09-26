@@ -1032,36 +1032,41 @@ NEED FIX chevrons for timepicker in creation of tournament
 .chevron.bottom {
 
 }*/
-.playoff-wgt .level{
-  //background-color: #007bff;
-  * {
-    box-sizing: border-box;
-  }
+playoff-wgt {
+  width: 100%;
+}
+.playoff-wgt {
+  .level {
+    //background-color: #007bff;
+    * {
+      box-sizing: border-box;
+    }
 
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    //width: 500px;
-    //height: 400px;
-    display: table;
-    //background-color: red;
-  }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      //width: 500px;
+      //height: 400px;
+      display: table;
+      //background-color: red;
+    }
 
-  li {
-    display: table-row;
-    vertical-align: middle;
-  }
+    li {
+      display: table-row;
+      vertical-align: middle;
+    }
 
-  .tile-wrap {
-    display: table-cell;
-    vertical-align: middle;
-  }
+    .tile-wrap {
+      display: table-cell;
+      vertical-align: middle;
+    }
 
-  .tile-wrap .tile {
-    min-width: 40px;
-    min-height: 50px;
-    //background: white;
-    //border: 1px solid blue;
+    .tile-wrap .tile {
+      min-width: 40px;
+      min-height: 50px;
+      //background: white;
+      //border: 1px solid blue;
+    }
   }
 }

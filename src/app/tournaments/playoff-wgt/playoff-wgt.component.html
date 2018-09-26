@@ -1,12 +1,9 @@
 <!--loader [hidden]="!dataIsLoading"></loader-->
 <div class="playoff-wgt col-md-12 col-md-offset-12">
-  {{round_count}}
-  {{teamsCount}}
-  <ngb-tabset type="pills">
+  <ngb-tabset type="pills" justify="center">
     <ngb-tab *ngFor="let i of rounds">
       <ng-template ngbTabTitle><span title="1/8 финала">{{i == 0 ? round_names[0] : round_names[round_count-i]}}</span></ng-template>
       <ng-template ngbTabContent>
-        {{levels_counts}}
         <div *ngIf="i == 0">
           <div class="div-table-border div-table">
             <div class="div-table-row">
