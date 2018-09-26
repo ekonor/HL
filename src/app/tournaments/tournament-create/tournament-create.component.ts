@@ -119,6 +119,19 @@ export class TournamentCreateComponent implements OnInit {
     this.addTeam(new Team({id: 1, name: 'team2', cityName: 'city2'}));
     this.addTeam(new Team({id: 2, name: 'team3', cityName: 'city3'}));
     this.addTeam(new Team({id: 3, name: 'team4', cityName: 'city4'}));
+    this.addTeam(new Team({id: 4, name: 'team5', cityName: 'city1'}));
+    this.addTeam(new Team({id: 5, name: 'team6', cityName: 'city2'}));
+    this.addTeam(new Team({id: 6, name: 'team7', cityName: 'city3'}));
+    this.addTeam(new Team({id: 7, name: 'team8', cityName: 'city4'}));
+    this.addTeam(new Team({id: 8, name: 'team9', cityName: 'city1'}));
+    this.addTeam(new Team({id: 9, name: 'team10', cityName: 'city1'}));
+    this.addTeam(new Team({id: 10, name: 'team11', cityName: 'city2'}));
+    this.addTeam(new Team({id: 11, name: 'team12', cityName: 'city2'}));
+    this.addTeam(new Team({id: 12, name: 'team13', cityName: 'city3'}));
+    this.addTeam(new Team({id: 13, name: 'team14', cityName: 'city4'}));
+    this.addTeam(new Team({id: 14, name: 'team15', cityName: 'city1'}));
+    this.addTeam(new Team({id: 15, name: 'team16', cityName: 'city2'}));
+
 
     this.addArena(new ArenaListItem({id: 0, name: 'arena1', linkName: 'arena1'}));
     this.addArena(new ArenaListItem({id: 0, name: 'arena2', linkName: 'arena2'}));
@@ -496,7 +509,6 @@ export class TournamentCreateComponent implements OnInit {
       for (let i = 0; i < gamesPlayOffCountFirstRound; i++) {
         this.gamesPlayOff.push(new Game());
       }
-      console.log(gamesPlayOffCountFirstRound);
     }
   }
 
@@ -515,7 +527,11 @@ export class TournamentCreateComponent implements OnInit {
       }*/
       this.tournament.games = this.gamesRound;
     }
-    //console.log(this.tournament.games.length);
+
+    // console.log(this.gamesPlayOff.length);
+    if ((this.tournament.tournamentType === 'Play-off') && (this.gamesPlayOff.length > 0)) {
+      this.tournament.games = this.gamesPlayOff;
+    }
   }
 
   private getTournamentTypes() {

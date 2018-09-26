@@ -12,6 +12,7 @@ export class Game {
   team2: Team = null; // Команда 2
   arena: Arena = null; // Арена
   referees: Array<Referee> = new Array<Referee>(); // Судьи
+  prevGameId: number = null; // Предыдущая игра - для плей-офф
 
   constructor( values: Object = {} ) {
     Object.assign( this, values );
