@@ -136,7 +136,7 @@
                   {{tournament.arenas?.indexOf(arenaItem)+1}}.
                 </div>
                 <div class="col-md-5 table-row-selection" (click)="setSelectionArena(arenaItem)" tabindex="{{tournament.arenas?.indexOf(arenaItem)+1}}">
-                  {{arenaItem.name }} {{arenaItem.cityName ? '(' + arenaItem.cityName + ')' : ''}}
+                  {{arenaItem.name }} {{arenaItem.cityName ? ' (' + arenaItem.cityName + ')' : ''}}
                 </div>
                 <div class="col-md-6">
                   <div class="operations-panel navbar navbar-left pull-left">
@@ -251,7 +251,7 @@
                 {{tournament.teams?.indexOf(teamItem)+1}}.
               </div>
               <div class="col-md-5 table-row-selection" (click)="setSelectionTeam(teamItem)" tabindex="{{tournament.teams?.indexOf(teamItem)+1}}">
-                {{teamItem.name }} {{teamItem.cityName ? '(' + teamItem.cityName + ')' : ''}}
+                {{teamItem.name }} {{teamItem.cityName ? ' (' + teamItem.cityName + ')' : ''}}
               </div>
               <div class="col-md-6">
                 <div class="operations-panel navbar navbar-left pull-left">
@@ -302,7 +302,7 @@
               Проверьте список добавленных игроков
             </div>
             <div class="col-md-12 text-center">
-              {{activeTeam.name }}{{activeTeam.city? '('+activeTeam.city.name+')': ''}}
+              {{activeTeam.name }}{{activeTeam.city? ' ('+activeTeam.city.name+')': ''}}
             </div>
           </div>
           <div class="row" *ngIf="activeTeam">
@@ -413,7 +413,7 @@
                 {{tournament.referees?.indexOf(refereeItem)+1}}.
               </div>
               <div class="col-md-5 table-row-selection" (click)="setSelectionReferee(refereeItem)" tabindex="{{tournament.referees?.indexOf(refereeItem)+1}}">
-                {{refereeItem.name }} {{refereeItem.cityName ? '(' + refereeItem.cityName + ')' : ''}}
+                {{refereeItem.name }} {{refereeItem.cityName ? ' (' + refereeItem.cityName + ')' : ''}}
               </div>
               <div class="col-md-6">
                 <div class="operations-panel navbar navbar-left pull-left">
@@ -538,7 +538,7 @@
                   {{tournament.teams?.indexOf(teamItem)+1}}.
                 </div>
                 <div class="col-md-9">
-                  {{teamItem.name }} {{teamItem.cityName ? '(' + teamItem.cityName + ')' : ''}}
+                  {{teamItem.name }} {{teamItem.cityName ? ' (' + teamItem.cityName + ')' : ''}}
                 </div>
             </div>
           </div>
@@ -593,12 +593,12 @@
               </div>
               <div class="col-md-2">
                 <select class="form-group" [(ngModel)]="gameItem.team1" name="team1" class="form-control" #team1="ngModel" id="team1" (ngModelChange)="changeTeamForGame(gameItem,$event)">
-                  <option *ngFor="let teamItem of tournament.teams" [ngValue]="teamItem" >{{teamItem.name + (teamItem.cityName ? ('(' + teamItem.cityName + ')') : '')}}</option>
+                  <option *ngFor="let teamItem of tournament.teams" [ngValue]="teamItem" >{{teamItem.name + (teamItem.cityName ? (' (' + teamItem.cityName + ')') : '')}}</option>
                 </select>
               </div>
               <div class="col-md-2">
                 <select class="form-group" [(ngModel)]="gameItem.team2" name="team2" class="form-control" #team2="ngModel" id="team2" (ngModelChange)="gameItem.team2 = $event">
-                  <option *ngFor="let teamItem of tournament.teams" [ngValue]="teamItem" >{{teamItem.name + (teamItem.cityName ? ('(' + teamItem.cityName + ')') : '')}}</option>
+                  <option *ngFor="let teamItem of tournament.teams" [ngValue]="teamItem" >{{teamItem.name + (teamItem.cityName ? (' (' + teamItem.cityName + ')') : '')}}</option>
                 </select>
               </div>
               <div class="col-md-2">
