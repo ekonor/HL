@@ -1069,4 +1069,15 @@ playoff-wgt {
       //border: 1px solid blue;
     }
   }
+
+  .btn-horizontal.ellipsis {
+    width: 200px;
+
+  }
+
+  .ellipsis {
+    white-space: nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

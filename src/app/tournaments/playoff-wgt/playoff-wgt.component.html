@@ -12,14 +12,14 @@
                   <li *ngFor="let num of level">
                     <div *ngIf="levels.indexOf(level) == 0 && games != undefined" class="tile-wrap">
                       <div class="tile">
-                        <button class="btn btn-horizontal btn-primary waves-light">{{games[num]?.team1?.name}}{{games[num]?.team1?.cityName ? '(' + games[num]?.team1?.cityName + ')' : ''}}&nbsp;</button>
-                        <button class="btn btn-horizontal btn-primary waves-light">{{games[num]?.team2?.name}}{{games[num]?.team2?.cityName ? '(' + games[num]?.team2?.cityName + ')' : ''}}&nbsp;</button>
+                        <button class="btn btn-horizontal btn-primary waves-light ellipsis">{{games[num]?.team1?.name}}{{games[num]?.team1?.cityName ? '(' + games[num]?.team1?.cityName + ')' : ''}}&nbsp;</button>
+                        <button class="btn btn-horizontal btn-primary waves-light ellipsis">{{games[num]?.team2?.name}}{{games[num]?.team2?.cityName ? '(' + games[num]?.team2?.cityName + ')' : ''}}&nbsp;</button>
                       </div>
                     </div>
                     <div *ngIf="levels.indexOf(level) != 0" class="tile-wrap">
                       <div class="tile">
-                        <button class="btn btn-horizontal btn-primary waves-light">&nbsp;</button>
-                        <button class="btn btn-horizontal btn-primary waves-light">&nbsp;</button>
+                        <button class="btn btn-horizontal btn-primary waves-light ellipsis">&nbsp;</button>
+                        <button class="btn btn-horizontal btn-primary waves-light ellipsis">&nbsp;</button>
                       </div>
                     </div>
                   </li>
