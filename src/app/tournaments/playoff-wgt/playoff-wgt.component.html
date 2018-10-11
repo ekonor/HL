@@ -4,10 +4,11 @@
     <ngb-tab *ngFor="let i of rounds">
       <ng-template ngbTabTitle><span title="1/8 финала">{{i == 0 ? round_names[0] : round_names[round_count-i]}}</span></ng-template>
       <ng-template ngbTabContent>
-        <div *ngIf="i == 0">
+        <!--div *ngIf="i == 0"-->
           <div class="div-table-border div-table">
             <div class="div-table-row">
-              <div *ngFor="let level of levels" class="div-class-col level level-{{levels.indexOf(level)}}">
+              <div *ngFor="let level of levels" class="text-center div-class-col level level-{{levels.indexOf(level)}}">
+                <div>{{levels.indexOf(level) == 0 ? round_names[0] : round_names[round_count-levels.indexOf(level)]}}</div>
                 <ul [ngStyle]="{'height':'calc( 80*' + levels[0].length + 'px)'}">
                   <li *ngFor="let num of level">
                     <div *ngIf="levels.indexOf(level) == 0 && games != undefined" class="tile-wrap">
@@ -27,7 +28,7 @@
               </div>
             </div>
           </div>
-        </div>
+        <!--/div-->
       </ng-template>
     </ngb-tab>
   </ngb-tabset>

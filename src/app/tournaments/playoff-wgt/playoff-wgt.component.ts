@@ -63,7 +63,7 @@ export class PlayOffWgtComponent implements OnInit {
       for (let i = 0; i < this.round_count; i++) {
         this.rounds.push(i);
       }
-      for (let k = this.teamsCount; k >= 2; k = k/2) {
+      for (let k = this.teamsCount/2; k >= 1; k = k/2) {
         this.levels_counts.push(k);
         console.log(k);
       }
