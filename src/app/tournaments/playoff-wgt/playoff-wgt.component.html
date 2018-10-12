@@ -1,17 +1,15 @@
 <!--loader [hidden]="!dataIsLoading"></loader-->
 <div class="playoff-wgt col-md-12 col-md-offset-12">
   <ngb-tabset type="pills" justify="center">
-
     <ngb-tab *ngFor="let i of rounds">
       <ng-template ngbTabTitle><span title="{{i == 0 ? round_names[0] : round_names[round_count-i]}}">{{i == 0 ? round_names[0] : round_names[round_count-i]}}</span></ng-template>
       <ng-template ngbTabContent>
           <div class="div-table-border div-table">
             <div class="div-table-row">
-              {{levels|json}}{{rounds|json}}
-              {{rounds.indexOf(round)}}{{rounds.length}}
               <div *ngFor="let level of levels" class="text-center div-class-col level level-{{levels.indexOf(level)}}">
-                <div *ngIf="levels.indexOf(level)==rounds.indexOf(i) || levels.indexOf(level)==rounds.indexOf(i)+1 || levels.indexOf(level)==rounds.indexOf(i)+2 || ((rounds.indexOf(i)==rounds.length-1) && (levels.indexOf(level)==rounds.indexOf(i)-1))">
-                  <div>{{levels.indexOf(level) == 0 ? round_names[0] : round_names[round_count-levels.indexOf(level)]}}</div>
+                <!--div *ngIf="levels.indexOf(level)==rounds.indexOf(i) || levels.indexOf(level)==rounds.indexOf(i)+1 || levels.indexOf(level)==rounds.indexOf(i)+2 || ((rounds.indexOf(i)==rounds.length-1) && (levels.indexOf(level)==rounds.indexOf(i)-1))"-->
+                <div *ngIf="levels.indexOf(level)==rounds.indexOf(i) || levels.indexOf(level)==rounds.indexOf(i)+1 || levels.indexOf(level)==rounds.indexOf(i)+2">
+                <div>{{levels.indexOf(level) == 0 ? round_names[0] : round_names[round_count-levels.indexOf(level)]}}</div>
                   <ul [ngStyle]="{'height':'calc( 80*' + levels[0].length + 'px)'}">
                     <li *ngFor="let num of level">
                       <div *ngIf="levels.indexOf(level) == 0 && games != undefined && i == 0" class="tile-wrap">
@@ -26,6 +24,12 @@
                           <button class="btn btn-horizontal btn-primary waves-light ellipsis">&nbsp;</button>
                         </div>
                       </div>
+                      <div *ngIf="levels.indexOf(level) == levels.length-1" class="tile-wrap">
+                        <div class="">
+                          <img src="../../../assets/img/cup.jpg" height="100">
+                        </div>
+                      </div>
+
                     </li>
                   </ul>
                 </div>
