@@ -1081,3 +1081,7 @@ playoff-wgt {
     text-overflow: ellipsis;
   }
 }
+
+.chevron, .chevron.bottom, ngb-timepicker .btn{
+  display: none;
+}
