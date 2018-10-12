@@ -603,12 +603,12 @@
               </div>
               <div class="col-md-2">
                 <select class="form-group" [(ngModel)]="gameItem.arena" name="arena" class="form-control" #arena="ngModel" id="arena" (ngModelChange)="gameItem.arena = $event">
-                  <option *ngFor="let arenaItem of tournament.arenas" [ngValue]="arenaItem.id" >{{arenaItem.name}}</option>
+                  <option *ngFor="let arenaItem of tournament.arenas" [ngValue]="arenaItem" >{{arenaItem.name}}</option>
                 </select>
               </div>
               <div class="col-md-1">
                 <select class="form-group" [(ngModel)]="gameItem.referees[0]" name="referee" class="form-control" #referee="ngModel" id="referee" (ngModelChange)="gameItem.referees[0] = $event">
-                  <option *ngFor="let refereeItem of tournament.referees" [ngValue]="refereeItem.id" >{{refereeItem.name}}</option>
+                  <option *ngFor="let refereeItem of tournament.referees" [ngValue]="refereeItem" >{{refereeItem.name}}</option>
                 </select>
               </div>
             </div>

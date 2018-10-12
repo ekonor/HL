@@ -14,8 +14,22 @@
                     <li *ngFor="let num of level">
                       <div *ngIf="levels.indexOf(level) == 0 && games != undefined && i == 0" class="tile-wrap">
                         <div class="tile">
-                          <button class="btn btn-horizontal btn-primary waves-light ellipsis">{{games[num]?.team1?.name}}{{games[num]?.team1?.cityName ? ' (' + games[num]?.team1?.cityName + ')' : ''}}&nbsp;</button>
-                          <button class="btn btn-horizontal btn-primary waves-light ellipsis">{{games[num]?.team2?.name}}{{games[num]?.team2?.cityName ? ' (' + games[num]?.team2?.cityName + ')' : ''}}&nbsp;</button>
+                          <button class="btn btn-horizontal btn-primary waves-light ellipsis"
+                                  title="{{games[num]?.arena?.name ? games[num]?.arena?.name : ''}} {{games[num]?.date ? games[num]?.date.toLocaleDateString() : ''}} {{games[num]?.time ? games[num]?.time.hour + ':' + games[num]?.time.minute : ''}}
+                                         ">
+                            {{games[num]?.team1?.name}}
+                            {{games[num]?.team1?.cityName ? ' (' + games[num]?.team1?.cityName + ')' : ''}}
+                            &nbsp;
+                          </button>
+                          <button class="btn btn-horizontal btn-primary waves-light ellipsis"
+                                  title="{{games[num]?.arena?.name ? 'Арена: ' + games[num]?.arena?.name : ''}}
+                                         {{games[num]?.date ? 'Дата: ' + games[num]?.date : ''}}
+                                         {{games[num]?.time ? 'Время: ' + games[num]?.time : ''}}
+                                         ">
+                            {{games[num]?.team2?.name}}
+                            {{games[num]?.team2?.cityName ? ' (' + games[num]?.team2?.cityName + ')' : ''}}
+                            &nbsp;
+                          </button>
                         </div>
                       </div>
                       <div *ngIf="levels.indexOf(level) != 0" class="tile-wrap">
