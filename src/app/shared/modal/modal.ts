@@ -1,29 +1,21 @@
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { Component } from '@angular/core';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-export interface ModalButtons {
-    buttonText: string;
-    getResultAction?: ($scope: any, modalService: NgbModal) => ModalResult;
-    buttonClass?: string;
-}
+@Component({
+  selector: 'modal',
+  templateUrl: 'modal.html',
+  // add NgbModalConfig and NgbModal to the component providers
+  providers: [NgbModalConfig, NgbModal]
+})
 
-export class ModalIconTypes {
-    static IconWarning: string = 'fa-exclamation-triangle';
-    static IconInfo: string = 'fa-info';
-    static IconHelp: string = 'fa-comment-o';
-    static IconShield: string = 'fa-shield';
-    static IconError: string = 'fa-exclamation';
-}
+export class ModalComponent {
+  constructor(config: NgbModalConfig, private modalService: NgbModal) {
+    // customize default values of modals used by this component tree
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
 
-export interface ModalOptions {
-    //headerText?: string;
-    bodyIcon?: string;
-    bodyText: string;
-    buttons?: ModalButtons[];
-    yes?: ModalButtons;
-    cancel?: ModalButtons;
-}
-
-export interface ModalResult {
-    state: number;
-    result?: any;
+  open(content) {
+    this.modalService.open(content);
+  }
 }

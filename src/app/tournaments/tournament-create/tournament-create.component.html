@@ -607,8 +607,16 @@
                 </select>
               </div>
               <div class="col-md-1">
-                <select class="form-group" [(ngModel)]="gameItem.referees[0]" name="referee" class="form-control" #referee="ngModel" id="referee" (ngModelChange)="gameItem.referees[0] = $event">
+                <!--select class="form-group" [(ngModel)]="gameItem.referees[0]" name="referee" class="form-control" #referee="ngModel" id="referee" (ngModelChange)="gameItem.referees[0] = $event">
                   <option *ngFor="let refereeItem of tournament.referees" [ngValue]="refereeItem" >{{refereeItem.name}}</option>
+                </select-->
+                <select class="mdb-select md-form colorful-select dropdown-primary" multiple searchable="Search here..">
+                  <option value="" disabled selected>Choose your country</option>
+                  <option value="1">USA</option>
+                  <option value="2">Germany</option>
+                  <option value="3">France</option>
+                  <option value="4">Poland</option>
+                  <option value="5">Japan</option>
                 </select>
               </div>
             </div>
