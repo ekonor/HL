@@ -558,14 +558,14 @@
             </div>
           </div>
           <div class="list-table games-table" *ngFor="let gameItem of (this.tournament.tournamentType =='Play-off' ? this.gamesPlayOff : this.gamesRound)">
-            <div class="row vertical-align" *ngIf="(this.tournament.tournamentType == 'Play-off' ? this.gamesPlayOff : this.gamesRound)?.indexOf(gameItem) == 0">
+            <div class="row vertical-align text-center" *ngIf="(this.tournament.tournamentType == 'Play-off' ? this.gamesPlayOff : this.gamesRound)?.indexOf(gameItem) == 0">
               <div class="col-md-1">
                 №
               </div>
               <div class="col-md-2">
                 Дата игры
               </div>
-              <div class="col-md-2">
+              <div class="col-md-1">
                 Время
               </div>
               <div class="col-md-2">
@@ -577,7 +577,7 @@
               <div class="col-md-2">
                 Арена
               </div>
-              <div class="col-md-1">
+              <div class="col-md-2">
                 Судья
               </div>
             </div>
@@ -588,7 +588,7 @@
               <div class="col-md-2">
                 <app-datepicker [dt]="gameItem.date" (onChanged)="gameItem.date = $event"></app-datepicker>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-1">
                 <ngb-timepicker [(ngModel)]="gameItem.time"></ngb-timepicker>
               </div>
               <div class="col-md-2">
@@ -606,18 +606,19 @@
                   <option *ngFor="let arenaItem of tournament.arenas" [ngValue]="arenaItem" >{{arenaItem.name}}</option>
                 </select>
               </div>
-              <div class="col-md-1">
+              <div class="col-md-2">
                 <!--select class="form-group" [(ngModel)]="gameItem.referees[0]" name="referee" class="form-control" #referee="ngModel" id="referee" (ngModelChange)="gameItem.referees[0] = $event">
                   <option *ngFor="let refereeItem of tournament.referees" [ngValue]="refereeItem" >{{refereeItem.name}}</option>
                 </select-->
-                <select class="mdb-select md-form colorful-select dropdown-primary" multiple searchable="Search here..">
+                <!--select class="mdb-select md-form colorful-select dropdown-primary" multiple searchable="Search here..">
                   <option value="" disabled selected>Choose your country</option>
                   <option value="1">USA</option>
                   <option value="2">Germany</option>
                   <option value="3">France</option>
                   <option value="4">Poland</option>
                   <option value="5">Japan</option>
-                </select>
+                </select-->
+                <app-combobox [todos]="todos"></app-combobox>
               </div>
             </div>
           </div>

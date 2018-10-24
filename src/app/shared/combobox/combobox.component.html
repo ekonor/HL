@@ -1,0 +1,20 @@
+<div class="multiselect">
+  <div class="selectbox" (click)="showCheckboxes()">
+    <select class="form-control">
+      <option>Выбрать что-то</option>
+    </select>
+
+    <div class="over-select"></div>
+  </div>
+
+  <div class="checkboxes" *ngIf="checkboxesShown">
+    <ng-container *ngFor="let todo of todos; let index = index">
+      <!--div class="form-check form-group"-->
+        <input class="form-check-input" type="checkbox" [attr.id]="index" [checked]="todo.completed" (change)="checkTodo(todo)" title="tttt">
+        <label class="form-check-label" [attr.for]="index">
+          {{ todo.title }}
+         </label>
+      <!--/div-->
+    </ng-container>
+  </div>
+</div>

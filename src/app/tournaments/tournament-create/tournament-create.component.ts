@@ -31,6 +31,7 @@ import { RefereeType} from 'app/referees/shared/referee-type';
 import { Game } from 'app/tournaments/shared/game';
 import { CustomTime } from 'app/tournaments/shared/customtime';
 
+import { Todo } from 'app/shared/combobox/todo';
 @Component({
   moduleId: module.id,
   selector: 'tournament-create',
@@ -78,6 +79,8 @@ export class TournamentCreateComponent implements OnInit {
     defaultOpen: true
   };
 
+  todos: Todo[];
+
   constructor( private tournamentService: TournamentService,
                private arenaService: ArenaService,
                private teamService: TeamService,
@@ -89,7 +92,7 @@ export class TournamentCreateComponent implements OnInit {
     this.dataIsLoading = true;
     this.tournament = new Tournament();
     this.dataIsLoading = false;
-    this.step = 3;
+    this.step = 5;
     this.oneDay = false;
     this.arena = null;
     this.newarena = new ArenaFastCreation();
@@ -144,6 +147,9 @@ export class TournamentCreateComponent implements OnInit {
     } else {
       this.twoWays = 0;
     }
+
+    // DELETE
+    this.todos = this.getTodos(10);
   }
 
   ngOnInit() {
@@ -565,5 +571,16 @@ export class TournamentCreateComponent implements OnInit {
       this.tournament.twoWays = true;
     }
     this.generateGames();
+  }
+
+  getTodos(length: number): Todo[] {
+    return Array.from({
+      length
+    }).map(() => {
+      return {
+        title: 'Пункт',
+        completed: false
+      };
+    });
   }
 }

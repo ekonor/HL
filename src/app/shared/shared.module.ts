@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { NgbModule, NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { PaginationComponent } from "app/shared/pagination/pagination.component";
 import { PaginationService } from "app/shared/pagination.service";
@@ -19,7 +19,7 @@ import { LoaderEmptyComponent } from "app/shared/loader/loader-empty.component";
 // import { NgbDateNativeAdapter, DatepickerComponent } from 'app/shared/datepicker/datepicker.component';
 import { DatepickerComponent } from 'app/shared/datepicker/datepicker.component';
 
-import { ModalComponent } from 'app/shared/modal/modal';
+import { ComboboxComponent } from 'app/shared/combobox/combobox.component';
 
 
 @NgModule({
@@ -31,7 +31,8 @@ import { ModalComponent } from 'app/shared/modal/modal';
         SimpleFilterComponent,
         LoaderComponent,
         LoaderEmptyComponent,
-        DatepickerComponent
+        DatepickerComponent,
+        ComboboxComponent
       ],
       imports: [
         BrowserModule,
@@ -54,7 +55,7 @@ import { ModalComponent } from 'app/shared/modal/modal';
         LoaderComponent,
         LoaderEmptyComponent,
         DatepickerComponent,
-        ModalComponent
+        ComboboxComponent
       ],
       providers: [
         PaginationService
