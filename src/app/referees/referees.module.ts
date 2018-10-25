@@ -11,10 +11,12 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { RefereeService } from 'app/referees/shared/referee.service';
 import { SharedModule } from 'app/shared/shared.module';
 import { RefereeSelectComponent } from 'app/referees/referee-select/referee-select.component';
+import { RefereeMultiselectComponent } from 'app/referees/referee-multiselect/referee-multiselect.component';
 
 @NgModule({
       declarations: [
-        RefereeSelectComponent
+        RefereeSelectComponent,
+        RefereeMultiselectComponent
       ],
       imports: [
         BrowserModule,
@@ -28,7 +30,8 @@ import { RefereeSelectComponent } from 'app/referees/referee-select/referee-sele
         MDBBootstrapModule
       ],
       exports: [
-        RefereeSelectComponent
+        RefereeSelectComponent,
+        RefereeMultiselectComponent
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       providers: [
