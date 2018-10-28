@@ -513,7 +513,7 @@
             <option *ngFor="let tournamentType of tournamentTypes"  [ngValue]="tournamentType.value" >{{tournamentType.name}}</option>
           </select>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 twoWays">
           <label for="twoWays">Игра на своем и чужом поле? &nbsp;</label>
           <div class="btn-group btn-group-toggle" ngbRadioGroup name="twoWays" [(ngModel)]="twoWays" (change)="changeTwoWays(twoWays)">
             <label class="btn-primary label-button fixed-size-button-s" ngbButtonLabel>
@@ -671,6 +671,7 @@
 
     <div id="step-6" *ngIf="step == 6">
       step 6
+      Здесь еще раз выводим основную информацию по турниру и турнирную таблицу
     </div>
 
     <span class="btn {{ ( step != 1  ) ? 'btn-primary' : 'grey disabled' }}" (click)="changeStep(step-1)" data-toggle="button" aria-pressed="false" data-placement="top" title="На предыдущий шаг">На предыдущий шаг</span>

@@ -189,10 +189,18 @@ pagination, ngb-pagination {
   //width: 250px;
 }
 
-.ta-filter-wrap, .arena-filter-wrap, .school-filter-wrap {
+.ta-filter-wrap {
+  max-width: 220px;
+}
+
+.arena-filter-wrap, .school-filter-wrap {
+  max-width: 250px;
+}
+
+  .ta-filter-wrap, .arena-filter-wrap, .school-filter-wrap {
 
   //font-size: 1rem;
-  max-width: 250px;
+
   // min-width: 220px;
 
   select {
@@ -213,6 +221,9 @@ pagination, ngb-pagination {
     white-space: normal !important;
     word-wrap: break-word;
     cursor: pointer;
+  }
+  .label-button input {
+    display: none !important;
   }
   label.btn-primary.active {
     background-color: red!important;
@@ -371,6 +382,9 @@ pre {
   .h-100[_ngcontent-c4], .h-100[_ngcontent-c3], .h-100[_ngcontent-c5] {
     height: auto !important;
   }
+  .card {
+    height: auto !important;
+  }
   .card[_ngcontent-c3] {
     height: auto !important;
   }
@@ -381,6 +395,7 @@ pre {
     height: auto !important;
   }
 
+  .blog-item,
   .blog-item[_ngcontent-c3],
   .blog-item[_ngcontent-c4],
   .blog-item[_ngcontent-c5],
@@ -433,6 +448,11 @@ pre {
     font-weight: 400;
     line-height: 2;
   }
+
+  .item-title-main {
+    width: 100%;
+  }
+
   .item-title-main p {
     background-color: grey;
     color: white;
@@ -1129,6 +1149,12 @@ playoff-wgt {
         background-color: #007bff;
       }
     }
+  }
+}
+
+.twoWays {
+  .label-button input {
+    display: none !important;
   }
 }
 /* END of multiselect */

@@ -92,7 +92,7 @@ export class TournamentCreateComponent implements OnInit {
     this.dataIsLoading = true;
     this.tournament = new Tournament();
     this.dataIsLoading = false;
-    this.step = 5;
+    this.step = 1;
     this.oneDay = false;
     this.arena = null;
     this.newarena = new ArenaFastCreation();
