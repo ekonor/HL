@@ -10,6 +10,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/merge';
 
 import { NgForm} from '@angular/forms';
+
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { AlertService } from 'app/components/alert/alert.service';
@@ -45,8 +46,9 @@ export class TournamentCreateComponent implements OnInit {
 
   step: number;
   oneDay: boolean;
-  divisionTypes: Array<Item>;
+  // divisionTypes: Array<Item>;
   ageTypes: Array<Item>;
+  yearTypes: Array<Item>;
   seasonTypes: Array<Item>;
   genderTypes: Array<Item>;
   tournamentTypes: Array<Item>;
@@ -87,12 +89,12 @@ export class TournamentCreateComponent implements OnInit {
                private refereeService: RefereeService,
                private router: Router,
                private activatedRoute: ActivatedRoute,
-               private alertService: AlertService ) {
+               private alertService: AlertService) {
     this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
     this.dataIsLoading = true;
     this.tournament = new Tournament();
     this.dataIsLoading = false;
-    this.step = 1;
+    this.step = 2;
     this.oneDay = false;
     this.arena = null;
     this.newarena = new ArenaFastCreation();
@@ -102,8 +104,9 @@ export class TournamentCreateComponent implements OnInit {
     this.activeReferee = null;
     this.activeArena = null;
     this.activeTeam = null;
-    this.getDivisionTypes();
+    // this.getDivisionTypes();
     this.getAgeTypes();
+    this.getYearTypes();
     this.getSeasonTypes();
     this.getGenderTypes();
     this.getTournamentTypes();
@@ -165,7 +168,7 @@ export class TournamentCreateComponent implements OnInit {
     }
   }
 
-  private getDivisionTypes() {
+  /* private getDivisionTypes() {
     this.divisionTypes = new Array<Item>();
     this.divisionTypes.push(new Item({value: null, name: 'Нет этапов'}));
     this.divisionTypes.push(new Item({value: 'A', name: 'Группа "A"'}));
@@ -176,21 +179,25 @@ export class TournamentCreateComponent implements OnInit {
     this.divisionTypes.push(new Item({value: '2', name: '2 этап'}));
     this.divisionTypes.push(new Item({value: '3', name: '3 этап'}));
     this.divisionTypes.push(new Item({value: '4', name: '4 этап'}));
-  }
+  } */
 
   private getAgeTypes() {
     this.ageTypes = new Array<Item>();
     this.ageTypes.push(new Item({value: 'Juniors', name: 'Юниоры 14-16 лет'}));
     this.ageTypes.push(new Item({value: 'Young', name: 'Молодежь 16-21 год'}));
     this.ageTypes.push(new Item({value: 'Adults', name: 'Взрослые старше 21 лет'}));
-    this.ageTypes.push(new Item({value: '2011', name: '2011 г.р.'}));
-    this.ageTypes.push(new Item({value: '2010', name: '2010 г.р.'}));
-    this.ageTypes.push(new Item({value: '2009', name: '2009 г.р.'}));
-    this.ageTypes.push(new Item({value: '2008', name: '2008 г.р.'}));
-    this.ageTypes.push(new Item({value: '2007', name: '2007 г.р.'}));
-    this.ageTypes.push(new Item({value: '2006', name: '2006 г.р.'}));
-    this.ageTypes.push(new Item({value: '2005', name: '2005 г.р.'}));
-    this.ageTypes.push(new Item({value: '2004', name: '2004 г.р.'}));
+  }
+
+  private getYearTypes() {
+    this.yearTypes = new Array<Item>();
+    this.yearTypes.push(new Item({value: '2011', name: '2011 г.р.'}));
+    this.yearTypes.push(new Item({value: '2010', name: '2010 г.р.'}));
+    this.yearTypes.push(new Item({value: '2009', name: '2009 г.р.'}));
+    this.yearTypes.push(new Item({value: '2008', name: '2008 г.р.'}));
+    this.yearTypes.push(new Item({value: '2007', name: '2007 г.р.'}));
+    this.yearTypes.push(new Item({value: '2006', name: '2006 г.р.'}));
+    this.yearTypes.push(new Item({value: '2005', name: '2005 г.р.'}));
+    this.yearTypes.push(new Item({value: '2004', name: '2004 г.р.'}));
   }
 
   public addArena(arena: ArenaListItem) {
@@ -583,4 +590,5 @@ export class TournamentCreateComponent implements OnInit {
       };
     });
   }
+
 }

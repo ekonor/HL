@@ -45,14 +45,18 @@
             <select class="form-group" [(ngModel)]="tournament.gender" name="gender" class="form-control" #gender="ngModel" id="gender" (ngModelChange)="tournament.gender = $event">
               <option *ngFor="let genderType of genderTypes"  [ngValue]="genderType.value" >{{genderType.name}}</option>
             </select>
-            <label for="age">Возрастная группа/Год рождения</label>
-            <select class="form-group" [(ngModel)]="tournament.ageGroup" name="age" class="form-control" #age="ngModel" id="age" (ngModelChange)="tournament.ageGroup = $event">
+            <label for="ageGroup">Возрастная группа</label>
+            <select class="form-group" [(ngModel)]="tournament.ageGroup" name="ageGroup" class="form-control" #ageGroup="ngModel" id="ageGroup" (ngModelChange)="tournament.ageGroup = $event">
               <option *ngFor="let age of ageTypes" [ngValue]="age.value" >{{age.name}}</option>
             </select>
-            <label for="division">Дивизион/группы/этапы</label>
+            <label for="age">Год рождения</label>
+            <select class="form-group" [(ngModel)]="tournament.year" name="year" class="form-control" #year="ngModel" id="year" (ngModelChange)="tournament.year = $event">
+              <option *ngFor="let year of yearTypes" [ngValue]="year.value" >{{year.name}}</option>
+            </select>
+            <!--label for="division">Дивизион/группы/этапы</label>
             <select class="form-group" [(ngModel)]="tournament.division" name="division" class="form-control" #division="ngModel" id="division" (ngModelChange)="tournament.division = $event">
               <option *ngFor="let division of divisionTypes" [ngValue]="division.value" >{{division.name}}</option>
-            </select>
+            </select-->
           </div>
         </div>
       </div>
@@ -84,7 +88,7 @@
           </div>
           <div class="row vertical-align">
             <div class="col-md-5 vertical-align">
-              <button [hasPermission]="['tournamentadministrator']"
+              <!--button [hasPermission]="['tournamentadministrator']"
                       class="btn btn-primary waves-light"
                       title="Создать новую арену"
                       (click)="toggledNewArena=true"
@@ -92,10 +96,11 @@
                       onUnauthorizedPermission="hide"
                       [disabled]="dataIsLoading">
                 <i [class]="getAddIconClass()"></i>&nbsp;&nbsp;Создать арену
-              </button>
+              </button-->
+              <arena-create-fast></arena-create-fast>
             </div>
           </div>
-        <form #newarenaForm="ngForm" class="row toggled-form" [hidden]="!toggledNewArena">
+        <!--form #newarenaForm="ngForm" class="row toggled-form" [hidden]="!toggledNewArena">
             <div class="col-md-2 form-group required">
               <label for="newarenaname">Название арены</label>
               <input type="text" class="form-control" name="newarenaname" [(ngModel)]="newarena.name" (ngModelChange)="newarena.name = $event" #newarenaname="ngModel" id="newarenaname" title="Введите название арены" required="required"/>
@@ -114,7 +119,7 @@
                 <i [class]="getAddIconClass()"></i>&nbsp;&nbsp;Добавить
               </button>
             </div>
-        </form>
+        </form-->
         <div class="row">
           <div class="col-md-6" *ngIf="tournament.arenas.length == 0">
             <br/>
@@ -568,17 +573,14 @@
               <div class="col-md-1">
                 Время
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 Команда 1
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 Команда 2
               </div>
               <div class="col-md-2">
                 Арена
-              </div>
-              <div class="col-md-2">
-                Судья
               </div>
             </div>
             <div class="row vertical-align">
@@ -591,12 +593,12 @@
               <div class="col-md-1">
                 <ngb-timepicker [(ngModel)]="gameItem.time"></ngb-timepicker>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <select class="form-group" [(ngModel)]="gameItem.team1" name="team1" class="form-control" #team1="ngModel" id="team1" (ngModelChange)="changeTeamForGame(gameItem,$event)">
                   <option *ngFor="let teamItem of tournament.teams" [ngValue]="teamItem" >{{teamItem.name + (teamItem.cityName ? (' (' + teamItem.cityName + ')') : '')}}</option>
                 </select>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <select class="form-group" [(ngModel)]="gameItem.team2" name="team2" class="form-control" #team2="ngModel" id="team2" (ngModelChange)="gameItem.team2 = $event">
                   <option *ngFor="let teamItem of tournament.teams" [ngValue]="teamItem" >{{teamItem.name + (teamItem.cityName ? (' (' + teamItem.cityName + ')') : '')}}</option>
                 </select>
@@ -606,20 +608,9 @@
                   <option *ngFor="let arenaItem of tournament.arenas" [ngValue]="arenaItem" >{{arenaItem.name}}</option>
                 </select>
               </div>
-              <div class="col-md-2">
-                <!--select class="form-group" [(ngModel)]="gameItem.referees[0]" name="referee" class="form-control" #referee="ngModel" id="referee" (ngModelChange)="gameItem.referees[0] = $event">
-                  <option *ngFor="let refereeItem of tournament.referees" [ngValue]="refereeItem" >{{refereeItem.name}}</option>
-                </select-->
-                <!--select class="mdb-select md-form colorful-select dropdown-primary" multiple searchable="Search here..">
-                  <option value="" disabled selected>Choose your country</option>
-                  <option value="1">USA</option>
-                  <option value="2">Germany</option>
-                  <option value="3">France</option>
-                  <option value="4">Poland</option>
-                  <option value="5">Japan</option>
-                </select-->
+              <!--div class="col-md-2">
                 <referee-multiselect [todos]="todos" [referees]="tournament.referees"></referee-multiselect>
-              </div>
+              </div-->
             </div>
           </div>
           <div class="row vertical-align">

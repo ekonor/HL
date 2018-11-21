@@ -11,6 +11,7 @@ import { ArenaViewComponent } from 'app/arenas/arena-view/arena-view.component';
 import { ArenaEditComponent } from 'app/arenas/arena-edit/arena-edit.component';
 import { ArenaLogoComponent} from 'app/arenas/arena-logo/arena-logo.component';
 import { ArenaCreateComponent } from 'app/arenas/arena-create/arena-create.component';
+import { ArenaCreateFastComponent } from 'app/arenas/arena-create-fast/arena-create-fast.component';
 import { ArenaListComponent } from 'app/arenas/arena-list/arena-list.component';
 import { ArenasComponent } from 'app/arenas/arenas.component';
 import { ArenaFilterComponent } from 'app/arenas/arena-filter/arena-filter.component';
@@ -28,6 +29,7 @@ import { ArenaPicComponent } from 'app/arenas/arena-pic/arena-pic.component';
         ArenaViewComponent,
         ArenaEditComponent,
         ArenaCreateComponent,
+        ArenaCreateFastComponent,
         ArenaLogoComponent,
         ArenaFilterComponent,
         ArenaSelectComponent,
@@ -47,7 +49,8 @@ import { ArenaPicComponent } from 'app/arenas/arena-pic/arena-pic.component';
       exports: [
         ArenaFilterComponent,
         ArenaSelectComponent,
-        ArenaPicComponent
+        ArenaPicComponent,
+        ArenaCreateFastComponent
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       providers: [

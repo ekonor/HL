@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import 'rxjs/add/operator/catch';
@@ -18,14 +18,18 @@ import { City } from 'app/core/geo/city';
 import { AlertService } from 'app/components/alert/alert.service';
 import { Point } from 'app/shared/map/point';
 
+import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @Component({
   moduleId: module.id,
-  selector: 'arena-create',
-  templateUrl: 'arena-create.component.html'
+  selector: 'arena-create-fast',
+  templateUrl: 'arena-create-fast.component.html'
 })
-export class ArenaCreateComponent implements OnInit {
+
+@Injectable()
+export class ArenaCreateFastComponent implements OnInit {
   arena: ArenaViewItem;
   returnUrl: string;
   dataIsLoading: boolean;
@@ -36,10 +40,13 @@ export class ArenaCreateComponent implements OnInit {
   errorMessage: string;
   city: City;
 
+  closeResult: string;
+  private modalRef: NgbModalRef;
   constructor( private service: ArenaService,
                private router: Router,
                private activatedRoute: ActivatedRoute,
-               private alertService: AlertService ) {
+               private alertService: AlertService,
+               private modalService: NgbModal ) {
     this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
     this.dataIsLoading = true;
     this.arena = new ArenaViewItem;
@@ -76,6 +83,26 @@ export class ArenaCreateComponent implements OnInit {
       });
   }
 
+  open(content) {
+    /*this.modalService.open(content,  { }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      this.modalRef = result;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });*/
+
+    this.modalRef = this.modalService.open(content);
+    this.modalService.open(content,  { }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  public getAddIconClass() {
+    return this.service.getAddIconClass();
+  }
+
   private getArenaTypes() {
     this.dataIsLoading = true;
     this.service.getArenaTypes()
@@ -97,6 +124,16 @@ export class ArenaCreateComponent implements OnInit {
   private setCity(city: City) {
     if (city && city.id) {
       this.city = city;
+    }
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
     }
   }
 }

@@ -10,9 +10,10 @@ export class Tournament {
   name: string; // Название турнира
   startDate?: Date; // Дата начала турнира
   endDate?: Date; // Дата окончания турнира
-  ageGroup: string = null; // Возрастная группа/год рождения
+  ageGroup: string = null; // Возрастная группа
+  year: number = null; // Год рождения
   gender: string = 'Male'; // Пол м/ж
-  division: string = null; // Дивизион/группы/этапы;
+  // division: string = null; // Дивизион/группы/этапы;
   season: string = null; // Сезон
   requiredResponseCount?: number; // Кол-во участников
   city: City = null; // Город проведения

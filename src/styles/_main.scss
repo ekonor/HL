@@ -1159,5 +1159,47 @@ playoff-wgt {
 }
 /* END of multiselect */
 
+/* MODAL FORMS */
+.modal-form {
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin-bottom: 0;
+
+  label {
+    margin-bottom: 2px;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .form-control {
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+.btn.modal-btn {
+  padding: 0.5rem 0.75rem;
+  word-break: break-word;
+}
+
+.modal-header {
+  padding: 5px 15px;
+}
+
+.modal-body {
+  padding: 10px;
+}
+
+button.close {
+  cursor: pointer;
+}
+/* END OF MODAL FORMS */
+
 
 
