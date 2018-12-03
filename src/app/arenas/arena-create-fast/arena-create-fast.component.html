@@ -1,91 +1,89 @@
 <div class="arena-create-fast">
   <ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Добавление арены</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modalRef.dismiss()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div class="arena-create-fast col-md-12">
-        <form (ngSubmit)="addArena(arena)" #myForm="ngForm" class="modal-form">
-          <div class="row">
-            <div class="form-group required col-md-5">
-              <label for="arenaname">Сокращенное название</label>
-              <input type="text" class="form-control" name="arenaname" [(ngModel)]="arena.name" (ngModelChange)="arena.name = $event" #arenaname="ngModel" id="arenaname" required="required"/>
-            </div>
-            <div class="form-group col-md-5">
-              <label for="fullName">Полное название</label>
-              <input type="text" class="form-control" name="fullName" [(ngModel)]="arena.fullName" (ngModelChange)="arena.fullName = $event" #fullName="ngModel" id="fullName"/>
-            </div>
-            <div class="form-group col-md-2">
-              <label for="startYear">Год</label>
-              <input type="number" min="1900" max="2050" step="1" number="true" class="form-control" name="startYear" [(ngModel)]="arena.startYear" (ngModelChange)="arena.startYear = $event" #startYear="ngModel" ngModel id="startYear"/>
-            </div>
-          </div>
-          <div class="form-group required">
-            <app-city-filter *ngIf="city" [city]="city" [isRequired]="true" (onChanged)="setCity($event)"></app-city-filter>
-          </div>
-          <div class="row">
-            <div class="form-group col-md-3">
-              <label for="capacity">Вместимость</label>
-              <input type="number" class="form-control" name="capacity" [(ngModel)]="arena.capacity" (ngModelChange)="arena.capacity = $event" #capacity="ngModel" ngModel number="true" id="capacity"/>
-            </div>
-            <div class="form-group col-md-5">
-              <label for="address">Адрес</label>
-              <input type="text" class="form-control" name="address" [(ngModel)]="arena.address" (ngModelChange)="arena.address = $event" #address="ngModel" id="address"/>
-            </div>
-            <div class="form-group col-md-4">
-              <label for="arenaTypeId">Тип арены</label>
-              <select class="form-group" [(ngModel)]="arena.arenaTypeId" name="arenaTypeId" class="form-control" #arenaTypeId="ngModel" id="arenaTypeId" (ngModelChange)="arena.arenaTypeId = $event">
-                <option *ngFor="let arenaType of arenaTypes" [ngValue]="arenaType.id" >{{arenaType.name}}</option>
-              </select>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-md-8">
-              <label for="contacts">Контакты</label>
-              <input type="text" class="form-control" name="contacts" [(ngModel)]="arena.contacts" (ngModelChange)="arena.contacts = $event" #contacts="ngModel" id="contacts" />
-            </div>
-            <div class="form-group col-md-2">
-              <label for="email">E-mail</label>
-              <input type="email" class="form-control" name="email" [(ngModel)]="arena.email" (ngModelChange)="arena.email = $event" #email="ngModel" ngModel id="email"/>
-            </div>
-            <div class="form-group col-md-2">
-              <label for="webSite">Сайт</label>
-              <input type="text" class="form-control" name="webSite" [(ngModel)]="arena.webSite" (ngModelChange)="arena.webSite = $event" #webSite="ngModel" id="webSite"/>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-md-12">
-              <!--label for="about">Описание</label-->
-              <app-ngx-editor [placeholder]="'Описание арены'" [height]="50" [resizer]="false" class="form-control" name="about" [(ngModel)]="arena.about" (ngModelChange)="arena.about = $event" #about="ngModel" id="about"></app-ngx-editor>
-            </div>
-          </div>
-        </form>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Добавление арены</h4>
+        <button type="button" class="close" aria-label="Close" data-dismiss="modal" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-    </div>
-    <div class="modal-footer">
-      <!--button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button-->
-      <button [hasPermission]="['tournamentadministrator']"
-              class="btn btn-primary waves-light modal-btn"
-              title="Создать новую арену"
-              (click)="modal.close('Save click')"
-              [disabled]="dataIsLoading"
-              onAuthorizedPermission="show"
-              onUnauthorizedPermission="hide">
-        <i [class]="getAddIconClass()"></i>&nbsp;&nbsp;Создать арену
-      </button>
-    </div>
+      <div class="modal-body">
+        <div class="arena-create-fast col-md-12">
+          <form #myForm="ngForm" class="modal-form">
+            <div class="row">
+              <div class="form-group required col-md-5">
+                <label for="arenaname">Сокращенное название</label>
+                <input type="text" class="form-control" name="arenaname" [(ngModel)]="arena.name" (ngModelChange)="arena.name = $event" #arenaname="ngModel" id="arenaname" required="required"/>
+              </div>
+              <div class="form-group col-md-5">
+                <label for="fullName">Полное название</label>
+                <input type="text" class="form-control" name="fullName" [(ngModel)]="arena.fullName" (ngModelChange)="arena.fullName = $event" #fullName="ngModel" id="fullName"/>
+              </div>
+              <div class="form-group col-md-2">
+                <label for="startYear">Год</label>
+                <input type="number" min="1900" max="2050" step="1" number="true" class="form-control" name="startYear" [(ngModel)]="arena.startYear" (ngModelChange)="arena.startYear = $event" #startYear="ngModel" ngModel id="startYear"/>
+              </div>
+            </div>
+            <div class="form-group required">
+              <app-city-filter *ngIf="city" [city]="city" [isRequired]="true" (onChanged)="setCity($event)"></app-city-filter>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-3">
+                <label for="capacity">Вместимость</label>
+                <input type="number" class="form-control" name="capacity" [(ngModel)]="arena.capacity" (ngModelChange)="arena.capacity = $event" #capacity="ngModel" ngModel number="true" id="capacity"/>
+              </div>
+              <div class="form-group col-md-5">
+                <label for="address">Адрес</label>
+                <input type="text" class="form-control" name="address" [(ngModel)]="arena.address" (ngModelChange)="arena.address = $event" #address="ngModel" id="address"/>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="arenaTypeId">Тип арены</label>
+                <select class="form-group" [(ngModel)]="arena.arenaTypeId" name="arenaTypeId" class="form-control" #arenaTypeId="ngModel" id="arenaTypeId" (ngModelChange)="arena.arenaTypeId = $event">
+                  <option *ngFor="let arenaType of arenaTypes" [ngValue]="arenaType.id" >{{arenaType.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-8">
+                <label for="contacts">Контакты</label>
+                <input type="text" class="form-control" name="contacts" [(ngModel)]="arena.contacts" (ngModelChange)="arena.contacts = $event" #contacts="ngModel" id="contacts" />
+              </div>
+              <div class="form-group col-md-2">
+                <label for="email">E-mail</label>
+                <input type="email" class="form-control" name="email" [(ngModel)]="arena.email" (ngModelChange)="arena.email = $event" #email="ngModel" ngModel id="email"/>
+              </div>
+              <div class="form-group col-md-2">
+                <label for="webSite">Сайт</label>
+                <input type="text" class="form-control" name="webSite" [(ngModel)]="arena.webSite" (ngModelChange)="arena.webSite = $event" #webSite="ngModel" id="webSite"/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-12">
+                <app-ngx-editor [placeholder]="'Описание арены'" [height]="50" [resizer]="false" class="form-control" name="about" [(ngModel)]="arena.about" (ngModelChange)="arena.about = $event" #about="ngModel" id="about"></app-ngx-editor>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button [hasPermission]="['tournamentadministrator']"
+                class="btn btn-primary waves-light modal-btn"
+                title="Создать новую арену"
+                (click)="save()"
+                [disabled]="dataIsLoading || myForm.invalid"
+                onAuthorizedPermission="show"
+                onUnauthorizedPermission="hide">
+          <i [class]="getAddIconClass()"></i>&nbsp;&nbsp;Создать арену
+        </button>
+      </div>
   </ng-template>
 
   <button [hasPermission]="['tournamentadministrator']"
           class="btn btn-primary waves-light modal-btn"
           title="Создать новую арену"
           (click)="open(content)"
+          [disabled]="isDisabled || dataIsLoading"
           onAuthorizedPermission="show"
           onUnauthorizedPermission="hide">
     <i [class]="getAddIconClass()"></i>&nbsp;&nbsp;Создать арену
   </button>
-  <!--button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button-->
 </div>

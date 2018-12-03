@@ -88,38 +88,9 @@
           </div>
           <div class="row vertical-align">
             <div class="col-md-5 vertical-align">
-              <!--button [hasPermission]="['tournamentadministrator']"
-                      class="btn btn-primary waves-light"
-                      title="Создать новую арену"
-                      (click)="toggledNewArena=true"
-                      onAuthorizedPermission="show"
-                      onUnauthorizedPermission="hide"
-                      [disabled]="dataIsLoading">
-                <i [class]="getAddIconClass()"></i>&nbsp;&nbsp;Создать арену
-              </button-->
-              <arena-create-fast></arena-create-fast>
+              <arena-create-fast [isDisabled]="dataIsLoading" (onChanged)="setArenaDraft($event)"></arena-create-fast>
             </div>
           </div>
-        <!--form #newarenaForm="ngForm" class="row toggled-form" [hidden]="!toggledNewArena">
-            <div class="col-md-2 form-group required">
-              <label for="newarenaname">Название арены</label>
-              <input type="text" class="form-control" name="newarenaname" [(ngModel)]="newarena.name" (ngModelChange)="newarena.name = $event" #newarenaname="ngModel" id="newarenaname" title="Введите название арены" required="required"/>
-            </div>
-            <div class="col-md-4 form-group required vertical-align">
-              <app-city-filter [city]="newarena.city" [isRequired]="true" (onChanged)="setNewArenaCity($event)"></app-city-filter>
-            </div>
-            <div class="col-md-6 vertical-align">
-              <button [hasPermission]="['tournamentadministrator']"
-                      class="btn btn-primary waves-light"
-                      title="Добавить новую арену"
-                      (click)="createArena()"
-                      onAuthorizedPermission="show"
-                      onUnauthorizedPermission="hide"
-                      [disabled]="dataIsLoading || newarenaForm.invalid || newarena.city == null">
-                <i [class]="getAddIconClass()"></i>&nbsp;&nbsp;Добавить
-              </button>
-            </div>
-        </form-->
         <div class="row">
           <div class="col-md-6" *ngIf="tournament.arenas.length == 0">
             <br/>
@@ -287,7 +258,7 @@
                           [disabled]="dataIsLoading || !teamItem || tournament.teams.length < 2 || tournament.teams?.indexOf(teamItem) == 0">
                     <i [class]="getMoveUpIconClass()"></i>
                   </button>
-                  <button [hasPermission]="['tournamentadministrator']"
+                  <!--button [hasPermission]="['tournamentadministrator']"
                           class="btn btn-primary waves-light"
                           title="Изменить состав"
                           (click)="changePlayers(teamItem)"
@@ -295,7 +266,8 @@
                           onUnauthorizedPermission="hide"
                           [disabled]="dataIsLoading || !teamItem">
                     <i [class]="getPlayersIconClass()"></i>
-                  </button>
+                  </button-->
+                  <player-set [team]="teamItem"></player-set>
                 </div>
               </div>
             </div>

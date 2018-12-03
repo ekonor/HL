@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import 'rxjs/add/operator/catch';
@@ -18,7 +18,7 @@ import { City } from 'app/core/geo/city';
 import { AlertService } from 'app/components/alert/alert.service';
 import { Point } from 'app/shared/map/point';
 
-import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbModalRef, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -30,12 +30,12 @@ import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-boo
 
 @Injectable()
 export class ArenaCreateFastComponent implements OnInit {
+  @Input() isDisabled: boolean;
+  @Output() onChanged = new EventEmitter<ArenaViewItem>();
   arena: ArenaViewItem;
   returnUrl: string;
   dataIsLoading: boolean;
   id: number;
-  // mapPoint: Point;
-  // private sub: any;
   arenaTypes: ArenaType[];
   errorMessage: string;
   city: City;
@@ -59,44 +59,29 @@ export class ArenaCreateFastComponent implements OnInit {
   ngOnInit() {
   }
 
-  /* private getMapPoint(arena: ArenaViewItem): Point {
-    if (this.arena && this.arena.coordinates.latitude && this.arena.coordinates.longitude) {
-      return {latitude: this.arena.coordinates.latitude, longitude: this.arena.coordinates.longitude};
-    }
-  }*/
-
-  public addArena(arena: ArenaViewItem) {
+  public addArena() {
     if (!this.city && !this.city.id) {
-      this.alertService.error("Не удалось сохранить изменения");
+      this.alertService.error('Не удалось сохранить изменения');
       return;
     }
     this.arena.city = this.city;
     this.dataIsLoading = true;
-    this.service.addArena(this.arena).subscribe(
+    this.service.addArenaDraft(this.arena).subscribe(
       data => {
-        this.router.navigate(['/arenas']);
       },
       error => {
         this.alertService.error(error);
-        this.alertService.error("Не удалось добавить арену");
+        this.alertService.error('Не удалось создать арену');
         this.dataIsLoading = false;
+        alert('Не удалось создать арену');
+      },
+      () => {
+        this.dataIsLoading = false;
+        alert('Арена создана успешно. Теперь Вы можете добавить ее в список через поиск арен');
+        this.arena = null;
+        //this.toggledNewArena = false;
       });
-  }
-
-  open(content) {
-    /*this.modalService.open(content,  { }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-      this.modalRef = result;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });*/
-
-    this.modalRef = this.modalService.open(content);
-    this.modalService.open(content,  { }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.dataIsLoading = false;
   }
 
   public getAddIconClass() {
@@ -127,13 +112,18 @@ export class ArenaCreateFastComponent implements OnInit {
     }
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
-    }
+  open(content) {
+    this.modalRef = this.modalService.open(content);
+  }
+
+  close() {
+    this.modalRef.close();
+  }
+
+  save() {
+    console.log('save');
+    //this.addArena();
+    this.onChanged.emit(this.arena);
+    this.modalRef.close();
   }
 }

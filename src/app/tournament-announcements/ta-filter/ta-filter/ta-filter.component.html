@@ -9,20 +9,8 @@
           <input type="text" name="searchText" [(ngModel)]="filter.searchText" placeholder="Название или строка поиска" class="form-control">
           <label>Дата проведения c</label>
           <app-datepicker [dt]="filter.startDateFrom" (onChanged)="onChangedStartDt($event)"></app-datepicker>
-          <!--input id="startDateFrom"
-                 type="date"
-                 name="startDateFrom"
-                 [(ngModel)]="filter.startDateFrom"
-                 placeholder="Дата проведения, от"
-                 class="form-control"-->
           <label>до</label>
           <app-datepicker [dt]="filter.startDateTo" (onChanged)="onChangedEndDt($event)"></app-datepicker>
-          <!--input id="startDateTo"
-                 type="date"
-                 name="startDateTo"
-                 [(ngModel)]="filter.startDateTo"
-                 placeholder="Дата проведения, до"
-                 class="form-control"-->
           <div class="btn-group-vertical btn-group-toggle elements-group-border" ngbRadioGroup name="gender" [(ngModel)]="filter.gender">
             <label class="btn-primary label-button fixed-size-button-s" ngbButtonLabel>
               <input type="radio" name="Male" ngbButton value="Male"><i class="fa fa-male"></i>
@@ -31,14 +19,6 @@
               <input type="radio" name="Female" ngbButton value="Female"><i class="fa fa-female"></i>
             </label>
           </div>
-          <!--div class="btn-group-vertical btn-group-toggle elements-group-border" ngbRadioGroup name="state" [(ngModel)]="filter.state">
-            <label class="btn-primary fixed-size-button-lg label-button" ngbButtonLabel>
-              <input type="radio" name="isRegistration" ngbButton value="ApprovedByModerator">Идет регистрация
-            </label>
-            <label class="btn-primary fixed-size-button-lg label-button" ngbButtonLabel>
-              <input type="radio" name="isFinished" ngbButton value="Finished">Завершенные
-            </label>
-          </div-->
           <div class="btn-group btn-group-vertical btn-group-toggle elements-group-border" data-toggle="buttons" >
             <label class="btn-primary fixed-size-button-s label-button" ngbButtonLabel>
               <input type="checkbox" autocomplete="off" name="isRegistration" ngbButton [(ngModel)]="filter.state.isRegistration">

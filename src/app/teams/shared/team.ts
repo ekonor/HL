@@ -15,6 +15,7 @@ export class Team {
   ageGroup?: string;
   logo?: string;
   players: Array<Player> = new Array<Player>(); // Игроки
+  activePlayers?: Array<Player> = new Array<Player>(); // Текущий состав
 
   constructor( values: Object = {} ) {
     Object.assign( this, values );

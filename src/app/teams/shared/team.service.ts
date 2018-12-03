@@ -72,6 +72,18 @@ export class TeamService {
     return 'fa fa-pencil';
   }
 
+  public getPlayersIconClass(): string {
+    return 'fa fa-users';
+  }
+
+  public getDeleteIconClass(): string {
+    return 'fa fa-close';
+  }
+
+  public getMoveIconClass(): string {
+    return 'fa fa-arrow-right';
+  }
+
   private getMethodUrl(methodUrlPrefix: string): string {
     return this.apiConfig.apiPath + methodUrlPrefix;
   }

@@ -112,7 +112,34 @@ export class ArenaService {
     }
   }
 
-  public addArenaFast(arena: ArenaFastCreation): Observable<number> {
+  public addArenaDraft(arena: ArenaViewItem): Observable<number> {
+    // TODO свернуть
+    const body = JSON.stringify({
+      'name': arena.name,
+      'fullName': (arena.fullName ? arena.fullName : arena.name),
+      'cityId': arena.city.id,
+      'arenaTypeId': arena.arenaTypeId,
+      'startYear': arena.startYear,
+      'address': arena.address,
+      'email': arena.email,
+      'webSite': arena.webSite,
+      'contacts': arena.contacts,
+      'capacity': arena.capacity,
+      'about': arena.about
+    });
+
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': 'Bearer ' + currentUser.token
+      });
+      return this.httpClient.post<number>(this.getMethodUrl('/arenas/draft/'), body, { headers: headers });
+    }
+  }
+
+ /*public addArenaFast(arena: ArenaFastCreation): Observable<number> {
     // TODO свернуть
     const body = JSON.stringify({
       'name': arena.name,
@@ -128,7 +155,7 @@ export class ArenaService {
       });
       return this.httpClient.post<number>(this.getMethodUrl('/arenas/'), body, { headers: headers });
     }
-  }
+  }*/
 
   public deleteArena(id: number): Observable<void> {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));

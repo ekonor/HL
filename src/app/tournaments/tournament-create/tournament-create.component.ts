@@ -33,6 +33,9 @@ import { Game } from 'app/tournaments/shared/game';
 import { CustomTime } from 'app/tournaments/shared/customtime';
 
 import { Todo } from 'app/shared/combobox/todo';
+import {ArenaViewItem} from 'app/arenas/shared/arena-view-item';
+import {Player} from 'app/teams/shared/player';
+
 @Component({
   moduleId: module.id,
   selector: 'tournament-create',
@@ -55,7 +58,7 @@ export class TournamentCreateComponent implements OnInit {
 
   city: City; // текущий город арены в поле ввода
   arena: ArenaListItem; // текущая арена в поле ввода
-  newarena: ArenaFastCreation; // новая арена
+  newarena: ArenaViewItem; // новая арена
   team: Team; // текущая команда в поле ввода
 
   referee: RefereeListItem; // текущий судья в поле ввода
@@ -94,10 +97,11 @@ export class TournamentCreateComponent implements OnInit {
     this.dataIsLoading = true;
     this.tournament = new Tournament();
     this.dataIsLoading = false;
-    this.step = 2;
+    this.step = 3;
     this.oneDay = false;
     this.arena = null;
-    this.newarena = new ArenaFastCreation();
+    //this.newarena = new ArenaFastCreation();
+    this.newarena = new ArenaViewItem();
     this.team = null;
     this.referee = null;
     this.newreferee = new RefereeFastCreation();
@@ -121,7 +125,36 @@ export class TournamentCreateComponent implements OnInit {
     this.addReferee(new RefereeListItem({id: 0, name: 'Петров И.А.', fullName: 'Петров И.А.', linkName: 'test1', gender: 'муж', refereeAmplua: 'Линейный', number: 11, birthdate: new Date('1981-01-01'), city: new City({id: 0, name: 'city1'} )}));
     this.addReferee(new RefereeListItem({id: 1, name: 'Иванов П.А.', fullName: 'Иванов П.А.', linkName: 'test2', gender: 'муж', refereeAmplua: 'Главный', number: 12, refereeType: new RefereeType({id: 0, name: 'Судья международной категории', description: 'Судья международной категории'}), birthdate: new Date('1985-01-01'), city: new City({id: 1, name: 'city2'} )}));
 
-    this.addTeam(new Team({id: 0, name: 'team1', cityName: 'city1'}));
+    let player1 = new Player({id: 0, name: 'Иванов И.И.', birthdate: new Date('1988-01-01'), amplua: 'ЦЕНТР НАП'});
+    let player2 = new Player({id: 1, name: 'Петров П.П.', birthdate: new Date('1989-01-01'), amplua: 'ПОЛУЗАЩ'});
+    let player3 = new Player({id: 2, name: 'Романов Р.Р.', birthdate: new Date('1990-01-01'), amplua: 'ЦЕНТР ПОЛУЗАЩ'});
+    let player4 = new Player({id: 3, name: 'Кузнецов К.К.', birthdate: new Date('1991-01-01'), amplua: 'ЛЕВ ПОЛУЗАЩ'});
+    let player5 = new Player({id: 4, name: 'Зайцев Х.К.', birthdate: new Date('1992-01-01'), amplua: 'ВРАТАРЬ'});
+    let player6 = new Player({id: 5, name: 'Николаев Н.Н.', birthdate: new Date('1993-01-01'), amplua: 'ПРАВ АТАК'});
+
+
+    let player11 = new Player({id: 0, name: 'Иванов И.И.', birthdate: new Date('1988-01-01'), amplua: 'ЦЕНТР НАП'});
+    let player21 = new Player({id: 1, name: 'Петров П.П.', birthdate: new Date('1989-01-01'), amplua: 'ПОЛУЗАЩ'});
+    let player31 = new Player({id: 2, name: 'Романов Р.Р.', birthdate: new Date('1990-01-01'), amplua: 'ЦЕНТР ПОЛУЗАЩ'});
+    let player41 = new Player({id: 3, name: 'Кузнецов К.К.', birthdate: new Date('1991-01-01'), amplua: 'ЛЕВ ПОЛУЗАЩ'});
+    let player51 = new Player({id: 4, name: 'Зайцев Х.К.', birthdate: new Date('1992-01-01'), amplua: 'ВРАТАРЬ'});
+    let player61 = new Player({id: 5, name: 'Николаев Н.Н.', birthdate: new Date('1993-01-01'), amplua: 'ПРАВ АТАК'});
+
+
+    let players_test = new Array<Player>();
+    players_test.push(player1);
+    players_test.push(player2);
+    players_test.push(player3);
+    players_test.push(player4);
+    players_test.push(player5);
+
+    players_test.push(player11);
+    players_test.push(player21);
+    players_test.push(player31);
+    players_test.push(player41);
+    players_test.push(player51);
+
+    this.addTeam(new Team({id: 0, name: 'team1', cityName: 'city1', players: players_test}));
     this.addTeam(new Team({id: 1, name: 'team2', cityName: 'city2'}));
     this.addTeam(new Team({id: 2, name: 'team3', cityName: 'city3'}));
     this.addTeam(new Team({id: 3, name: 'team4', cityName: 'city4'}));
@@ -306,7 +339,7 @@ export class TournamentCreateComponent implements OnInit {
     }
   }
 
-  createArena(arena: ArenaFastCreation, form: NgForm) {
+  /*createArena(arena: ArenaFastCreation, form: NgForm) {
     if (!this.newarena || this.newarena == null ) { return; }
     if (confirm('Вы действительно хотите создать новую арену?')) {
       // TODO проверка существования города
@@ -329,7 +362,7 @@ export class TournamentCreateComponent implements OnInit {
       this.dataIsLoading = false;
     }
     this.dataIsLoading = false;
-  }
+  }*/
 
   createReferee(referee: RefereeFastCreation, form: NgForm) {
     if (!this.newreferee || this.newreferee == null ) { return; }
@@ -477,11 +510,11 @@ export class TournamentCreateComponent implements OnInit {
     }
   }
 
-  private setNewArenaCity(city: City) {
+  /*private setNewArenaCity(city: City) {
     if (city) {
       this.newarena.city = city;
     }
-  }
+  }*/
 
   private setArena(arena: ArenaListItem) {
     if (arena) {

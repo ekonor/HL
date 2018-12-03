@@ -1,0 +1,73 @@
+<div class="player-set">
+  <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Изменение состава команды</h4>
+        <button type="button" class="close" aria-label="Close" data-dismiss="modal" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="playerSetType">Список игроков</label>
+            <select class="form-group" [(ngModel)]="playerSetType" name="playerSetType" class="form-control" #PlayerSetType="ngModel" id="playerSetType" (ngModelChange)="playerSetType = $event">
+              <option *ngFor="let playerSetTypeItem of playerSetTypes" [ngValue]="playerSetTypeItem.value" >{{playerSetTypeItem.name}}</option>
+            </select>
+            <div class="align-middle scroll-area bordered-area">
+              <div *ngFor="let playerSetItem of team.players">
+                <label class="align-middle"><input type="checkbox"/><span class="align-middle">&nbsp;{{playerSetItem.name}}{{playerSetItem.amplua}}</span></label>
+              </div>
+            </div>
+            <button [hasPermission]="['tournamentadministrator']"
+                    class="btn btn-primary waves-light"
+                    title="Переместить в списке"
+                    (click)="movePlayerToActive(playerSetItem)"
+                    onAuthorizedPermission="show"
+                    onUnauthorizedPermission="hide"
+                    [disabled]="dataIsLoading ">
+              <i [class]="getMoveIconClass()"></i>
+            </button>
+          </div>
+          <div class="col-md-6">
+            Список 2
+            <div class="align-middle scroll-area bordered-area">
+              <div *ngFor="let activePlayerSetItem of team.activePlayers">
+                <label class="align-middle"><input type="checkbox"/><span class="align-middle">&nbsp;{{activePlayerSetItem.name}}{{activePlayerSetItem.amplua}}</span>
+                  <button [hasPermission]="['tournamentadministrator']"
+                          class="btn btn-danger waves-light"
+                          title="Удалить игрока из списка"
+                          (click)="removeActivePlayer(activePlayerSetItem)"
+                          onAuthorizedPermission="show"
+                          onUnauthorizedPermission="hide"
+                          [disabled]="dataIsLoading || !activePlayerSetItem">
+                    <i [class]="getDeleteIconClass()"></i>
+                  </button>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button [hasPermission]="['tournamentadministrator']"
+                class="btn btn-primary waves-light modal-btn"
+                title="Применить"
+                (click)="save()"
+                [disabled]="dataIsLoading"
+                onAuthorizedPermission="show"
+                onUnauthorizedPermission="hide">
+          <i [class]="getAddIconClass()"></i>&nbsp;&nbsp;Применить
+        </button>
+      </div>
+  </ng-template>
+
+  <button [hasPermission]="['tournamentadministrator']"
+          class="btn btn-primary waves-light modal-btn"
+          title="Изменить состав команды"
+          (click)="open(content)"
+          [disabled]="isDisabled || dataIsLoading"
+          onAuthorizedPermission="show"
+          onUnauthorizedPermission="hide">
+    <i [class]="getPlayersIconClass()"></i>
+  </button>
+</div>

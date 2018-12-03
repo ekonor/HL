@@ -1199,7 +1199,26 @@ playoff-wgt {
 button.close {
   cursor: pointer;
 }
+
+.modal-content {
+  z-index: 9999;
+}
 /* END OF MODAL FORMS */
+input[type="checkbox"] {
+  vertical-align: middle;
+}
 
+label {
+  vertical-align: middle;
+}
 
+.scroll-area {
+  min-height: 300px;
+  overflow-y: auto;
+}
+
+.bordered-area {
+  border: 1px lightgrey solid;
+  padding: 5px;
+}
 

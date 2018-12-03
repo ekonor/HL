@@ -1,6 +1,6 @@
 export class Item {
-  value: string;
-  name: string;
+  value: string = null;
+  name: string = null;
 
   constructor( values: Object = {} ) {
     Object.assign( this, values );

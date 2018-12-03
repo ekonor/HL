@@ -12,11 +12,13 @@ import { TeamFilterComponent } from 'app/teams/team-filter/team-filter.component
 import { TeamService } from 'app/teams/shared/team.service';
 import { SharedModule } from 'app/shared/shared.module';
 import { TeamSelectComponent } from 'app/teams/team-select/team-select.component';
+import {PlayerSetComponent } from 'app/teams/player-set/player-set.component';
 
 @NgModule({
       declarations: [
         TeamFilterComponent,
-        TeamSelectComponent
+        TeamSelectComponent,
+        PlayerSetComponent
       ],
       imports: [
         BrowserModule,
@@ -30,7 +32,8 @@ import { TeamSelectComponent } from 'app/teams/team-select/team-select.component
       ],
       exports: [
         TeamFilterComponent,
-        TeamSelectComponent
+        TeamSelectComponent,
+        PlayerSetComponent
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       providers: [
