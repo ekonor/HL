@@ -21,17 +21,32 @@
         <div class="row">
           <div class="col-md-6 scroll-area-wrap">
             <div class="align-middle scroll-area bordered-area">
-              <div *ngFor="let playerSetItem of team.players">
-                <label class="align-middle"><input type="checkbox" [(ngModel)]="checkList[team.players.indexOf(playerSetItem)]" (change)="movePlayerToActive(playerSetItem, $event)" /><span class="align-middle">&nbsp;{{playerSetItem.name}}{{playerSetItem.amplua}}</span></label>
-              </div>
+              <label *ngFor="let playerSetItem of team.players" class="row m-0 align-middle">
+                <div class="col-md-1 align-middle"><!--label class="align-middle"-->
+                  <input type="checkbox" [(ngModel)]="checkList[team.players.indexOf(playerSetItem)]" (change)="movePlayerToActive(playerSetItem, $event)" />
+                </div>
+                <div class="col-md-5 align-middle">
+                  {{playerSetItem.name}}
+                </div>
+                <div class="col-md-5 align-middle p-0">
+                  {{playerSetItem.amplua}}
+                </div>
+                <!--/label-->
+              </label>
             </div>
           </div>
           <div class="col-md-6 scroll-area-wrap">
-            <div class="align-middle scroll-area bordered-area">
-              <div *ngFor="let activePlayerSetItem of team.activePlayers">
-                <label class="align-middle"><input type="checkbox"/><span class="align-middle">&nbsp;{{activePlayerSetItem.name}}{{activePlayerSetItem.amplua}}</span>
+            <div class="align-middle scroll-area bordered-area align-middle">
+              <label *ngFor="let activePlayerSetItem of team.activePlayers" class="row m-0 align-middle">
+                <div class="col-md-5 align-middle">
+                  {{activePlayerSetItem.name}}
+                </div>
+                <div class="col-md-5 align-middle">
+                  {{activePlayerSetItem.amplua}}
+                </div>
+                <div class="col-md-2 align-middle">
                   <button [hasPermission]="['tournamentadministrator']"
-                          class="btn btn-danger waves-light"
+                          class="btn btn-danger waves-light modal-btn"
                           title="Удалить игрока из списка"
                           (click)="removeActivePlayer(activePlayerSetItem)"
                           onAuthorizedPermission="show"
@@ -39,8 +54,8 @@
                           [disabled]="dataIsLoading || !activePlayerSetItem">
                     <i [class]="getDeleteIconClass()"></i>
                   </button>
-                </label>
-              </div>
+                </div>
+              </label>
             </div>
           </div>
         </div>
