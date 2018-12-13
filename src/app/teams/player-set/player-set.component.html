@@ -13,23 +13,20 @@
             <select class="form-group" [(ngModel)]="playerSetType" name="playerSetType" class="form-control" #PlayerSetType="ngModel" id="playerSetType" (ngModelChange)="playerSetType = $event">
               <option *ngFor="let playerSetTypeItem of playerSetTypes" [ngValue]="playerSetTypeItem.value" >{{playerSetTypeItem.name}}</option>
             </select>
-            <div class="align-middle scroll-area bordered-area">
-              <div *ngFor="let playerSetItem of team.players">
-                <label class="align-middle"><input type="checkbox"/><span class="align-middle">&nbsp;{{playerSetItem.name}}{{playerSetItem.amplua}}</span></label>
-              </div>
-            </div>
-            <button [hasPermission]="['tournamentadministrator']"
-                    class="btn btn-primary waves-light"
-                    title="Переместить в списке"
-                    (click)="movePlayerToActive(playerSetItem)"
-                    onAuthorizedPermission="show"
-                    onUnauthorizedPermission="hide"
-                    [disabled]="dataIsLoading ">
-              <i [class]="getMoveIconClass()"></i>
-            </button>
           </div>
           <div class="col-md-6">
-            Список 2
+            <label>Выбранные игроки</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 scroll-area-wrap">
+            <div class="align-middle scroll-area bordered-area">
+              <div *ngFor="let playerSetItem of team.players">
+                <label class="align-middle"><input type="checkbox" [(ngModel)]="checkList[team.players.indexOf(playerSetItem)]" (change)="movePlayerToActive(playerSetItem, $event)" /><span class="align-middle">&nbsp;{{playerSetItem.name}}{{playerSetItem.amplua}}</span></label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 scroll-area-wrap">
             <div class="align-middle scroll-area bordered-area">
               <div *ngFor="let activePlayerSetItem of team.activePlayers">
                 <label class="align-middle"><input type="checkbox"/><span class="align-middle">&nbsp;{{activePlayerSetItem.name}}{{activePlayerSetItem.amplua}}</span>
@@ -47,6 +44,22 @@
             </div>
           </div>
         </div>
+        <!--div class="row">
+          <div class="col-md-6">
+            <button [hasPermission]="['tournamentadministrator']"
+                    class="btn btn-primary waves-light"
+                    title="Добавить в список"
+                    (click)="movePlayersToActive()"
+                    onAuthorizedPermission="show"
+                    onUnauthorizedPermission="hide"
+                    [disabled]="dataIsLoading ">
+              <i [class]="getMoveIconClass()"></i>
+            </button>
+          </div>
+          <div class="col-md-6">
+            &nbsp;
+          </div>
+        </div-->
       </div>
       <div class="modal-footer">
         <button [hasPermission]="['tournamentadministrator']"

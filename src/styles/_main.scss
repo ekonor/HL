@@ -1161,7 +1161,7 @@ playoff-wgt {
 
 /* MODAL FORMS */
 .modal-form {
-  overflow-x: hidden;
+  overflow-x: auto;
   overflow-y: auto;
   margin-bottom: 0;
 
@@ -1213,12 +1213,17 @@ label {
 }
 
 .scroll-area {
-  min-height: 300px;
   overflow-y: auto;
+  height: 100% !important; // TODO адаптация под разные экраны
 }
 
 .bordered-area {
   border: 1px lightgrey solid;
   padding: 5px;
+}
+
+.scroll-area-wrap {
+  height: 50%;
+  position: relative;
 }
 

@@ -154,6 +154,18 @@ export class TournamentCreateComponent implements OnInit {
     players_test.push(player41);
     players_test.push(player51);
 
+    players_test.push(player11);
+    players_test.push(player21);
+    players_test.push(player31);
+    players_test.push(player41);
+    players_test.push(player51);
+
+    players_test.push(player11);
+    players_test.push(player21);
+    players_test.push(player31);
+    players_test.push(player41);
+    players_test.push(player51);
+
     this.addTeam(new Team({id: 0, name: 'team1', cityName: 'city1', players: players_test}));
     this.addTeam(new Team({id: 1, name: 'team2', cityName: 'city2'}));
     this.addTeam(new Team({id: 2, name: 'team3', cityName: 'city3'}));

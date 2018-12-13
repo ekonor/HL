@@ -31,9 +31,9 @@ export class PlayerSetComponent implements OnInit {
   @Input() isDisabled: boolean;
   @Input() team: Team;
   @Output() onChanged = new EventEmitter<Team>();
-
-  playerSetType: Item;
+  playerSetType: string;
   playerSetTypes: Array<Item>;
+  checkList: Array<boolean>;
 
   returnUrl: string;
   dataIsLoading: boolean;
@@ -50,12 +50,20 @@ export class PlayerSetComponent implements OnInit {
                private modalService: NgbModal ) {
     this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
     this.dataIsLoading = true;
-    this.getPlayerSetTypes();
-    this.playerSetType = null;
+
+    this.getPlayerSetTypes();  // TODO при изменении набора - получение с сервера запросом
+                              // списка игроков по типу набора и айди команды - сбор игроков по всем матчам искомого сезона?
+
     this.dataIsLoading = false;
   }
 
   ngOnInit() {
+    this.checkList = new Array<boolean>();
+    if (this.team && this.team.players) {
+      for (let i = 0; i < this.team.players.length; i++) {
+        this.checkList.push(false);
+      }
+    }
   }
 
   public getPlayersIconClass() {
@@ -87,10 +95,30 @@ export class PlayerSetComponent implements OnInit {
     this.modalRef.close();
   }
 
+  movePlayerToActive(playerSetItem: Player, event: any) {
+    if (event.target.checked) {
+      if (this.team.activePlayers.indexOf(playerSetItem) === -1) {
+        this.team.activePlayers.push(playerSetItem);
+      }
+    } else {
+      this.removeActivePlayer(playerSetItem);
+    }
+  }
+
+  removeActivePlayer(activePlayerSetItem: Player) {
+    if (this.team.activePlayers.indexOf(activePlayerSetItem) !== -1) {
+      this.team.activePlayers = this.team.activePlayers.filter(obj => obj !== activePlayerSetItem)
+      if (this.team.players.indexOf(activePlayerSetItem) !== -1) {
+        this.checkList[this.team.players.indexOf(activePlayerSetItem)] = false;
+      }
+    }
+  }
+
   private getPlayerSetTypes() {
     this.playerSetTypes = new Array<Item>();
     this.playerSetTypes.push(new Item({value: 'current', name: 'Текущий сезон'}));
     this.playerSetTypes.push(new Item({value: 'prev', name: 'Предыдущий сезон'}));
     this.playerSetTypes.push(new Item({value: '5 years', name: 'Предыдущие 5 лет'}));
+    this.playerSetType = this.playerSetTypes[0].value;
   }
 }
