@@ -97,7 +97,7 @@ export class TournamentCreateComponent implements OnInit {
     this.dataIsLoading = true;
     this.tournament = new Tournament();
     this.dataIsLoading = false;
-    this.step = 3;
+    this.step = 5;
     this.oneDay = false;
     this.arena = null;
     //this.newarena = new ArenaFastCreation();
@@ -205,9 +205,9 @@ export class TournamentCreateComponent implements OnInit {
   }
 
   public changeStep(step: number) {
-    if (step > 0 && step < 7) {
+    if (step > 0 && step < 8) {
       this.step = step;
-      if (step === 5) {
+      if (step === 6) {
        this.generateGames();
       }
     }
@@ -405,33 +405,6 @@ export class TournamentCreateComponent implements OnInit {
     this.dataIsLoading = false;
   }
 
-
-
-  /* createTeam(team: Team, form: NgForm) {
-    if (!this.newteam || this.newteam == null ) { return; }
-    if (confirm('Вы действительно хотите создать  новую команду?')) {
-      // TODO проверка существования города
-      this.dataIsLoading = true;
-      this.teamService.addTeamFast(this.newteam).subscribe(
-        data => {
-        },
-        error => {
-          this.alertService.error(error);
-          this.alertService.error('Не удалось создать команду');
-          this.dataIsLoading = false;
-          alert('Не удалось создать команду');
-        },
-        () => {
-          this.dataIsLoading = false;
-          alert('Команда создана успешно. Теперь Вы можете добавить ее в список через поиск команд');
-          this.newteam = null;
-          this.toggledNewTeam = false;
-        });
-      this.dataIsLoading = false;
-    }
-    this.dataIsLoading = false;
-  } */
-
   setSelectionArena(arena: ArenaListItem) {
     if (arena) {
       this.activeArena = arena;
@@ -514,10 +487,6 @@ export class TournamentCreateComponent implements OnInit {
     }
   }
 
-  changePlayers(team: Team) {
-    // форма всплывающая для изменения заявленного состава команды
-  }
-
   private setTeam(team: Team) {
     if (team) {
       this.team = team;
@@ -525,12 +494,6 @@ export class TournamentCreateComponent implements OnInit {
       this.team = null;
     }
   }
-
-  /*private setNewArenaCity(city: City) {
-    if (city) {
-      this.newarena.city = city;
-    }
-  }*/
 
   private setArena(arena: ArenaListItem) {
     if (arena) {
@@ -573,12 +536,6 @@ export class TournamentCreateComponent implements OnInit {
       }
     }
   }
-
-  /* private setNewTeamCity(city: City) {
-    if (city) {
-      this.newteam.city = city;
-    }
-  } */
 
   generateGamesTable() {
     if ((this.tournament.tournamentType === 'Round') && (this.gamesRound.length > 0)) {
