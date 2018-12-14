@@ -22,7 +22,7 @@
           <div class="col-md-6 scroll-area-wrap">
             <div class="align-middle scroll-area bordered-area">
               <label *ngFor="let playerSetItem of team.players" class="row m-0 align-middle">
-                <div class="col-md-1 align-middle"><!--label class="align-middle"-->
+                <div class="col-md-1 align-middle vertical-align"><!--label class="align-middle"-->
                   <input type="checkbox" [(ngModel)]="checkList[team.players.indexOf(playerSetItem)]" (change)="movePlayerToActive(playerSetItem, $event)" />
                 </div>
                 <div class="col-md-5 align-middle">
@@ -36,15 +36,15 @@
             </div>
           </div>
           <div class="col-md-6 scroll-area-wrap">
-            <div class="align-middle scroll-area bordered-area align-middle">
-              <label *ngFor="let activePlayerSetItem of team.activePlayers" class="row m-0 align-middle">
-                <div class="col-md-5 align-middle">
+            <div class="align-middle scroll-area bordered-area">
+              <label *ngFor="let activePlayerSetItem of team.activePlayers" class="row m-0 align-middle vertical-align">
+                <div class="col-md-5 vertical-align">
                   {{activePlayerSetItem.name}}
                 </div>
-                <div class="col-md-5 align-middle">
+                <div class="col-md-5 vertical-align">
                   {{activePlayerSetItem.amplua}}
                 </div>
-                <div class="col-md-2 align-middle">
+                <div class="col-md-2 vertical-align">
                   <button [hasPermission]="['tournamentadministrator']"
                           class="btn btn-danger waves-light modal-btn"
                           title="Удалить игрока из списка"
@@ -59,22 +59,6 @@
             </div>
           </div>
         </div>
-        <!--div class="row">
-          <div class="col-md-6">
-            <button [hasPermission]="['tournamentadministrator']"
-                    class="btn btn-primary waves-light"
-                    title="Добавить в список"
-                    (click)="movePlayersToActive()"
-                    onAuthorizedPermission="show"
-                    onUnauthorizedPermission="hide"
-                    [disabled]="dataIsLoading ">
-              <i [class]="getMoveIconClass()"></i>
-            </button>
-          </div>
-          <div class="col-md-6">
-            &nbsp;
-          </div>
-        </div-->
       </div>
       <div class="modal-footer">
         <button [hasPermission]="['tournamentadministrator']"
@@ -84,7 +68,7 @@
                 [disabled]="dataIsLoading"
                 onAuthorizedPermission="show"
                 onUnauthorizedPermission="hide">
-          <i [class]="getAddIconClass()"></i>&nbsp;&nbsp;Применить
+          <i [class]="getOkIconClass()"></i>&nbsp;&nbsp;Применить
         </button>
       </div>
   </ng-template>

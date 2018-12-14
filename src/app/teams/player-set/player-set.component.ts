@@ -70,8 +70,8 @@ export class PlayerSetComponent implements OnInit {
     return this.service.getPlayersIconClass();
   }
 
-  public getAddIconClass() {
-    return this.service.getAddIconClass();
+  public getOkIconClass() {
+    return this.service.getOkIconClass();
   }
 
   public getMoveIconClass() {

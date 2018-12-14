@@ -267,7 +267,7 @@
                           [disabled]="dataIsLoading || !teamItem">
                     <i [class]="getPlayersIconClass()"></i>
                   </button-->
-                  <player-set [team]="teamItem"></player-set>
+                  <player-set [team]="teamItem" (onChanged)="setPlayersForTeam($event)"></player-set>
                 </div>
               </div>
             </div>

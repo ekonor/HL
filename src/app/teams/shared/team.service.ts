@@ -84,6 +84,10 @@ export class TeamService {
     return 'fa fa-arrow-right';
   }
 
+  public getOkIconClass(): string {
+    return 'fa fa-check';
+  }
+
   private getMethodUrl(methodUrlPrefix: string): string {
     return this.apiConfig.apiPath + methodUrlPrefix;
   }

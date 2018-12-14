@@ -213,6 +213,10 @@ export class TournamentCreateComponent implements OnInit {
     }
   }
 
+  public setPlayersForTeam(team: Team) {
+    console.log(team);
+  }
+
   /* private getDivisionTypes() {
     this.divisionTypes = new Array<Item>();
     this.divisionTypes.push(new Item({value: null, name: 'Нет этапов'}));
