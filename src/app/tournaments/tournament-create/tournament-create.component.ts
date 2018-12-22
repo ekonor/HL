@@ -86,6 +86,8 @@ export class TournamentCreateComponent implements OnInit {
 
   todos: Todo[];
 
+  tournamentRoundCount: number = 1;
+
   constructor( private tournamentService: TournamentService,
                private arenaService: ArenaService,
                private teamService: TeamService,

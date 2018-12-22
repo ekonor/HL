@@ -1227,3 +1227,10 @@ label {
   position: relative;
 }
 
+.small-fields {
+
+  input[type="number"] {
+    width: 50px;
+  }
+
+}

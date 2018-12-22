@@ -477,10 +477,40 @@
     </div>
     <div id="step-5" *ngIf="step == 5">
       ШАГ 5. СИСТЕМА ПРОВЕДЕНИЯ
-      <div class="row vertical-align">
-        <div class="col-md-4">
+      <div class="row vertical-align small-fields text-center">
+        <div class="col-md-12">
           <label for="levelCount">Количество этапов в турнире</label>
-          <input type="number" id="levelCount">
+          <input type="number" id="levelCount" min="1" max="10" step="1" [(ngModel)]="tournamentRoundCount" class="text-center">
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-10">
+          <ng-template ngFor [ngForOf]="[].constructor(tournamentRoundCount)" let-i="index">
+            <div class="row">
+              <div class="col-md-12">
+                ЭТАП {{i + 1}}
+                <hr/>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+        <div class="col-md-2">
+          <div class="list-table" *ngFor="let teamItem of tournament.teams">
+            <div class="row" *ngIf="tournament.teams?.indexOf(teamItem) == 0">
+              <div class="col-md-12">
+                Команды
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                {{tournament.teams?.indexOf(teamItem)+1}}.
+              </div>
+              <div class="col-md-9">
+                {{teamItem.name }} {{teamItem.cityName ? ' (' + teamItem.cityName + ')' : ''}}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
