@@ -55,6 +55,7 @@ export class TournamentCreateComponent implements OnInit {
   seasonTypes: Array<Item>;
   genderTypes: Array<Item>;
   tournamentTypes: Array<Item>;
+  roundTypes: Array<Item>;
 
   city: City; // текущий город арены в поле ввода
   arena: ArenaListItem; // текущая арена в поле ввода
@@ -87,6 +88,7 @@ export class TournamentCreateComponent implements OnInit {
   todos: Todo[];
 
   tournamentRoundCount: number = 1;
+  groupCounts: number[];
 
   constructor( private tournamentService: TournamentService,
                private arenaService: ArenaService,
@@ -116,7 +118,7 @@ export class TournamentCreateComponent implements OnInit {
     this.getSeasonTypes();
     this.getGenderTypes();
     this.getTournamentTypes();
-
+    this.getRoundTypes();
     this.tournament.tournamentType = 'Play-off';
 
 
@@ -200,6 +202,7 @@ export class TournamentCreateComponent implements OnInit {
 
     // DELETE
     this.todos = this.getTodos(10);
+    this.groupCounts = {0:1};
   }
 
   ngOnInit() {
@@ -559,6 +562,13 @@ export class TournamentCreateComponent implements OnInit {
     this.tournamentTypes =  new Array<Item>();
     this.tournamentTypes.push(new Item({value: 'Play-off', name: 'Плейофф'}));
     this.tournamentTypes.push(new Item({value: 'Round', name: 'Круговой'}));
+  }
+
+  private getRoundTypes() {
+    this.roundTypes =  new Array<Item>();
+    this.roundTypes.push(new Item({value: 'Play-off', name: 'Плейофф'}));
+    this.roundTypes.push(new Item({value: 'Round', name: 'Круговой'}));
+    this.roundTypes.push(new Item({value: 'MultiRound', name: 'Несколько кругов'}));
   }
 
   dtForTeams(team1: Team, team2: Team) {

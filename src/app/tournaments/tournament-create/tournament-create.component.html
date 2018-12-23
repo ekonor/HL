@@ -490,15 +490,30 @@
             <div class="row">
               <div class="col-md-12">
                 ЭТАП {{i + 1}}
-                <hr/>
               </div>
             </div>
+            <div class="row small-fields">
+              <div class="col-md-6">
+                <label for="roundType">Система проведения {{i + 1}} этапа</label>
+                <!--select class="form-group" [(ngModel)]="" name="roundType" class="form-control" #roundType="ngModel" id="roundType" (ngModelChange)="roundType = $event" (onChange)="changeRoundType()">
+                  <option *ngFor="let roundType of roundTypes"  [ngValue]="roundType.value" >{{roundType.name}}</option>
+                </select-->
+                <select class="form-group" class="form-control">
+                  <option *ngFor="let roundType of roundTypes">{{roundType.name}}</option>
+                </select>
+              </div>
+              <div class="col-md-6 text-center">
+                <label for="groupCount_{{i+1}}">Введите кол-во групп/дивизионов на {{i + 1}} этапе</label><br/>
+                <input type="number" id="groupCount_{{i+1}}" min="1" max="10" step="1" value="1" class="text-center" [(ngModel)]="groupCounts[i]" >
+              </div>
+            </div>
+            <hr/>
           </ng-template>
         </div>
         <div class="col-md-2">
           <div class="list-table" *ngFor="let teamItem of tournament.teams">
             <div class="row" *ngIf="tournament.teams?.indexOf(teamItem) == 0">
-              <div class="col-md-12">
+              <div class="col-md-12 text-center">
                 Команды
               </div>
             </div>
