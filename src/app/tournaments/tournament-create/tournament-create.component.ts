@@ -202,7 +202,8 @@ export class TournamentCreateComponent implements OnInit {
 
     // DELETE
     this.todos = this.getTodos(10);
-    this.groupCounts = {0:1};
+    this.groupCounts = [];
+    this.groupCounts[0] = 1;
   }
 
   ngOnInit() {
@@ -607,6 +608,21 @@ export class TournamentCreateComponent implements OnInit {
         completed: false
       };
     });
+  }
+
+  changeRoundCount() {
+    if (this.tournamentRoundCount > this.groupCounts.length) {
+      this.groupCounts[this.tournamentRoundCount-1] = 1;
+    }
+    else if (this.tournamentRoundCount < this.groupCounts.length) {
+      this.groupCounts = this.groupCounts.filter(obj => obj !== this.groupCounts[this.groupCounts.length-1]);
+    }
+  }
+
+  changeGroupCount(round: number, groupCount: number) {
+    if (this.groupCounts.length > round) {
+      this.groupCounts[round] = groupCount;
+    }
   }
 
 }

@@ -480,7 +480,7 @@
       <div class="row vertical-align small-fields text-center">
         <div class="col-md-12">
           <label for="levelCount">Количество этапов в турнире</label>
-          <input type="number" id="levelCount" min="1" max="10" step="1" [(ngModel)]="tournamentRoundCount" class="text-center">
+          <input type="number" id="levelCount" min="1" max="10" step="1" [(ngModel)]="tournamentRoundCount" class="text-center" (ngModelChange)="changeRoundCount()">
         </div>
       </div>
       <hr/>
@@ -492,20 +492,68 @@
                 ЭТАП {{i + 1}}
               </div>
             </div>
-            <div class="row small-fields">
+            <div *ngIf="i==(tournamentRoundCount-1)" class="row small-fields">
               <div class="col-md-6">
                 <label for="roundType">Система проведения {{i + 1}} этапа</label>
-                <!--select class="form-group" [(ngModel)]="" name="roundType" class="form-control" #roundType="ngModel" id="roundType" (ngModelChange)="roundType = $event" (onChange)="changeRoundType()">
-                  <option *ngFor="let roundType of roundTypes"  [ngValue]="roundType.value" >{{roundType.name}}</option>
-                </select-->
                 <select class="form-group" class="form-control">
                   <option *ngFor="let roundType of roundTypes">{{roundType.name}}</option>
                 </select>
+                <div class="col-md-6">
+                  &nbsp;
+                </div>
+             </div>
+            </div>
+            <div *ngIf="i==(tournamentRoundCount-1)" class="row small-fields">
+              <div class="col-md-6 text-center">
+                <label for="victoryGameCount">Количество игр для победы</label><br/>
+                <input type="number" id="victoryGameCount" min="1" max="10" step="1" value="2" class="text-center">
               </div>
               <div class="col-md-6 text-center">
-                <label for="groupCount_{{i+1}}">Введите кол-во групп/дивизионов на {{i + 1}} этапе</label><br/>
-                <input type="number" id="groupCount_{{i+1}}" min="1" max="10" step="1" value="1" class="text-center" [(ngModel)]="groupCounts[i]" >
+                <label for="victoryGameFinalCount">Количество игр для победы в финале</label><br/>
+                <input type="number" id="victoryGameFinalCount" min="1" max="10" step="1" value="1" class="text-center">
               </div>
+            </div>
+            <div *ngIf="i!=(tournamentRoundCount-1)">
+              <div class="row small-fields">
+                <div class="col-md-6">
+                  <label for="roundType">Система проведения {{i + 1}} этапа</label>
+                  <!--select class="form-group" [(ngModel)]="" name="roundType" class="form-control" #roundType="ngModel" id="roundType" (ngModelChange)="roundType = $event" (onChange)="changeRoundType()">
+                    <option *ngFor="let roundType of roundTypes"  [ngValue]="roundType.value" >{{roundType.name}}</option>
+                  </select-->
+                  <select class="form-group" class="form-control">
+                    <option *ngFor="let roundType of roundTypes">{{roundType.name}}</option>
+                  </select>
+                </div>
+                <div class="col-md-6 text-center">
+                  <label for="groupCount_{{i+1}}">Введите кол-во групп/дивизионов на {{i + 1}} этапе</label><br/>
+                  <input type="number" id="groupCount_{{i+1}}" min="1" max="10" step="1" value="1" class="text-center" [(ngModel)]="groupCounts[i]" >
+                </div>
+                <br/>
+              </div>
+              <ng-template ngFor [ngForOf]="[].constructor(groupCounts[i])" let-i="index">
+                <br/>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="group_{{i+1}}">ГРУППА {{i + 1}}</label><br/>
+                    <input type="text" id="groupName_{{i+1}}" placeholder="Введите название группы. (Пример: Группа А)">
+                  </div>
+                  <div class="col-md-6">
+                   &nbsp;
+                  </div>
+                </div>
+                <br/>
+                <div class="row text-center">
+                  <div class="col-md-6 small-fields">
+                    <label for="markCount_{{i+1}}">Кол-во очков за победу</label><br/>
+                    <input type="number" id="markCount_{{i+1}}" min="1" max="100" step="1" value="2" class="text-center">
+                  </div>
+                  <div class="col-md-6 text-center small-fields">
+                    <label for="teamCount_{{i+1}}">Кол-во команд в группе {{i + 1}}</label><br/>
+                    <input type="number" id="teamCount_{{i+1}}" min="1" max="10" step="1" value="2" class="text-center">
+                  </div>
+                  <br/>
+                </div>
+              </ng-template>
             </div>
             <hr/>
           </ng-template>
