@@ -521,7 +521,7 @@
                     <option *ngFor="let roundType of roundTypes"  [ngValue]="roundType.value" >{{roundType.name}}</option>
                   </select-->
                   <select class="form-group" class="form-control">
-                    <option *ngFor="let roundType of roundTypes">{{roundType.name}}</option>
+                    <option *ngFor="let roundType of roundTypes" [ngValue]="roundType.value">{{roundType.name}}</option>
                   </select>
                 </div>
                 <div class="col-md-6 text-center">

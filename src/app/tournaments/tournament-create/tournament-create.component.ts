@@ -89,6 +89,7 @@ export class TournamentCreateComponent implements OnInit {
 
   tournamentRoundCount: number = 1;
   groupCounts: number[];
+  roundTypeArray: string[];
 
   constructor( private tournamentService: TournamentService,
                private arenaService: ArenaService,
@@ -204,6 +205,9 @@ export class TournamentCreateComponent implements OnInit {
     this.todos = this.getTodos(10);
     this.groupCounts = [];
     this.groupCounts[0] = 1;
+
+    this.roundTypeArray = [];
+    this.roundTypeArray[0] = 'З';
   }
 
   ngOnInit() {
@@ -617,6 +621,11 @@ export class TournamentCreateComponent implements OnInit {
     else if (this.tournamentRoundCount < this.groupCounts.length) {
       this.groupCounts = this.groupCounts.filter(obj => obj !== this.groupCounts[this.groupCounts.length-1]);
     }
+    if (this.tournamentRoundCount > this.roundTypeArray.length) {
+
+    }
+    else if (this.tournamentRoundCount < this.roundTypeArray.length) {
+    }
   }
 
   changeGroupCount(round: number, groupCount: number) {
@@ -625,4 +634,7 @@ export class TournamentCreateComponent implements OnInit {
     }
   }
 
+  changeRoundType(round: number, type: string) {
+
+  }
 }
